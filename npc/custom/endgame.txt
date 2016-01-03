@@ -1,0 +1,6 @@
+sch_gld,140,93,4	script	Challenge Reward::end_game_reward	811,{
+
+	close;
+}
+	
+

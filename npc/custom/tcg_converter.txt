@@ -1,0 +1,43 @@
+aldebaran,146,107,4	script	TCG exchanger	124,{
+
+set .@i, countitem(7227);
+
+mes "[TCG Exchanger]";
+
+mes "You have ^0055FF"+.@i+" TCG^000000.";
+
+if (!.@i) { mes "Please come back later."; close; }
+
+mes "I can trade ^FF00001 TCG^000000 for ^FF00005 Cash Points^000000.";
+
+next;
+
+if(select(" - Trade: - ^777777Leave^000000")==2) close;
+
+mes "[TCG Exchanger]";
+
+mes "How many would you like to exchange?";
+
+next;
+
+input .@j;
+
+mes "[TCG Exchanger]";
+
+if (.@j < 1 || .@j > countitem(7227)) { mes "That's an invalid amount."; close; }
+
+mes "Are you sure you want to exchange ^0055FF"+.@j+" TCG^000000?";
+
+if(select(" - Yes: - No")==2) close;
+
+mes " ";
+
+delitem 7227, .@j;
+
+set #CASHPOINTS, #CASHPOINTS+(.@j*10);
+
+mes "You now have "+#CASHPOINTS+" Cash Points.";
+
+close;
+
+}
