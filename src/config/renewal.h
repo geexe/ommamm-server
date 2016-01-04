@@ -35,13 +35,13 @@
 ///  On a skill whos cast time is 10s, only 8s may be reduced. the other 2s are part of a FCT
 #define RENEWAL_CAST
 
-/**
-* Renewal Drop Rate Modifier
-* @values: 1 (enabled) or 0 (disabled)
-* - When enabled a modifier based on difference between the player and the monster level is applied,
-* - based on the http://irowiki.org/wiki/Drop_System#Level_Factor table
-**/
-#define RE_DROP_MOD 0
+/// Renewal drop rate algorithms
+/// (disable by commenting the line)
+///
+/// Leave this line to enable renewal item drop rate algorithms
+/// While enabled a special modified based on the difference between the player and monster level is applied
+/// Based on the http://irowiki.org/wiki/Drop_System#Level_Factor table
+///#define RENEWAL_DROP
 
 /// Renewal exp rate algorithms
 /// (disable by commenting the line)
@@ -71,8 +71,6 @@
 ///
 /// Leave this line to enable renewal calculation for increasing status/parameter points
 #define RENEWAL_STAT
-
-
 
 #endif
 
