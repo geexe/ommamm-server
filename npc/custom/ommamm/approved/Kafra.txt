@@ -1,15 +1,17 @@
 sch_gld,135,83,5	script	Kafra	581,{
 	mes "[Kafra]";
-	mes "ยินดีต้อนรับ";
-	mes strcharinfo(0);
-	mes "มีอะไรให้ช่วยไหม?";
+	mes ^6755E3strcharinfo(0^)000000;
+	mes "The Kafra Corporation";
+	mes "is always working to provide";
+	mes "you with convenient services.";
+	mes "How may I be of assistance?";
 	next;
-	switch(select("บันทึกจุดเกิด:เก็บของ:รับสกิลเสริม:เช่า:ยกเลิก")){
+	switch(select("Save:Use Storage:Job Platinum Skill:Rental:Cancel")){
 	case 1:
 		mes "[Kafra]";
-		mes "บันทึกจุดเกิดเรียบร้อย";
-		mes "Nidhoggur(sch_gld)";
-		mes "ขอบคุณที่ใช้บริการ";
+		mes "Your respawn point has been saved here,";
+		mes "Nidhoggur(sch_gld).";
+		mes "Thank you.";
 		savepoint "sch_gld",141,80;
 		close;
 		break;
