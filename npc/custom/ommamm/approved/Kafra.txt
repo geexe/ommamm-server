@@ -1,4 +1,4 @@
-sch_gld,142,83,5	script	Kafra	581,{
+sch_gld,135,83,5	script	Kafra	581,{
 	mes "[Kafra]";
 	mes ^6755E3strcharinfo(0^)000000;
 	mes "The Kafra Corporation";
