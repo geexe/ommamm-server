@@ -1,4 +1,4 @@
-izlude,139,150,3	script	ElvenEars Fairy	622,{
+izlude,121,160,3	script	BlankEyes Fairy	621,{
 	mes .npc$;
 	if(countitem(5102)){
 		mes "What can I help you on your ^000099Blank Eyes^000000?";
