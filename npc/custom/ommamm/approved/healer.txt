@@ -8,37 +8,37 @@ izlude,121,147,5	script	Healer	641,{
 	specialeffect2 EF_HEAL2;
 	percentheal 20,20;
 	addtimer 200,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 400,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 600,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 800,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 1000,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 1200,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 1400,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 1600,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 1800,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 2000,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 2200,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 2400,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 2600,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 2800,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 3000,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	addtimer 3200,"Healer::OnHealTimer";
-	deltimer "Healer::OnHealTimer"
+	deltimer "Healer::OnHealTimer";
 	end;
 
 OnHealTimer:
