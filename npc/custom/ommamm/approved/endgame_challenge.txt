@@ -1,6 +1,6 @@
 //Biolab Hunting Challenge
 
-sch_gld,144,80,4	script	Challenge::endgame_npc	811,{
+izlude,148,129,3	script	Challenge::endgame_npc	811,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	if (!getarraysize(#biolabkill)) {
