@@ -18,41 +18,47 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You will be sent to the town of Izlude.";
 					next;
 					warp "izlude",128,146;
+					callsub L_Save;
 					end;
 				case 2:
 					mes .npc$;
 					mes "You have chosen to become an Acolyte.";
 					mes "You will be sent to the town of Prontera.";
 					next;
-					warp "prontera",156,191;
+					callsub L_Izlude;
+					callsub L_Save;
 					end;
 				case 3:
 					mes .npc$;
 					mes "You have chosen to become a Thief.";
 					mes "You will be sent to the town of Morroc.";
 					next;
-					warp "morocc",156,93;
+					callsub L_Izlude;
+					callsub L_Save;
 					end;
 				case 4:
 					mes .npc$;
 					mes "You have chosen to become a Merchant.";
 					mes "You will be sent to the town of Alberta.";
 					next;
-					warp "alberta",192,147;
+					callsub L_Izlude;
+					callsub L_Save;
 					end;
 				case 5:
-					mes "[Hanson]";
+					mes .npc$;
 					mes "You have chosen to become an Archer.";
 					mes "You will be sent to the town of Payon.";
 					next;
-					warp "payon",162,233;
+					callsub L_Izlude;
+					callsub L_Save;
 					end;
 				case 6:
-					mes "[Hanson]";
+					mes .npc$;
 					mes "You have chosen to become a Mage.";
 					mes "You will be sent to the town of Geffen.";
 					next;
-					warp "geffen_in",119,59;
+					callsub L_Izlude;
+					callsub L_Save;
 					end;
 			}
 		case 2:
@@ -64,6 +70,20 @@ new_1-2,100,29,3	script	Officer	642,{
 			end;
 		}
 		end;
+
+
+L_Izlude:
+	mes .npc$;
+	mes "Just Kiddin', you will be send to the town of Izlude.";
+	warp "izlude",0,0;
+	return;
+
+
+L_Save:
+	getmapxy(@mapName$,@mapX,@mapY,0,strcharinfo(0));
+	savepoint @mapName$,@mapX,@mapY;
+	end;
+
 
 OnInit:
 	.npc$ = "[^AA0000Officer^000000]";
