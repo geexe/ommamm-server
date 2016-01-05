@@ -1,7 +1,8 @@
-sch_gld,132,82,5	script	Enchanter	10041,{
+sch_gld,132,82,5	script	Blank Eyes	626,{
 	mes .npc$;
 	if(countitem(5102)){
-		mes "Would you like to enchant your ^000099Blank Eyes^000000?";
+		mes "Would you like to enchant your";
+		mes "^000099Blank Eyes^000000?";
 		next;
 		switch(select("Enchant Blank Eyes:Reset Enchantment")){
 			case 1: goto OnEnchantNow;
@@ -29,8 +30,9 @@ OnEnchantNow:
 	@slot2 = getequipcardid(EQI_HEAD_MID,1);
 	@slot3 = getequipcardid(EQI_HEAD_MID,2);
 	@slot4 = getequipcardid(EQI_HEAD_MID,3);
-	mes "Enchantment will cost ^0000991,000,000z^000000.";
-	mes "Please select your preferred Enchantment.";
+	mes "Enchantment will require zeny.";
+	mes "^0000991,000,000z^000000";
+	mes "Select your preferred enchantment.";
 	next;
 	setd ".@enc$", select("Fighting Enchant:Magic Enchant:Archer Enchant:Critical/Fatal Enchant:Max HP Enchant:Max SP Enchant:ASPD Enchant:STR Enchant:AGI Enchant:DEX Enchant:VIT Enchant:INT Enchant:LUK Enchant");
 	if(Zeny<1000000) {
@@ -81,7 +83,8 @@ OnEnchantNow:
 		}
 	}
 	mes .npc$;
-	mes "Your ^000099Blank Eyes^000000 has been enchanted with ^000099"+getitemname(.@EnStat)+"^000000.";
+	mes "Your ^000099Blank Eyes^000000 has been enchanted";
+	mes "^000099"+getitemname(.@EnStat)+"^000000";
 	close;
 
 
@@ -108,7 +111,7 @@ OnConfirmReset:
 
 
 OnInit:
-	.npc$ = "[^AA0000Enchanter^000000]";
+	.npc$ = "[^AA0000Blank Eyes^000000]";
 	setarray .enc1[0], 4809,4808,4820, 4821;	//Fighting 3~5
 	setarray .enc2[0], 4812,4826,4827, 4828;	//Magic 4~6
 	setarray .enc3[0], 4832,4833,4834, 4835;	//Expert Arc 1~3

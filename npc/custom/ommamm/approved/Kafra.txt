@@ -1,18 +1,15 @@
-sch_gld,135,83,5	script	Kafra	581,{
-	mes "[Kafra]";
-	mes strcharinfo(0);
-	mes "The Kafra Corporation";
-	mes "is always working to provide";
-	mes "you with convenient services.";
-	mes "How may I be of assistance?";
+sch_gld,135,83,5	script	Kafra	94,{
+	mes .npc$;
+	mes "^000099"+strcharinfo(0)+"^000000";
+	mes "The Kafra Corporation is always working to provide you with convenient services. How may I be of assistance?";
 	next;
 	switch(select("Save:Use Storage:Job Platinum Skill:Rental:Cancel")){
 	case 1:
-		mes "[Kafra]";
-		mes "Your respawn point has been saved here,";
-		mes "Nidhoggur(sch_gld).";
-		mes "Thank you.";
-		savepoint "sch_gld",141,80;
+		mes .npc$;
+		getmapxy(@mapName$,@mapX,@mapY,0,strcharinfo(0));
+		mes "Your respawn point has been saved.";
+		mes "^000099"+@mapName$+" ("+@mapX+", "+@mapY+")^000000";
+		savepoint @mapName$,@mapX,@mapY;
 		close;
 		break;
 	case 2:
@@ -133,4 +130,8 @@ sch_gld,135,83,5	script	Kafra	581,{
 		break;
 	}
 	close;
+
+
+OnInit:
+	.npc$ = "[^AA0000Kafra^000000]";
 }
