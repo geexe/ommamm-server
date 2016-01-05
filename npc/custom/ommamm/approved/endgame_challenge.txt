@@ -1,6 +1,6 @@
 //Biolab Hunting Challenge
 
-izlude,148,129,3	script	Challenge::endgame_npc	811,{
+izlude,148,129,4	script	Challenge::endgame_npc	811,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -25,11 +25,11 @@ izlude,148,129,3	script	Challenge::endgame_npc	811,{
 		mes getitemname(.reward);
 		next;
 		//display completed MVPs
-		if(getarraysize(#biolabkill)) {
+		if(getarraysize(biolabkill)) {
 			mes "MVPs you have completed:";
 			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(#biolabkill[.@i] == .biolabmvp[.@i]) {
-					mes strmobinfo(1,#biolabkill[.@i]);
+				if(biolabkill[.@i] == .biolabmvp[.@i]) {
+					mes strmobinfo(1,biolabkill[.@i]);
 				}
 			}
 		}
@@ -40,9 +40,9 @@ izlude,148,129,3	script	Challenge::endgame_npc	811,{
 	case 2:
 		mes "[Challenge]";
 		//check to see if character has received the reward
-		if(!#getommammreward) {
+		if(!getommammreward) {
 			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(#biolabkill[.@i] == .biolabmvp[.@i]) {
+				if(biolabkill[.@i] == .biolabmvp[.@i]) {
 					.@mvpcount += 1;
 				}
 			}
@@ -54,7 +54,7 @@ izlude,148,129,3	script	Challenge::endgame_npc	811,{
 				//check weight and inventory 
 				if(checkweight(.reward,1)) {
 					//Set variable to prevent player from getting multiple items
-					#getommammreward = 1;
+					getommammreward = 1;
 					getitem .reward, 1;
 				}
 				else {
@@ -76,18 +76,38 @@ izlude,148,129,3	script	Challenge::endgame_npc	811,{
 	close;
 	
 OnNPCKillEvent:
-	for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-		if(killedrid == .biolabmvp[.@i]) {
-			setarray #biolabkill[.@i], killedrid;
-			dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid);
+	if(!.party || !getcharid(1)) {	
+		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+			if(killedrid == .biolabmvp[.@i]) {
+				setarray biolabkill[.@i], killedrid;
+				dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid);
+			}
+		}
+	} else if (.party) {
+		getmapxy(.@map1$,.@x1,.@y1,0);
+		getpartymember getcharid(1), 0;
+		getpartymember getcharid(1), 1;
+		getpartymember getcharid(1), 2;
+		for (.@i = 0; .@i < $@partymembercount; .@i++) {
+			if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
+				for (.@j = 0; .@j < getarraysize(.biolabmvp); .@j++) {
+					if(killedrid == .biolabmvp[.@j]) {
+						query_sql("INSERT INTO `char_reg_num` (`char_id`,`key`,`index`,`value`) VALUES ("+$@partymembercid[.@i]+",'biolabkill'," +.@j+ ","+killedrid+")");
+						//query_sql("INSERT INTO char_reg_num (char_id,key,index,value) VALUES ('$@partymembercid[.@i]', '"biolabkill"', '.@j', 'killedrid')");
+						dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid) + $@partymembercid[.@i];
+					}
+				}
+			}
 		}
 	}
 	end;
 	
 OnInit:
 	//monsters to kill
-	setarray .biolabmvp[0],1646,1647,1648,1649,1650,1651;
+	setarray .biolabmvp[0],1001,1002,1004,1005;
 	//reward item
-	.reward = 501;			
+	.reward = 501;
+	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
+	.party = 1;
 	end;
 	}
