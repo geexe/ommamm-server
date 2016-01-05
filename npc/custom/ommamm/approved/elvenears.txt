@@ -29,12 +29,6 @@ OnEnchant:
 	}
 	@slotNormal = getequipcardid(EQI_HEAD_MID,2);
 	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
-	mes "Enchantment will require zeny.";
-	mes "^0000991,000,000z^000000";
-	if(Zeny<1000000) {
-		mes "You don't have enough zeny.";
-		close;
-	}
 	mes "Select your preferred slot.";
 	next;
 	switch(select("Special Enchantment (Slot4):Normal Enchantment (Slot3)")){
@@ -161,7 +155,6 @@ OnNormal:
 	mes .npc$;
 	mes "Your ^000099Elven Ears^000000 has been enchanted";
 	mes "^000099"+getitemname(.@enchant)+"^000000";
-	Zeny -= 1000000;
 	delitem 2286,1;
 	getitem2 2286,1,1,0,0,0,0,.@enchant,@slotSpecial;
 	equip 2286;
@@ -242,7 +235,6 @@ OnSpecial:
 	mes .npc$;
 	mes "Your ^000099Elven Ears^000000 has been enchanted";
 	mes "^000099"+getitemname(.@enchant)+"^000000";
-	Zeny -= 1000000;
 	delitem 2286,1;
 	getitem2 2286,1,1,0,0,0,0,@slotNormal,.@enchant;
 	equip 2286;
@@ -253,13 +245,87 @@ OnSpecial:
 
 OnReset:
 	mes .npc$;
-	mes "This will reset your ^000099Elven Ears^000000. Are you sure?";
+	mes "This will reset your ^000099Elven Ears^000000.";
+	mes "Select your preferred enchantment.";
+	next;
+	switch(select("All (500,000z):Special (300,000z):Normal (300,000z)")){
+		case 0: goto ResetAll;
+		case 1: goto ResetSpecial;
+		case 2: goto ResetNormal;
+	}
+	close;
+
+
+ResetSpecial: 
+	mes .npc$;
+	mes "Special Enchanment";
+	mes "Payment for this function.";
+	mes "^000099300,000z^000000";
+	next;
+	mes .npc$;
+	if(Zeny<300000) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	mes "Are you sure?";
 	next;
 	switch(select("No:Yes")){
 		case 1: close;
 		case 2:
 			mes .npc$;
-			mes "Your ^000099Elven Ears^000000's enchantments have been reset.";
+			mes "Your ^000099Elven Ears^000000's <Special> Enchantments have been reset.";
+			Zeny -= 300000;
+			delitem 2286, 1;
+			getitem2 2286,1,1,0,0,0,0,@slotNormal,0;
+			equip 2286;
+			specialeffect2 261;
+			specialeffect2 119;
+			break;
+	}
+	close;
+
+
+ResetNormal: 
+	mes .npc$;
+	mes "Normal Enchanment";
+	mes "Payment for this function.";
+	mes "^000099300,000z^000000";
+	next;
+	mes .npc$;
+	if(Zeny<300000) {
+		mes "You don't have enough zeny.";
+		close;
+	}
+	mes "Are you sure?";
+	next;
+	switch(select("No:Yes")){
+		case 1: close;
+		case 2:
+			mes .npc$;
+			mes "Your ^000099Elven Ears^000000's <Normal> Enchantments have been reset.";
+			Zeny -= 300000;
+			delitem 2286, 1;
+			getitem2 2286,1,1,0,0,0,0,0,@slotSpecial;
+			equip 2286;
+			specialeffect2 261;
+			specialeffect2 119;
+			break;
+	}
+	close;
+
+
+ResetAll:
+	mes .npc$;
+	mes "All Enchanment";
+	mes "Payment for this function.";
+	mes "^000099500,000z^000000";
+	mes "Are you sure?";
+	next;
+	switch(select("No:Yes")){
+		case 1: close;
+		case 2:
+			mes .npc$;
+			mes "Your ^000099Elven Ears^000000's <All> Enchantments have been reset.";
 			delitem 2286, 1;
 			getitem 2286, 1;
 			equip 2286;
