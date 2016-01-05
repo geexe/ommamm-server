@@ -249,9 +249,9 @@ OnReset:
 	mes "Select your preferred enchantment.";
 	next;
 	switch(select("All (500,000z):Special (300,000z):Normal (300,000z)")){
-		case 0: goto ResetAll;
-		case 1: goto ResetSpecial;
-		case 2: goto ResetNormal;
+		case 1: goto ResetAll;
+		case 2: goto ResetSpecial;
+		case 3: goto ResetNormal;
 	}
 	close;
 
@@ -326,6 +326,7 @@ ResetAll:
 		case 2:
 			mes .npc$;
 			mes "Your ^000099Elven Ears^000000's <All> Enchantments have been reset.";
+			Zeny -= 500000;
 			delitem 2286, 1;
 			getitem 2286, 1;
 			equip 2286;
