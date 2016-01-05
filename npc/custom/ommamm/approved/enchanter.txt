@@ -48,10 +48,11 @@ OnEnchant5102:
 	if( (getequipid(EQI_HEAD_MID)!=5102) ) {
 		mes "Please equip your ^000099Blank Eyes^000000 if you want to have it enchanted.";
 		switch(select("Equip:Don't equip")){
-			case 1: equip 5102;
+			case 1: 
+				equip 5102;
+				next;
 			case 2: close;
 		}
-		next;
 	}
 	@slot1 = getequipcardid(EQI_HEAD_MID,0);
 	@slot2 = getequipcardid(EQI_HEAD_MID,1);
@@ -120,10 +121,11 @@ OnEnchant2286:
 	if( (getequipid(EQI_HEAD_MID)!=2286) ) {
 		mes "Please equip your ^000099Elven Ears^000000 if you want to have it enchanted.";
 		switch(select("Equip:Don't equip")){
-			case 1: equip 2286;
+			case 1:
+				equip 2286;
+				next;
 			case 2: close;
 		}
-		next;
 	}
 	@slot1 = getequipcardid(EQI_HEAD_MID,0);
 	@slot2 = getequipcardid(EQI_HEAD_MID,1);
