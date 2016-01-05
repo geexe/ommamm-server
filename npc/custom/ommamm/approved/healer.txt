@@ -1,4 +1,4 @@
-sch_gld,140,83,3	script	Healer	641,{
+izlude,121,147,5	script	Healer	641,{
 	if (npcDelay > gettimetick(2)) end;
 	
 	specialeffect2 EF_INCAGILITY;
