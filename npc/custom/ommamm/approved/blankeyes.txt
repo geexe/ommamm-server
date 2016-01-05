@@ -1,4 +1,4 @@
-izlude,132,153,3	script	BlankEyes Fairy	621,{
+izlude,132,153,3	script	BlankEyes Fairy	660,{
 	mes .npc$;
 	if(countitem(5102)){
 		mes "What can I help you on your ^000099Blank Eyes^000000?";
@@ -71,7 +71,7 @@ OnNormal:
 		close;
 	}
 	switch( .@enc ){
-		ccase 1: //STR
+		case 1: //STR
 			set .@i, rand(1,85);
 			if ( .@i<11) set .@enchant, 4700;
 			else if ( .@i<21) set .@enchant, 4701;
