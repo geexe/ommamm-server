@@ -1,4 +1,4 @@
-izlude,130,153,3	script	Unique Enchanter	626,{
+izlude,139,150,3	script	Unique Enchanter	626,{
 	mes .npc$;
 	mes "What would you like to enchant?";
 	switch(select("Blank Eyes:Elven Ears")){
@@ -51,6 +51,7 @@ OnEnchant5102:
 			case 1: equip 5102;
 			case 2: close;
 		}
+		next;
 	}
 	@slot1 = getequipcardid(EQI_HEAD_MID,0);
 	@slot2 = getequipcardid(EQI_HEAD_MID,1);
@@ -122,6 +123,7 @@ OnEnchant2286:
 			case 1: equip 2286;
 			case 2: close;
 		}
+		next;
 	}
 	@slot1 = getequipcardid(EQI_HEAD_MID,0);
 	@slot2 = getequipcardid(EQI_HEAD_MID,1);

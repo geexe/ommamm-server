@@ -1,36 +1,47 @@
 izlude,121,147,5	script	Healer	641,{
 	if (npcDelay > gettimetick(2)) end;
-	
 	specialeffect2 EF_INCAGILITY;
 	sc_start SC_INCREASEAGI,900000,10;
 	specialeffect2 EF_BLESSING;
 	sc_start SC_BLESSING,900000,10;
-	
 	set npcDelay, gettimetick(2) + 10;
-	
 	specialeffect2 EF_HEAL2;
 	percentheal 20,20;
 	addtimer 200,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 400,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 600,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 800,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 1000,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 1200,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 1400,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 1600,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 1800,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 2000,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 2200,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 2400,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 2600,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 2800,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 3000,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer"
 	addtimer 3200,"Healer::OnHealTimer";
-
+	deltimer "Healer::OnHealTimer"
 	end;
 
 OnHealTimer:
-	if(Hp==MaxHp && Sp==MaxSp) end;
 	percentheal 5,5;
 	end;
 }
