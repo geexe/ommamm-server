@@ -3,6 +3,9 @@ izlude,132,153,3	script	BlankEyes Knight	420,{
 	if(countitem(5102)){
 		mes "What can I help you on your ^000099Blank Eyes^000000?";
 		next;
+		@slotUnique = getequipcardid(EQI_HEAD_MID,1);
+		@slotNormal = getequipcardid(EQI_HEAD_MID,2);
+		@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
 		switch(select("Enchantment:Reset")){
 			case 1: goto OnEnchant;
 			case 2: goto OnReset;
@@ -27,9 +30,6 @@ OnEnchant:
 				close;
 		}
 	}
-	@slotUnique = getequipcardid(EQI_HEAD_MID,1);
-	@slotNormal = getequipcardid(EQI_HEAD_MID,2);
-	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
 	mes "Select your preferred slot.";
 	next;
 	switch(select("Slot 4 (Special Enchantment):Slot 3 (Normal Enchantment):Slot 2 (Unique Enchantment)")){

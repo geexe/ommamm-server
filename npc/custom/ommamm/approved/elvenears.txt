@@ -3,6 +3,8 @@ izlude,129,153,5	script	ElvenEars Knight	416,{
 	if(countitem(2286)){
 		mes "What can I help you on your ^000099Elven Ears^000000?";
 		next;
+		@slotNormal = getequipcardid(EQI_HEAD_MID,2);
+		@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
 		switch(select("Enchantment:Reset")){
 			case 1: goto OnEnchant;
 			case 2: goto OnReset;
@@ -27,8 +29,6 @@ OnEnchant:
 				close;
 		}
 	}
-	@slotNormal = getequipcardid(EQI_HEAD_MID,2);
-	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
 	mes "Select your preferred slot.";
 	next;
 	switch(select("Special Enchantment (Slot4):Normal Enchantment (Slot3)")){
