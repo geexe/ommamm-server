@@ -1,0 +1,71 @@
+new_1-2,100,29,4	script	Officer	642,{
+	mes .npc$;
+	mes "Welcome to the Rune-Midgard.";
+	next;
+	mes .npc$;
+	mes "I will send you to any town that you'd like to go to.";
+	mes "Or do you have a favourite Class?";
+	switch(select("Choose a Class:Go to the town of Izlude")) {
+		case 1:
+			mes .npc$;
+			mes "What Class would you like to perform?";
+			dispbottom "The Kafra Corporation will always support the adventurers of Rune-Midgard, at the town of Izlude.";
+			next;
+			switch(select("Swordman Class:Acolyte Class:Thief Class:Merchant Class:Archer Class:Mage Class")) {
+				case 1:
+					mes .npc$;
+					mes "You have chosen to become a Swordman.";
+					mes "You will be sent to the town of Izlude.";
+					next;
+					warp "izlude",128,146;
+					end;
+				case 2:
+					mes .npc$;
+					mes "You have chosen to become an Acolyte.";
+					mes "You will be sent to the town of Prontera.";
+					next;
+					warp "prontera",156,191;
+					end;
+				case 3:
+					mes .npc$;
+					mes "You have chosen to become a Thief.";
+					mes "You will be sent to the town of Morroc.";
+					next;
+					warp "morocc",156,93;
+					end;
+				case 4:
+					mes .npc$;
+					mes "You have chosen to become a Merchant.";
+					mes "You will be sent to the town of Alberta.";
+					next;
+					warp "alberta",192,147;
+					end;
+				case 5:
+					mes "[Hanson]";
+					mes "You have chosen to become an Archer.";
+					mes "You will be sent to the town of Payon.";
+					next;
+					warp "payon",162,233;
+					end;
+				case 6:
+					mes "[Hanson]";
+					mes "You have chosen to become a Mage.";
+					mes "You will be sent to the town of Geffen.";
+					next;
+					warp "geffen_in",119,59;
+					end;
+			}
+		case 2:
+			mes .npc$;
+			mes "You will now be teleported.";
+			mes "Good luck, ^A62A2A"+strcharinfo(0)+"^000000 and farewell.";
+			next;
+			warp "izlude",128,146;
+			end;
+		}
+		end;
+
+OnInit:
+	.npc$ = "[^AA0000Officer^000000]";
+}
+			
