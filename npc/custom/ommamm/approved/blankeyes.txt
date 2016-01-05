@@ -1,4 +1,4 @@
-izlude,132,153,3	script	BlankEyes Fairy	420,{
+izlude,132,153,3	script	BlankEyes Knight	420,{
 	mes .npc$;
 	if(countitem(5102)){
 		mes "What can I help you on your ^000099Blank Eyes^000000?";
@@ -411,6 +411,6 @@ ResetAll:
 
 
 OnInit:
-	.npc$ = "[^AA0000BlankEyes Fairy^000000]";
+	.npc$ = "[^AA0000BlankEyes Knight^000000]";
 }
 

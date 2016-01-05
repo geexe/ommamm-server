@@ -1,4 +1,4 @@
-izlude,129,153,5	script	ElvenEars Fairy	416,{
+izlude,129,153,5	script	ElvenEars Knight	416,{
 	mes .npc$;
 	if(countitem(2286)){
 		mes "What can I help you on your ^000099Elven Ears^000000?";
@@ -336,6 +336,6 @@ ResetAll:
 	close;
 
 OnInit:
-	.npc$ = "[^AA0000ElvenEars Fairy^000000]";
+	.npc$ = "[^AA0000ElvenEars Knight^000000]";
 }
 
