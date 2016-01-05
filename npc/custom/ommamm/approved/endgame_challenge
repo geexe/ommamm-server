@@ -1,0 +1,41 @@
+//Biolab Hunting Challenge
+
+sch_gld,144,80,4  script	Challenge::endgame_npc  811,{
+	mes "[Challenge]";
+	mes "Hello, " + strcharinfo(0) + "!";
+	if (!getarraysize(#biolabkill)) {
+		next;
+		mes "[Challenge]";
+		mes "This is a challenge to prove";
+		mes "that your skills are worthy";
+		mes "of recognition";
+		next;
+		mes "You must killed all six";
+		mes "Biolab bosses at level 3";
+		close;
+		}
+	else {
+		mes "You have killed some bosses!";
+		mes "Bosses you have slained:";
+		for (.@i = 0, .@i < getarraysize(.biolabboss), .@i++) {
+			if(#biolabkill[.@i] == .biolabboss[.@i]) {
+				mes strmobinfo(1,);
+			}
+		}
+		close;
+		}
+	
+OnNPCKillEvent:
+	for (.@i = 0, .@i < getarraysize(.biolabboss), .@i++) {
+		if(killedrid == .biolabboss[.@i]) {
+			setarray #biolabkill[.@i], killedrid;
+			dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid);
+		}
+	}
+	end;
+	
+OnInit:
+	setarray .biolabboss[0],1646,1647,1648,1649,1650,1651;
+	end;
+	
+	}
