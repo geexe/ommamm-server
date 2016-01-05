@@ -1,4 +1,4 @@
-new_1-2,100,29,4	script	Officer	642,{
+new_1-2,100,29,3	script	Officer	642,{
 	mes .npc$;
 	mes "Welcome to the Rune-Midgard.";
 	next;
