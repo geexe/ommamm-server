@@ -22,8 +22,8 @@ izlude,121,147,5	script	Healer	641,{
 	addtimer 2600,"Healer::OnHealTimer";
 	addtimer 2800,"Healer::OnHealTimer";
 	addtimer 3000,"Healer::OnHealTimer";
-	addtimer 3200,"Healer::OnHealTimer";
 	deltimer "Healer::OnHealTimer";
+	percentheal 5,5;
 	end;
 
 OnHealTimer:
