@@ -7,26 +7,18 @@ izlude,121,147,5	script	Healer	641,{
 	set npcDelay, gettimetick(2) + 10;
 	specialeffect2 EF_HEAL2;
 	percentheal 20,20;
-	addtimer 200,"Healer::OnHealTimer";
-	addtimer 400,"Healer::OnHealTimer";
+	addtimer 300,"Healer::OnHealTimer";
 	addtimer 600,"Healer::OnHealTimer";
-	addtimer 800,"Healer::OnHealTimer";
-	addtimer 1000,"Healer::OnHealTimer";
+	addtimer 900,"Healer::OnHealTimer";
 	addtimer 1200,"Healer::OnHealTimer";
-	addtimer 1400,"Healer::OnHealTimer";
-	addtimer 1600,"Healer::OnHealTimer";
-	addtimer 1800,"Healer::OnHealTimer";
-	addtimer 2000,"Healer::OnHealTimer";
-	addtimer 2200,"Healer::OnHealTimer";
-	addtimer 2400,"Healer::OnHealTimer";
-	addtimer 2600,"Healer::OnHealTimer";
-	addtimer 2800,"Healer::OnHealTimer";
-	addtimer 3000,"Healer::OnHealTimer";
+	addtimer 1500,"Healer::OnHealTimer";
+	addtimer 1700,"Healer::OnHealTimer";
+	addtimer 1900,"Healer::OnHealTimer";
+	addtimer 2100,"Healer::OnHealTimer";
 	deltimer "Healer::OnHealTimer";
-	percentheal 5,5;
 	end;
 
 OnHealTimer:
-	percentheal 5,5;
+	percentheal 10,10;
 	end;
 }

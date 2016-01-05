@@ -9,7 +9,6 @@ new_1-2,100,29,3	script	Officer	642,{
 		case 1:
 			mes .npc$;
 			mes "What Class would you like to perform?";
-			dispbottom "The Kafra Corporation will always support the adventurers of Rune-Midgard, at the town of Izlude.";
 			next;
 			switch(select("Swordman Class:Acolyte Class:Thief Class:Merchant Class:Archer Class:Mage Class")) {
 				case 1:
@@ -75,12 +74,15 @@ new_1-2,100,29,3	script	Officer	642,{
 L_Izlude:
 	mes .npc$;
 	mes "Just Kiddin', you will be send to the town of Izlude.";
+	close;
 	warp "izlude",0,0;
 	return;
 
 
 L_Save:
 	getmapxy(@mapName$,@mapX,@mapY,0,strcharinfo(0));
+	dispbottom "Your respawn point has been saved.";
+	dispbottom "^000099"+@mapName$+" ("+@mapX+", "+@mapY+")^000000";
 	savepoint @mapName$,@mapX,@mapY;
 	end;
 
