@@ -1,7 +1,8 @@
 izlude,139,150,3	script	ElvenEars Fairy	622,{
 	mes .npc$;
-	if(countitem(5102)){
+	if(countitem(2286)){
 		mes "What can I help you on your ^000099Elven Ears^000000?";
+		next;
 		switch(select("Enchantment:Reset")){
 			case 1: goto OnEnchant;
 			case 2: goto OnReset;
@@ -17,6 +18,7 @@ OnEnchant:
 	mes .npc$;
 	if( (getequipid(EQI_HEAD_MID)!=2286) ) {
 		mes "Please equip your ^000099Elven Ears^000000 if you want to have it enchanted.";
+		next;
 		switch(select("Equip:Don't equip")){
 			case 1:
 				equip 2286;
@@ -34,15 +36,16 @@ OnEnchant:
 		close;
 	}
 	mes "Select your preferred slot.";
-	switch(select("Normal Enchantment (Slot3):Special Enchantment (Slot4)")){
-		case 1: goto OnNormal;
-		case 2: goto OnSpecial;
+	next;
+	switch(select("Special Enchantment (Slot4):Normal Enchantment (Slot3)")){
+		case 1: goto OnSpecial;
+		case 2: goto OnNormal;
 	}
 	close;
 
 OnNormal:
 	mes .npc$;
-	mes "This slot will be enchant with Normal Stats.";
+	mes "These are about Normal Stats.";
 	mes "STR AGI VIT INT DEX LUK"; 
 	mes "Select your preferred enchantment.";
 	next;
@@ -72,111 +75,110 @@ OnNormal:
 		close;
 	}
 	switch( .@enc ){
-		case 1:
-			set .@i, rand(0,9);
-			if (.@i==0) set .@enchant, 4700;
-			if (.@i==1) set .@enchant, 4701;
-			if (.@i==2) set .@enchant, 4702;
-			if (.@i==3) set .@enchant, 4703;
-			if (.@i==4) set .@enchant, 4704;
-			if (.@i==5) set .@enchant, 4705;
-			if (.@i==6) set .@enchant, 4706;
-			if (.@i==7) set .@enchant, 4707;
-			if (.@i==8) set .@enchant, 4708;
-			if (.@i==9) set .@enchant, 4709;
+		case 1: //STR
+			set .@i, rand(20,90);
+			if (.@i>19 && .@i<30) set .@enchant, 4700;
+			if (.@i>29 && .@i<40) set .@enchant, 4701;
+			if (.@i>39 && .@i<50) set .@enchant, 4702;
+			if (.@i>49 && .@i<60) set .@enchant, 4703;
+			if (.@i>59 && .@i<70) set .@enchant, 4704;
+			if (.@i>69 && .@i<75) set .@enchant, 4705;
+			if (.@i>74 && .@i<80) set .@enchant, 4706;
+			if (.@i>79 && .@i<85) set .@enchant, 4707;
+			if (.@i>84 && .@i<90) set .@enchant, 4708;
+			if (.@i>89 && .@i<91) set .@enchant, 4709;
 			break;
-		case 2:
-			set .@i, rand(0,9);
-			if (.@i==0) set .@enchant, 4710;
-			if (.@i==1) set .@enchant, 4711;
-			if (.@i==2) set .@enchant, 4712;
-			if (.@i==3) set .@enchant, 4713;
-			if (.@i==4) set .@enchant, 4714;
-			if (.@i==5) set .@enchant, 4715;
-			if (.@i==6) set .@enchant, 4716;
-			if (.@i==7) set .@enchant, 4717;
-			if (.@i==8) set .@enchant, 4718;
-			if (.@i==9) set .@enchant, 4719;
+		case 4:	//INT
+			set .@i, rand(20,90);
+			if (.@i>19 && .@i<30) set .@enchant, 4710;
+			if (.@i>29 && .@i<40) set .@enchant, 4711;
+			if (.@i>39 && .@i<50) set .@enchant, 4712;
+			if (.@i>49 && .@i<60) set .@enchant, 4713;
+			if (.@i>59 && .@i<70) set .@enchant, 4714;
+			if (.@i>69 && .@i<75) set .@enchant, 4715;
+			if (.@i>74 && .@i<80) set .@enchant, 4716;
+			if (.@i>79 && .@i<85) set .@enchant, 4717;
+			if (.@i>84 && .@i<90) set .@enchant, 4718;
+			if (.@i>89 && .@i<91) set .@enchant, 4719;
 			break;
-		case 3:
-			set .@i, rand(0,9);
-			if (.@i==0) set .@enchant, 4720;
-			if (.@i==1) set .@enchant, 4721;
-			if (.@i==2) set .@enchant, 4722;
-			if (.@i==3) set .@enchant, 4723;
-			if (.@i==4) set .@enchant, 4724;
-			if (.@i==5) set .@enchant, 4725;
-			if (.@i==6) set .@enchant, 4726;
-			if (.@i==7) set .@enchant, 4727;
-			if (.@i==8) set .@enchant, 4728;
-			if (.@i==9) set .@enchant, 4729;
+		case 5: //DEX
+			set .@i, rand(20,90);
+			if (.@i>19 && .@i<30) set .@enchant, 4720;
+			if (.@i>29 && .@i<40) set .@enchant, 4721;
+			if (.@i>39 && .@i<50) set .@enchant, 4722;
+			if (.@i>49 && .@i<60) set .@enchant, 4723;
+			if (.@i>59 && .@i<70) set .@enchant, 4724;
+			if (.@i>69 && .@i<75) set .@enchant, 4725;
+			if (.@i>74 && .@i<80) set .@enchant, 4726;
+			if (.@i>79 && .@i<85) set .@enchant, 4727;
+			if (.@i>84 && .@i<90) set .@enchant, 4728;
+			if (.@i>89 && .@i<91) set .@enchant, 4729;
 			break;
-		case 4:
-			set .@i, rand(0,9);
-			if (.@i==0) set .@enchant, 4730;
-			if (.@i==1) set .@enchant, 4731;
-			if (.@i==2) set .@enchant, 4732;
-			if (.@i==3) set .@enchant, 4733;
-			if (.@i==4) set .@enchant, 4734;
-			if (.@i==5) set .@enchant, 4735;
-			if (.@i==6) set .@enchant, 4736;
-			if (.@i==7) set .@enchant, 4737;
-			if (.@i==8) set .@enchant, 4738;
-			if (.@i==9) set .@enchant, 4739;
+		case 2: //AGI
+			set .@i, rand(20,90);
+			if (.@i>19 && .@i<30) set .@enchant, 4730;
+			if (.@i>29 && .@i<40) set .@enchant, 4731;
+			if (.@i>39 && .@i<50) set .@enchant, 4732;
+			if (.@i>49 && .@i<60) set .@enchant, 4733;
+			if (.@i>59 && .@i<70) set .@enchant, 4734;
+			if (.@i>69 && .@i<75) set .@enchant, 4735;
+			if (.@i>74 && .@i<80) set .@enchant, 4736;
+			if (.@i>79 && .@i<85) set .@enchant, 4737;
+			if (.@i>84 && .@i<90) set .@enchant, 4738;
+			if (.@i>89 && .@i<91) set .@enchant, 4739;
 			break;
-		case 5:
-			set .@i, rand(0,9);
-			if (.@i==0) set .@enchant, 4740;
-			if (.@i==1) set .@enchant, 4741;
-			if (.@i==2) set .@enchant, 4742;
-			if (.@i==3) set .@enchant, 4743;
-			if (.@i==4) set .@enchant, 4744;
-			if (.@i==5) set .@enchant, 4745;
-			if (.@i==6) set .@enchant, 4746;
-			if (.@i==7) set .@enchant, 4747;
-			if (.@i==8) set .@enchant, 4748;
-			if (.@i==9) set .@enchant, 4749;
+		case 3: //VIT
+			set .@i, rand(20,90);
+			if (.@i>19 && .@i<30) set .@enchant, 4740;
+			if (.@i>29 && .@i<40) set .@enchant, 4741;
+			if (.@i>39 && .@i<50) set .@enchant, 4742;
+			if (.@i>49 && .@i<60) set .@enchant, 4743;
+			if (.@i>59 && .@i<70) set .@enchant, 4744;
+			if (.@i>69 && .@i<75) set .@enchant, 4745;
+			if (.@i>74 && .@i<80) set .@enchant, 4746;
+			if (.@i>79 && .@i<85) set .@enchant, 4747;
+			if (.@i>84 && .@i<90) set .@enchant, 4748;
+			if (.@i>89 && .@i<91) set .@enchant, 4749;
 			break;
-		case 6:
-			set .@i, rand(0,9);
-			if (.@i==0) set .@enchant, 4750;
-			if (.@i==1) set .@enchant, 4751;
-			if (.@i==2) set .@enchant, 4752;
-			if (.@i==3) set .@enchant, 4753;
-			if (.@i==4) set .@enchant, 4754;
-			if (.@i==5) set .@enchant, 4755;
-			if (.@i==6) set .@enchant, 4756;
-			if (.@i==7) set .@enchant, 4757;
-			if (.@i==8) set .@enchant, 4758;
-			if (.@i==9) set .@enchant, 4759;
+		case 6: //LUK
+			set .@i, rand(20,90);
+			if (.@i>19 && .@i<30) set .@enchant, 4750;
+			if (.@i>29 && .@i<40) set .@enchant, 4751;
+			if (.@i>39 && .@i<50) set .@enchant, 4752;
+			if (.@i>49 && .@i<60) set .@enchant, 4753;
+			if (.@i>59 && .@i<70) set .@enchant, 4754;
+			if (.@i>69 && .@i<75) set .@enchant, 4755;
+			if (.@i>74 && .@i<80) set .@enchant, 4756;
+			if (.@i>79 && .@i<85) set .@enchant, 4757;
+			if (.@i>84 && .@i<90) set .@enchant, 4758;
+			if (.@i>89 && .@i<91) set .@enchant, 4759;
 			break;
 		default:
 			mes .npc$;
 			mes "There is something wrong. Please try again.";
 			close;
 	}
+	mes .npc$;
+	mes "Your ^000099Elven Ears^000000 has been enchanted";
+	mes "^000099"+getitemname(.@enchant)+"^000000";
 	Zeny -= 1000000;
 	delitem 2286,1;
 	getitem2 2286,1,1,0,0,0,0,.@enchant,@slotSpecial;
 	equip 2286;
 	specialeffect2 1019;
 	specialeffect2 98;
-	next;
-	mes .npc$;
-	mes "Your ^000099Elven Ears^000000 has been enchanted";
-	mes "^000099"+getitemname(.@enchant)+"^000000";
 	close;
 
 
 OnSpecial:
 	mes .npc$;
-	mes "This slot will be enchant with Special Stats.";
-	mes "Spell : MATK and Casting Time.";
-	mes "Fighting Spirit : ATK and HIT.";
-	mes "Expert Archer : Ranged Attack.";
+	mes "These are about Special Stats.";
+	mes "Spell: MATK and Casting Time.";
+	mes "Fighting Spirit: ATK and HIT.";
+	mes "Expert Archer: Ranged Attack.";
 	mes "Select your preferred enchantment.";
 	next;
-	switch(select("Spell:Fighting Spirit:Expert Archer")){
+	switch(select("Spell (Force):Fighting Spirit:Expert Archer")){
 		case 1:
 			set .@enc, 1;
 			break;
@@ -194,59 +196,58 @@ OnSpecial:
 	}
 	switch( .@enc ){
 		case 1:
-			set .@i, rand(0,9);
-			if (.@i==0) set .@enchant, 4815;
-			if (.@i==1) set .@enchant, 4814;
-			if (.@i==2) set .@enchant, 4813;
-			if (.@i==3) set .@enchant, 4812;
-			if (.@i==4) set .@enchant, 4826;
-			if (.@i==5) set .@enchant, 4827;
-			if (.@i==6) set .@enchant, 4828;
-			if (.@i==7) set .@enchant, 4829;
-			if (.@i==8) set .@enchant, 4830;
-			if (.@i==9) set .@enchant, 4831;
+			set .@i, rand(20,90);
+			if (.@i>19 && .@i<30) set .@enchant, 4815;
+			if (.@i>29 && .@i<40) set .@enchant, 4814;
+			if (.@i>39 && .@i<50) set .@enchant, 4813;
+			if (.@i>49 && .@i<60) set .@enchant, 4812;
+			if (.@i>59 && .@i<70) set .@enchant, 4826;
+			if (.@i>69 && .@i<75) set .@enchant, 4827;
+			if (.@i>74 && .@i<80) set .@enchant, 4828;
+			if (.@i>79 && .@i<85) set .@enchant, 4829;
+			if (.@i>84 && .@i<90) set .@enchant, 4830;
+			if (.@i>89 && .@i<91) set .@enchant, 4831;
 			break;
 		case 2:
-			set .@i, rand(0,9);
-			if (.@i==0) set .@enchant, 4811;
-			if (.@i==1) set .@enchant, 4810;
-			if (.@i==2) set .@enchant, 4809;
-			if (.@i==3) set .@enchant, 4808;
-			if (.@i==4) set .@enchant, 4820;
-			if (.@i==5) set .@enchant, 4821;
-			if (.@i==6) set .@enchant, 4822;
-			if (.@i==7) set .@enchant, 4823;
-			if (.@i==8) set .@enchant, 4824;
-			if (.@i==9) set .@enchant, 4825;
+			set .@i, rand(20,90);
+			if (.@i>19 && .@i<30) set .@enchant, 4811;
+			if (.@i>29 && .@i<40) set .@enchant, 4810;
+			if (.@i>39 && .@i<50) set .@enchant, 4809;
+			if (.@i>49 && .@i<60) set .@enchant, 4808;
+			if (.@i>59 && .@i<70) set .@enchant, 4820;
+			if (.@i>69 && .@i<75) set .@enchant, 4821;
+			if (.@i>74 && .@i<80) set .@enchant, 4822;
+			if (.@i>79 && .@i<85) set .@enchant, 4823;
+			if (.@i>84 && .@i<90) set .@enchant, 4824;
+			if (.@i>89 && .@i<91) set .@enchant, 4825;
 			break;
 		case 3:
-			set .@i, rand(0,9);
-			if (.@i==0) set .@enchant, 4832;
-			if (.@i==1) set .@enchant, 4833;
-			if (.@i==2) set .@enchant, 4834;
-			if (.@i==3) set .@enchant, 4835;
-			if (.@i==4) set .@enchant, 4836;
-			if (.@i==5) set .@enchant, 4837;
-			if (.@i==6) set .@enchant, 4838;
-			if (.@i==7) set .@enchant, 4839;
-			if (.@i==8) set .@enchant, 4840;
-			if (.@i==9) set .@enchant, 4841;
+			set .@i, rand(20,90);
+			if (.@i>19 && .@i<30) set .@enchant, 4832;
+			if (.@i>29 && .@i<40) set .@enchant, 4833;
+			if (.@i>39 && .@i<50) set .@enchant, 4834;
+			if (.@i>49 && .@i<60) set .@enchant, 4835;
+			if (.@i>59 && .@i<70) set .@enchant, 4836;
+			if (.@i>69 && .@i<75) set .@enchant, 4837;
+			if (.@i>74 && .@i<80) set .@enchant, 4838;
+			if (.@i>79 && .@i<85) set .@enchant, 4839;
+			if (.@i>84 && .@i<90) set .@enchant, 4840;
+			if (.@i>89 && .@i<91) set .@enchant, 4841;
 			break;
 		default:
 			mes .npc$;
 			mes "There is something wrong. Please try again.";
 			close;
 	}
+	mes .npc$;
+	mes "Your ^000099Elven Ears^000000 has been enchanted";
+	mes "^000099"+getitemname(.@enchant)+"^000000";
 	Zeny -= 1000000;
 	delitem 2286,1;
 	getitem2 2286,1,1,0,0,0,0,@slotNormal,.@enchant;
 	equip 2286;
 	specialeffect2 1019;
 	specialeffect2 98;
-	next;
-	mes .npc$;
-	mes "Your ^000099Elven Ears^000000 has been enchanted";
-	mes "^000099"+getitemname(.@enchant)+"^000000";
 	close;
 
 
