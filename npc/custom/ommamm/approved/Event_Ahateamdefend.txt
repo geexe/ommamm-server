@@ -1,4 +1,4 @@
-sch_gld,160,61,5	script	Ommamm Defense Return	469,{
+izlude,144,128,5	script	Ommamm Defense Return	469,{
 if($Open_Dun_aha==1){end;}
 mes "[AhaTeamDefend]";
 mes "ยินดีต้อนรับผู้กล้าทั้งหลายเข้าสู่ ^FF0000AhaTeamDefend^000000"; 
