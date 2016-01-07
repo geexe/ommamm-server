@@ -18,7 +18,9 @@
 
 // Main NPC :: safety_Ref_NPC
 //============================================================
-aldebaran,146,111,6	script	Refine Master	851,{
+izlude,157,129,4	script	Refine Master	851,{
+	OnInit:
+	waitingroom "Ticket Refiner",0;
 	disable_items;
 	if (countitem(6238) || countitem(6228) || countitem(6229) || countitem(6230) || countitem(6231) || countitem(6456))
 		set .@bWeaponUp,1;

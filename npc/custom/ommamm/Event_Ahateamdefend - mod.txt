@@ -1,4 +1,4 @@
-izlude,144,128,4	script	AhaTeamDefendS	469,{
+izlude,144,128,5	script	Ommamm Defense Return	469,{
 if($Open_Dun_aha==1){end;}
 mes "[AhaTeamDefend]";
 mes "ยินดีต้อนรับผู้กล้าทั้งหลายเข้าสู่ ^FF0000AhaTeamDefend^000000"; 
@@ -65,7 +65,7 @@ mes "[AhaTeamDefend]";
 mes "ไม่เป็นไรท่านผู้กล้าถ้าท่านพร้อมค่อยมาหาข้าใหม่"; 
 close; 
 OnInit:
-	waitingroom "Aha Team Defend",0;
+	waitingroom "Ommamm Defense Return",0;
 end;
 
 } 
@@ -95,6 +95,7 @@ OnClock1620:
 OnClock1750:
 OnClock1920:
 OnClock2050:
+OnClock2108:
 Announce "[ AhaTeamDefend ] : AhaTeamDefend กำลังจะเปิดใน 5 นาที !!",8; 
 initnpctimer; 
 set $iatd,1; 
@@ -102,23 +103,7 @@ set $atdstatus,0;
 killmonsterall "force_2-3.gat"; 
 end; 
 
-OnTimer60000: 
-Announce "[ AhaTeamDefend ] : AhaTeamDefend จะเริ่มต้นภายใน 4 นาที!!",8; 
-end; 
-
-OnTimer120000: 
-Announce "[ AhaTeamDefend ] : AhaTeamDefend จะเริ่มต้นภายใน 3 นาที!!",8; 
-end; 
-
-OnTimer180000: 
-Announce "[ AhaTeamDefend ] : AhaTeamDefend จะเริ่มต้นภายใน 2 นาที!!",8; 
-end; 
-
-OnTimer240000: 
-Announce "[ AhaTeamDefend ] : AhaTeamDefend  จะเริ่มต้นภายใน 1 นาที!!",8; 
-end; 
-
-OnTimer300000:
+OnTimer30000:
 Announce "[ AhaTeamDefend ] : AhaTeamDefend ได้เริ่มต้นขึ้นแล้ว ณ บัดนี้ !!",8; 
 initnpctimer "CekATD";
 setnpctimer 0;
@@ -234,7 +219,6 @@ set $atd3room4,0;
 monster "force_2-3.gat",20,140,"Bloodyknight",1268,8,"HiddenNpcATD::On3room1";
 monster "force_2-3.gat",20,140,"Abysknight",1219,8,"HiddenNpcATD::On3room1";
 monster "force_2-3.gat",20,140,"Phreeoni",1159,2,"HiddenNpcATD::On3room1";
-monster "force_2-3.gat",20,140,"Beelzebub",1874,1,"HiddenNpcATD::On3room1";
 monster "force_2-3.gat",140,100,"Bloodyknight",1268,8,"HiddenNpcATD::On3room2";
 monster "force_2-3.gat",140,100,"Abysknight",1219,8,"HiddenNpcATD::On3room2";
 monster "force_2-3.gat",140,100,"Phreeoni",1159,2,"HiddenNpcATD::On3room2";
@@ -381,7 +365,7 @@ end;
 Onboxdead: 
 if ($atdstatus == 1) end;  
 Announce "[ AhaTeamDefend ] : " + strcharinfo(0) +" ได้เปิดขุมทรัพย์ AhaTeamDefend  แล้ว",8; 
-getitem 7227,1;
+getitem 7227,7;
 getitem 607,1;
 if(rand(1,10)==9){getitem 607,2;}
 end; 

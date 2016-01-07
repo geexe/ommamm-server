@@ -1,0 +1,6 @@
+izlude,158,123,3	script	Refine and Socketing	857,{
+	OnInit:
+	waitingroom "Refine and Socketing",0;
+	end;
+
+}

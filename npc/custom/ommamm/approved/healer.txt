@@ -1,4 +1,4 @@
-izlude,121,147,5	script	Healer	641,{
+izlude,134,147,3	script	Healer	641,{
 	if (npcDelay > gettimetick(2)) end;
 	
 	sc_end SC_Poison;

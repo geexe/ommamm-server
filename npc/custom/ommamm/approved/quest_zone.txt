@@ -1,0 +1,6 @@
+izlude,111,140,5	script	Quest Zone	857,{
+	OnInit:
+	waitingroom "Challenge Zone",0;
+	end;
+
+}

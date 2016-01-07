@@ -1,6 +1,6 @@
 //Biolab Hunting Challenge
 
-izlude,148,129,4	script	Challenge::endgame_npc	811,{
+izlude,100,140,4	script	Biolab Challenge::endgame_biolab	402,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -25,6 +25,7 @@ izlude,148,129,4	script	Challenge::endgame_npc	811,{
 		mes getitemname(.reward);
 		next;
 		//display completed MVPs
+
 		if(getarraysize(biolabkill)) {
 			mes "MVPs you have completed:";
 			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
@@ -84,6 +85,7 @@ OnNPCKillEvent:
 			}
 		}
 	} else if (.party) {
+		.@mob = killedrid;
 		getmapxy(.@map1$,.@x1,.@y1,0);
 		getpartymember getcharid(1), 0;
 		getpartymember getcharid(1), 1;
@@ -92,9 +94,10 @@ OnNPCKillEvent:
 			if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
 				for (.@j = 0; .@j < getarraysize(.biolabmvp); .@j++) {
 					if(killedrid == .biolabmvp[.@j]) {
-						query_sql("INSERT INTO `char_reg_num` (`char_id`,`key`,`index`,`value`) VALUES ("+$@partymembercid[.@i]+",'biolabkill'," +.@j+ ","+killedrid+")");
-						//query_sql("INSERT INTO char_reg_num (char_id,key,index,value) VALUES ('$@partymembercid[.@i]', '"biolabkill"', '.@j', 'killedrid')");
-						dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid) + $@partymembercid[.@i];
+						attachrid($@partymemberaid[.@i]);
+						setarray biolabkill[.@j], killedrid;
+						//query_sql("INSERT INTO `char_reg_num` (`char_id`,`key`,`index`,`value`) VALUES ("+$@partymembercid[.@i]+",'biolabkill'," +.@j+ ","+killedrid+")");
+						dispbottom "[Challenge] Biolab MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
 					}
 				}
 			}
@@ -104,9 +107,9 @@ OnNPCKillEvent:
 	
 OnInit:
 	//monsters to kill
-	setarray .biolabmvp[0],1001,1002,1004,1005;
+	setarray .biolabmvp[0],1651,1650,1649,1648,1647,1646;
 	//reward item
-	.reward = 501;
+	.reward = 2383;
 	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
 	.party = 1;
 	end;
