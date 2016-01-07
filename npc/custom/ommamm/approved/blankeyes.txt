@@ -293,7 +293,7 @@ OnReset:
 	mes "This will reset your ^000099Blank Eyes^000000.";
 	mes "Select your preferred enchantment.";
 	next;
-	switch(select("All (3,000,000z):Special (1,600,000z):Normal (1,600,000z):Unique (100,000z)")){
+	switch(select("All (3,000,000z):Special (1,600,000z):Normal (1,600,000z):Unique (0z)")){
 		case 1: goto ResetAll;
 		case 2: goto ResetSpecial;
 		case 3: goto ResetNormal;
@@ -364,13 +364,9 @@ ResetUnique:
 	mes .npc$;
 	mes "Unique Enchanment";
 	mes "Payment for this function.";
-	mes "^000099100,000z^000000";
+	mes "^0000990z^000000";
 	next;
 	mes .npc$;
-	if(Zeny<100000) {
-		mes "You don't have enough zeny.";
-		close;
-	}
 	mes "Are you sure?";
 	next;
 	switch(select("No:Yes")){
@@ -378,7 +374,6 @@ ResetUnique:
 		case 2:
 			mes .npc$;
 			mes "Your ^000099Blank Eyes^000000's <Unique> Enchantments have been reset.";
-			Zeny -= 100000;
 			delitem 5102, 1;
 			getitem2 5102,1,1,0,0,0,0,@slotNormal,@slotSpecial;
 			equip 5102;
