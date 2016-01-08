@@ -5,7 +5,7 @@ izlude,100,140,4	script	Biolab Challenge::endgame_biolab	402,{
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
 	mes "Please select a challenge to view the details";
-	//switch for other challenges
+
 	next;
 	mes "[Challenge]";
 	mes "This is a challenge to prove that your skills are worthy of recognition";
@@ -13,13 +13,13 @@ izlude,100,140,4	script	Biolab Challenge::endgame_biolab	402,{
 	switch(select("Quest Info:Claim Reward:Cancel")){
 	case 1:
 		mes "[Challenge]";
-		mes "You must kill all 6 Biolab MVPs:";
+		mes "You must kill all " + getarraysize(.biolabmvp) + " Biolab MVPs:";
 		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
 			mes .@i+1 + ". " + strmobinfo(1,.biolabmvp[.@i]);
 		}
 		next;
 		mes "[Challenge]";
-		mes "When you have killed all 6 MVPs, you can claim the reward from me.";
+		mes "When you have killed all " + getarraysize(.biolabmvp) + " MVPs, you can claim the reward from me.";
 		mes " ";
 		mes "The reward for this quest is";
 		mes getitemname(.reward);
@@ -85,19 +85,23 @@ OnNPCKillEvent:
 			}
 		}
 	} else if (.party) {
-		.@mob = killedrid;
-		getmapxy(.@map1$,.@x1,.@y1,0);
-		getpartymember getcharid(1), 0;
-		getpartymember getcharid(1), 1;
-		getpartymember getcharid(1), 2;
-		for (.@i = 0; .@i < $@partymembercount; .@i++) {
-			if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
-				for (.@j = 0; .@j < getarraysize(.biolabmvp); .@j++) {
-					if(killedrid == .biolabmvp[.@j]) {
-						attachrid($@partymemberaid[.@i]);
-						setarray biolabkill[.@j], killedrid;
-						//query_sql("INSERT INTO `char_reg_num` (`char_id`,`key`,`index`,`value`) VALUES ("+$@partymembercid[.@i]+",'biolabkill'," +.@j+ ","+killedrid+")");
-						dispbottom "[Challenge] Biolab MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
+		for (.@j = 0; .@j < getarraysize(.biolabmvp); .@j++) {
+			if(killedrid == .biolabmvp[.@j]) {
+				getmapxy(.@map1$,.@x1,.@y1,0);
+				getpartymember getcharid(1), 0;
+				getpartymember getcharid(1), 1;
+				getpartymember getcharid(1), 2;
+				for (.@i = 0; .@i < $@partymembercount; .@i++) {
+					if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
+						set .@HP, getvar(HP, $@partymembercid[.@i]);
+						if (.@HP > 0) {
+							getmapxy(.@map2$,.@x2,.@y2,0);
+							if ((.@map1$ == .@map2$ || .Party == 1) && (distance(.@x1,.@y1,.@x2,.@y2) <= 30 || .Party < 3)) {
+								attachrid($@partymemberaid[.@i]);
+								setarray biolabkill[.@j], killedrid;
+								dispbottom "[Challenge] Biolab MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
+							}
+						}
 					}
 				}
 			}

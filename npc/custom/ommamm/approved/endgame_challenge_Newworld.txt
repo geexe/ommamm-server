@@ -4,58 +4,41 @@ izlude,108,136,4	script	New World Challenge::endgame_newworld	884,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
-	mes "Please select a challenge to view the details";
-	//switch for other challenges
+	mes " ";
+	mes "Prove yourself that you really love Ragnarok Online.";
+	mes "We will reward only the utmost dedication to Ragnarok Online.";
+	
 	next;
 	mes "[Challenge]";
-	mes "This is a challenge to prove that your skills are worthy of recognition";
+	mes "This is a challenge to prove that your perseverence is limitless.";
 	next;
 	switch(select("Quest Info:Claim Reward:Cancel")){
 	case 1:
 		mes "[Challenge]";
-		mes "You must kill all 6 Biolab MVPs:";
-		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-			mes .@i+1 + ". " + strmobinfo(1,.biolabmvp[.@i]);
-		}
+		mes "You must complete the quest:";
+		mes "Report from the New World";
+		
 		next;
 		mes "[Challenge]";
-		mes "When you have killed all 6 MVPs, you can claim the reward from me.";
+		mes "When you have completed the quest, you can claim the reward from me.";
 		mes " ";
 		mes "The reward for this quest is";
 		mes getitemname(.reward);
-		next;
-		//display completed MVPs
 
-		if(getarraysize(biolabkill)) {
-			mes "MVPs you have completed:";
-			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(biolabkill[.@i] == .biolabmvp[.@i]) {
-					mes strmobinfo(1,biolabkill[.@i]);
-				}
-			}
-		}
-		else {
-			mes "Go kill those MVPs!";
-		}
 		break;
 	case 2:
 		mes "[Challenge]";
 		//check to see if character has received the reward
-		if(!getommammreward) {
-			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(biolabkill[.@i] == .biolabmvp[.@i]) {
-					.@mvpcount += 1;
-				}
-			}
+		if(!getommammreward_newworld) {
 			//check to see if all MVPs have been completed
-			if(.@mvpcount == getarraysize(.biolabmvp)) {
+			if(checkquest(3094) == 2) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
 				
 				//check weight and inventory 
 				if(checkweight(.reward,1)) {
 					//Set variable to prevent player from getting multiple items
-					getommammreward = 1;
+					getommammreward_newworld = 1;
 					getitem .reward, 1;
 				}
 				else {
@@ -76,41 +59,9 @@ izlude,108,136,4	script	New World Challenge::endgame_newworld	884,{
 	}
 	close;
 	
-OnNPCKillEvent:
-	if(!.party || !getcharid(1)) {	
-		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-			if(killedrid == .biolabmvp[.@i]) {
-				setarray biolabkill[.@i], killedrid;
-				dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid);
-			}
-		}
-	} else if (.party) {
-		.@mob = killedrid;
-		getmapxy(.@map1$,.@x1,.@y1,0);
-		getpartymember getcharid(1), 0;
-		getpartymember getcharid(1), 1;
-		getpartymember getcharid(1), 2;
-		for (.@i = 0; .@i < $@partymembercount; .@i++) {
-			if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
-				for (.@j = 0; .@j < getarraysize(.biolabmvp); .@j++) {
-					if(killedrid == .biolabmvp[.@j]) {
-						attachrid($@partymemberaid[.@i]);
-						setarray biolabkill[.@j], killedrid;
-						//query_sql("INSERT INTO `char_reg_num` (`char_id`,`key`,`index`,`value`) VALUES ("+$@partymembercid[.@i]+",'biolabkill'," +.@j+ ","+killedrid+")");
-						dispbottom "[Challenge] Biolab MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
-					}
-				}
-			}
-		}
-	}
-	end;
 	
 OnInit:
-	//monsters to kill
-	setarray .biolabmvp[0],1651,1650,1649,1648,1647,1646;
 	//reward item
 	.reward = 2383;
-	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
-	.party = 1;
 	end;
 	}

@@ -1,4 +1,4 @@
-//Biolab Hunting Challenge
+//Endless Tower Challenge
 
 izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	405,{
 	mes "[Challenge]";
@@ -8,54 +8,54 @@ izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	405,{
 	//switch for other challenges
 	next;
 	mes "[Challenge]";
-	mes "This is a challenge to prove that your skills are worthy of recognition";
+	mes "This is a challenge to prove that your knowledge and preparation are second to none.";
 	next;
 	switch(select("Quest Info:Claim Reward:Cancel")){
 	case 1:
 		mes "[Challenge]";
-		mes "You must finish 100 rooms in the Endless Tower and slay the boss:";
-		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-			mes .@i+1 + ". " + strmobinfo(1,.biolabmvp[.@i]);
+		mes "You must finish 100 rooms in the Endless Tower and slay the bosses:";
+		for (.@i = 0; .@i < getarraysize(.endlessmvp); .@i++) {
+			mes .@i+1 + ". " + strmobinfo(1,.endlessmvp[.@i]);
 		}
 		next;
 		mes "[Challenge]";
-		mes "When you have killed him, you can claim the reward from me.";
+		mes "When you have completed Endless Tower instance, you can claim the reward from me.";
 		mes " ";
 		mes "The reward for this quest is";
 		mes getitemname(.reward);
 		next;
 		//display completed MVPs
 
-		if(getarraysize(biolabkill)) {
+		if(getarraysize(endlesskill)) {
 			mes "MVPs you have completed:";
-			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(biolabkill[.@i] == .biolabmvp[.@i]) {
-					mes strmobinfo(1,biolabkill[.@i]);
+			for (.@i = 0; .@i < getarraysize(.endlessmvp); .@i++) {
+				if(endlesskill[.@i] == .endlessmvp[.@i]) {
+					mes strmobinfo(1,endlesskill[.@i]);
 				}
 			}
 		}
 		else {
-			mes "Hunt Him down!";
+			mes "End the Endless!";
 		}
 		break;
 	case 2:
 		mes "[Challenge]";
 		//check to see if character has received the reward
-		if(!getommammreward) {
-			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(biolabkill[.@i] == .biolabmvp[.@i]) {
+		if(!getommammreward_endless) {
+			for (.@i = 0; .@i < getarraysize(.endlessmvp); .@i++) {
+				if(endlesskill[.@i] == .endlessmvp[.@i]) {
 					.@mvpcount += 1;
 				}
 			}
 			//check to see if all MVPs have been completed
-			if(.@mvpcount == getarraysize(.biolabmvp)) {
+			if(.@mvpcount == getarraysize(.endlessmvp)) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
 				
 				//check weight and inventory 
 				if(checkweight(.reward,1)) {
 					//Set variable to prevent player from getting multiple items
-					getommammreward = 1;
+					getommammreward_endless = 1;
 					getitem .reward, 1;
 				}
 				else {
@@ -78,26 +78,30 @@ izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	405,{
 	
 OnNPCKillEvent:
 	if(!.party || !getcharid(1)) {	
-		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-			if(killedrid == .biolabmvp[.@i]) {
-				setarray biolabkill[.@i], killedrid;
-				dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid);
+		for (.@i = 0; .@i < getarraysize(.endlessmvp); .@i++) {
+			if(killedrid == .endlessmvp[.@i]) {
+				setarray endlesskill[.@i], killedrid;
+				dispbottom "[Challenge] Endless MVP killed: " + strmobinfo(1,killedrid);
 			}
 		}
 	} else if (.party) {
-		.@mob = killedrid;
-		getmapxy(.@map1$,.@x1,.@y1,0);
-		getpartymember getcharid(1), 0;
-		getpartymember getcharid(1), 1;
-		getpartymember getcharid(1), 2;
-		for (.@i = 0; .@i < $@partymembercount; .@i++) {
-			if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
-				for (.@j = 0; .@j < getarraysize(.biolabmvp); .@j++) {
-					if(killedrid == .biolabmvp[.@j]) {
-						attachrid($@partymemberaid[.@i]);
-						setarray biolabkill[.@j], killedrid;
-						//query_sql("INSERT INTO `char_reg_num` (`char_id`,`key`,`index`,`value`) VALUES ("+$@partymembercid[.@i]+",'biolabkill'," +.@j+ ","+killedrid+")");
-						dispbottom "[Challenge] Biolab MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
+		for (.@j = 0; .@j < getarraysize(.endlessmvp); .@j++) {
+			if(killedrid == .endlessmvp[.@j]) {
+				getmapxy(.@map1$,.@x1,.@y1,0);
+				getpartymember getcharid(1), 0;
+				getpartymember getcharid(1), 1;
+				getpartymember getcharid(1), 2;
+				for (.@i = 0; .@i < $@partymembercount; .@i++) {
+					if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
+						set .@HP, getvar(HP, $@partymembercid[.@i]);
+						if (.@HP > 0) {
+							getmapxy(.@map2$,.@x2,.@y2,0);
+							if ((.@map1$ == .@map2$ || .Party == 1) && (distance(.@x1,.@y1,.@x2,.@y2) <= 30 || .Party < 3)) {
+								attachrid($@partymemberaid[.@i]);
+								setarray endlesskill[.@j], killedrid;
+								dispbottom "[Challenge] Endless MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
+							}
+						}
 					}
 				}
 			}
@@ -107,10 +111,10 @@ OnNPCKillEvent:
 	
 OnInit:
 	//monsters to kill
-	setarray .biolabmvp[0],1956;
+	setarray .endlessmvp[0],1956,1957;
 	//reward item
 	.reward = 19859;
 	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
-	.party = 1;
+	.party = 2;
 	end;
 	}

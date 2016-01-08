@@ -1,0 +1,20 @@
+izlude,111,140,5	script	Quest Zone	857,{
+	OnInit:
+	waitingroom "Challenge Zone",0;
+	end;
+
+}
+
+izlude,158,123,3	script	Refine and Socketing	857,{
+	OnInit:
+	waitingroom "Refine and Socketing",0;
+	end;
+
+}
+
+izlude,142,139,5	script	Event Zone	857,{
+	OnInit:
+	waitingroom "Events and Utilities",0;
+	end;
+
+}
