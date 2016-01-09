@@ -24,7 +24,10 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become an Acolyte.";
 					mes "You will be sent to the town of Prontera.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					close;
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 				case 3:
@@ -32,7 +35,10 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become a Thief.";
 					mes "You will be sent to the town of Morroc.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					close;
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 				case 4:
@@ -40,7 +46,10 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become a Merchant.";
 					mes "You will be sent to the town of Alberta.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					close;
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 				case 5:
@@ -48,7 +57,10 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become an Archer.";
 					mes "You will be sent to the town of Payon.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					close;
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 				case 6:
@@ -56,7 +68,10 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become a Mage.";
 					mes "You will be sent to the town of Geffen.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					close;
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 			}
@@ -66,17 +81,11 @@ new_1-2,100,29,3	script	Officer	642,{
 			mes "Good luck, ^A62A2A"+strcharinfo(0)+"^000000 and farewell.";
 			next;
 			warp "izlude",128,146;
+			callsub L_Save;
 			end;
 		}
 		end;
 
-
-L_Izlude:
-	mes .npc$;
-	mes "Just Kiddin', you will be send to the town of Izlude.";
-	close;
-	warp "izlude",0,0;
-	return;
 
 
 L_Save:
