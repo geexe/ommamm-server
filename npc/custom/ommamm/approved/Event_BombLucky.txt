@@ -97,7 +97,7 @@ addtimer 1,"Ev_BombLucky_time::Ontime_game";
 end;
 
 OnClock2200: 
-set $@EvBombtimeST$,"20:18";
+set $@EvBombtimeST$,"22:00";
 addtimer 1,"Ev_BombLucky_time::Ontime_game";
 end;
 

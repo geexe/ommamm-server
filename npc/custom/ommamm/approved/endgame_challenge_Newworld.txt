@@ -1,4 +1,4 @@
-//Biolab Hunting Challenge
+//New World Challenge
 
 izlude,108,136,4	script	New World Challenge::endgame_newworld	884,{
 	mes "[Challenge]";
@@ -6,7 +6,7 @@ izlude,108,136,4	script	New World Challenge::endgame_newworld	884,{
 	mes "Welcome to Ommamm Challenge.";
 	mes " ";
 	mes "Prove yourself that you really love Ragnarok Online.";
-	mes "We will reward only the utmost dedication to Ragnarok Online.";
+	mes "We will reward only the utmost dedication to the game.";
 	
 	next;
 	mes "[Challenge]";

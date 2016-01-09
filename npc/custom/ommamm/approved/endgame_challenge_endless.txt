@@ -4,8 +4,10 @@ izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	405,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
-	mes "Please select a challenge to view the details";
-	//switch for other challenges
+	mes " ";
+	mes "Prove yourself that you really love Ragnarok Online.";
+	mes "We will reward only the utmost dedication to the game.";
+	
 	next;
 	mes "[Challenge]";
 	mes "This is a challenge to prove that your knowledge and preparation are second to none.";

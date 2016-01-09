@@ -4,11 +4,10 @@ izlude,100,140,4	script	Biolab Challenge::endgame_biolab	402,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
-	mes "Please select a challenge to view the details";
-
-	next;
-	mes "[Challenge]";
-	mes "This is a challenge to prove that your skills are worthy of recognition";
+	mes " ";
+	mes "Prove yourself that you really love Ragnarok Online.";
+	mes "We will reward only the utmost dedication to the game.";
+	
 	next;
 	switch(select("Quest Info:Claim Reward:Cancel")){
 	case 1:
