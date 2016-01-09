@@ -23,8 +23,9 @@ izlude,108,136,4	script	New World Challenge::endgame_newworld	884,{
 		mes "When you have completed the quest, you can claim the reward from me.";
 		mes " ";
 		mes "The reward for this quest is";
-		mes getitemname(.reward);
-
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes .@k+1 + ". " + getitemname(.reward[.@k]);
+		}
 		break;
 	case 2:
 		mes "[Challenge]";
@@ -39,7 +40,9 @@ izlude,108,136,4	script	New World Challenge::endgame_newworld	884,{
 				if(checkweight(.reward,1)) {
 					//Set variable to prevent player from getting multiple items
 					getommammreward_newworld = 1;
-					getitem .reward, 1;
+					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+						getitembound .reward[.@k], .reward_quantity[.@k], 1;
+					}
 				}
 				else {
 					mes "You do not enough space.";
@@ -61,7 +64,9 @@ izlude,108,136,4	script	New World Challenge::endgame_newworld	884,{
 	
 	
 OnInit:
-	//reward item
-	.reward = 2383;
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],2328;	
+	setarray .reward_quantity[0],1;
 	end;
 	}

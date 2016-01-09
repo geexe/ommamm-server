@@ -22,7 +22,9 @@ izlude,100,140,4	script	Biolab Challenge::endgame_biolab	402,{
 		mes "When you have killed all " + getarraysize(.biolabmvp) + " MVPs, you can claim the reward from me.";
 		mes " ";
 		mes "The reward for this quest is";
-		mes getitemname(.reward);
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes .@k+1 + ". " + getitemname(.reward[.@k]);
+		}
 		next;
 		//display completed MVPs
 
@@ -41,7 +43,7 @@ izlude,100,140,4	script	Biolab Challenge::endgame_biolab	402,{
 	case 2:
 		mes "[Challenge]";
 		//check to see if character has received the reward
-		if(!getommammreward) {
+		if(!getommammreward_biolab) {
 			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
 				if(biolabkill[.@i] == .biolabmvp[.@i]) {
 					.@mvpcount += 1;
@@ -55,8 +57,11 @@ izlude,100,140,4	script	Biolab Challenge::endgame_biolab	402,{
 				//check weight and inventory 
 				if(checkweight(.reward,1)) {
 					//Set variable to prevent player from getting multiple items
-					getommammreward = 1;
-					getitem .reward, 1;
+					getommammreward_biolab = 1;
+					//Cycle through the reward array
+					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+						getitembound .reward[.@k], .reward_quantity[.@k], 1;
+					}
 				}
 				else {
 					mes "You do not enough space.";
@@ -112,8 +117,10 @@ OnNPCKillEvent:
 OnInit:
 	//monsters to kill
 	setarray .biolabmvp[0],1651,1650,1649,1648,1647,1646;
-	//reward item
-	.reward = 2383;
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],31100;	
+	setarray .reward_quantity[0],1;
 	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
 	.party = 1;
 	end;

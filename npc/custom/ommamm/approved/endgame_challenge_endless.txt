@@ -22,7 +22,9 @@ izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	405,{
 		mes "When you have completed Endless Tower instance, you can claim the reward from me.";
 		mes " ";
 		mes "The reward for this quest is";
-		mes getitemname(.reward);
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes .@k+1 + ". " + getitemname(.reward[.@k]);
+		}
 		next;
 		//display completed MVPs
 
@@ -56,7 +58,9 @@ izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	405,{
 				if(checkweight(.reward,1)) {
 					//Set variable to prevent player from getting multiple items
 					getommammreward_endless = 1;
-					getitem .reward, 1;
+					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+						getitembound .reward[.@k], .reward_quantity[.@k], 1;
+					}
 				}
 				else {
 					mes "You do not enough space.";
@@ -112,8 +116,10 @@ OnNPCKillEvent:
 OnInit:
 	//monsters to kill
 	setarray .endlessmvp[0],1956,1957;
-	//reward item
-	.reward = 19859;
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],19859;	
+	setarray .reward_quantity[0],1;
 	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
 	.party = 2;
 	end;
