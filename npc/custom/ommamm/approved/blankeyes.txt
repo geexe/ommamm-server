@@ -260,7 +260,7 @@ OnUnique:
 			set .@enc, 2;
 			break;
 	}
-	if( @slotSpecial ) {
+	if( @slotUnique ) {
 		mes .npc$;
 		mes "Hmm.. it seems that slot has already been enchanted.";
 		close;
