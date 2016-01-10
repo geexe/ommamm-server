@@ -24,10 +24,7 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become an Acolyte.";
 					mes "You will be sent to the town of Prontera.";
 					next;
-					mes .npc$;
-					mes "Just Kiddin', you will be send to the town of Izlude.";
-					close;
-					warp "izlude",0,0;
+					callsub L_Izlude;
 					callsub L_Save;
 					end;
 				case 3:
@@ -35,10 +32,7 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become a Thief.";
 					mes "You will be sent to the town of Morroc.";
 					next;
-					mes .npc$;
-					mes "Just Kiddin', you will be send to the town of Izlude.";
-					close;
-					warp "izlude",0,0;
+					callsub L_Izlude;
 					callsub L_Save;
 					end;
 				case 4:
@@ -46,10 +40,7 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become a Merchant.";
 					mes "You will be sent to the town of Alberta.";
 					next;
-					mes .npc$;
-					mes "Just Kiddin', you will be send to the town of Izlude.";
-					close;
-					warp "izlude",0,0;
+					callsub L_Izlude;
 					callsub L_Save;
 					end;
 				case 5:
@@ -57,10 +48,7 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become an Archer.";
 					mes "You will be sent to the town of Payon.";
 					next;
-					mes .npc$;
-					mes "Just Kiddin', you will be send to the town of Izlude.";
-					close;
-					warp "izlude",0,0;
+					callsub L_Izlude;
 					callsub L_Save;
 					end;
 				case 6:
@@ -68,10 +56,7 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become a Mage.";
 					mes "You will be sent to the town of Geffen.";
 					next;
-					mes .npc$;
-					mes "Just Kiddin', you will be send to the town of Izlude.";
-					close;
-					warp "izlude",0,0;
+					callsub L_Izlude;
 					callsub L_Save;
 					end;
 			}
@@ -86,6 +71,14 @@ new_1-2,100,29,3	script	Officer	642,{
 		}
 		end;
 
+L_Izlude:
+	mes .npc$;
+	mes "Just Kiddin', you will be send to the town of Izlude.";
+	close;
+	set @x,rand(250);
+	set @y,rand(250);
+	warp "izlude",@x,@y;
+	return;
 
 
 L_Save:

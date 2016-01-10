@@ -1,0 +1,82 @@
+-	script	Officer	-1,{
+	mes .npc$;
+	mes "^000099"+strcharinfo(0)+"^000000";
+	mes "The Kafra Corporation is always working to provide you with convenient services. How may I be of assistance?";
+	next;
+	switch(select("Take me back to Izlude:Cancel")){
+	case 1:
+		mes .npc$;
+		mes "You will now be teleported.";
+		mes "Good luck, ^A62A2A"+strcharinfo(0)+"^000000 and farewell.";
+		next;
+		warp "izlude",128,146;
+		callsub L_Save;
+		break;
+	case 2:
+		mes .npc$;
+		mes "See you later";
+		break;
+	}
+	end;
+
+L_Save:
+	getmapxy(@mapName$,@mapX,@mapY,0,strcharinfo(0));
+	dispbottom "Your respawn point has been saved.";
+	dispbottom "^000099"+@mapName$+" ("+@mapX+", "+@mapY+")^000000";
+	savepoint @mapName$,@mapX,@mapY;
+	end;
+
+
+OnInit:
+	.npc$ = "[^AA0000Officer^000000]";
+}
+
+
+alb2trea,57,70,6	duplicate(Officer)	Officer#tre	874
+alberta,28,240,4	duplicate(Officer)	Officer#alb	874
+aldebaran,145,118,4	duplicate(Officer)	Officer#alde	874
+amatsu,203,87,4	duplicate(Officer)	Officer#ama	874
+ayothaya,209,169,6	duplicate(Officer)	Officer#ayo	874
+comodo,194,158,4	duplicate(Officer)	Officer#com	874
+einbech,59,38,6	duplicate(Officer)	Officer#einbe	874
+einbroch,69,202,4	duplicate(Officer)	Officer#einbr	874
+gef_fild10,71,339,4	duplicate(Officer)	Officer#orc	874
+geffen,124,72,4	duplicate(Officer)	Officer#gef	874
+glast_01,372,308,4	duplicate(Officer)	Officer#glh	874
+gonryun,162,122,4	duplicate(Officer)	Officer#gon	874
+hugel,101,151,4	duplicate(Officer)	Officer#hug	874
+izlu2dun,110,92,4	duplicate(Officer)	Officer#izd	874
+izlude,134,150,4	duplicate(Officer)	Officer#izl	874	//Pre-RE: (132,120)
+jawaii,253,138,4	duplicate(Officer)	Officer#jaw	874
+lighthalzen,162,102,4	duplicate(Officer)	Officer#lhz	874
+louyang,208,103,6	duplicate(Officer)	Officer#lou	874
+manuk,274,146,6	duplicate(Officer)	Officer#man	874
+mid_camp,216,288,4	duplicate(Officer)	Officer#mid	874
+mjolnir_02,85,364,4	duplicate(Officer)	Officer#mjo	874
+moc_ruins,64,164,4	duplicate(Officer)	Officer#moc	874
+morocc,159,97,4	duplicate(Officer)	Officer#mor	874
+moscovia,229,191,4	duplicate(Officer)	Officer#mos	874
+nameless_n,259,213,4	duplicate(Officer)	Officer#nam	874
+niflheim,205,179,4	duplicate(Officer)	Officer#nif	874
+pay_arche,42,134,4	duplicate(Officer)	Officer#arc	874
+payon,182,108,4	duplicate(Officer)	Officer#pay	874
+prontera,159,192,4	duplicate(Officer)	Officer#prt	874
+prt_fild05,279,223,6	duplicate(Officer)	Officer#cul	874
+rachel,135,116,4	duplicate(Officer)	Officer#rac	874
+splendide,205,153,4	duplicate(Officer)	Officer#spl	874
+thor_camp,249,76,4	duplicate(Officer)	Officer#thor	874
+umbala,106,150,3	duplicate(Officer)	Officer#umb	874
+veins,214,123,4	duplicate(Officer)	Officer#ve	874
+xmas,150,136,6	duplicate(Officer)	Officer#xmas	874
+yuno,162,47,4	duplicate(Officer)	Officer#yuno	874
+
+// --------------------------------------------------
+//	Duplicates (Renewal):
+// --------------------------------------------------
+brasilis,201,222,4	duplicate(Officer)	Officer#bra	874
+dewata,204,186,6	duplicate(Officer)	Officer#dew	874
+dicastes01,194,194,6	duplicate(Officer)	Officer#dic	874
+ecl_in01,51,60,4	duplicate(Officer)	Officer#ecl	874
+malangdo,134,117,6	duplicate(Officer)	Officer#mal	874
+malaya,231,204,4	duplicate(Officer)	Officer#ma	874
+mora,57,152,4	duplicate(Officer)	Officer#mora	874
