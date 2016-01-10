@@ -1,0 +1,627 @@
+//Bomb Lucky Sweepstakes
+
+//Reward NPCs=========================================================================================
+force_2-3,20,29,4	script	พนักงานของกิจกรรม#แพ้	893,{
+set @npc$,"[^000080"+strnpcinfo(0)+"^000000]";
+set .@s$,strcharinfo(0);
+
+mes "เสียใจด้วยนะถึงแพ้ก็ไม่เป็นไรหรอกนะ";
+mes "รับรางวัลสมน้ำหน้าคุณไปเลย...!!";
+getitem 7227,1;
+set Zeny, Zeny + 100000;
+dispbottom "คุณได้รับรางวัล TCG 1 ใบและ Cash Coin 1 อัน พร้อมเงิน 100,000z";
+warp "izlude",128,144;
+end;
+
+OnInit:
+waitingroom "แจกรางวัลสำหรับคนตกรอบ",0;
+end;
+}
+
+force_2-3,60,29,4	script	พนักงานของกิจกรรม#ชนะ	893,{
+set @npc$,"[^000080"+strnpcinfo(0)+"^000000]";
+set .@s$,strcharinfo(0);
+
+mes "ยินดีด้วยนะสำหรับผู้ชนะทุกท่าน คุณถือได้ว่าดวงดีมากๆ";
+mes "ผ่านมาได้ถือว่าแจ่มสุดๆ แต่คุณอย่าคิดว่าคุณจะดวงดีทุกวันเชียวนะ";
+mes "แต่ในเมื่อผ่านมาได้ถึงขนาดนี้ ก็สมควรที่จะได้รับรางวัลตอบแทน";
+getitem 7227,10;
+set Zeny, Zeny + 1000000;
+dispbottom "คุณได้รับรางวัล Zeny 1,000,000z";
+warp "izlude",128,144;
+end;
+
+OnInit:
+waitingroom "แจกรางวัลสำหรับผู้ดวงดี",0;
+end;
+}
+
+//Event NPCs=========================================================================================
+izlude,144,132,3	script	Bomb Lucky	440,{
+	
+	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
+	
+	mes .npc$;
+	mes "สวัสดี " + strcharinfo(0);
+	mes "ขอต้อนรับสู่กิจกรรม Bomb Lucky";
+	mes "กิจกรรมที่แจกหนัก และแจกง่ายที่สุดในเกม!";
+	next;
+	goto Event_menu;
+	
+Event_menu:
+	
+	if(.event_bomblucky == 1) {
+		menu "รายละเอียดกิจกรรม",Event_desc,"^FF0000เข้าร่วมกิจกรรม^000000",Join_event,"เวลากิจกรรม",Event_time,"ยกเลิก",Lend;
+	}
+	if(getgmlevel() >=99) {
+		menu "รายละเอียดกิจกรรม",Event_desc,"เวลากิจกรรม",Event_time,"^FF0000เปิดกิจกรรมนี้^000000",Open_event,"ยกเลิก",Lend;
+	}
+	if(.event_bomblucky == 0) {
+		menu "รายละเอียดกิจกรรม",Event_desc,"เวลากิจกรรม",Event_time,"ยกเลิก",Lend;
+	}
+	
+//GM-only menu
+Open_event:
+	.event_bomblucky = 1;
+	mes "The event is opened";
+	goto Event_start;
+	
+Event_desc:
+	mes .npc$;
+	mes "^880000การเตรียมตัว: ไม่จำเป็นต้องนำอะไรไปขอให้นำใจและดวงไปอย่างเดี่ยว";
+	mes "^330000รายละเอียด: กิจกรรมนี้ จะให้คุณเลือก 4 ห้อง ซึ่ง ห้องใด ห้อง 1 จะมีระเบิด อยู่ และระเบิดจะตูมทีละห้อง ทั้งหมด 3 ครั้ง ถ้ายังรอดอยู่ก็จะได้รับรางวัล";
+	mes "^770000รางวัล: TCG 10ea และ Zeny 1m/คน^000000";
+	mes "^660000ผู้เข้าร่วม(ไม่ได้รางวัล): TCG 1ea/คน^000000";
+	next;
+	goto Event_menu;
+	
+Event_time:
+	mes "เวลาเริ่มกิจกรรม";
+	mes "03:00, 07:00, 12:00, 17:00, 22:00";
+	next;
+	goto Event_menu;
+	
+Join_event:
+	mes "โชคดีนะท่าน";
+	warp "quiz_02",337,73;
+	end;
+
+Lend:
+	mes "อย่าลืมมาร่วมกิจกรรม Bomb Lucky กันนะ";			
+	close;
+	end;
+	
+Event_start:
+	initnpctimer;
+	announce "...ปิ้ง...ป่อง.........",bc_all,0xFFFF00;
+	end;
+OnTimer5000:
+	announce "ขออภัยผู้เล่นทุกท่านในความไม่สะดวก....",bc_all,0xFFFF00;
+	end;
+OnTimer10000:
+	announce "ซึงตอนนี้ก็ถึงเวลา "+.@current_hour+.@current_min+" น. ซึ่งเป็นเวลาของ....",bc_all,0xFFFF00;
+	end;
+OnTimer15000:
+	announce "......กิจกรรม Bomb Lucky (วัดดวง).....",bc_all,0xFFFF00;
+	end;
+OnTimer20000:
+	announce "มีเวลา 5 นาที ในการรับผู้เข้าร่วมเล่นกิจกรรม",bc_all,0xFFFF00;
+	end;
+OnTimer60000:
+	announce "เหลือเวลาอีก 4 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	end;
+OnTimer120000:
+	announce "เหลือเวลาอีก 3 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	end;
+OnTimer180000:
+	announce "เหลือเวลาอีก 2 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	end;
+OnTimer240000:
+	announce "เหลือเวลาอีก 1 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	end;
+OnTimer300000:
+	.event_bomblucky = 0;
+	announce "หมดเวลาเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	sleep 8000;
+	areaannounce "quiz_02",310,87,359,34,"วิธีเข้าร่วมกิจกรรม คือ ให้คุณเลือกเข้าห้องทีคิดว่าจะไม่มีระเบิด ไปจนกว่าจะตกรอบหรือชนะ",0xFFFF00;
+	sleep 4000;
+	areaannounce "quiz_02",310,87,359,34,"แต่ถ้าคุณเข้าห้องผิดเป็นห้องที่มีระเบิด ก็จะตกรอบแล้วได้รับรางวัลสมน้ำหน้า ก่อนจะถูกส่งกลับเมือง",0xFFFF00;
+	sleep 6000;
+	areaannounce "quiz_02",310,87,359,34,"สำหรับผู้ที่ยังอยู่รอดในห้องสุดท้ายจะได้รับรางวัลของกิจกรรม",0xFFFF00;
+	sleep 6000;
+	areaannounce "quiz_02",310,87,359,34,"เรามาเริ่มกิจกรรมเลยดีกว่า",0xFFFF00;
+	sleep 3000;
+	goto Round_standby;
+	end;
+	
+Round_standby:
+	if(.warp1) {
+		enablenpc "BombLucky_Warp1";
+	}
+	if(.warp2) {
+		enablenpc "BombLucky_Warp2"; 
+	}
+	if(.warp3) {
+		enablenpc "BombLucky_Warp3"; 
+	}
+	if(.warp4) {
+		enablenpc "BombLucky_Warp4";
+	}
+	areaannounce "quiz_02",310,87,359,34,"กรุณาเลือกห้องที่คุณคิดว่าน่าจะไม่มีระเบิดภายในเวลา 1 นาที",0xFFFF00;
+	sleep 60000;
+	areaannounce "quiz_02",310,87,359,34,"หมดเวลาในการเข้าห้อง ผู้ที่ไม่ได้อยู่ในห้องจะถูกส่งกลับโดยไม่ได้รับรางวัลอะไรเลยเนื่องจากไม่ทำตามข้อตกลง",0xFFFF00;
+	areawarp "quiz_02",310,87,358,59,"izlude",126,141;
+	disablenpc "BombLucky_Warp1";
+	disablenpc "BombLucky_Warp2"; 
+	disablenpc "BombLucky_Warp3"; 
+	disablenpc "BombLucky_Warp4";
+	sleep 5000;
+	switch(.warp1 + .warp2 + .warp3 + .warp4) {
+		case 4:
+			goto Round_1;
+			break;
+		case 3:
+			goto Round_2;
+			break;
+		case 2:
+			goto Round_3;
+			break;
+	}
+
+Round_1:
+	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่าละ....",0xFFFF00;
+	sleep 5000;
+	areaannounce "quiz_02",310,87,359,34,"3",0xFFFF00;
+	sleep 1000;
+	areaannounce "quiz_02",310,87,359,34,"2",0xFFFF00;
+	sleep 1000;
+	areaannounce "quiz_02",310,87,359,34,"1",0xFFFF00;
+	sleep 1000;
+	.@bomb = rand(1,4);
+	areaannounce "quiz_02",310,87,359,34,"ระเบิดนั้นอยู่ในห้องหมายเลย ..."+.@bomb+"...ค่ะ....",0xFFFF00;
+	sleep 1000;
+	areaannounce "quiz_02",310,87,359,34,"........ระเบิดทำงาน.......",0xFFFF00;
+	switch(.@bomb) {
+		case 1: 
+			.warp1 = 0;
+			donpcevent "::OnBombLuckyEffect1";
+			sleep 3000;
+			areawarp "quiz_02",314,57,323,34,"force_2-3",19,12;
+			break;
+		case 2: 
+			.warp2 = 0;
+			donpcevent "::OnBombLuckyEffect2";
+			sleep 3000;
+			areawarp "quiz_02",326,57,335,34,"force_2-3",19,12;
+			break;
+		case 3: 
+			.warp3 = 0;
+			donpcevent "::OnBombLuckyEffect3";
+			sleep 3000;
+			areawarp "quiz_02",338,57,347,34,"force_2-3",19,12;
+			break;
+		case 4: 
+			.warp4 = 0;
+			donpcevent "::OnBombLuckyEffect4";
+			sleep 3000;
+			areawarp "quiz_02",350,57,359,34,"force_2-3",19,12;
+			break;
+	}
+	sleep 6000;
+	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
+	sleep 3000;
+	areaannounce "quiz_02",310,87,359,34,"เล่นเอาหายใจไม่ทั่วท้องกันเลยเดียว...",0xFFFF00;
+	sleep 3000;
+	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่านะคะ",0xFFFF00;
+	sleep 4000;
+	goto Round_standby;
+	
+Round_2:
+	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่าละ....",0xFFFF00;
+	sleep 5000;
+	areaannounce "quiz_02",310,87,359,34,"3",0xFFFF00;
+	sleep 1000;
+	areaannounce "quiz_02",310,87,359,34,"2",0xFFFF00;
+	sleep 1000;
+	areaannounce "quiz_02",310,87,359,34,"1",0xFFFF00;
+	sleep 1000;
+	.@bomb = rand(1,4);
+	setarray .@BombLuckyWarp[0],.warp1,.warp2,.warp3,.warp4;
+	while (.@BombLuckyWarp[.@bomb - 1] == 0) {
+		.@bomb = rand(1,4);
+	}
+	areaannounce "quiz_02",310,87,359,34,"ระเบิดนั้นอยู่ในห้องหมายเลย ..."+.@bomb+"...ค่ะ....",0xFFFF00;
+	sleep 1000;
+	areaannounce "quiz_02",310,87,359,34,"........ระเบิดทำงาน.......",0xFFFF00;
+	switch(.@bomb) {
+		case 1: 
+			.warp1 = 0;
+			donpcevent "::OnBombLuckyEffect1";
+			sleep 3000;
+			areawarp "quiz_02",314,57,323,34,"force_2-3",19,12;
+			break;
+		case 2: 
+			.warp2 = 0;
+			donpcevent "::OnBombLuckyEffect2";
+			sleep 3000;
+			areawarp "quiz_02",326,57,335,34,"force_2-3",19,12;
+			break;
+		case 3: 
+			.warp3 = 0;
+			donpcevent "::OnBombLuckyEffect3";
+			sleep 3000;
+			areawarp "quiz_02",338,57,347,34,"force_2-3",19,12;
+			break;
+		case 4: 
+			.warp4 = 0;
+			donpcevent "::OnBombLuckyEffect4";
+			sleep 3000;
+			areawarp "quiz_02",350,57,359,34,"force_2-3",19,12;
+			break;
+	}
+	sleep 6000;
+	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
+	sleep 3000;
+	areaannounce "quiz_02",310,87,359,34,"เล่นเอาหายใจไม่ทั่วท้องกันเลยเดียว...",0xFFFF00;
+	sleep 3000;
+	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่านะคะ",0xFFFF00;
+	sleep 4000;
+	goto Round_standby;
+
+Round_3:
+	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่าละ....",0xFFFF00;
+	sleep 5000;
+	areaannounce "quiz_02",310,87,359,34,"3",0xFFFF00;
+	sleep 1000;
+	areaannounce "quiz_02",310,87,359,34,"2",0xFFFF00;
+	sleep 1000;
+	areaannounce "quiz_02",310,87,359,34,"1",0xFFFF00;
+	sleep 1000;
+	.@bomb = rand(1,4);
+	setarray .@BombLuckyWarp[0],.warp1,.warp2,.warp3,.warp4;
+	while (.@BombLuckyWarp[.@bomb - 1] == 0) {
+		.@bomb = rand(1,4);
+	}
+	areaannounce "quiz_02",310,87,359,34,"ระเบิดนั้นอยู่ในห้องหมายเลย ..."+.@bomb+"...ค่ะ....",0xFFFF00;
+	sleep 1000;
+	areaannounce "quiz_02",310,87,359,34,"........ระเบิดทำงาน.......",0xFFFF00;
+	switch(.@bomb) {
+		case 1: 
+			.warp1 = 0;
+			donpcevent "::OnBombLuckyEffect1";
+			sleep 3000;
+			areawarp "quiz_02",314,57,323,34,"force_2-3",19,12;
+			break;
+		case 2: 
+			.warp2 = 0;
+			donpcevent "::OnBombLuckyEffect2";
+			sleep 3000;
+			areawarp "quiz_02",326,57,335,34,"force_2-3",19,12;
+			break;
+		case 3: 
+			.warp3 = 0;
+			donpcevent "::OnBombLuckyEffect3";
+			sleep 3000;
+			areawarp "quiz_02",338,57,347,34,"force_2-3",19,12;
+			break;
+		case 4: 
+			.warp4 = 0;
+			donpcevent "::OnBombLuckyEffect4";
+			sleep 3000;
+			areawarp "quiz_02",350,57,359,34,"force_2-3",19,12;
+			break;
+	}
+	sleep 6000;
+	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็เหลือแค่ห้องเดียวแล้วนะคะ ที่ไม่มีระเบิด",0xFFFF00;
+	sleep 4000;
+	areaannounce "quiz_02",310,87,359,34,"ขอแสดงความยินดีกับผู้ชนะด้วยนะคะ...และขอขอบคุณทุกท่านที่สละเวลามาเข้าร่วมกิจกรรม ตอนนี้ให้ผู้ชนะไปรับรางวัลกันได้เลยค่ะ",0xFFFF00;
+	if(.warp1) {
+		donpcevent "::OnBombLuckyWin1";
+	}
+	if(.warp2) {
+		donpcevent "::OnBombLuckyWin2";
+	}
+	if(.warp3) {
+		donpcevent "::OnBombLuckyWin3";
+	}
+	if(.warp4) {
+		donpcevent "::OnBombLuckyWin4";
+	}
+	sleep 3000;
+	areawarp "quiz_02",314,34,359,57,"force_2-3",67,19;
+	end;
+	
+//Event Time
+OnClock0300:
+OnClock0700:
+OnClock1200:
+OnClock1700:
+OnClock2200:
+	.event_bomblucky = 1;
+	.@current_hour = gettime(3);
+	.@current_min = gettime(2);
+	goto Event_start;
+	end;		
+	
+OnInit:
+	.event_bomblucky = 0;
+	disablenpc "BombLucky_Warp1";
+	disablenpc "BombLucky_Warp2"; 
+	disablenpc "BombLucky_Warp3"; 
+	disablenpc "BombLucky_Warp4";
+	.warp1 = 1;
+	.warp2 = 1;
+	.warp3 = 1;
+	.warp4 = 1;
+	end;
+}
+
+//Warp NPCs=========================================================================================
+quiz_02,319,61,4	script	BombLucky_Warp1	45,1,1,{
+	warp "quiz_02",319,47;
+	end;
+}
+
+quiz_02,331,61,4	script	BombLucky_Warp2	45,1,1,{
+	warp "quiz_02",331,47;
+	end;
+}
+
+quiz_02,343,61,4	script	BombLucky_Warp3	45,1,1,{
+	warp "quiz_02",343,47;
+	end;
+}
+
+quiz_02,355,61,4	script	BombLucky_Warp4	45,1,1,{
+	warp "quiz_02",355,47;
+	end;
+}
+
+//Effect NPCs=========================================================================================
+-	script	BombLuckyEffect1	-1,{
+
+OnBombLuckyEffect1:
+	specialeffect 90;	//Lord of Vermillion
+	sleep 1000;
+	specialeffect 106;	//ระเบิด1
+	sleep 1000;
+	specialeffect 183;	//ระเบิด2
+	sleep 1000;
+	specialeffect 585;	//ระเบิด3
+	end;
+
+OnBombLuckyWin1:
+	specialeffect 91;	//นางฟ้า
+	sleep 1000;
+	end;
+}
+
+-	script	BombLuckyEffect2	-1,{
+
+OnBombLuckyEffect2:
+	specialeffect 90;	//Lord of Vermillion
+	sleep 1000;
+	specialeffect 106;	//ระเบิด1
+	sleep 1000;
+	specialeffect 183;	//ระเบิด2
+	sleep 1000;
+	specialeffect 585;	//ระเบิด3
+	end;
+	
+OnBombLuckyWin2:
+	specialeffect 91;	//นางฟ้า
+	sleep 1000;
+	end;
+}
+
+-	script	BombLuckyEffect3	-1,{
+
+OnBombLuckyEffect3:
+	specialeffect 90;	//Lord of Vermillion
+	sleep 1000;
+	specialeffect 106;	//ระเบิด1
+	sleep 1000;
+	specialeffect 183;	//ระเบิด2
+	sleep 1000;
+	specialeffect 585;	//ระเบิด3
+	end;
+	
+OnBombLuckyWin3:
+	specialeffect 91;	//นางฟ้า
+	sleep 1000;
+	end;
+}
+
+-	script	BombLuckyEffect4	-1,{
+
+OnBombLuckyEffect4:
+	specialeffect 90;	//Lord of Vermillion
+	sleep 1000;
+	specialeffect 106;	//ระเบิด1
+	sleep 1000;
+	specialeffect 183;	//ระเบิด2
+	sleep 1000;
+	specialeffect 585;	//ระเบิด3
+	end;
+	
+OnBombLuckyWin4:
+	specialeffect 91;	//นางฟ้า
+	sleep 1000;
+	end;
+}
+
+// 1 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+quiz_02,314,56,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#1-1	139
+quiz_02,317,56,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#1-2	139
+quiz_02,320,56,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#1-3	139
+quiz_02,323,56,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#1-4	139
+
+quiz_02,314,53,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#2-1	139
+quiz_02,317,53,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#2-2	139
+quiz_02,320,53,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#2-3	139
+quiz_02,323,53,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#2-4	139
+
+quiz_02,314,50,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#3-1	139
+quiz_02,317,50,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#3-2	139
+quiz_02,320,50,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#3-3	139
+quiz_02,323,50,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#3-4	139
+
+quiz_02,314,47,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#4-1	139
+quiz_02,317,47,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#4-2	139
+quiz_02,320,47,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#4-3	139
+quiz_02,323,47,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#4-4	139
+
+quiz_02,314,44,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#5-1	139
+quiz_02,317,44,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#5-2	139
+quiz_02,320,44,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#5-3	139
+quiz_02,323,44,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#5-4	139
+
+quiz_02,314,41,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#6-1	139
+quiz_02,317,41,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#6-2	139
+quiz_02,320,41,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#6-3	139
+quiz_02,323,41,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#6-4	139
+
+quiz_02,314,38,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#7-1	139
+quiz_02,317,38,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#7-2	139
+quiz_02,320,38,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#7-3	139
+quiz_02,323,38,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#7-4	139
+
+quiz_02,314,35,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#8-1	139
+quiz_02,317,35,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#8-2	139
+quiz_02,320,35,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#8-3	139
+quiz_02,323,35,4	duplicate(BombLuckyEffect1)	BombLuckyEffect1#8-4	139
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 2 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+quiz_02,326,56,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#1-1	139
+quiz_02,329,56,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#1-2	139
+quiz_02,332,56,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#1-3	139
+quiz_02,335,56,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#1-4	139
+
+quiz_02,326,53,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#2-1	139
+quiz_02,329,53,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#2-2	139
+quiz_02,332,53,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#2-3	139
+quiz_02,335,53,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#2-4	139
+
+quiz_02,326,50,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#3-1	139
+quiz_02,329,50,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#3-2	139
+quiz_02,332,50,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#3-3	139
+quiz_02,335,50,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#3-4	139
+
+quiz_02,326,47,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#4-1	139
+quiz_02,329,47,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#4-2	139
+quiz_02,332,47,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#4-3	139
+quiz_02,335,47,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#4-4	139
+
+quiz_02,326,44,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#5-1	139
+quiz_02,329,44,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#5-2	139
+quiz_02,332,44,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#5-3	139
+quiz_02,335,44,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#5-4	139
+
+quiz_02,326,41,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#6-1	139
+quiz_02,329,41,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#6-2	139
+quiz_02,332,41,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#6-3	139
+quiz_02,335,41,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#6-4	139
+
+quiz_02,326,38,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#7-1	139
+quiz_02,329,38,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#7-2	139
+quiz_02,332,38,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#7-3	139
+quiz_02,335,38,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#7-4	139
+
+quiz_02,326,35,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#8-1	139
+quiz_02,329,35,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#8-2	139
+quiz_02,332,35,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#8-3	139
+quiz_02,335,35,4	duplicate(BombLuckyEffect2)	BombLuckyEffect2#8-4	139
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 3 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+quiz_02,338,56,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#1-1	139
+quiz_02,341,56,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#1-2	139
+quiz_02,344,56,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#1-3	139
+quiz_02,347,56,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#1-4	139
+
+quiz_02,338,53,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#2-1	139
+quiz_02,341,53,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#2-2	139
+quiz_02,344,53,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#2-3	139
+quiz_02,347,53,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#2-4	139
+
+quiz_02,338,50,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#3-1	139
+quiz_02,341,50,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#3-2	139
+quiz_02,344,50,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#3-3	139
+quiz_02,347,50,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#3-4	139
+
+quiz_02,338,47,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#4-1	139
+quiz_02,341,47,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#4-2	139
+quiz_02,344,47,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#4-3	139
+quiz_02,347,47,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#4-4	139
+
+quiz_02,338,44,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#5-1	139
+quiz_02,341,44,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#5-2	139
+quiz_02,344,44,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#5-3	139
+quiz_02,347,44,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#5-4	139
+
+quiz_02,338,41,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#6-1	139
+quiz_02,341,41,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#6-2	139
+quiz_02,344,41,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#6-3	139
+quiz_02,347,41,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#6-4	139
+
+quiz_02,338,38,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#7-1	139
+quiz_02,341,38,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#7-2	139
+quiz_02,344,38,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#7-3	139
+quiz_02,347,38,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#7-4	139
+
+quiz_02,338,35,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#8-1	139
+quiz_02,341,35,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#8-2	139
+quiz_02,344,35,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#8-3	139
+quiz_02,347,35,4	duplicate(BombLuckyEffect3)	BombLuckyEffect3#8-4	139
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 4 /////////////////////////////////////////////////////////////////////////////////////////////////
+
+quiz_02,350,56,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#1-1	139
+quiz_02,353,56,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#1-2	139
+quiz_02,356,56,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#1-3	139
+quiz_02,359,56,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#1-4	139
+
+quiz_02,350,53,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#2-1	139
+quiz_02,353,53,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#2-2	139
+quiz_02,356,53,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#2-3	139
+quiz_02,359,53,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#2-4	139
+
+quiz_02,350,50,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#3-1	139
+quiz_02,353,50,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#3-2	139
+quiz_02,356,50,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#3-3	139
+quiz_02,359,50,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#3-4	139
+
+quiz_02,350,47,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#4-1	139
+quiz_02,353,47,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#4-2	139
+quiz_02,356,47,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#4-3	139
+quiz_02,359,47,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#4-4	139
+
+quiz_02,350,44,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#5-1	139
+quiz_02,353,44,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#5-2	139
+quiz_02,356,44,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#5-3	139
+quiz_02,359,44,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#5-4	139
+
+quiz_02,350,41,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#6-1	139
+quiz_02,353,41,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#6-2	139
+quiz_02,356,41,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#6-3	139
+quiz_02,359,41,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#6-4	139
+
+quiz_02,350,38,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#7-1	139
+quiz_02,353,38,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#7-2	139
+quiz_02,356,38,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#7-3	139
+quiz_02,359,38,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#7-4	139
+
+quiz_02,350,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-1	139
+quiz_02,353,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-2	139
+quiz_02,356,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-3	139
+quiz_02,359,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-4	139
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
