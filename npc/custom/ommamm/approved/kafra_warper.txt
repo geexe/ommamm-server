@@ -46,7 +46,6 @@ glast_01,372,308,4	duplicate(Officer)	Officer#glh	874
 gonryun,162,122,4	duplicate(Officer)	Officer#gon	874
 hugel,101,151,4	duplicate(Officer)	Officer#hug	874
 izlu2dun,110,92,4	duplicate(Officer)	Officer#izd	874
-izlude,134,150,4	duplicate(Officer)	Officer#izl	874	//Pre-RE: (132,120)
 jawaii,253,138,4	duplicate(Officer)	Officer#jaw	874
 lighthalzen,162,102,4	duplicate(Officer)	Officer#lhz	874
 louyang,208,103,6	duplicate(Officer)	Officer#lou	874
