@@ -60,11 +60,12 @@ Event_menu:
 		menu "รายละเอียดกิจกรรม",Event_desc,"เวลากิจกรรม",Event_time,"ยกเลิก",Lend;
 	}
 	
-//GM-only menu
+//--------------------------------GM-only Menu-----------------------
 Open_event:
 	.event_bomblucky = 1;
 	mes "The event is opened";
 	goto Event_start;
+//-------------------------------------------------------------------
 	
 Event_desc:
 	mes .npc$;
@@ -83,7 +84,20 @@ Event_time:
 	
 Join_event:
 	mes "โชคดีนะท่าน";
-	warp "quiz_02",337,73;
+	for (.@i = 0; .@i < getarraysize(.charip$); .@i++) {
+		if (getcharip() == .charip$[.@i]) {
+			.@charcount += 1; 
+		}
+	}
+	if (.@charcount > 2) {
+		mes "กิจกรรมนี้อนุญาตให้เข้าร่วมได้ไม่เกิน 3 ตัวละครต่อ 1 IP";
+
+		close;
+	} else {
+		.@char_ip$ = getcharip();
+		setarray .charip$[getarraysize(.charip$)], getcharip();
+		warp "quiz_02",337,73;
+	}
 	end;
 
 Lend:
@@ -93,6 +107,7 @@ Lend:
 	
 Event_start:
 	initnpctimer;
+	deletearray .charip$[0],getarraysize(.charip$);
 	announce "...ปิ้ง...ป่อง.........",bc_all,0xFFFF00;
 	end;
 OnTimer5000:
@@ -152,8 +167,8 @@ Round_standby:
 	areaannounce "quiz_02",310,87,359,34,"หมดเวลาในการเข้าห้อง ผู้ที่ไม่ได้อยู่ในห้องจะถูกส่งกลับโดยไม่ได้รับรางวัลอะไรเลยเนื่องจากไม่ทำตามข้อตกลง",0xFFFF00;
 	areawarp "quiz_02",310,87,358,59,"izlude",126,141;
 	disablenpc "BombLucky_Warp1";
-	disablenpc "BombLucky_Warp2"; 
-	disablenpc "BombLucky_Warp3"; 
+	disablenpc "BombLucky_Warp2";
+	disablenpc "BombLucky_Warp3";
 	disablenpc "BombLucky_Warp4";
 	sleep 5000;
 	switch(.warp1 + .warp2 + .warp3 + .warp4) {
@@ -625,3 +640,15 @@ quiz_02,356,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-3	139
 quiz_02,359,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-4	139
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+quiz_02	mapflag	nowarpto
+quiz_02	mapflag	noteleport
+quiz_02	mapflag	nosave	SavePoint
+quiz_02	mapflag	nomemo
+quiz_02	mapflag	nowarp
+quiz_02	mapflag	noreturn
+quiz_02	mapflag	noloot
+quiz_02	mapflag	nobranch
+quiz_02	mapflag	noicewall
+quiz_02	mapflag	noexp
+quiz_02	mapflag	noskill
