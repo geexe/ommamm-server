@@ -28,7 +28,7 @@ OnInit:
 	end;
 }
 
-izlude,153,120,4	script	Refill Info		815,{
+izlude,116,126,3	script	Refill Info		815,{
 	
 	mes "[Refill Rate]";
 	mes "50 Baht 500 Cash Point";
