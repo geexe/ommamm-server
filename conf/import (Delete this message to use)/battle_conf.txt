@@ -1,0 +1,63 @@
+//Only Add custom configuration
+
+//----------------exp.conf chages
+
+// Rate at which exp. is given. (Note 2)
+base_exp_rate: 3000
+
+// Rate at which job exp. is given. (Note 2)
+job_exp_rate: 3000
+
+// Rate of base/job exp given by NPCs. (Note 2)
+quest_exp_rate: 1000
+
+//----------------drops.conf changes
+
+// The rate the common items are dropped (Items that are in the ETC tab, besides card)
+item_rate_common: 2000
+item_rate_common_boss: 100
+item_drop_common_min: 1
+item_drop_common_max: 10000
+
+// The rate healing items are dropped (items that restore HP or SP)
+item_rate_heal: 1000
+item_rate_heal_boss: 100
+item_drop_heal_min: 1
+item_drop_heal_max: 10000
+
+// The rate at which usable items (in the item tab) other then healing items are dropped.
+item_rate_use: 1500
+item_rate_use_boss: 100
+item_drop_use_min: 1
+item_drop_use_max: 10000
+
+// The rate at which equipment is dropped.
+item_rate_equip: 3500
+item_drop_equip_min: 1
+item_drop_equip_max: 3000
+
+// The rate at which cards are dropped
+item_rate_card: 7000
+item_rate_card_boss: 2000
+item_drop_card_min: 1
+item_drop_card_max: 10000
+
+// The rate adjustment for the MVP equipment drop [Xantara]
+item_rate_equip_boss: 100
+item_drop_equip_min_boss: 1
+item_drop_equip_max_boss: 10000
+
+//----------------client.conf changes
+
+// Valid range of dyes and styles on the client.
+min_hair_style: 0
+max_hair_style: 100
+min_hair_color: 0
+max_hair_color: 100
+min_cloth_color: 0 
+max_cloth_color: 4
+
+// Give additional experience bonus per party-member involved on even-share parties (excluding yourself)?
+// ex. If set to 10, an even-share party of 5 people will receive +40% exp (4 members * 10% exp):
+//     140% party experience in total, so each member receives 140%/5 = 28% exp (instead of 20%).
+party_even_share_bonus: 0
