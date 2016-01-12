@@ -5,6 +5,7 @@ new_1-2,100,29,3	script	Officer	642,{
 	mes .npc$;
 	mes "I will send you to any town that you'd like to go to.";
 	mes "Or do you have a favourite Class?";
+	next;
 	switch(select("Choose a Class:Go to the town of Izlude")) {
 		case 1:
 			mes .npc$;
@@ -24,7 +25,9 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become an Acolyte.";
 					mes "You will be sent to the town of Prontera.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 				case 3:
@@ -32,7 +35,9 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become a Thief.";
 					mes "You will be sent to the town of Morroc.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 				case 4:
@@ -40,7 +45,9 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become a Merchant.";
 					mes "You will be sent to the town of Alberta.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 				case 5:
@@ -48,7 +55,9 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become an Archer.";
 					mes "You will be sent to the town of Payon.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 				case 6:
@@ -56,7 +65,9 @@ new_1-2,100,29,3	script	Officer	642,{
 					mes "You have chosen to become a Mage.";
 					mes "You will be sent to the town of Geffen.";
 					next;
-					callsub L_Izlude;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
 					callsub L_Save;
 					end;
 			}
