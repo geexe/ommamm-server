@@ -7923,6 +7923,8 @@ static const struct _battle_data {
 	{ "item_drop_equip_max",                &battle_config.item_drop_equip_max,             10000,  1,      10000,          },
 	{ "item_drop_card_min",                 &battle_config.item_drop_card_min,              1,      1,      10000,          },
 	{ "item_drop_card_max",                 &battle_config.item_drop_card_max,              10000,  1,      10000,          },
+	{ "item_drop_equip_min_boss",           &battle_config.item_drop_equip_min_boss,        1,      1,      10000,          },
+	{ "item_drop_equip_max_boss",           &battle_config.item_drop_equip_max_boss,        10000,  1,      10000,          },
 	{ "item_drop_mvp_min",                  &battle_config.item_drop_mvp_min,               1,      1,      10000,          },
 	{ "item_drop_mvp_max",                  &battle_config.item_drop_mvp_max,               10000,  1,      10000,          },
 	{ "item_drop_mvp_mode",                 &battle_config.item_drop_mvp_mode,              0,      0,      2,              },

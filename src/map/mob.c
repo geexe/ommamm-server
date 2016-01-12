@@ -4758,8 +4758,8 @@ static void mob_drop_ratio_adjust(void){
 					case IT_ARMOR:
 					case IT_PETARMOR:
 						rate_adjust = (mob->status.mode&MD_BOSS) ? battle_config.item_rate_equip_boss : battle_config.item_rate_equip;
-						ratemin = battle_config.item_drop_equip_min;
-						ratemax = battle_config.item_drop_equip_max;
+						ratemin = (mob->status.mode&MD_BOSS) ? battle_config.item_drop_equip_min_boss : battle_config.item_drop_equip_min;
+						ratemax = (mob->status.mode&MD_BOSS) ? battle_config.item_drop_equip_max_boss : battle_config.item_drop_equip_max;
 						break;
 					case IT_CARD:
 						rate_adjust = (mob->status.mode&MD_BOSS) ? battle_config.item_rate_card_boss : battle_config.item_rate_card;
