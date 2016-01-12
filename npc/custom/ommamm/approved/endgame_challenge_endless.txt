@@ -120,8 +120,8 @@ OnInit:
 	setarray .endlessmvp[0],1956,1957;
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],19859;	
-	setarray .reward_quantity[0],1;
+	setarray .reward[0],20737,6233,6228,16755,16753;	
+	setarray .reward_quantity[0],1,1,1,5,5;
 	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
 	.party = 2;
 	end;
