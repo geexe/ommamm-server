@@ -162,8 +162,8 @@ izlude,157,129,4	script	Refine Master	851,{
 	mes "Farewell~!";
 	close;
 
-OnInit:
-	waitingroom "Ticket Refiner",0;
-	end;
+//OnInit:
+	//waitingroom "Ticket Refiner",0;
+	//end;
 }
 

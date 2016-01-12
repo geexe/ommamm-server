@@ -1,4 +1,4 @@
-izlude,118,145,4	script	Server Info	837,{
+izlude,121,153,4	script	Server Info	837,{
 	
 	mes "[Server Info]";
 	mes "Temporary up/down time until Ommamm cafe opens.";
