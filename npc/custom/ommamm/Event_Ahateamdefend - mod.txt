@@ -1,4 +1,4 @@
-sch_gld,160,61,5	script	Ommamm Defense Return	469,{
+izlude,144,128,5	script	Ommamm Defense Return	469,{
 if($Open_Dun_aha==1){end;}
 mes "[AhaTeamDefend]";
 mes "ยินดีต้อนรับผู้กล้าทั้งหลายเข้าสู่ ^FF0000AhaTeamDefend^000000"; 
@@ -365,7 +365,7 @@ end;
 Onboxdead: 
 if ($atdstatus == 1) end;  
 Announce "[ AhaTeamDefend ] : " + strcharinfo(0) +" ได้เปิดขุมทรัพย์ AhaTeamDefend  แล้ว",8; 
-getitem 7227,1;
+getitem 7227,7;
 getitem 607,1;
 if(rand(1,10)==9){getitem 607,2;}
 end; 

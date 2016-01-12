@@ -1,4 +1,4 @@
-aldebaran,146,107,4	script	TCG exchanger	124,{
+izlude,153,129,4	script	TCG exchanger	951,{
 
 set .@i, countitem(7227);
 
@@ -8,7 +8,7 @@ mes "You have ^0055FF"+.@i+" TCG^000000.";
 
 if (!.@i) { mes "Please come back later."; close; }
 
-mes "I can trade ^FF00001 TCG^000000 for ^FF00005 Cash Points^000000.";
+mes "I can trade ^FF00001 TCG^000000 for ^FF000010 Cash Points^000000.";
 
 next;
 

@@ -1,0 +1,126 @@
+//Biolab Hunting Challenge
+
+izlude,100,140,4	script	Biolab Challenge::endgame_biolab	468,{
+	mes "[Challenge]";
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Welcome to Ommamm Challenge.";
+	mes " ";
+	mes "Prove yourself that you really love Ragnarok Online.";
+	mes "We will reward only the utmost dedication to the game.";
+	
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	case 1:
+		mes "[Challenge]";
+		mes "You must kill all " + getarraysize(.biolabmvp) + " Biolab MVPs:";
+		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+			mes .@i+1 + ". " + strmobinfo(1,.biolabmvp[.@i]);
+		}
+		next;
+		mes "[Challenge]";
+		mes "When you have killed all " + getarraysize(.biolabmvp) + " MVPs, you can claim the reward from me.";
+		mes " ";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes .@k+1 + ". " + getitemname(.reward[.@k]);
+		}
+		next;
+		//display completed MVPs
+
+		if(getarraysize(biolabkill)) {
+			mes "MVPs you have completed:";
+			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+				if(biolabkill[.@i] == .biolabmvp[.@i]) {
+					mes strmobinfo(1,biolabkill[.@i]);
+				}
+			}
+		}
+		else {
+			mes "Go kill those MVPs!";
+		}
+		break;
+	case 2:
+		mes "[Challenge]";
+		//check to see if character has received the reward
+		if(!getommammreward_biolab) {
+			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+				if(biolabkill[.@i] == .biolabmvp[.@i]) {
+					.@mvpcount += 1;
+				}
+			}
+			//check to see if all MVPs have been completed
+			if(.@mvpcount == getarraysize(.biolabmvp)) {
+				mes "You have completed the challenge";
+				mes "Do you want to claim the reward?";
+				
+				//check weight and inventory 
+				if(checkweight(.reward,1)) {
+					//Set variable to prevent player from getting multiple items
+					getommammreward_biolab = 1;
+					//Cycle through the reward array
+					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+						getitembound .reward[.@k], .reward_quantity[.@k], 1;
+					}
+				}
+				else {
+					mes "You do not enough space.";
+					mes "Please clear your inventory and come back again.";
+				}
+			}
+			else {
+				mes "You have not completed the challenge.";
+			}
+		}
+		else {
+			mes "You have already received reward for this challenge.";
+		}
+		break;	
+	case 3:
+		break;
+	}
+	close;
+	
+OnNPCKillEvent:
+	if(!.party || !getcharid(1)) {	
+		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+			if(killedrid == .biolabmvp[.@i]) {
+				setarray biolabkill[.@i], killedrid;
+				dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid);
+			}
+		}
+	} else if (.party) {
+		for (.@j = 0; .@j < getarraysize(.biolabmvp); .@j++) {
+			if(killedrid == .biolabmvp[.@j]) {
+				getmapxy(.@map1$,.@x1,.@y1,0);
+				getpartymember getcharid(1), 0;
+				getpartymember getcharid(1), 1;
+				getpartymember getcharid(1), 2;
+				for (.@i = 0; .@i < $@partymembercount; .@i++) {
+					if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
+						set .@HP, getvar(HP, $@partymembercid[.@i]);
+						if (.@HP > 0) {
+							getmapxy(.@map2$,.@x2,.@y2,0);
+							if ((.@map1$ == .@map2$ || .Party == 1) && (distance(.@x1,.@y1,.@x2,.@y2) <= 30 || .Party < 3)) {
+								attachrid($@partymemberaid[.@i]);
+								setarray biolabkill[.@j], killedrid;
+								dispbottom "[Challenge] Biolab MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	end;
+	
+OnInit:
+	//monsters to kill
+	setarray .biolabmvp[0],1651,1650,1649,1648,1647,1646;
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],31100,6238,6232,2383;	
+	setarray .reward_quantity[0],1,1,1,1;
+	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
+	.party = 1;
+	end;
+	}

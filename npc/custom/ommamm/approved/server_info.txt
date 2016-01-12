@@ -1,0 +1,46 @@
+izlude,118,145,4	script	Server Info	837,{
+	
+	mes "[Server Info]";
+	mes "Temporary up/down time until Ommamm cafe opens.";
+	mes "Up time: All-day on Weekend";
+	mes "All-night weekday";
+	mes "Monday Night, Tuesday Morning";
+	mes "Friday Morning";
+	mes "Other times depending on our schedule";
+	next;
+	mes "[Server Info]";
+	mes "Maintainace: Wednesday morning";
+	mes " ";
+	mes "Down Time: Monday Morning";
+	mes "Tuesday Night, Wednesday Night";
+	mes "Friday Night";
+	next;
+	mes "Other features will be released";
+	mes "as necessarily";
+	mes " ";
+	mes "It would be great if we can";
+	mes "here your feed back";
+	mes "    Thank You ";
+	close;
+	
+OnInit:
+	waitingroom "Server Info",0;
+	end;
+}
+
+izlude,153,120,4	script	Refill Info		815,{
+	
+	mes "[Refill Rate]";
+	mes "50 Baht 500 Cash Point";
+	mes "100 Baht 1100 Cash Point";
+	mes "200 Baht 2300 Cash Point";
+	mes "300 Baht 3600 Cash Point";
+	mes "500 Baht 6500 Cash Point";
+	mes "1000 Baht 15000 Cash Point";
+	mes "โอนเงินได้ที่เลขบัญชี ธนาคารไทยพาณิชย์ 045-573800-4";
+	mes "สรกฤต หอวงศ์รัตนะ";
+	close;
+OnInit:
+	waitingroom "Refill Info",0;
+	end;
+}

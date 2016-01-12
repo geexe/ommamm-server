@@ -1,0 +1,72 @@
+//New World Challenge
+
+izlude,108,136,4	script	New World Challenge::endgame_newworld	470,{
+	mes "[Challenge]";
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Welcome to Ommamm Challenge.";
+	mes " ";
+	mes "Prove yourself that you really love Ragnarok Online.";
+	mes "We will reward only the utmost dedication to the game.";
+	
+	next;
+	mes "[Challenge]";
+	mes "This is a challenge to prove that your perseverence is limitless.";
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	case 1:
+		mes "[Challenge]";
+		mes "You must complete the quest:";
+		mes "Report from the New World";
+		
+		next;
+		mes "[Challenge]";
+		mes "When you have completed the quest, you can claim the reward from me.";
+		mes " ";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes .@k+1 + ". " + getitemname(.reward[.@k]);
+		}
+		break;
+	case 2:
+		mes "[Challenge]";
+		//check to see if character has received the reward
+		if(!getommammreward_newworld) {
+			//check to see if all MVPs have been completed
+			if(checkquest(3094) == 2) {
+				mes "You have completed the challenge";
+				mes "Do you want to claim the reward?";
+				
+				//check weight and inventory 
+				if(checkweight(.reward,1)) {
+					//Set variable to prevent player from getting multiple items
+					getommammreward_newworld = 1;
+					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+						getitembound .reward[.@k], .reward_quantity[.@k], 1;
+					}
+				}
+				else {
+					mes "You do not enough space.";
+					mes "Please clear your inventory and come back again.";
+				}
+			}
+			else {
+				mes "You have not completed the challenge.";
+			}
+		}
+		else {
+			mes "You have already received reward for this challenge.";
+		}
+		break;	
+	case 3:
+		break;
+	}
+	close;
+	
+	
+OnInit:
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],6230,6234,7227,12246,616;	
+	setarray .reward_quantity[0],1,1,500,1,5;
+	end;
+	}

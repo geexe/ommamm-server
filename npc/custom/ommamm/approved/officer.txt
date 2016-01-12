@@ -1,0 +1,106 @@
+new_1-2,100,29,3	script	Officer	642,{
+	mes .npc$;
+	mes "Welcome to the Rune-Midgard.";
+	next;
+	mes .npc$;
+	mes "I will send you to any town that you'd like to go to.";
+	mes "Or do you have a favourite Class?";
+	next;
+	switch(select("Choose a Class:Go to the town of Izlude")) {
+		case 1:
+			mes .npc$;
+			mes "What Class would you like to perform?";
+			next;
+			switch(select("Swordman Class:Acolyte Class:Thief Class:Merchant Class:Archer Class:Mage Class")) {
+				case 1:
+					mes .npc$;
+					mes "You have chosen to become a Swordman.";
+					mes "You will be sent to the town of Izlude.";
+					next;
+					warp "izlude",128,146;
+					callsub L_Save;
+					end;
+				case 2:
+					mes .npc$;
+					mes "You have chosen to become an Acolyte.";
+					mes "You will be sent to the town of Prontera.";
+					next;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
+					callsub L_Save;
+					end;
+				case 3:
+					mes .npc$;
+					mes "You have chosen to become a Thief.";
+					mes "You will be sent to the town of Morroc.";
+					next;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
+					callsub L_Save;
+					end;
+				case 4:
+					mes .npc$;
+					mes "You have chosen to become a Merchant.";
+					mes "You will be sent to the town of Alberta.";
+					next;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
+					callsub L_Save;
+					end;
+				case 5:
+					mes .npc$;
+					mes "You have chosen to become an Archer.";
+					mes "You will be sent to the town of Payon.";
+					next;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
+					callsub L_Save;
+					end;
+				case 6:
+					mes .npc$;
+					mes "You have chosen to become a Mage.";
+					mes "You will be sent to the town of Geffen.";
+					next;
+					mes .npc$;
+					mes "Just Kiddin', you will be send to the town of Izlude.";
+					warp "izlude",0,0;
+					callsub L_Save;
+					end;
+			}
+		case 2:
+			mes .npc$;
+			mes "You will now be teleported.";
+			mes "Good luck, ^A62A2A"+strcharinfo(0)+"^000000 and farewell.";
+			next;
+			warp "izlude",128,146;
+			callsub L_Save;
+			end;
+		}
+		end;
+
+L_Izlude:
+	mes .npc$;
+	mes "Just Kiddin', you will be send to the town of Izlude.";
+	close;
+	set @x,rand(250);
+	set @y,rand(250);
+	warp "izlude",@x,@y;
+	return;
+
+
+L_Save:
+	getmapxy(@mapName$,@mapX,@mapY,0,strcharinfo(0));
+	dispbottom "Your respawn point has been saved.";
+	dispbottom "^000099"+@mapName$+" ("+@mapX+", "+@mapY+")^000000";
+	savepoint @mapName$,@mapX,@mapY;
+	end;
+
+
+OnInit:
+	.npc$ = "[^AA0000Officer^000000]";
+}
+			

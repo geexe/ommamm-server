@@ -1,0 +1,39 @@
+izlude,134,147,3	script	Healer	641,{
+	if (npcDelay > gettimetick(2)) end;
+	
+	sc_end SC_Poison;
+	sc_end SC_Freeze;
+	sc_end SC_Sleep;
+	sc_end SC_Stan;
+	sc_end SC_Stun;
+	sc_end SC_Stone;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Bleeding;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+	sc_end SC_ORCISH;	
+		
+	specialeffect2 EF_INCAGILITY;
+	sc_start SC_INCREASEAGI,900000,10;
+	specialeffect2 EF_BLESSING;
+	sc_start SC_BLESSING,900000,10;
+	set npcDelay, gettimetick(2) + 10;
+	specialeffect2 EF_HEAL2;
+	percentheal 20,20;
+	addtimer 300,"Healer::OnHealTimer";
+	addtimer 600,"Healer::OnHealTimer";
+	addtimer 900,"Healer::OnHealTimer";
+	addtimer 1200,"Healer::OnHealTimer";
+	addtimer 1500,"Healer::OnHealTimer";
+	addtimer 1700,"Healer::OnHealTimer";
+	addtimer 1900,"Healer::OnHealTimer";
+	addtimer 2100,"Healer::OnHealTimer";
+	deltimer "Healer::OnHealTimer";
+	end;
+
+OnHealTimer:
+	percentheal 10,10;
+	end;
+}

@@ -1,0 +1,43 @@
+izlude,134,147,3	script	Healer	641,{
+
+	.@Price = 0;	// Zeny required for heal
+	.@Buffs = 1;	// Also buff players? (1: yes / 0: no)
+	.@Delay = 1;	// Heal delay, in seconds
+
+	if (@HD > gettimetick(2))
+		end;
+	if (.@Price) {
+		message strcharinfo(0), "Healing costs " + callfunc("F_InsertComma",.@Price) + " Zeny.";
+		if (Zeny < .@Price)
+			end;
+		if (select("^0055FFHeal^000000:^777777Cancel^000000") == 2)
+			end;
+		Zeny -= .@Price;
+	}
+	specialeffect2 EF_HEAL2;
+			
+	sc_end SC_Poison;
+	sc_end SC_Freeze;
+	sc_end SC_Sleep;
+	sc_end SC_Stan;
+	sc_end SC_Stun;
+	sc_end SC_Stone;
+	sc_end SC_Silence;
+	sc_end SC_Blind;
+	sc_end SC_Bleeding;
+	sc_end SC_Confusion;
+	sc_end SC_Curse;
+	sc_end SC_Hallucination;
+	sc_end SC_ORCISH;
+	percentheal 100,100;
+	if (.@Buffs) {
+	
+		specialeffect2 EF_INCAGILITY;
+		sc_start SC_INCREASEAGI,900000,10;
+		specialeffect2 EF_BLESSING;
+		sc_start SC_BLESSING,900000,10;
+	}
+	if (.@Delay)
+		@HD = gettimetick(2) + .@Delay;
+	end;
+}

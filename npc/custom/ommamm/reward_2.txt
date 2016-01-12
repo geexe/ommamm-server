@@ -1,0 +1,63 @@
+//===== eAthena Script =======================================
+//= Reward for Challengers
+//===== Compatible With: =====================================
+//= TXT & SQL, Must have a newer revision and updated item_db
+//===== Description: =========================================
+//= Makes Unique to Epic item to those who bring extremely rare item
+//============================================================
+//= For Test (Use fruits as the item)
+sch_gld,140,78,3	script	ChallengeReward	84,{
+ 
+	mes "[Challenge Reward]";  
+	mes "Are you good enough to beat the strongest monster?,";
+	mes "if you killed them all, I can give you extremely valuable items.";
+	goto C_top;
+ 
+C_top:
+	menu "Bio Lab Challenge",C_Bio,"Endless Tower Challenge",C_endless,"Cancel",C_cancel;
+//_____________Item requirements_______________//
+ 
+//________model___________//
+//I_:
+C_Bio:
+	next;
+	mes "6x Artificial DNA";
+	menu "Make",M_Bio,"Return to Menu",C_top;
+ 
+C_Endless:
+	next;
+	mes "1x Endless Memory";
+	menu "Make",M_Endless,"Return to Menu",C_top;
+
+//_____________deletion and creation of items_______________//
+ 
+//____________model______________//
+//M_:
+M_bio:
+	if(countitem(512)<6)
+	goto M_insufficient;
+	delitem 512,6;
+ 	getitem 514,1;
+	close;
+
+M_Endless:
+	if(countitem(582)<1)
+	goto M_insufficient;
+	delitem 582,1;
+	getitem 513,1;
+	close;
+//________not enough or not the correct items________
+       
+M_insufficient:
+	next;
+	mes "[Challenge Reward]";
+	mes "You don't have the required materials.";
+	mes "Please come back when you do...";
+	menu "Return to Main Menu",C_top,"Leave",C_cancel;
+	close;
+       
+C_cancel:
+	close;
+
+     end;
+}

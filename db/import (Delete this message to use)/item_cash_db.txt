@@ -1,0 +1,107 @@
+// Cash Shop Database
+// Contains the items sold in the ingame cash shop.
+//
+// Structure of Database:
+// Type,ItemID,Price
+//
+// Type:
+//    0: New
+//    1: Hot
+//    2: Limited
+//    3: Rental
+//    4: Gear
+//    5: Buff
+//    6: Usables
+//    7: Other
+//    8: Special
+//
+// Price:
+//    Item cost, in cash points (#CASHPOINTS).
+
+0, 7227, 10 //Bossania Entrance Ticket
+0, 14523, 5 //Pill
+0, 14522, 5 //Big Bun
+1, 6241, 25 //HD Elunium
+1, 6240, 25 //HD Oridecon
+1, 6225, 25 //HD Carnium
+1, 6224, 25 //HD Bradium
+1, 16753, 450 //Blessed Ori
+1, 16755, 450 //Blessed Elu
+1, 6456, 500 //Safe to 5 Weapon Certificate
+1, 6457, 750 //Safe to 5 Armor Certificatate
+1, 6235, 1500 //Safe to 6 Weapon Certificate
+1, 6231, 1000 //Safe to 6 Armor Certificate
+1, 6230, 3000 //Safe to 7 Weapon Certificate
+1, 6234, 2000 //Safe to 7 Armor Certificate
+2, 13875, 1000 //Thief Set Card Box
+2, 13874, 1000 //Swordman Set Card Box
+2, 13871, 1000 //Mage Set Card Box
+2, 13872, 1000 //Acolyte Set Card Box
+2, 13873, 1000 //Archer Set Card Box
+2, 13876, 1000 //Merchant Set Card Box
+3, 19509, 2000 //Cos butterfly wing ear
+3, 19517, 2000 //Cos Chicken Crest
+3, 19934, 2000 //Cos Lolita
+3, 20119, 2000 //Cos beanie
+3, 20147, 2000 //Cos parrot
+3, 20068, 3500 //Cos black bunny
+3, 19876, 2000 //Cos bunny top hat
+3, 19552, 2000 //Cos romantic flower
+3, 19920, 2000 //Cos Ghost
+3, 19984, 2000 //Cos winter Hat
+3, 19687, 2000 //Cos Fresh Rose
+3, 19574, 2000 //Cos Transformer
+3, 19540, 2000 //Cos Rabbit Earplug
+3, 19536, 2000 //Cos RJC
+3, 18742, 3500 //Cos Moon and Star
+3, 20183, 2500 //Cos There is something
+3, 19510, 2000 //Cos Knuckel in head
+3, 19603, 2000 //Cos Invisible Sunglasses
+3, 19827, 2000 //Cos Altemis
+3, 20201, 3500 //Cos Banshee masterr
+3, 19678, 2500 //Cos Bell Ribbon
+3, 20159, 2000 //Cos Blue Hairband
+3, 19550, 2000 //Cos Brush
+3, 19871, 4000 //Cos Decoration of Music
+3, 20202, 2500 //Cos Deviluchi Bollon
+3, 20177, 2000 //Cos Dropping Disuke
+3, 20162, 2000 //Cos lamb Hat
+3, 19977, 2000 //Cos Exclaimation mark
+3, 20204, 2000 //Cos hunter Hat
+4, 5102, 1000 //Blank Eye
+4, 5359, 2500 //Ship Captain Hat
+4, 5641, 2500 //Robo Eye
+4, 5361, 1500 //Gangster Scarf
+4, 5463, 1500 //Rainbow Scarf
+4, 5585, 2000 //Rune Hairband
+4, 5389, 1500 //Angel Spirit
+4, 5305, 1500 //Pirate Dagger
+4, 5574, 1500 //Well-chewed pencil
+4, 5800, 2000 //Blush of Groom
+4, 5628, 2500 //Pecopeco Hairband
+4, 2589, 3000 //Fallen Angel Wing
+4, 5137, 2500 //Alice Doll
+4, 5208, 2500 //Rideword Hat
+4, 18830, 3500 //RWC 2011 Runner
+4, 2967, 1500 //RWC ring
+4, 2967, 1500 //RWC Ring
+4, 2969, 1500 //RWC chamber
+4, 5363, 2000 //abyss Helm
+//4, 18821, 2500 // rainbow RWC
+//4, 18503, 5000 //Small Devil Horn
+4, 18522, 2500 //Evil Marching Hat
+4, 18656, 2500 //Witch's Pumpkin Hat
+4, 2576, 2000 //Adventurer's Backpack
+4, 2828, 1500 //Upg Clip
+4, 5547, 4500 //RJC kanjusa
+4, 5357, 2000 //Wings of Victory
+6, 12208, 100 //Battle Manual
+6, 12900, 850 //Battle Manual Box
+6, 12210, 100 //Bubble Gum
+6, 12902, 850 //Bubble Gum Box
+7, 6293, 10 //Token of Ziegfried
+7, 17068, 500 //Acidbomb Box50
+7, 17069, 950 //Acidbomb Box100
+7, 17070, 4500 //Acidbomb Box500
+7, 17066, 500 //Poison Bottle Box50
+7, 17067, 950 //Poison Bottle Box100

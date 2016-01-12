@@ -10,7 +10,7 @@ quiz_02	mapflag	noicewall
 quiz_02	mapflag	noexp
 quiz_02	mapflag	noskill
 
-prontera,180,199,4	script	Bomb Lucky(วัดดวง)	440,{
+izlude,144,132,3	script	Bomb Lucky(วัดดวง)	440,{
 
 //== ตัวแปรห้ามแก้ไข ============================================
 set @npc$,"[^000080"+strnpcinfo(0)+"^000000]";
@@ -19,11 +19,11 @@ set .@s$,strcharinfo(0);
 mes @npc$;
 mes "ฉันคือผู้ควบคุมกิจกรรมต่างๆ";
 mes "รางวัลที่จะได้รับในการเข้าร่วมกิจกรรม";
-mes "คือ..Cash Coin ที่มีค่ามากกว่า Zeny และ Zeny จำนวนหนึ่ง !!";
+mes "คือ..TCG ที่มีค่ามากกว่า Zeny และ Zeny จำนวนหนึ่ง !!";
 mes "สำหรับ ซื้อของในตู้ขายได้";
 mes "^880000การเตรียมตัว: ไม่จำเป็นต้องนำอะไรไปขอให้นำใจและดวงไปอย่างเดี่ยวเท่านั้น";
 mes "^330000รายละเอียด: กิจกรรมนี้ จะให้คุณเลือก 4 ห้อง ซึ่ง ห้องใด ห้อง 1 จะมีระเบิด อยู่ และระเบิดจะระเบิดทีละห้อง ทั้งหมด 3 ครั้ง รวม 3 ห้อง ถ้ายังรอดอยู่ก็จะได้รับรางวัล";
-mes "^770000รางวัล: TCG 10ea/ Cash Coin 10ea พร้อมเงินอีก 3,000,000 เซนี^000000";
+mes "^770000รางวัล: TCG 10ea/ Cash Coin 10ea พร้อมเงินอีก 1,000,000 เซนี^000000";
 mes "^660000ผู้เข้าร่วม(ไม่ได้รางวัล): TCG 1ea/ Cash Coin 1ea พร้อมเงินอีก 100,000 เซนี^000000";
 next;
 menu "ขอดูรายการกิจกรรมทั้งหมด",-,"ข้ายังไม่พร้อมขอตัวก่อนละกัน",Lend;
@@ -34,7 +34,7 @@ menu "^800000กิจกรรม^000000 Bomb Lucky (วัดดวง)",Levents1,
 end;
 
 Lend:
-//mes "ลาก่อนนะค่ะ..มีอะไรก็กลับมาใหม่ละกัน";
+mes "ลาก่อนนะค่ะ..มีอะไรก็กลับมาใหม่ละกัน";
 end;
 
 Levents1:
@@ -55,8 +55,8 @@ Levents1_data:
 mes @npc$;
 mes "^880000การเตรียมตัว: ไม่จำเป็นต้องนำอะไรไปขอให้นำใจและดวงไปอย่างเดี่ยว";
 mes "^330000รายละเอียด: กิจกรรมนี้ จะให้คุณเลือก 4 ห้อง ซึ่ง ห้องใด ห้อง 1 จะมีระเบิด อยู่ และระเบิดจะตูมทีละห้อง ทั้งหมด 3 ครั้ง ถ้ายังรอดอยู่ก็จะได้รับรางวัล";
-mes "^770000รางวัล: Cash Coin 5ea และ Zeny 2m/คน^000000";
-mes "^660000ผู้เข้าร่วม(ไม่ได้รางวัล): Cash Coin 1ea/คน^000000";
+mes "^770000รางวัล: TCG 10ea และ Zeny 1m/คน^000000";
+mes "^660000ผู้เข้าร่วม(ไม่ได้รางวัล): TCG 1ea/คน^000000";
 next;
 goto Lend;
 
@@ -97,7 +97,7 @@ addtimer 1,"Ev_BombLucky_time::Ontime_game";
 end;
 
 OnClock2200: 
-set $@EvBombtimeST$,"20:18";
+set $@EvBombtimeST$,"22:00";
 addtimer 1,"Ev_BombLucky_time::Ontime_game";
 end;
 
@@ -147,7 +147,7 @@ deltimer "Ev_BombLucky_time::Ontime3_2";
 end;
 
 Ontime3_3:
-set $Ev_BomeLucky,0;
+set $Ev_BombLucky,0;
 announce "หมดเวลาการเข้าร่วมกิจกรรม Bomb Lucky (วัดดวง) ค่ะ ผู้ใดเข้าร่วมไม่ทันกรุณารอรอบต่อไปนะคะ",bc_all,0xFFFF00;
 addtimer 15000,"Ev_BombLucky_time::Ongame4_1a";
 deltimer "Ev_BombLucky_time::Ontime3_3";
@@ -173,7 +173,7 @@ end;
 
 Ongame4_1b:
 areaannounce "quiz_02",310,87,359,34,"หมดเวลาในการเข้าห้องผู้ที่ไม่ได้อยู่ในห้องทางเราจะส่งกลับโดยไม่ได้รับรางวัลอะไรเลยเนื่องจากไม่ทำตามข้อตกลง",0xFFFF00;
-areawarp "quiz_02",310,87,358,59,"oasis",159,44;
+areawarp "quiz_02",310,87,358,59,"izlude",126,141;
 sleep2 5000;
 areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่าละ....",0xFFFF00;
 sleep2 5000;
@@ -358,13 +358,13 @@ if($Ev_BombLucky_Boom1 == 1) specialeffect 183;	//ระเบิด2
 if($Ev_BombLucky_Boom1 == 1) sleep2 1000;
 if($Ev_BombLucky_Boom1 == 1) specialeffect 585;	//ระเบิด3
 if($Ev_BombLucky_Boom1 == 1) sleep2 1000;
-if($Ev_BombLucky_Boom1 == 1) areawarp "quiz_02",314,57,323,34,"job_star",99,12;
+if($Ev_BombLucky_Boom1 == 1) areawarp "quiz_02",314,57,323,34,"force_2-3",19,12;
 if($Ev_BombLucky_Boom1 == 1) set $Ev_BombLucky_Boom1,0;
 if($Ev_BombLucky_Boom1 == 2) areawarp "quiz_02",314,57,323,34,"quiz_02",337,74;
 if($Ev_BombLucky_Boom1 == 2) set $Ev_BombLucky_Boom1,0;
 if($Ev_BombLucky_Boom1 == 3) specialeffect 91;	//นางฟ้า
 if($Ev_BombLucky_Boom1 == 3) sleep2 1000;
-if($Ev_BombLucky_Boom1 == 3) areawarp "quiz_02",314,57,323,34,"job_star",33,12;
+if($Ev_BombLucky_Boom1 == 3) areawarp "quiz_02",314,57,323,34,"force_2-3",67,19;
 if($Ev_BombLucky_Boom1 == 3) set $Ev_BombLucky_Boom1,0;
 sleep2 1000;
 goto Lst_effect;
@@ -386,13 +386,13 @@ if($Ev_BombLucky_Boom2 == 1) specialeffect 183;	//ระเบิด2
 if($Ev_BombLucky_Boom2 == 1) sleep2 1000;
 if($Ev_BombLucky_Boom2 == 1) specialeffect 585;	//ระเบิด3
 if($Ev_BombLucky_Boom2 == 1) sleep2 1000;
-if($Ev_BombLucky_Boom2 == 1) areawarp "quiz_02",326,57,335,34,"job_star",99,12;
+if($Ev_BombLucky_Boom2 == 1) areawarp "quiz_02",326,57,335,34,"force_2-3",19,12;
 if($Ev_BombLucky_Boom2 == 1) set $Ev_BombLucky_Boom2,0;
 if($Ev_BombLucky_Boom2 == 2) areawarp "quiz_02",326,57,335,34,"quiz_02",337,74;
 if($Ev_BombLucky_Boom2 == 2) set $Ev_BombLucky_Boom2,0;
 if($Ev_BombLucky_Boom2 == 3) specialeffect 91;	//นางฟ้า
 if($Ev_BombLucky_Boom2 == 3) sleep2 1000;
-if($Ev_BombLucky_Boom2 == 3) areawarp "quiz_02",326,57,335,34,"job_star",33,12;
+if($Ev_BombLucky_Boom2 == 3) areawarp "quiz_02",326,57,335,34,"force_2-3",67,19;
 if($Ev_BombLucky_Boom2 == 3) set $Ev_BombLucky_Boom2,0;
 sleep2 1000;
 goto Lst_effect;
@@ -414,13 +414,13 @@ if($Ev_BombLucky_Boom3 == 1) specialeffect 183;	//ระเบิด2
 if($Ev_BombLucky_Boom3 == 1) sleep2 1000;
 if($Ev_BombLucky_Boom3 == 1) specialeffect 585;	//ระเบิด3
 if($Ev_BombLucky_Boom3 == 1) sleep2 1000;
-if($Ev_BombLucky_Boom3 == 1) areawarp "quiz_02",338,57,347,34,"job_star",99,12;
+if($Ev_BombLucky_Boom3 == 1) areawarp "quiz_02",338,57,347,34,"force_2-3",19,12;
 if($Ev_BombLucky_Boom3 == 1) set $Ev_BombLucky_Boom3,0;
 if($Ev_BombLucky_Boom3 == 2) areawarp "quiz_02",338,57,347,34,"quiz_02",337,74;
 if($Ev_BombLucky_Boom3 == 2) set $Ev_BombLucky_Boom3,0;
 if($Ev_BombLucky_Boom3 == 3) specialeffect 91;	//นางฟ้า
 if($Ev_BombLucky_Boom3 == 3) sleep2 1000;
-if($Ev_BombLucky_Boom3 == 3) areawarp "quiz_02",338,57,347,34,"job_star",33,12;
+if($Ev_BombLucky_Boom3 == 3) areawarp "quiz_02",338,57,347,34,"force_2-3",67,19;
 if($Ev_BombLucky_Boom3 == 3) set $Ev_BombLucky_Boom3,0;
 sleep2 1000;
 goto Lst_effect;
@@ -442,13 +442,13 @@ if($Ev_BombLucky_Boom4 == 1) specialeffect 183;	//ระเบิด2
 if($Ev_BombLucky_Boom4 == 1) sleep2 1000;
 if($Ev_BombLucky_Boom4 == 1) specialeffect 585;	//ระเบิด3
 if($Ev_BombLucky_Boom4 == 1) sleep2 1000;
-if($Ev_BombLucky_Boom4 == 1) areawarp "quiz_02",350,57,359,34,"job_star",99,12;
+if($Ev_BombLucky_Boom4 == 1) areawarp "quiz_02",350,57,359,34,"force_2-3",19,12;
 if($Ev_BombLucky_Boom4 == 1) set $Ev_BombLucky_Boom4,0;
 if($Ev_BombLucky_Boom4 == 2) areawarp "quiz_02",350,57,359,34,"quiz_02",337,74;
 if($Ev_BombLucky_Boom4 == 2) set $Ev_BombLucky_Boom4,0;
 if($Ev_BombLucky_Boom4 == 3) specialeffect 91;	//นางฟ้า
 if($Ev_BombLucky_Boom4 == 3) sleep2 1000;
-if($Ev_BombLucky_Boom4 == 3) areawarp "quiz_02",350,57,359,34,"job_star",33,12;
+if($Ev_BombLucky_Boom4 == 3) areawarp "quiz_02",350,57,359,34,"force_2-3",67,19;
 if($Ev_BombLucky_Boom4 == 3) set $Ev_BombLucky_Boom4,0;
 sleep2 1000;
 goto Lst_effect;
@@ -632,7 +632,7 @@ quiz_02,359,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-4	139
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-job_star,100,37,4	script	พนักงานของกิจกรรม#แพ้	893,{
+force_2-3,20,29,4	script	พนักงานของกิจกรรม#แพ้	893,{
 //== ตัวแปรห้ามแก้ไข ============================================
 set @npc$,"[^000080"+strnpcinfo(0)+"^000000]";
 set .@s$,strcharinfo(0);
@@ -640,10 +640,9 @@ set .@s$,strcharinfo(0);
 mes "เสียใจด้วยนะถึงแพ้ก็ไม่เป็นไรหรอกนะ";
 mes "รับรางวัลสมน้ำหน้าคุณไปเลย...!!";
 getitem 7227,1;
-getitem 671,1;
 set Zeny, Zeny + 100000;
 dispbottom "คุณได้รับรางวัล TCG 1 ใบและ Cash Coin 1 อัน พร้อมเงิน 100,000z";
-warp "prontera",155,179;
+warp "izlude",128,144;
 end;
 
 OnInit:
@@ -651,7 +650,7 @@ waitingroom "แจกรางวัลสำหรับคนตกรอบ",0;
 end;
 }
 
-job_star,34,37,4	script	พนักงานของกิจกรรม#ชนะ	893,{
+force_2-3,60,29,4	script	พนักงานของกิจกรรม#ชนะ	893,{
 //== ตัวแปรห้ามแก้ไข ============================================
 set @npc$,"[^000080"+strnpcinfo(0)+"^000000]";
 set .@s$,strcharinfo(0);
@@ -660,10 +659,9 @@ mes "ยินดีด้วยนะสำหรับผู้ชนะทุกท่าน คุณถือได้ว่าดวงดีมากๆ";
 mes "ผ่านมาได้ถือว่าแจ่มสุดๆ แต่คุณอย่าคิดว่าคุณจะดวงดีทุกวันเชียวนะ";
 mes "แต่ในเมื่อผ่านมาได้ถึงขนาดนี้ ก็สมควรที่จะได้รับรางวัลตอบแทน";
 getitem 7227,10;
-getitem 671,10;
-set Zeny, Zeny + 3000000;
-dispbottom "คุณได้รับรางวัล Zeny 3,000,000z";
-warp "prontera",155,179;
+set Zeny, Zeny + 1000000;
+dispbottom "คุณได้รับรางวัล Zeny 1,000,000z";
+warp "izlude",128,144;
 end;
 
 OnInit:
