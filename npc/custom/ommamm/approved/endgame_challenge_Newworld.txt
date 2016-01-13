@@ -1,6 +1,6 @@
 //New World Challenge
 
-izlude,108,136,4	script	New World Challenge::endgame_newworld	470,{
+izlude,108,136,3	script	New World Challenge::endgame_newworld	470,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";

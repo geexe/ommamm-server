@@ -1,4 +1,4 @@
-izlude,134,147,3	script	Healer	641,{
+izlude,134,147,3	script	Healer	569,{
 
 	.@Price = 0;	// Zeny required for heal
 	.@Buffs = 1;	// Also buff players? (1: yes / 0: no)
