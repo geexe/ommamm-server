@@ -93,6 +93,8 @@ L_Izlude:
 
 
 L_Save:
+	getitembound 12210,5,4;
+	getitembound 12208,5,4;
 	getmapxy(@mapName$,@mapX,@mapY,0,strcharinfo(0));
 	dispbottom "Your respawn point has been saved.";
 	dispbottom "^000099"+@mapName$+" ("+@mapX+", "+@mapY+")^000000";
