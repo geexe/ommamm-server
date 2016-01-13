@@ -1,4 +1,4 @@
-izlude,131,148,3	script	Warper	634,{
+izlude,131,148,3	script	Warper	10079,{
 function Go; function Disp; function Pick; function Restrict;
 
 // --------------------------------------------------
