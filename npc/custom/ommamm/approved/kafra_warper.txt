@@ -1,4 +1,4 @@
--	script	Officer	-1,{
+-	script	Officer::izlude_warper	-1,{
 	mes .npc$;
 	mes "^000099"+strcharinfo(0)+"^000000";
 	mes "The Kafra Corporation is always working to provide you with convenient services. How may I be of assistance?";
