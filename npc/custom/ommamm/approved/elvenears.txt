@@ -1,4 +1,4 @@
-izlude,129,153,5	script	ElvenEars Knight	645,{
+izlude,129,153,5	script	ElvenEars Knight	420,{
 	mes .npc$;
 	if(countitem(2286)){
 		mes "What can I help you on your ^000099Elven Ears^000000?";
