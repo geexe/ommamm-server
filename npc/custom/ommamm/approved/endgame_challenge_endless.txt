@@ -25,7 +25,7 @@ izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	469,{
 		mes " ";
 		mes "The reward for this quest is";
 		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
-			mes .@k+1 + ". " + getitemname(.reward[.@k]);
+			mes .@k+1 + ". " + getitemname(.reward[.@k]) + " x " + .reward_quantity[.@k];
 		}
 		next;
 		//display completed MVPs

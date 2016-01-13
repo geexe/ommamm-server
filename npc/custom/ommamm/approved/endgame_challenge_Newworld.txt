@@ -24,7 +24,7 @@ izlude,108,136,4	script	New World Challenge::endgame_newworld	470,{
 		mes " ";
 		mes "The reward for this quest is";
 		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
-			mes .@k+1 + ". " + getitemname(.reward[.@k]);
+			mes .@k+1 + ". " + getitemname(.reward[.@k]) + " x " + .reward_quantity[.@k];
 		}
 		break;
 	case 2:
