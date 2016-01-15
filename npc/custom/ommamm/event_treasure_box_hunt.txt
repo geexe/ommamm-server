@@ -1,0 +1,103 @@
+-	script	Treasure Box Hunt	-1,{
+
+Event_start:
+	.event_end = 0
+	.@spawn_map$ = .all_towns$[rand(36)];
+	.@spawn_amount = rand(20,30);
+	killmonster .@spawn_map$, "Treasure Box Hunt::OnTreasureDie";
+	monster .@spawn_map$,0,0,"Treasure Box",1474,.@spawn_amount,"Treasure Box Hunt::OnTreasureDie";
+	announce "Treasure Event : กล่องสมบัติ Treasure Box ปรากฏตัว ณ เมือง " + .@spawn_map$ + " จำนวน [ "+.@spawn_amount+" ] กล่อง มีเวลาในการล่าสมบัติ 10 นาที ",0,0x00FF00;
+	sleep 600000;
+	if(!event_end) {
+		goto Event_end;
+	}
+	end;
+
+OnTreasureDie:
+	.@killcount =+ 1;
+	for (.@i = 1; .@i < getarraysize(.reward); .@i++){
+		getitem .reward[.@i], .reward_quantity[.@i];
+	}
+	announce "ผู้เล่น [ " + strcharinfo(0) + " ] ได้ค้นพบ Treasure Box กล่องที่ "+.@killcount+" / "+.@spawn_amount+" ",0,0xFF5555;
+	if(.@killcount == .@spawn_amount) {
+		goto Event_end;
+	}
+	end;
+	
+Event_end:
+	.event_end = 1;
+	killmonster .@spawn_map$, "Treasure Box Hunt::OnTreasureDie";
+	announce "Treasure Event : หมดเวลาในการล่าสมบัติ Treasure Box ทุกกล่องถูกทำลาย",0,0x00FF00;
+	end;
+	
+OnClock0100:
+OnClock0200:
+OnClock0300:
+OnClock0400:
+OnClock0500:
+OnClock0600:
+OnClock0700:
+OnClock0800:
+OnClock0900:
+OnClock1000:
+OnClock1100:
+OnClock1200:
+OnClock1300:
+OnClock1400:
+OnClock1500:
+OnClock1600:
+OnClock1700:
+OnClock1800:
+OnClock1900:
+OnClock2000:
+OnClock2100:
+OnClock2200:
+OnClock2300:
+OnClock0000:
+	goto Event_start;
+	end;
+	
+OnInit:
+	//Reward when monsters are killed
+	setarray .reward[0], 7227;
+	setarray .reward_quantity[0], 1;
+	//Town array for random
+	setarray .all_towns$[0],
+		"prontera",
+		"alberta",
+		"aldebaran",
+		"amatsu",
+		"ayothaya",
+		"brasilis",
+		"comodo",
+		"dewata",
+		"ecl_in01",
+		"einbech",
+		"einbroch",
+		"dicastes01",
+		"geffen",
+		"gonryun",
+		"hugel",
+		"izlude",
+		"jawaii",
+		"lighthalzen",
+		"louyang",
+		"xmas",
+		"malangdo",
+		"malaya",
+		"manuk",
+		"mid_camp",
+		"mora",
+		"morocc",
+		"moscovia",
+		"nameless_n",
+		"niflheim",
+		"payon",
+		"rachel",
+		"splendide",
+		"thor_camp",
+		"umbala",
+		"veins",
+		"yuno";
+	end;
+}
