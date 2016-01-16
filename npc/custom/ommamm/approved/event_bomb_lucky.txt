@@ -135,6 +135,8 @@ OnTimer240000:
 	announce "เหลือเวลาอีก 1 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
 	end;
 OnTimer300000:
+	stopnpctimer;
+	setnpctimer 0;
 	.event_bomblucky = 0;
 	announce "หมดเวลาเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
 	sleep 8000;
