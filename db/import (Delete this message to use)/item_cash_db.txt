@@ -13,7 +13,7 @@
 //    5: Buff
 //    6: Usables
 //    7: Other
-//    8: Special
+//    8: DO NOT USE - WILL CRASH MAP SERVER
 //
 // Price:
 //    Item cost, in cash points (#CASHPOINTS).
@@ -29,16 +29,10 @@
 1, 16755, 450 //Blessed Elu
 1, 6456, 500 //Safe to 5 Weapon Certificate
 1, 6457, 750 //Safe to 5 Armor Certificatate
-1, 6235, 1500 //Safe to 6 Weapon Certificate
-1, 6231, 1000 //Safe to 6 Armor Certificate
-1, 6230, 3000 //Safe to 7 Weapon Certificate
-1, 6234, 2000 //Safe to 7 Armor Certificate
-2, 13875, 1000 //Thief Set Card Box
-2, 13874, 1000 //Swordman Set Card Box
-2, 13871, 1000 //Mage Set Card Box
-2, 13872, 1000 //Acolyte Set Card Box
-2, 13873, 1000 //Archer Set Card Box
-2, 13876, 1000 //Merchant Set Card Box
+1, 6231, 1000 //Safe to 6 Weapon Certificate
+1, 6235, 1500 //Safe to 6 Armor Certificate
+1, 6230, 2500 //Safe to 7 Weapon Certificate
+1, 6234, 3500 //Safe to 7 Armor Certificate
 3, 19509, 2000 //Cos butterfly wing ear
 3, 19517, 2000 //Cos Chicken Crest
 3, 19934, 2000 //Cos Lolita
@@ -68,6 +62,7 @@
 3, 20162, 2000 //Cos lamb Hat
 3, 19977, 2000 //Cos Exclaimation mark
 3, 20204, 2000 //Cos hunter Hat
+3, 19976, 2000 //Cos Cat Santa Hat
 4, 5102, 1000 //Blank Eye
 4, 5359, 2500 //Ship Captain Hat
 4, 5641, 2500 //Robo Eye
@@ -95,13 +90,42 @@
 4, 2828, 1500 //Upg Clip
 4, 5547, 4500 //RJC kanjusa
 4, 5357, 2000 //Wings of Victory
-6, 12208, 100 //Battle Manual
-6, 12900, 850 //Battle Manual Box
-6, 12210, 100 //Bubble Gum
-6, 12902, 850 //Bubble Gum Box
+//5, 14540, 50 //Holy Armor Scroll
+5, 12927, 85 //Aspersio Scroll box
+5, 13700, 85 //Adrenaline Scroll box
+5, 12906, 85 //Tonic Boxes
+5, 12903, 85 //Steamed Tongue Box
+5, 12905, 85 //Dragon Breath Box
+5, 14160, 85 //Steamed Scorpian box
+5, 14164, 85 //Immortal Stew Box
+5, 14163, 85 //Nine Tails Box
+6, 12208, 50 //Battle Manual
+6, 12900, 450 //Battle Manual Box
+6, 12210, 50 //Bubble Gum
+6, 12902, 450 //Bubble Gum Box
+6, 14523, 5 //Pill
+6, 14522, 5 //Big Bun
 7, 6293, 10 //Token of Ziegfried
-7, 17068, 500 //Acidbomb Box50
-7, 17069, 950 //Acidbomb Box100
-7, 17070, 4500 //Acidbomb Box500
-7, 17066, 500 //Poison Bottle Box50
-7, 17067, 950 //Poison Bottle Box100
+7, 17068, 250 //Acidbomb Box50
+7, 17069, 450 //Acidbomb Box100
+7, 17070, 2000 //Acidbomb Box500
+7, 17066, 250 //Poison Bottle Box50
+7, 17067, 450 //Poison Bottle Box100
+7, 6241, 25 //HD Elunium
+7, 6240, 25 //HD Oridecon
+7, 6225, 25 //HD Carnium
+7, 6224, 25 //HD Bradium
+7, 16753, 450 //Blessed Ori
+7, 16755, 450 //Blessed Elu
+7, 6456, 500 //Safe to 5 Weapon Certificate
+7, 6457, 750 //Safe to 5 Armor Certificatate
+7, 6231, 1000 //Safe to 6 Weapon Certificate
+7, 6235, 1500 //Safe to 6 Armor Certificate
+7, 6230, 2500 //Safe to 7 Weapon Certificate
+7, 6234, 3500 //Safe to 7 Armor Certificate
+7, 13875, 1000 //Thief Set Card Box
+7, 13874, 1000 //Swordman Set Card Box
+7, 13871, 1000 //Mage Set Card Box
+7, 13872, 1000 //Acolyte Set Card Box
+7, 13873, 1000 //Archer Set Card Box
+7, 13876, 1000 //Merchant Set Card Box
