@@ -1,25 +1,22 @@
 izlude,121,153,4	script	Server Info	837,{
 	
 	mes "[Server Info]";
-	mes "Temporary up/down time until Ommamm cafe opens.";
-	mes "Up time: All-day on Weekend";
-	mes "All-night weekday";
-	mes "Monday Night, Tuesday Morning";
-	mes "Friday Morning";
-	mes "Other times depending on our schedule";
+	mes "Available @ Command:";
+	mes "@rates - display server rates";
+	mes "@mi <monster name OR monster ID> - display monster information";
+	mes "@time - display server time";
+	mes "@autotrade - allows offline vending";
 	next;
 	mes "[Server Info]";
 	mes "Maintainace: Wednesday morning";
 	mes " ";
-	mes "Down Time: Monday Morning";
-	mes "Tuesday Night, Wednesday Night";
-	mes "Friday Night";
+	mes "Down time only due to unexpected events such as electrical or internet outage.";
 	next;
-	mes "Other features will be released";
-	mes "as necessarily";
+	mes "[Server Info]";
+	mes "Other features will be released periodically";
 	mes " ";
-	mes "It would be great if we can";
-	mes "here your feed back";
+	mes "Please tell us what you think!";
+	mes "We appreciate all feedback.";
 	mes "    Thank You ";
 	close;
 	
