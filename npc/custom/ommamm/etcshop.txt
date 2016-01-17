@@ -46,4 +46,4 @@ L_MenuExit:
 close;
 }
 
-sch_gld,126,78,4	duplicate(ETCShopCustom)	Ammo Shop	120
+izlude,124,144,4	duplicate(ETCShopCustom)	Ammo Shop	120

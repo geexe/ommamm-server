@@ -105,7 +105,7 @@ OnTimer5000:
 	announce "ขออภัยผู้เล่นทุกท่านในความไม่สะดวก....",bc_all,0xFFFF00;
 	end;
 OnTimer10000:
-	announce "ซึงตอนนี้ก็ถึงเวลา "+$@current_hour+$@current_min+" น. ซึ่งเป็นเวลาของ....",bc_all,0xFFFF00;
+	announce "ซึงตอนนี้ก็ถึงเวลา "+$@current_hour$+":"+$@current_min$+" น. ซึ่งเป็นเวลาของ....",bc_all,0xFFFF00;
 	end;
 OnTimer15000:
 	announce "......กิจกรรม Bomb Lucky (วัดดวง).....",bc_all,0xFFFF00;
@@ -348,8 +348,8 @@ OnClock0700:
 OnClock1200:
 OnClock1700:
 OnClock2200:
-	$@current_hour = gettime(3);
-	$@current_min = gettime(2);
+	$@current_hour$ = gettime(3);
+	$@current_min$ = gettime(2);
 	goto Event_start;
 	end;		
 	

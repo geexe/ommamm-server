@@ -71,8 +71,8 @@ OnInit:
 		"brasilis",
 		"comodo",
 		"dewata",
-		"ecl_in01",
-		"einbech",
+		"eclage",
+		//cannot teleport "einbech",
 		"einbroch",
 		"dicastes01",
 		"geffen",
@@ -95,7 +95,7 @@ OnInit:
 		"payon",
 		"rachel",
 		"splendide",
-		"thor_camp",
+		//cannot teleport "thor_camp",
 		"umbala",
 		"veins";
 		//cannot teleport "yuno"
