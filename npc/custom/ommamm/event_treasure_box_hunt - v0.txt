@@ -7,7 +7,7 @@ Event_start:
 	killmonster .@spawn_map$, "Treasure Box Hunt::OnTreasureDie";
 	monster .@spawn_map$,0,0,"Treasure Box",1474,.@spawn_amount,"Treasure Box Hunt::OnTreasureDie";
 	announce "Treasure Event : กล่องสมบัติ Treasure Box ปรากฏตัว ณ เมือง " + .@spawn_map$ + " จำนวน [ "+.@spawn_amount+" ] กล่อง มีเวลาในการล่าสมบัติ 10 นาที ",0,0x00FF00;
-	sleep 600000;
+	sleep 5000;
 	if(!event_end) {
 		goto Event_end;
 	}
