@@ -2,6 +2,7 @@
 
 Event_start:
 	.event_end = 0;
+	$@killcount = 0;
 	$@spawn_map$ = .all_towns$[rand(getarraysize(.all_towns$))];
 	killmonster $@spawn_map$, "Treasure_Box_Hunt::OnTreasureDie";
 	set $@trevent,rand(15,25);

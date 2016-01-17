@@ -77,7 +77,7 @@ Event_desc:
 	
 Event_time:
 	mes "เวลาเริ่มกิจกรรม";
-	mes "03:00, 07:00, 12:00, 17:00, 22:00";
+	mes "03:30, 07:30, 12:30, 17:30, 22:30";
 	next;
 	goto Event_menu;
 	
@@ -343,11 +343,11 @@ Round_3:
 	end;
 	
 //Event Time
-OnClock0300:
-OnClock0700:
-OnClock1200:
-OnClock1700:
-OnClock2200:
+OnClock0330:
+OnClock0730:
+OnClock1230:
+OnClock1730:
+OnClock2230:
 	$@current_hour$ = gettime(3);
 	$@current_min$ = gettime(2);
 	goto Event_start;
