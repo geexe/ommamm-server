@@ -62,7 +62,6 @@ Event_menu:
 	
 //--------------------------------GM-only Menu-----------------------
 Open_event:
-	.event_bomblucky = 1;
 	mes "The event is opened";
 	goto Event_start;
 //-------------------------------------------------------------------
@@ -83,19 +82,11 @@ Event_time:
 	goto Event_menu;
 	
 Join_event:
-	mes "โชคดีนะท่าน";
-	for (.@i = 0; .@i < getarraysize(.charip$); .@i++) {
-		if (getcharip() == .charip$[.@i]) {
-			.@charcount += 1; 
-		}
-	}
-	if (.@charcount > 2) {
-		mes "กิจกรรมนี้อนุญาตให้เข้าร่วมได้ไม่เกิน 3 ตัวละครต่อ 1 IP";
-
+	if (BaseLevel < 90) {
+		mes "กิจกรรมนี้อนุญาตเฉพาะผู้ที่มีเลเวลมากกว่า 90 เท่านั้น";
 		close;
 	} else {
-		.@char_ip$ = getcharip();
-		setarray .charip$[getarraysize(.charip$)], getcharip();
+		mes "โชคดีนะท่าน";
 		warp "quiz_02",337,73;
 	}
 	end;
@@ -114,31 +105,34 @@ OnTimer5000:
 	announce "ขออภัยผู้เล่นทุกท่านในความไม่สะดวก....",bc_all,0xFFFF00;
 	end;
 OnTimer10000:
-	announce "ซึงตอนนี้ก็ถึงเวลา "+.@current_hour+.@current_min+" น. ซึ่งเป็นเวลาของ....",bc_all,0xFFFF00;
+	announce "ซึงตอนนี้ก็ถึงเวลา "+$@current_hour+$@current_min+" น. ซึ่งเป็นเวลาของ....",bc_all,0xFFFF00;
 	end;
 OnTimer15000:
 	announce "......กิจกรรม Bomb Lucky (วัดดวง).....",bc_all,0xFFFF00;
 	end;
 OnTimer20000:
-	announce "มีเวลา 5 นาที ในการรับผู้เข้าร่วมเล่นกิจกรรม",bc_all,0xFFFF00;
+	announce "อีก 5 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที" ,bc_all,0xFFFF00;
 	end;
 OnTimer60000:
-	announce "เหลือเวลาอีก 4 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	announce "อีก 4 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที",bc_all;
 	end;
 OnTimer120000:
-	announce "เหลือเวลาอีก 3 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	announce "อีก 3 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที",bc_all;
 	end;
 OnTimer180000:
-	announce "เหลือเวลาอีก 2 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	announce "อีก 2 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที",bc_all;
 	end;
 OnTimer240000:
-	announce "เหลือเวลาอีก 1 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	announce "อีก 1 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที",bc_all;
 	end;
 OnTimer300000:
 	stopnpctimer;
 	setnpctimer 0;
-	.event_bomblucky = 0;
+	announce "กิจกรรม Bomb Lucky เปิดแล้ว รีบเข้าไปก่อนที่เวลาจะหมด!!",bc_all;
+	.event_bomblucky = 1;
+	sleep 20000;
 	announce "หมดเวลาเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	.event_bomblucky = 0;
 	sleep 8000;
 	areaannounce "quiz_02",310,87,359,34,"วิธีเข้าร่วมกิจกรรม คือ ให้คุณเลือกเข้าห้องทีคิดว่าจะไม่มีระเบิด ไปจนกว่าจะตกรอบหรือชนะ",0xFFFF00;
 	sleep 4000;
@@ -164,8 +158,8 @@ Round_standby:
 	if(.warp4) {
 		enablenpc "BombLucky_Warp4";
 	}
-	areaannounce "quiz_02",310,87,359,34,"กรุณาเลือกห้องที่คุณคิดว่าน่าจะไม่มีระเบิดภายในเวลา 1 นาที",0xFFFF00;
-	sleep 60000;
+	areaannounce "quiz_02",310,87,359,34,"กรุณาเลือกห้องที่คุณคิดว่าน่าจะไม่มีระเบิดภายในเวลา 20 วินาที",0xFFFF00;
+	sleep 20000;
 	areaannounce "quiz_02",310,87,359,34,"หมดเวลาในการเข้าห้อง ผู้ที่ไม่ได้อยู่ในห้องจะถูกส่งกลับโดยไม่ได้รับรางวัลอะไรเลยเนื่องจากไม่ทำตามข้อตกลง",0xFFFF00;
 	areawarp "quiz_02",310,87,358,59,"izlude",126,141;
 	disablenpc "BombLucky_Warp1";
@@ -354,9 +348,8 @@ OnClock0700:
 OnClock1200:
 OnClock1700:
 OnClock2200:
-	.event_bomblucky = 1;
-	.@current_hour = gettime(3);
-	.@current_min = gettime(2);
+	$@current_hour = gettime(3);
+	$@current_min = gettime(2);
 	goto Event_start;
 	end;		
 	
@@ -642,6 +635,15 @@ quiz_02,356,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-3	139
 quiz_02,359,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-4	139
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+force_2-3	mapflag	nowarpto
+force_2-3	mapflag	noteleport
+force_2-3	mapflag	nosave	SavePoint
+force_2-3	mapflag	nomemo
+force_2-3	mapflag	nowarp
+force_2-3	mapflag	noreturn
+force_2-3	mapflag	noicewall
+force_2-3	mapflag	nobranch
 
 quiz_02	mapflag	nowarpto
 quiz_02	mapflag	noteleport

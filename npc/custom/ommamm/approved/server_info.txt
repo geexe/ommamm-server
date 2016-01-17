@@ -28,14 +28,21 @@ OnInit:
 izlude,116,126,3	script	Refill Info		815,{
 	
 	mes "[Refill Rate]";
+	mes "พิเศษ ช่วงโปรโมชั่น เติมเงินได้ cash x2 จากที่แสดงด้านล่าง";
+	mes " ";
 	mes "50 Baht 500 Cash Point";
 	mes "100 Baht 1100 Cash Point";
 	mes "200 Baht 2300 Cash Point";
 	mes "300 Baht 3600 Cash Point";
 	mes "500 Baht 6500 Cash Point";
 	mes "1000 Baht 15000 Cash Point";
-	mes "โอนเงินได้ที่เลขบัญชี ธนาคารไทยพาณิชย์ 045-573800-4";
-	mes "สรกฤต หอวงศ์รัตนะ";
+	next;
+	mes "โอนเงินได้ที่บัญชี";
+	mes "เลขที่ 128-2-24276-5";
+	mes "นาย ธันยกร หอวงศ์รัตนะ";
+	mes "ธนาคารทหารไทย";
+	mes "โทรศัพท์ 092-270-0972 หรือ 080-244-7769";
+	mes "Line ID: nonxe_h";
 	close;
 OnInit:
 	waitingroom "Refill Info",0;
