@@ -82,6 +82,7 @@
 4, 2967, 1500 //RWC Ring
 4, 2969, 1500 //RWC chamber
 4, 5363, 2000 //abyss Helm
+4, 18652, 2000 //Vanargand Helm
 //4, 18821, 2500 // rainbow RWC
 //4, 18503, 5000 //Small Devil Horn
 4, 18522, 2500 //Evil Marching Hat
