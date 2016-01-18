@@ -1,24 +1,120 @@
 izlude,121,153,4	script	Server Info	837,{
+	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
 	
-	mes "[Server Info]";
-	mes "Available @ Command:";
-	mes "@rates - display server rates";
-	mes "@mi <monster name OR monster ID> - display monster information";
-	mes "@time - display server time";
-	mes "@autotrade - allows offline vending";
+	mes .npc$;
+	mes "สวัสดี  " + strcharinfo(0);
+	mes "คุณสามารถดูข้อมูลพื้นฐานของ Ommamm Server ได้ที่นี่";
 	next;
-	mes "[Server Info]";
+	goto Info_Menu;
+
+Info_Menu:
+	menu "^FF0000Update^000000",Update_Info,"แนวคิดของ Ommamm RO", Ommamm_principles, "ข้อมูลเซิฟเวอร์", Basic_info, "@ Command ที่อนุญาตให้ใช้", Command_allow, "Cancel", Lend;
+
+Update_Info:
+	mes .npc$;
+	mes "สำหรับ Update ในอนาคต";
+	next;
+	goto Info_Menu;
+	end;
+	
+Ommamm_principles:
+	mes .npc$;
+	mes "Ommamm RO สร้างขึ้นเพื่อต้องการรวมกลุ่มผู้ที่รักเกม Ragnarok Online และต้องการจะสัมผัส Ragnarok ตามแบบฉบับ Renewal ในบรรยากาศที่เป็นกันเอง โดยไม่จำเป็นต้องเล่นใน Ragnarok Online Official Server ซึ่งมีบรรยากาศการแข่งขันที่สูง รวมถึงมีบอทและผู้เล่นที่ไม่พึงประสงค์เป็นจำนวนมาก";
+	next;
+	mes .npc$;
+	mes "เพื่อให้บรรลุจุดประสงค์ดังกล่าว Ommamm RO จึงได้ใช้ Ragnarok Online Server เวอร์ชั่นใหม่ล่าสุดจาก rAthena ผู้พัฒนา Ragnarok Online Emulator (หรือที่เรียกกันง่ายๆว่าเซิฟเถื่อน) ";
+	mes "โดยตัวเซิฟเวอร์มีความใกล้เคียงกับ Official kRO จาก Gravity (ผู้พัฒนาเกม Ragnarok Online) มากที่สุดในปัจจุบัน";
+	next;
+	mes .npc$;
+	mes "แต่เนื่องจาก Database ของตัวเกมที่เป็นภาษาไทยยังตามหลัง kRO อยู่มาก (ประมาณ 3 ปี) ทีมงานจึงเห็นควรนำ Database ภาษาอังกฤษ ที่มีการ update มากกว่า (ตามหลังไม่เกิน 1 ปี) มาใช้งานแทน";
+	next;
+	mes .npc$;
+	mes "ในการพัฒนา Ommamm RO ทีมงานต้องการจะให้การเล่นมีเป้าหมายที่แตกต่างไปจากการเล่น Ragnarok Online ในแบบที่ทุกคนคุ้นเคย โดย Ommamm RO จะไม่มุ่งเน้นการเล่นในรูปแบบ PvP หรือว่า Guildwar เหมือนเช่นเซิฟเวอร์อื่นๆ";
+	mes "ระบบ PvP จะยึดตาม Official Server เพื่อให้ผู้เล่นสามารถสนุกกับการดวลกับเพื่อนๆ ได้ แต่จะไม่มีการเปิดระบบ Guildwar เนื่องจากข้อจำกัดในเรื่องจำนวนผู้เล่น";
+	next;
+	mes .npc$;
+	mes "ทีมงาน Ommamm RO ต้องการให้ทุกคนได้สัมผัส Ragnarok Online ในมิติของการค้นพบสิ่งใหม่ๆ จากโลกของ RO ร่วมกับเพื่อนๆ และสร้างสังคมในเกมส์ที่เกื้อกูลกันให้สามารถบรรลุวัตุประสงค์ และ 'ชนะ' เกมส์ให้ได้";
+	mes "ไม่ใช่เป็นการเล่นเพื่อสร้างตัวละครไป 'วอ' ได้อย่างเดียว แต่ต้องการให้ทุกคนได้สนุกไปกับการสร้างตัวละคร เก็บเวล หาของ และปาร์ตี้ร่วมกัน";
+	next;
+	mes .npc$;
+	mes "ด้วยเหตุนี้ ทีมงานจึงได้ปรับแต่ง Ommamm RO ให้มีความใกล้เคียงกับ Official Ragnarok Online มากที่สุด";
+	mes "การเพิ่มค่าประสบการณ์ โอกาสการดรอปไอเท็ม และสิ่งอำนวยความสะดวกที่นอกเหนือจาก Official RO เพียงเพื่อให้เหมาะสมกับจำนวนผู้เล่น และลดเวลาการเล่นในส่วนที่ได้อรรถรสต่ำเท่านั้น";
+	next;
+	mes .npc$;
+	mes "สุดท้ายนี้หวังว่าทุกคนจะสนุกกับการเล่นใน Ommamm RO และหาแนวทางการเล่นที่เหมาะสมกับตัวเองได้มากสุด";
+	mes "ทีมงาน Ommamm RO ขอบคุณทุกคนที่ร่วมเป็นส่วนหนึ่งของการสร้างสรรค์เล็กๆ ของพวกเรา";
+	next;
+	goto Info_Menu;
+	end;
+
+Basic_info:
+	mes .npc$;
+	mes "^FF00001. อัตราการคูณพื้นฐาน:^000000";
+	mes "สามารถดูได้โดยใช้คำสั่ง @rates";
+	next;
+	mes .npc$;
+	mes "^FF00002. Party Share Bonus:^000000";
+	mes "ปรับเพิ่มจาก 20% เป็น 40% ต่อสมาชิก 1 คน เพื่อเป็นการส่งเสริมการเก็บเลเวลแบบปาร์ตี้";
+	next;
+	mes .npc$;
+	mes "^FF00003. NPC ต่างๆ  ในเมือง Izlude :^000000";
+	mes "<ชื่อ NPC> (พิกัด)";
+	mes "Healer (134,147)";
+	mes "warper (131,148)";
+	mes "kafra (124,148)";
+	mes "Tool Dealer (121,147)";
+	mes "BlankEyes Knight (129,153)";
+	mes "ElvenEars Knight (132,153)";
+	mes "Stylist (136,126)";
+	mes "Reset Girl (153,147)";
+	mes "Bomb Lucky (147,142)";
+	mes "Aha Def (150,142)";
+	mes "TCG Converter (119,126)";
+	mes "Biolab Challenge (100,140)";
+	mes "New World Challenge (108,136)";
+	mes "Endless Tower Challenge (105,140)";
+	mes "Refine Master (157,129)";
+	next;
+	
+	mes .npc$;
+	mes "^FF00004. Function อื่นๆ^000000";
+	mes "สามารถเปิดดูอุปกรณ์สวมใส่ของผู้เล่นอื่นได้";
+	mes "ทรงผม 97 ทรง";
+	mes "สีผม 10 สี";
+	mes "สีชุด 3 สี (มีสีดำสนิทเป็นสีที่ 4)";
+	next;
+	goto Info_Menu;
+	end;
+	
+Command_allow:
+	mes .npc$;
+	mes "Available @ Command:";
+	mes "^FF0000@rates^000000 - แสดงอัตราการคูณของเซิฟเวอร์";
+	mes "^FF0000@mi <monster name OR monster ID>^000000 - แสดงข้อมูลมอนสเตอร์";
+	mes "^FF0000@time^000000 - แสดงเวลาของเซิฟเวอร์";
+	mes "^FF0000@autotrade^000000 - สามารถตั้งร้านรับ/ขายของ โดยไม่ต้องออนไลน์ (เมื่อกดคำสั่งหลังจากตั้งร้านจะ logout แต่ร้านจะตั้งอยู่จนกว่าจะเข้าตัวละครอีกครั้ง หรือของหมด) ";
+	next;
+	goto Info_Menu;
+	end;
+	
+Lend:
+	mes .npc$;
+	mes "แล้วอย่าลืมเข้ามา Update เรื่อยๆนะ";
+	close;
+	end;
+	
+	/*mes .npc$;
 	mes "Maintainace: Wednesday morning";
 	mes " ";
 	mes "Down time only due to unexpected events such as electrical or internet outage.";
 	next;
-	mes "[Server Info]";
+	mes .npc$;
 	mes "Other features will be released periodically";
 	mes " ";
 	mes "Please tell us what you think!";
 	mes "We appreciate all feedback.";
 	mes "    Thank You ";
-	close;
+	close;*/
 	
 OnInit:
 	waitingroom "Server Info",0;
@@ -26,9 +122,18 @@ OnInit:
 }
 
 izlude,116,126,3	script	Refill Info		815,{
+	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
 	
-	mes "[Refill Rate]";
-	mes "พิเศษ ช่วงโปรโมชั่น เติมเงินได้ cash x2 จากที่แสดงด้านล่าง";
+	mes .npc$;
+	mes "Ommamm RO เกิดขึ้นจากความรัก (ความบ้า) เกม Ragnarok Online ของทีมงาน และต้องการให้เพื่อนๆ มาติดเกมร่วมกัน โดยไม่ได้หวังผลกำไรแต่อย่างใด";
+	mes "ผู้เล่นทุกคนสามารถหา Cash Point ได้มากมายจากกิจกรรมต่างๆในเกม โดยไม่จำเป็นจะต้องเติมเงิน";
+	next;
+	mes .npc$;
+	mes "จุดประสงค์ในการเติมเงินนั้นเพื่อให้ไอเท็มต่างๆมีคุณค่าต่อผู้เล่น รวมถึงเป็นช่องทางในการบริจาคเพื่อเป็นกำลังใจให้กับทีมงาน";
+	mes "เงินที่ได้ ทีมงานจะนำไปพัฒนาเซิฟเวอร์ให้มีความพร้อม และความสเถียรมากขึ้น และหากยังเหลือ เงิน อาจมีการจัด Meeting เพื่อให้ได้สังสรรค์กัน";
+	next;
+	mes .npc$;
+	mes "^FF0000พิเศษ ช่วงโปรโมชั่น เติมเงินได้ cash x2 จากที่แสดงด้านล่าง!!^000000";
 	mes " ";
 	mes "50 Baht 500 Cash Point";
 	mes "100 Baht 1100 Cash Point";
@@ -37,6 +142,7 @@ izlude,116,126,3	script	Refill Info		815,{
 	mes "500 Baht 6500 Cash Point";
 	mes "1000 Baht 15000 Cash Point";
 	next;
+	mes .npc$;
 	mes "โอนเงินได้ที่บัญชี";
 	mes "เลขที่ 128-2-24276-5";
 	mes "นาย ธันยกร หอวงศ์รัตนะ";

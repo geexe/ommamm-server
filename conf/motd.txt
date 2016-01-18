@@ -1,4 +1,2 @@
 // Internal default is limited to 128 lines.  If you need more, you will need to modify the MOTD_LINE_SIZE definition in pc.c
-Welcome to Ommamm Server! 
-We aim to build a fun and relaxing community. Since we are a small server, we really encourage and provide massive rewards for party play and world discovery. Check out the Challenge Zone for more info.
-Maintenance is every Wednesday 9:00 - 12:00
+ผู้เล่นทุกคนสามารถตรวจสอบข้อมูลเซิฟเวอร์และ Update ได้จากป้าย "Server Info" กลางเมือง Izlude

@@ -350,6 +350,10 @@ OnClock1730:
 OnClock2230:
 	$@current_hour$ = gettime(3);
 	$@current_min$ = gettime(2);
+	.warp1 = 1;
+	.warp2 = 1;
+	.warp3 = 1;
+	.warp4 = 1;
 	goto Event_start;
 	end;		
 	
