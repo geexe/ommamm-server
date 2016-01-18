@@ -5,9 +5,9 @@ Event_start:
 	$@killcount = 0;
 	$@spawn_map$ = .all_towns$[rand(getarraysize(.all_towns$))];
 	killmonster $@spawn_map$, "Treasure_Box_Hunt::OnTreasureDie";
-	set $@trevent,rand(15,25);
-	announce "Treasure Event: กล่องสมบัติ Treasure Box ปรากฏตัว ณ เมือง "+$@spawn_map$+" จำนวน [ "+$@trevent+" ] กล่อง มีเวลาในการล่าสมบัติ 5 นาที ",0,0x00FF00;
-	monster $@spawn_map$,0,0,"Treasure Box",1474,$@trevent,"Treasure_Box_Hunt::OnTreasureDie";
+	$@spawn_count = rand(10,20);
+	announce "Treasure Event: กล่องสมบัติ Treasure Box ปรากฏตัว ณ เมือง "+$@spawn_map$+" จำนวน [ "+$@spawn_count+" ] กล่อง มีเวลาในการล่าสมบัติ 5 นาที ",0,0x00FF00;
+	monster $@spawn_map$,0,0,"Treasure Box",1474,$@spawn_count,"Treasure_Box_Hunt::OnTreasureDie";
 	sleep 300000;
 	if(!.event_end) {
 		goto Event_end;
@@ -16,18 +16,18 @@ Event_start:
 	
 OnTreasureDie:
 	$@killcount += 1;
-	for ($@i = 0; $@i < getarraysize(.reward); $@i++) {
-		getitem .reward[$@i], .reward_quantity[$@i];
+	for (.@i = 0; .@i < getarraysize(.reward); .@i++) {
+		getitem .reward[.@i], .reward_quantity[.@i];
 	}
-	announce "ผู้เล่น [ " + strcharinfo(0) + " ] ได้ค้นพบ Treasure Box กล่องที่ "+$@killcount+" / "+$@trevent+" ",0,0xFF5555;
-	if($@killcount == $@trevent) {
+	announce "ผู้เล่น [ " + strcharinfo(0) + " ] ได้ค้นพบ Treasure Box กล่องที่ "+$@killcount+" / "+$@spawn_count+" ",0,0xFF5555;
+	if($@killcount == $@spawn_count) {
 		goto Event_end;
 	}
 	end;
 	
 Event_end:
 	.event_end = 1;
-	killmonster $@spawn_map$, "Treasure Box Hunt::OnTreasureDie";
+	killmonster $@spawn_map$, "Treasure_Box_Hunt::OnTreasureDie";
 	announce "Treasure Event : หมดเวลาในการล่าสมบัติ Treasure Box ทุกกล่องถูกทำลาย",0,0x00FF00;
 	end;
 
