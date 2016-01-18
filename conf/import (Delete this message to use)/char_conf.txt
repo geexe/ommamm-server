@@ -52,4 +52,4 @@ char_name_letters: @#
 // Amount of time in seconds by which the character deletion is delayed.
 // Default: 86400 (24 hours)
 // NOTE: Requires client 2010-08-03aragexeRE or newer.
-char_del_delay: 60
+char_del_delay: 0
