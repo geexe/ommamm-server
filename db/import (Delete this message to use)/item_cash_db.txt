@@ -16,7 +16,7 @@
 //    8: DO NOT USE - WILL CRASH MAP SERVER
 //
 // Price:
-//    Item cost, in cash points (#CASHPOINTS).
+// Item cost, in cash points (#CASHPOINTS).
 
 0, 7227, 10 //Bossania Entrance Ticket
 0, 14523, 5 //Pill
@@ -63,34 +63,51 @@
 3, 19977, 2000 //Cos Exclaimation mark
 3, 20204, 2000 //Cos hunter Hat
 3, 19976, 2000 //Cos Cat Santa Hat
-4, 5102, 1000 //Blank Eye
-4, 5359, 2500 //Ship Captain Hat
+//-------------------------Equipment-----------------------
+//--------Upper
+4, 5359, 5500 //Ship Captain Hat
+4, 18652, 4500 //Vanargand Helm
+4, 5208, 4500 //Rideword Hat
+4, 5585, 5000 //Rune Hairband
+4, 18522, 5500 //Evil Marching Hat
+4, 5564, 5000 //Crown of Deceit
+4, 18542, 4000 //Benevolent Guardian
+4, 18673, 4000 //Chibi Pope
+4, 18580, 4000 //Yggdrasil Crown
+4, 18600, 4000 //Cat Ear Beret
+4, 5628, 2500 //Pecopeco Hairband
+4, 5137, 3500 //Alice Doll
+4, 5363, 2000 //Abyss Helm
+4, 18656, 2500 //Witch's Pumpkin Hat
+4, 18671, 2500 //Rudolf Hairband
+4, 5547, 4500 //RJC katyusa
+4, 5357, 2000 //Wings of Victory (Top, Mid)
+//4, 18821, 2500 // rainbow RWC
+//4, 18503, 5000 //Small Devil Horn
+//---------Mid
+4, 5102, 4000 //Blank Eye
 4, 5641, 2500 //Robo Eye
+4, 5389, 1500 //Angel Spirit
+4, 5800, 2000 //Blush of Groom
+4, 5992, 2000 //Sigrun's Wings
+4, 5421, 2000 //Ifrit Ears
+//--------Lower
 4, 5361, 1500 //Gangster Scarf
 4, 5463, 1500 //Rainbow Scarf
-4, 5585, 2000 //Rune Hairband
-4, 5389, 1500 //Angel Spirit
 4, 5305, 1500 //Pirate Dagger
 4, 5574, 1500 //Well-chewed pencil
-4, 5800, 2000 //Blush of Groom
-4, 5628, 2500 //Pecopeco Hairband
-4, 2589, 3000 //Fallen Angel Wing
-4, 5137, 2500 //Alice Doll
-4, 5208, 2500 //Rideword Hat
+4, 18670, 1500 //Handkerchief in Mouth
+//-------Garment
+4, 2589, 5500 //Fallen Angel Wing
+4, 2576, 5000 //Adventurer's Backpack
+//--------Accessory
 4, 18830, 3500 //RWC 2011 Runner
 4, 2967, 1500 //RWC ring
 4, 2967, 1500 //RWC Ring
 4, 2969, 1500 //RWC chamber
-4, 5363, 2000 //abyss Helm
-4, 18652, 2000 //Vanargand Helm
-//4, 18821, 2500 // rainbow RWC
-//4, 18503, 5000 //Small Devil Horn
-4, 18522, 2500 //Evil Marching Hat
-4, 18656, 2500 //Witch's Pumpkin Hat
-4, 2576, 2000 //Adventurer's Backpack
 4, 2828, 1500 //Upg Clip
-4, 5547, 4500 //RJC kanjusa
-4, 5357, 2000 //Wings of Victory
+4, 2829, 1500 //Greed Clip
+//--------------------------Buff/Scrolls-----------------------
 //5, 14540, 50 //Holy Armor Scroll
 5, 12927, 85 //Aspersio Scroll box
 5, 13700, 85 //Adrenaline Scroll box
