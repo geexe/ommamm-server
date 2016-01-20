@@ -12,7 +12,11 @@ Info_Menu:
 
 Update_Info:
 	mes .npc$;
-	mes "สำหรับ Update ในอนาคต";
+	mes "^FF0000Update วันที่ 20 มกราคม 2559^000000";
+	mes "^FF0000***โปรด Download Mini-Client ตัวใหม่ เพื่อสามารถใช้ Features ใหม่ และป้องกันการ Crash***^000000";
+	mes "1. เพิ่มไอเท็มใน Cash Shop หมวด Equipment";
+	mes "2. ปรับราคาไอเท็มใน Cash Shop บางรายการ";
+	mes "3. เพิ่ม Sprite ใหม่จาก jRO สำหรับอาชีพ Genetics และ Guillotine Cross";
 	next;
 	goto Info_Menu;
 	end;
