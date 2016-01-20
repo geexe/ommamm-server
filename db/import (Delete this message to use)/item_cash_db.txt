@@ -70,11 +70,19 @@
 4, 5457, 1000 //Moon Rabbit Hat
 4, 5357, 2000 //Wings of Victory (Top, Mid)
 4, 5363, 2000 //Abyss Helm
+4, 18580, 2000 //Yggdrasil Crown
+4, 5372, 2000 //Koneko Hat
+4, 18841, 2000 //Small Poring Band
 4, 5379, 2500 //Balloon Hat
 4, 5628, 2500 //Pecopeco Hairband
 4, 18656, 2500 //Witch's Pumpkin Hat
 4, 18671, 2500 //Rudolf Hairband
+4, 5778, 2500 //Turkey on your Head
+4, 18565, 2500 //St Patrick's Hat
+4, 5211, 2500 //Dress Hat
 4, 5547, 3000 //RJC katyusa
+4, 18539, 3000 //Skull Cap
+4, 18756, 3000 //Black Shiba Inu Hat
 4, 5137, 3500 //Alice Doll
 4, 5208, 3500 //Rideword Hat
 4, 18830, 3500 //RWC 2011 Runner
@@ -82,47 +90,43 @@
 4, 18673, 4000 //Chibi Pope
 4, 18856, 4000 //White Dropping Eddga Hat
 4, 18600, 4000 //Cat Ear Beret
+4, 5564, 4000 //Crown of Deceit
+4, 18542, 4000 //Benevolent Guardian
+4, 18892, 4000 //UFO Poring Hat
+4, 18791, 4000 //Shrine Maiden Hat
 4, 18652, 4500 //Vanargand Helm
+4, 18908, 4500 //Isabella Red Ear
+4, 18793, 4500 //Magician's Night Cap
 4, 18522, 5500 //Evil Marching Hat
 4, 5359, 5500 //Ship Captain Hat
-//No sprite 4, 5778, 4500 //Turkey on your Head
-//No sprite 4, 18539, 5000 //Skull Cap
-//no item 4, 5904, 4000 //Very Normal Hat
-//No sprite 4, 18892, 4000 //UFO Poring Hat
-//No sprite 4, 18908, 4000 //Isabella Red Ear
-//No sprite 4, 18756, 4000 //Black Shiba Inu Hat
-//No sprite 4, 5564, 5000 //Crown of Deceit
-//No sprite 4, 18542, 4000 //Benevolent Guardian
-//No sprite 4, 18791, 4000 //Shrine Maiden Hat
-//No sprite 4, 18580, 4000 //Yggdrasil Crown
-//No sprite 4, 18565, 2500 //St Patrick's Hat
 //4, 18821, 2500 // rainbow RWC
 //4, 18503, 5000 //Small Devil Horn
+//no item 4, 5904, 4000 //Very Normal Hat
 //---------Mid
 4, 5475, 1500 //Gozarian Mask (Mid, Low)
 4, 5641, 1500 //Robo Eye
 4, 5389, 1500 //Angel Spirit
 4, 5788, 1500 //3D Glasses
 4, 5664, 1500 //Filir's Pini
+4, 5402, 1500 //Mischievous Fairy
 4, 5800, 2000 //Blush of Groom
 4, 5992, 2000 //Sigrun's Wings
 4, 5421, 2000 //Ifrit Ears
 4, 18657, 2000 //Pegasus Ear Wing
 4, 18599, 2000 //Black Devil's Mask
+4, 18540, 2500 // Demon Mask (Mid, Low)
 4, 5102, 4000 //Blank Eye
-//No sprite 4, 5402, 1500 //Mischievous Fairy
-//No sprite 4, 18540, 2500 // Demon Mask (Mid, Low)
 //--------Lower
 4, 5361, 1000 //Gangster Scarf
+4, 18670, 1000 //Handkerchief in Mouth
 4, 5305, 1000 //Pirate Dagger
 4, 5574, 1000 //Well-chewed pencil
 4, 5596, 1000 //FOur Leaf Clover
 4, 5362, 1500 //Ninja Scroll
 4, 5463, 1500 //Rainbow Scarf
-//No sprite 4, 18918, 1500 //Long Octopus Ballon
+4, 18918, 1500 //Long Octopus Ballon
+4, 18666, 1500 //CD In Mouth
 //No item 4, 18968, 1500 //Jinn Marin Balloon
-//No sprite 4, 18666, 1500 //CD In Mouth
-//No sprite 4, 18670, 1500 //Handkerchief in Mouth
 //-------Garment
 4, 2576, 5000 //Adventurer's Backpack
 4, 2589, 5500 //Fallen Angel Wing
