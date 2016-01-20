@@ -110,7 +110,7 @@
 4, 5664, 1500 //Filir's Pini
 4, 5402, 1500 //Mischievous Fairy
 4, 5800, 2000 //Blush of Groom
-4, 5992, 2000 //Sigrun's Wings
+4, 5592, 2000 //Sigrun's Wings
 4, 5421, 2000 //Ifrit Ears
 4, 18657, 2000 //Pegasus Ear Wing
 4, 18599, 2000 //Black Devil's Mask
