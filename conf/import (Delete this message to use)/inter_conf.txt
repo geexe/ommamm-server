@@ -21,3 +21,6 @@ map_server_db: rathena
 log_db_id: ommammserver
 log_db_pw: UgK6G2QCwe
 log_db_db: logs
+
+// Level range for sharing within a party
+party_share_level: 17
