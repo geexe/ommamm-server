@@ -51,7 +51,7 @@ item_drop_equip_max_boss: 10000
 
 // Valid range of dyes and styles on the client.
 min_hair_style: 0
-max_hair_style: 97
+max_hair_style: 90
 min_hair_color: 0
 max_hair_color: 10
 min_cloth_color: 0 

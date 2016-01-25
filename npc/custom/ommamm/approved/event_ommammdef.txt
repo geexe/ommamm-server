@@ -318,6 +318,14 @@ Round_End:
 	killmonster "force_2-3", "Ommammdef_room1::OnKill";
 	disablenpc "Ommammdef_room1";
 	end;
+	
+OnPCLogoutEvent:
+	for(.@i = 0; .@i < getarraysize($@room1_player); .@i++) {
+		if(getcharid(3) == $@room1_player[.@i]) {
+			deletearray $@room1_player[.@i],1;
+		}
+	}
+	end;
 }
 
 -	script	Ommammdef_room2	-1,{
@@ -464,5 +472,13 @@ Round_End:
 	areawarp "force_2-3.gat",130,109,149,50,"izlude",126,141;
 	killmonster "force_2-3", "Ommammdef_room2::OnKill";
 	disablenpc "Ommammdef_room2";
+	end;
+	
+OnPCLogoutEvent:
+	for(.@i = 0; .@i < getarraysize($@room2_player); .@i++) {
+		if(getcharid(3) == $@room2_player[.@i]) {
+			deletearray $@room2_player[.@i],1;
+		}
+	}
 	end;
 }
