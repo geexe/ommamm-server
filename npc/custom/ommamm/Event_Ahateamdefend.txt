@@ -1,4 +1,4 @@
-izlude,150,142,5	script	AhaTeamDefendS	576,{
+izlude,141,138,5	script	AhaTeamDefendS	576,{
 if($Open_Dun_aha==1){end;}
 mes "[AhaTeamDefend]";
 mes "ยินดีต้อนรับผู้กล้าทั้งหลายเข้าสู่ ^FF0000AhaTeamDefend^000000"; 
