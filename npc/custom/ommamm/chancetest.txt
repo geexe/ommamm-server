@@ -1,0 +1,14 @@
+izlude,134,140,4	script	Test Random Item	440,{
+	addrid (1,0);
+	.@i = rand(1000);
+	if ( .@i<330) getitem 4811,1;
+	else if ( .@i<580) getitem 4810,1;
+	else if ( .@i<760) getitem 4809,1;
+	else if ( .@i<880) getitem 4808,1;
+	else if ( .@i<950) getitem 4820,1;
+	else if ( .@i<980) getitem 4821,1;
+	else if ( .@i<990) getitem 4822,1;
+	else if ( .@i<995) getitem 4823,1;
+	else if ( .@i<998) getitem 4824,1;
+	else if ( .@i<1000) getitem 4825,1;
+}

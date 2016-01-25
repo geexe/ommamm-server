@@ -1,0 +1,6 @@
+izlude,160,147,5	script	Rellion Job Changer::rebellion_job	857,{
+	mes;
+	if(//gs lv 99/50) {
+		jobchange 4215;
+	}
+}

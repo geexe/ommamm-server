@@ -71,7 +71,7 @@ Join_event:
 Select_room:
 	mes .npc$;
 	mes "โปรดเลือกห้องที่ต้องการจะเล่น";
-	mes "ห้องหนึ่งจะมีผู้กล้าได้ไม่เกิน 6 คน";
+	mes "ห้องหนึ่งจะมีผู้กล้าได้ไม่เกิน 7 คน";
 	next;
 	menu 
 		"ห้องที่ 1 (ง่าย) จำนวน [" + getareausers("force_2-3.gat",11,146,29,90) + "] คน",Roomatd1,
@@ -81,41 +81,39 @@ Select_room:
 	end;
 
 Roomatd1:
-	if(getareausers("force_2-3.gat",11,146,29,90) > 6){
+	if(getareausers("force_2-3.gat",11,146,29,90) > 6) {
 		goto L_error;
+	} else {
+		warp "force_2-3.gat",20,120; 
+		announce strcharinfo(0)+" ได้เข้าสู่ Ommamm Defense ห้องที่ 1 แล้ว",8; 
 	}
-	setarray $@room1_player[getarraysize($@room1_player)], getcharid(3);
-	warp "force_2-3.gat",20,120; 
-	announce .npc$ + " : "+strcharinfo(0)+" ได้เข้าสู่ห้องที่ 1 แล้ว",8; 
 	end;
 
 Roomatd2:
-	if(getareausers("force_2-3.gat",130,109,149,50) > 6){
+	if(getareausers("force_2-3.gat",130,109,149,50) > 6) {
 		goto L_error;
+	} else {
+		warp "force_2-3.gat",140,80; 
+		announce strcharinfo(0)+" ได้เข้าสู่ Ommamm Defense ห้องที่ 2 แล้ว",8; 
 	}
-	setarray $@room2_player[getarraysize($@room2_player)], getcharid(3);
-	warp "force_2-3.gat",140,80; 
-	announce .npc$ + " : "+strcharinfo(0)+" ได้เข้าสู่ห้องที่ 2 แล้ว",8; 
 	end;
 
 Roomatd3:
-	if($ppatd3>6){
+	if(getareausers("force_2-3.gat",90,69,109,11) > 6) {
 		goto L_error;
+	} else {
+		warp "force_2-3.gat",100,40; 
+		announce strcharinfo(0)+" ได้เข้าสู่ Ommamm Defense ห้องที่ 3 แล้ว",8; 
 	}
-	setarray $@room3_player[getarraysize($@room3_player)], getcharid(3);
-	set $ppatd3,$ppatd3+1;
-	warp "force_2-3.gat",100,40; 
-	announce .npc$ + " : "+strcharinfo(0)+" ได้เข้าสู่ห้องที่ 3 แล้ว",8; 
 	end;
 
 Roomatd4:
-	if($ppatd4>6){
+	if(getareausers("force_2-3.gat",50,90,109,109) > 6) {
 		goto L_error;
+	} else {
+		warp "force_2-3.gat",80,100; 
+		announce strcharinfo(0)+" ได้เข้าสู่ Ommamm Defense ห้องที่ 4 แล้ว",8; 
 	}
-	setarray $@room4_player[getarraysize($@room4_player)], getcharid(3);
-	set $ppatd4,$ppatd4+1;
-	warp "force_2-3.gat",80,100; 
-	announce .npc$ + " : "+strcharinfo(0)+" ได้เข้าสู่ห้องที่ 4 แล้ว",8; 
 	end;
 	
 L_error: 
@@ -130,7 +128,7 @@ Event_start:
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว มีเวลา 5 นาทีในการเข้าร่วมกิจกรรม" ,bc_all,0xFFFF00;
 	end;
 OnTimer60000:
-	announce "อOmmamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 4 นาทีในการเข้าร่วมกิจกรรม",bc_all;
+	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 4 นาทีในการเข้าร่วมกิจกรรม",bc_all;
 	end;
 OnTimer120000:
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 3 นาทีในการเข้าร่วมกิจกรรม",bc_all;
@@ -156,8 +154,8 @@ OnTimer300000:
 		announce "Ommamm Defense ได้เริ่มต้นขึ้นแล้ว ณ บัดนี้!!",0;
 		enablenpc "Ommammdef_room1";
 		enablenpc "Ommammdef_room2";
-		//enablenpc "Ommammdef_room3";
-		//enablenpc "Ommammdef_room4";
+		enablenpc "Ommammdef_room3";
+		enablenpc "Ommammdef_room4";
 		donpcevent "::OnOmmammdef_standby";
 		end;
 	}
@@ -173,7 +171,7 @@ OnClock0430:
 	end;
 }
 
--	script	Ommammdef_room1	-1,{
+force_2-3,1,1,1	script	Ommammdef_room1	-1,{
 
 OnInit:
 	//Reward and quantity
@@ -305,12 +303,11 @@ Round_End:
 	areaannounce "force_2-3.gat",11,146,29,90,"คุณได้กำจัดมอนสเตอร์ทั้งหมด และชนะกิจกรรม Ommamm Defense แล้ว",0;
 	sleep 5000;
 	areaannounce "force_2-3.gat",11,146,29,90,"นี่คือรางวัลของคุณ",0;
-	for (.@i = 0; .@i < getarraysize($@room1_player); .@i++) {
-		for (.@j = 0; .@j < getarraysize(.reward); .@j++) {
-			getitem2 .reward[.@j], .reward_quantity[.@j],0,0,0,0, 0,0,0,$@room1_player[.@i];
-		}
+	addrid (4,0,11,146,29,90);
+	for (.@i = 0; .@i < getarraysize(.reward); .@i++) {
+		getitem .reward[.@i], .reward_quantity[.@i];
 	}
-	deletearray $@room1_player[0], getarraysize($@room1_player);
+	detachrid;
 	sleep 5000;
 	areaannounce "force_2-3.gat",11,146,29,90,"ขอแสดงความยินดีกับผู้ชนะ..และขอขอบคุณทุกท่านที่สละเวลามาเข้าร่วมกิจกรรม",0;
 	sleep 5000;
@@ -318,17 +315,9 @@ Round_End:
 	killmonster "force_2-3", "Ommammdef_room1::OnKill";
 	disablenpc "Ommammdef_room1";
 	end;
-	
-OnPCLogoutEvent:
-	for(.@i = 0; .@i < getarraysize($@room1_player); .@i++) {
-		if(getcharid(3) == $@room1_player[.@i]) {
-			deletearray $@room1_player[.@i],1;
-		}
-	}
-	end;
 }
 
--	script	Ommammdef_room2	-1,{
+force_2-3,1,1,1	script	Ommammdef_room2	-1,{
 
 OnInit:
 	//Reward and quantity
@@ -460,25 +449,308 @@ Round_End:
 	areaannounce "force_2-3.gat",130,109,149,50,"คุณได้กำจัดมอนสเตอร์ทั้งหมด และชนะกิจกรรม Ommamm Defense แล้ว",0;
 	sleep 5000;
 	areaannounce "force_2-3.gat",130,109,149,50,"นี่คือรางวัลของคุณ",0;
-	for (.@i = 0; .@i < getarraysize($@room2_player); .@i++) {
-		for (.@j = 0; .@j < getarraysize(.reward); .@j++) {
-			getitem2 .reward[.@j], .reward_quantity[.@j],0,0,0,0, 0,0,0,$@room2_player[.@i];
-		}
+	addrid (4,0,130,109,149,50);
+	for (.@i = 0; .@i < getarraysize(.reward); .@i++) {
+		getitem .reward[.@i], .reward_quantity[.@i];
 	}
-	deletearray $@room2_player[0], getarraysize($@room2_player);
 	sleep 5000;
+	detachrid;
 	areaannounce "force_2-3.gat",130,109,149,50,"ขอแสดงความยินดีกับผู้ชนะ..และขอขอบคุณทุกท่านที่สละเวลามาเข้าร่วมกิจกรรม",0;
 	sleep 5000;
 	areawarp "force_2-3.gat",130,109,149,50,"izlude",126,141;
 	killmonster "force_2-3", "Ommammdef_room2::OnKill";
 	disablenpc "Ommammdef_room2";
 	end;
+}
+
+force_2-3,1,1,1	script	Ommammdef_room3	-1,{
+
+OnInit:
+	//Reward and quantity
+	setarray .reward[0], 7227, 607;
+	setarray .reward_quantity[0], 1, 1;
+	end;
+
+OnOmmammdef_standby:
+	if(getareausers("force_2-3.gat",90,69,109,11) == 0) {
+		disablenpc "Ommammdef_room3";
+	}
+	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 3 ทั้งหมด "  + getareausers("force_2-3.gat",90,69,109,11) + " คน",0;
+	.killcount = 0;
+	.roundcount = 1;
+	goto Round_1;
+	end;
 	
-OnPCLogoutEvent:
-	for(.@i = 0; .@i < getarraysize($@room2_player); .@i++) {
-		if(getcharid(3) == $@room2_player[.@i]) {
-			deletearray $@room2_player[.@i],1;
+OnKill:
+	.killcount += 1;
+	if (.killcount == .mobcount) {
+		areaannounce "force_2-3.gat",90,69,109,11,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
+		.roundcount += 1;
+		sleep 5000;
+		switch (.roundcount) {
+			case 2:
+				.killcount = 0;
+				goto Round_2;
+				break;
+			case 3:
+				.killcount = 0;
+				goto Round_3;
+				break;
+			case 4:
+				.killcount = 0;
+				goto Round_4;
+				break;
+			case 5:
+				.killcount = 0;
+				goto Round_End;
+				break;
 		}
 	}
+	end;
+	
+Round_1:
+	areaannounce "force_2-3.gat",90,69,109,11, "เราจะเริ่มรอบที่่ 1 ภายใน 20 วินาที",0;
+	sleep 20000;
+	monster "force_2-3.gat", 100,60, "Obsidian", 1615, 10, "Ommammdef_room3::OnKill";
+	monster "force_2-3.gat", 100,60, "Orc Archer", 1189, 10, "Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,60,"Merman",1264,10,"Ommammdef_room3::OnKill";
+	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
+	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
+	sleep 300000;
+	if(.roundcount == 1) {
+		if(mobcount("force_2-3.gat","Ommammdef_room3::OnKill") > 0) {
+			areaannounce "force_2-3.gat",90,69,109,11, "เสียใจด้วย คุณไม่สามารถกำจัดมอนสเตอร์ทั้งภายในเวลาที่กำหนด มาร่วมท้าทาย Ommamm Defense ได้ใหม่ในโอกาสหน้า",0;
+			sleep 4000;
+			areawarp "force_2-3.gat",90,69,109,11,"izlude",126,141;
+			killmonster "force_2-3.gat", "Ommammdef_room3::OnKill";
+			disablenpc "Ommammdef_room3";
+		}
+	}
+	end;
+
+Round_2:
+	areaannounce "force_2-3.gat",90,69,109,11, "เราจะเริ่มรอบที่่ 2 ภายใน 20 วินาที",0;
+	sleep 20000;	
+	monster "force_2-3.gat",100,20,"WRAITH",1192,10,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"MIMIC",1191,10,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Rideword",1195,20,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Raydric",1163,10,"Ommammdef_room3::OnKill";
+	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
+	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
+	sleep 300000;
+	if(.roundcount == 2) {
+		if(mobcount("force_2-3.gat","Ommammdef_room3::OnKill") > 0) {
+			areaannounce "force_2-3.gat",90,69,109,11,"เสียใจด้วย คุณไม่สามารถกำจัดมอนสเตอร์ทั้งภายในเวลาที่กำหนด มาร่วมท้าทาย Ommamm Defense ได้ใหม่ในโอกาสหน้า",0;
+			sleep 4000;
+			areawarp "force_2-3.gat",90,69,109,11,"izlude",126,141;
+			killmonster "force_2-3", "Ommammdef_room3::OnKill";
+			disablenpc "Ommammdef_room3";
+		}
+	}
+	end;
+
+Round_3:
+	areaannounce "force_2-3.gat",90,69,109,11, "เราจะเริ่มรอบที่่ 3 ภายใน 20 วินาที",0;
+	sleep 20000;
+	monster "force_2-3.gat",100,60,"Bloodyknight",1268,8,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,60,"Abysknight",1219,8,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,60,"Phreeoni",1159,2,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,60,"Beelzebub",1874,1,"Ommammdef_room3::OnKill";
+	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
+	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
+	sleep 300000;
+	if(.roundcount == 3) {
+		if(mobcount("force_2-3.gat","Ommammdef_room3::OnKill") > 0) {
+			areaannounce "force_2-3.gat",90,69,109,11, "เสียใจด้วย คุณไม่สามารถกำจัดมอนสเตอร์ทั้งภายในเวลาที่กำหนด มาร่วมท้าทาย Ommamm Defense ได้ใหม่ในโอกาสหน้า",0;
+			sleep 4000;
+			areawarp "force_2-3.gat",90,69,109,11,"izlude",126,141;
+			killmonster "force_2-3", "Ommammdef_room3::OnKill";
+			disablenpc "Ommammdef_room3";
+		}
+	}
+	end;
+	
+Round_4:
+	areaannounce "force_2-3.gat",90,69,109,11, "เราจะเริ่มรอบที่่ 4 ภายใน 20 วินาที",0;
+	sleep 20000;
+	monster "force_2-3.gat",100,20,"Owl Baron,Owl",1295,8,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Mini Demon",1292,8,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Majoruros",1310,8,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Valkyrie",1765,2,"Ommammdef_room3::OnKill";
+	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
+	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
+	sleep 300000;
+	if(.roundcount == 4) {
+		if(mobcount("force_2-3.gat","Ommammdef_room3::OnKill") > 0) {
+			areaannounce "force_2-3.gat",90,69,109,11, "เสียใจด้วย คุณไม่สามารถกำจัดมอนสเตอร์ทั้งภายในเวลาที่กำหนด มาร่วมท้าทาย Ommamm Defense ได้ใหม่ในโอกาสหน้า",0;
+			sleep 4000;
+			areawarp "force_2-3.gat",90,69,109,11,"izlude",126,141;
+			killmonster "force_2-3", "Ommammdef_room3::OnKill";
+			disablenpc "Ommammdef_room3";
+		}
+	}
+	end;
+
+Round_End:
+	areaannounce "force_2-3.gat",90,69,109,11,"คุณได้กำจัดมอนสเตอร์ทั้งหมด และชนะกิจกรรม Ommamm Defense แล้ว",0;
+	sleep 5000;
+	areaannounce "force_2-3.gat",90,69,109,11,"นี่คือรางวัลของคุณ",0;
+	addrid (4,0,90,69,109,11);
+	for (.@i = 0; .@i < getarraysize(.reward); .@i++) {
+		getitem .reward[.@i], .reward_quantity[.@i];
+	}
+	sleep 5000;
+	detachrid;
+	areaannounce "force_2-3.gat",90,69,109,11,"ขอแสดงความยินดีกับผู้ชนะ..และขอขอบคุณทุกท่านที่สละเวลามาเข้าร่วมกิจกรรม",0;
+	sleep 5000;
+	areawarp "force_2-3.gat",90,69,109,11,"izlude",126,141;
+	killmonster "force_2-3", "Ommammdef_room3::OnKill";
+	disablenpc "Ommammdef_room3";
+	end;
+}
+
+force_2-3,1,1,1	script	Ommammdef_room4	-1,{
+
+OnInit:
+	//Reward and quantity
+	setarray .reward[0], 7227, 607;
+	setarray .reward_quantity[0], 1, 1;
+	end;
+
+OnOmmammdef_standby:
+	if(getareausers("force_2-3.gat",50,90,109,109) == 0) {
+		disablenpc "Ommammdef_room4";
+	}
+	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 3 ทั้งหมด "  + getareausers("force_2-3.gat",50,90,109,109) + " คน",0;
+	.killcount = 0;
+	.roundcount = 1;
+	goto Round_1;
+	end;
+	
+OnKill:
+	.killcount += 1;
+	if (.killcount == .mobcount) {
+		areaannounce "force_2-3.gat",50,90,109,109,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
+		.roundcount += 1;
+		sleep 5000;
+		switch (.roundcount) {
+			case 2:
+				.killcount = 0;
+				goto Round_2;
+				break;
+			case 3:
+				.killcount = 0;
+				goto Round_3;
+				break;
+			case 4:
+				.killcount = 0;
+				goto Round_4;
+				break;
+			case 5:
+				.killcount = 0;
+				goto Round_End;
+				break;
+		}
+	}
+	end;
+	
+Round_1:
+	areaannounce "force_2-3.gat",50,90,109,109, "เราจะเริ่มรอบที่่ 1 ภายใน 20 วินาที",0;
+	sleep 20000;
+	monster "force_2-3.gat", 60,100, "Obsidian", 1615, 10, "Ommammdef_room4::OnKill";
+	monster "force_2-3.gat", 60,100, "Orc Archer", 1189, 10, "Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",60,100,"Merman",1264,10,"Ommammdef_room4::OnKill";
+	.mobcount = mobcount("force_2-3.gat","Ommammdef_room4::OnKill");
+	areaannounce "force_2-3.gat",50,90,109,109, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
+	sleep 300000;
+	if(.roundcount == 1) {
+		if(mobcount("force_2-3.gat","Ommammdef_room4::OnKill") > 0) {
+			areaannounce "force_2-3.gat",50,90,109,109, "เสียใจด้วย คุณไม่สามารถกำจัดมอนสเตอร์ทั้งภายในเวลาที่กำหนด มาร่วมท้าทาย Ommamm Defense ได้ใหม่ในโอกาสหน้า",0;
+			sleep 4000;
+			areawarp "force_2-3.gat",50,90,109,109,"izlude",126,141;
+			killmonster "force_2-3.gat", "Ommammdef_room4::OnKill";
+			disablenpc "Ommammdef_room4";
+		}
+	}
+	end;
+
+Round_2:
+	areaannounce "force_2-3.gat",50,90,109,109, "เราจะเริ่มรอบที่่ 2 ภายใน 20 วินาที",0;
+	sleep 20000;	
+	monster "force_2-3.gat",100,100,"WRAITH",1192,10,"Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",100,100,"MIMIC",1191,10,"Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",100,100,"Rideword",1195,20,"Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",100,100,"Raydric",1163,10,"Ommammdef_room4::OnKill";
+	.mobcount = mobcount("force_2-3.gat","Ommammdef_room4::OnKill");
+	areaannounce "force_2-3.gat",50,90,109,109, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
+	sleep 300000;
+	if(.roundcount == 2) {
+		if(mobcount("force_2-3.gat","Ommammdef_room4::OnKill") > 0) {
+			areaannounce "force_2-3.gat",50,90,109,109,"เสียใจด้วย คุณไม่สามารถกำจัดมอนสเตอร์ทั้งภายในเวลาที่กำหนด มาร่วมท้าทาย Ommamm Defense ได้ใหม่ในโอกาสหน้า",0;
+			sleep 4000;
+			areawarp "force_2-3.gat",50,90,109,109,"izlude",126,141;
+			killmonster "force_2-3", "Ommammdef_room4::OnKill";
+			disablenpc "Ommammdef_room4";
+		}
+	}
+	end;
+
+Round_3:
+	areaannounce "force_2-3.gat",50,90,109,109, "เราจะเริ่มรอบที่่ 3 ภายใน 20 วินาที",0;
+	sleep 20000;
+	monster "force_2-3.gat",60,100,"Bloodyknight",1268,8,"Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",60,100,"Abysknight",1219,8,"Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",60,100,"Phreeoni",1159,2,"Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",60,100,"Beelzebub",1874,1,"Ommammdef_room4::OnKill";
+	.mobcount = mobcount("force_2-3.gat","Ommammdef_room4::OnKill");
+	areaannounce "force_2-3.gat",50,90,109,109, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
+	sleep 300000;
+	if(.roundcount == 3) {
+		if(mobcount("force_2-3.gat","Ommammdef_room4::OnKill") > 0) {
+			areaannounce "force_2-3.gat",50,90,109,109, "เสียใจด้วย คุณไม่สามารถกำจัดมอนสเตอร์ทั้งภายในเวลาที่กำหนด มาร่วมท้าทาย Ommamm Defense ได้ใหม่ในโอกาสหน้า",0;
+			sleep 4000;
+			areawarp "force_2-3.gat",50,90,109,109,"izlude",126,141;
+			killmonster "force_2-3", "Ommammdef_room4::OnKill";
+			disablenpc "Ommammdef_room4";
+		}
+	}
+	end;
+	
+Round_4:
+	areaannounce "force_2-3.gat",50,90,109,109, "เราจะเริ่มรอบที่่ 4 ภายใน 20 วินาที",0;
+	sleep 20000;
+	monster "force_2-3.gat",100,100,"Owl Baron,Owl",1295,8,"Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",100,100,"Mini Demon",1292,8,"Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",100,100,"Majoruros",1310,8,"Ommammdef_room4::OnKill";
+	monster "force_2-3.gat",100,100,"Valkyrie",1765,2,"Ommammdef_room4::OnKill";
+	.mobcount = mobcount("force_2-3.gat","Ommammdef_room4::OnKill");
+	areaannounce "force_2-3.gat",50,90,109,109, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
+	sleep 300000;
+	if(.roundcount == 4) {
+		if(mobcount("force_2-3.gat","Ommammdef_room4::OnKill") > 0) {
+			areaannounce "force_2-3.gat",50,90,109,109, "เสียใจด้วย คุณไม่สามารถกำจัดมอนสเตอร์ทั้งภายในเวลาที่กำหนด มาร่วมท้าทาย Ommamm Defense ได้ใหม่ในโอกาสหน้า",0;
+			sleep 4000;
+			areawarp "force_2-3.gat",50,90,109,109,"izlude",126,141;
+			killmonster "force_2-3", "Ommammdef_room4::OnKill";
+			disablenpc "Ommammdef_room4";
+		}
+	}
+	end;
+
+Round_End:
+	areaannounce "force_2-3.gat",50,90,109,109,"คุณได้กำจัดมอนสเตอร์ทั้งหมด และชนะกิจกรรม Ommamm Defense แล้ว",0;
+	sleep 5000;
+	areaannounce "force_2-3.gat",50,90,109,109,"นี่คือรางวัลของคุณ",0;
+	addrid (4,0,50,90,109,109);
+	for (.@i = 0; .@i < getarraysize(.reward); .@i++) {
+		getitem .reward[.@i], .reward_quantity[.@i];
+	}
+	sleep 5000;
+	detachrid;
+	areaannounce "force_2-3.gat",50,90,109,109,"ขอแสดงความยินดีกับผู้ชนะ..และขอขอบคุณทุกท่านที่สละเวลามาเข้าร่วมกิจกรรม",0;
+	sleep 5000;
+	areawarp "force_2-3.gat",50,90,109,109,"izlude",126,141;
+	killmonster "force_2-3", "Ommammdef_room4::OnKill";
+	disablenpc "Ommammdef_room4";
 	end;
 }
