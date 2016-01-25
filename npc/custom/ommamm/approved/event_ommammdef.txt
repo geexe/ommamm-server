@@ -2,7 +2,7 @@ force_2-3.gat	mapflag	noicewall
 force_2-3.gat	mapflag	noteleport
 force_2-3.gat	mapflag	noreturn
 
-izlude,150,142,5	script	Ommamm Defense::ommammdef	576,{
+izlude,141,138,5	script	Ommamm Defense::ommammdef	576,{
 
 	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
 	
