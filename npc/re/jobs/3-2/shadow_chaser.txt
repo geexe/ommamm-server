@@ -288,8 +288,8 @@ L_Code:
 		mes "Here we go!";
 		next;
 		mes "^4d4dff";
-		mes "43231114345243";
-		mes "11441531241542";
+		mes "432311143452";
+		mes "5334423043233435";
 		mes "2433";
 		mes "3542343344154211";
 		mes "^000000";
@@ -315,7 +315,7 @@ s_atelier,65,123,5	script	Manager#sc04_prt	903,{
 			mes "So, what's the right answer?";
 			next;
 			input .@inputstr$;
-			if (.@inputstr$ == "shadows atelier in prontera" || .@inputstr$ == "SHADOWS ATELIER IN PRONTERA") {
+			if (.@inputstr$ == "shadow workshop in prontera" || .@inputstr$ == "SHADOWS ATELIER IN PRONTERA") {
 				mes "[Manager]";
 				mes "Good.";
 				mes "You just got it.";
@@ -595,7 +595,7 @@ L_Code:
 	set .@u, 21 + .@key01;
 	mes "^4d4dff" + .@b + " " + .@l + " " + .@u + " " + .@e + " ";
 	mes "" + .@f + " " + .@i + " " + .@r + " " + .@e + " ";
-	mes "" + .@i + " " + .@n + " ";
+	mes "" + .@o + " " + .@n + " ";
 	mes "" + .@t + " " + .@u + " " + .@r + " " + .@t + " " + .@l + " " + .@e + " ";
 	mes "" + .@i + " " + .@s + " " + .@l + " " + .@a + " " + .@n + " " + .@d + " ";
 	mes "" + .@t + " " + .@h + " " + .@i + " " + .@r + " " + .@d + " ";
