@@ -57,8 +57,9 @@ Basic_info:
 	mes "สามารถดูได้โดยใช้คำสั่ง @rates";
 	next;
 	mes .npc$;
-	mes "^FF00002. Party Share Bonus:^000000";
-	mes "ปรับเพิ่มจาก 20% เป็น 40% ต่อสมาชิก 1 คน เพื่อเป็นการส่งเสริมการเก็บเลเวลแบบปาร์ตี้";
+	mes "^FF00002. Party:^000000";
+	mes "ปรับ Party Share Bonus เพิ่มจาก 20% เป็น 40% ต่อสมาชิก 1 คน";
+	mes "ปรับช่วงเวเวลที่สามารถแชกันได้จาก 15 เวเวล เป็น 17 เวเวล";
 	next;
 	mes .npc$;
 	mes "^FF00003. NPC ต่างๆ  ในเมือง Izlude :^000000";
@@ -67,12 +68,13 @@ Basic_info:
 	mes "warper (131,148)";
 	mes "kafra (124,148)";
 	mes "Tool Dealer (121,147)";
+	mes "Production Shop (152,120)"; 
 	mes "BlankEyes Knight (129,153)";
 	mes "ElvenEars Knight (132,153)";
 	mes "Stylist (136,126)";
 	mes "Reset Girl (153,147)";
 	mes "Bomb Lucky (147,142)";
-	mes "Aha Def (150,142)";
+	mes "Ommamm Defense (150,142)";
 	mes "TCG Converter (119,126)";
 	mes "Biolab Challenge (100,140)";
 	mes "New World Challenge (108,136)";
@@ -86,6 +88,7 @@ Basic_info:
 	mes "ทรงผม 97 ทรง";
 	mes "สีผม 10 สี";
 	mes "สีชุด 3 สี (มีสีดำสนิทเป็นสีที่ 4)";
+	mes "Sprite jRO ของอาชีพ Genetics และ Guillotine Cross";
 	next;
 	goto Info_Menu;
 	end;
