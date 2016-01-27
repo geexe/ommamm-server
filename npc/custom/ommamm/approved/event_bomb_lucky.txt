@@ -158,8 +158,8 @@ Round_standby:
 	if(.warp4) {
 		enablenpc "BombLucky_Warp4";
 	}
-	areaannounce "quiz_02",310,87,359,34,"กรุณาเลือกห้องที่คุณคิดว่าน่าจะไม่มีระเบิดภายในเวลา 15 วินาที",0xFFFF00;
-	sleep 15000;
+	areaannounce "quiz_02",310,87,359,34,"กรุณาเลือกห้องที่คุณคิดว่าน่าจะไม่มีระเบิดภายในเวลา 20 วินาที",0xFFFF00;
+	sleep 20000;
 	areaannounce "quiz_02",310,87,359,34,"หมดเวลาในการเข้าห้อง ผู้ที่ไม่ได้อยู่ในห้องจะถูกส่งกลับโดยไม่ได้รับรางวัลอะไรเลยเนื่องจากไม่ทำตามข้อตกลง",0xFFFF00;
 	areawarp "quiz_02",310,87,358,59,"izlude",126,141;
 	disablenpc "BombLucky_Warp1";
@@ -219,12 +219,11 @@ Round_1:
 			break;
 	}
 	sleep 6000;
-	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
-	sleep 3000;
 	areaannounce "quiz_02",310,87,359,34,"เล่นเอาหายใจไม่ทั่วท้องกันเลยเดียว...",0xFFFF00;
 	sleep 3000;
 	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่านะคะ",0xFFFF00;
 	sleep 4000;
+	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
 	goto Round_standby;
 	
 Round_2:
@@ -271,12 +270,11 @@ Round_2:
 			break;
 	}
 	sleep 6000;
-	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
-	sleep 3000;
 	areaannounce "quiz_02",310,87,359,34,"เล่นเอาหายใจไม่ทั่วท้องกันเลยเดียว...",0xFFFF00;
 	sleep 3000;
 	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่านะคะ",0xFFFF00;
 	sleep 4000;
+	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
 	goto Round_standby;
 
 Round_3:
