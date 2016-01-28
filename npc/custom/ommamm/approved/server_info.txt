@@ -80,6 +80,7 @@ Basic_info:
 	mes "New World Challenge (108,136)";
 	mes "Endless Tower Challenge (105,140)";
 	mes "Refine Master (157,129)";
+	mes "Rebellion Job Changer (160,137)";
 	next;
 	
 	mes .npc$;
