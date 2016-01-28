@@ -1,0 +1,18 @@
+-	script	server_tips	-1,{
+	OnInit:
+		setarray .message$[0], 
+			"ผู้เล่นสามารถใช้ @command ได้ 4 คำสั่งได้แก่ @mi, @time, @rates และ @autotrade ดูรายละเอียดเพิ่มเติมได้จากบอร์ด Server Info กลางเมือง Izlude",
+			"Party ปรับเปลี่ยนให้ผู้เล่นมี Base Level ห่างกันไม่เกิน 17 เวเวล จากปกติ 15 เวเวล และปรับค่าประสบการณ์ที่ได้รับเพิ่มขึ้นจาก 20% เป็น 40% ต่อสมาชิก 1 คน",
+			"อย่าลืมร่วมกิจกรรมต่างๆใน Ommamm-RO เพื่อเก็บสะสม TCG รวมถึงของรางวัลอื่นๆ ที่มีแจกเฉพาะในกิจกรรมเท่านั้น ตรวจสอบกิจกรรมต่างๆได้จาก NPC ในโซนกิจกรรม",
+			"Enchant Level 10!! สุดยอดความ Imba ทั้ง Expert Archer, Fighting Spirit, Spell Power และ Stat ต่างๆ กับ NPC Enchant Knight กลางเมือง Izlude",
+			"ผู้เล่นใหม่ที่ต้องการอุปกรณ์สวมใส่และความช่วยเหลือเบื้องต้นในการเก็บเวเวลสามารถเข้าร่วม Eden Group เพื่อรับเควสต่างๆได้";
+		end;
+	
+	
+	OnMinute10:
+	OnMinute20:
+	OnMinute40:
+	OnMinute50:
+		announce .message$[rand(getarraysize(.message$))],0;
+		end;
+}
