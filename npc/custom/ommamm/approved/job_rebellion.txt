@@ -1,0 +1,34 @@
+izlude,160,147,5	script	Rellion Job Changer::rebellion_job	10062,{
+	
+	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
+	
+	mes .npc$;
+	mes "คุณสามารถเปลี่ยนอาชีพเป็น Rebellion ได้ทันทีหากเป็นอาชีพ Gunslinger ที่มี Base Level 99 และ Job Level 50";
+	next;
+	mes .npc$;
+	mes "เนื่องจากในปัจจุบัน Quest เปลี่ยนอาชีพ Rebllion ยังไม่เสร็จสมบูรณ์ (อยู่ในช่วง Test ของ kRO) ทีมงานจึงไม่สามารถนำเควสดังกล่าว";
+	mes "มาให้ทุกคนได้ร่วมสนุกด้วยได้";
+	next;
+	mes .npc$;
+	mes "Ommamm RO จึงจำเป็นต้องมี npc สำหรับเปลี่ยนอาชีพเป็น Rebellion ไว้จนกว่าจะมีเควสเปลี่ยนอาชีพอย่างเป็นทางการออกมา";
+	next;
+	mes .npc$;
+	if(Class == 24 && BaseLevel == 99 && JobLevel > 49) {
+		mes "ท่านต้องการเปลี่ยนอาชีพหรือไม่?";
+		switch(select("เปลี่ยนอาชีพ: ยกเลิก")) {
+			case 1:
+				jobchange 4215;
+				next;
+				mes "คุณได้เปลี่ยนอาชีพเป็น Rebellion แล้ว!!";
+				close;
+			case 2:
+				close;
+		}
+	} else if (Class == 4215) {
+		mes "คุณเป็น Rebellion แล้ว";
+		close;
+	} else {
+		mes "คุณไม่สามารถเปลี่ยนอาชีพเป็น Rebellion ได้";
+		close;
+	}
+}

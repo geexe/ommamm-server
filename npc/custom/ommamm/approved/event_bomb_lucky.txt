@@ -224,6 +224,7 @@ Round_1:
 	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่านะคะ",0xFFFF00;
 	sleep 4000;
 	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
+	sleep 2000;
 	goto Round_standby;
 	
 Round_2:
@@ -275,6 +276,7 @@ Round_2:
 	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่านะคะ",0xFFFF00;
 	sleep 4000;
 	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
+	sleep 2000;
 	goto Round_standby;
 
 Round_3:
