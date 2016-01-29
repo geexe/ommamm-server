@@ -25,8 +25,6 @@
 1, 6240, 25 //HD Oridecon
 1, 6225, 25 //HD Carnium
 1, 6224, 25 //HD Bradium
-1, 16753, 450 //Blessed Ori
-1, 16755, 450 //Blessed Elu
 1, 6456, 500 //Safe to 5 Weapon Certificate
 1, 6457, 750 //Safe to 5 Armor Certificatate
 1, 6231, 1000 //Safe to 6 Weapon Certificate
@@ -176,8 +174,8 @@
 7, 6240, 25 //HD Oridecon
 7, 6225, 25 //HD Carnium
 7, 6224, 25 //HD Bradium
-7, 16753, 450 //Blessed Ori
-7, 16755, 450 //Blessed Elu
+//7, 16753, 450 //Blessed Ori
+//7, 16755, 450 //Blessed Elu
 7, 7776, 100 //Gym Pass
 7, 6456, 500 //Safe to 5 Weapon Certificate
 7, 6457, 750 //Safe to 5 Armor Certificatate
