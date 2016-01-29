@@ -1,18 +1,46 @@
 -	script	server_tips	-1,{
-	OnInit:
-		setarray .message$[0], 
-			"ผู้เล่นสามารถใช้ @command ได้ 4 คำสั่งได้แก่ @mi, @time, @rates และ @autotrade ดูรายละเอียดเพิ่มเติมได้จากบอร์ด Server Info กลางเมือง Izlude",
-			"Party ปรับเปลี่ยนให้ผู้เล่นมี Base Level ห่างกันไม่เกิน 17 เวเวล จากปกติ 15 เวเวล และปรับค่าประสบการณ์ที่ได้รับเพิ่มขึ้นจาก 20% เป็น 40% ต่อสมาชิก 1 คน",
-			"อย่าลืมร่วมกิจกรรมต่างๆใน Ommamm-RO เพื่อเก็บสะสม TCG รวมถึงของรางวัลอื่นๆ ที่มีแจกเฉพาะในกิจกรรมเท่านั้น ตรวจสอบกิจกรรมต่างๆได้จาก NPC ในโซนกิจกรรม",
-			"Enchant Level 10!! สุดยอดความ Imba ทั้ง Expert Archer, Fighting Spirit, Spell Power และ Stat ต่างๆ กับ NPC Enchant Knight กลางเมือง Izlude",
-			"ผู้เล่นใหม่ที่ต้องการอุปกรณ์สวมใส่และความช่วยเหลือเบื้องต้นในการเก็บเลเวลสามารถเข้าร่วม Eden Group เพื่อรับเควสต่างๆได้";
+
+OnInit:
+	setarray .info_announced[0], 0;
+	setarray .info$[0], 
+		//element 0
+		"ผู้เล่นสามารถใช้ @command ได้ 4 คำสั่งได้แก่ @mi, @time, @rates และ @autotrade ดูรายละเอียดเพิ่มเติมได้จากบอร์ด Server Info กลางเมือง Izlude",
+		//element 1
+		"Party ปรับเปลี่ยนให้ผู้เล่นมี Base Level ห่างกันไม่เกิน 17 เวเวล จากปกติ 15 เวเวล และปรับค่าประสบการณ์ที่ได้รับเพิ่มขึ้นจาก 20% เป็น 40% ต่อสมาชิก 1 คน เพื่อส่งเสริมการเก็บเวเวลแบบปาร์ตี้",
+		//element 2
+		"อย่าลืมร่วมกิจกรรมต่างๆใน Ommamm-RO เพื่อเก็บสะสม TCG รวมถึงของรางวัลอื่นๆ ที่มีแจกเฉพาะในกิจกรรมเท่านั้น ตรวจสอบกิจกรรมต่างๆได้จาก NPC ในโซนกิจกรรม",
+		//element 3
+		"Enchant Level 10!! สุดยอดความ Imba ทั้ง Expert Archer, Fighting Spirit, Spell Power และ Stat ต่างๆ กับ NPC Enchant Knight กลางเมือง Izlude",
+		//element 4
+		"สำหรับผู้เล่นที่ต้องการความท้าทาย เรามี Challenge ให้คุณพิชิตเพื่อรับรางวัลใหญ่ ตรวจสอบได้จาก NPC Challenge ในโซนเควส",
+		//element 5
+		"โปรดตรวจสอบ NPC ต่างๆ ของ Ommamm-RO ในเมือง Izlude เพื่อสามารถวางแผนการเล่นได้อย่างอย่างสมบูรณ์ที่สุด",
+		//element 6
+		"ติดต่อทีมงาน Ommamm-RO ได้ผ่านทาง Facebook (Public) Group 'Ommamm-RO'";
+	
+	setarray .tips_announced[0], 0;
+	setarray .tips$[0],
+		//element 0
+		"ผู้เล่นใหม่ที่ต้องการอุปกรณ์สวมใส่และความช่วยเหลือเบื้องต้นในการเก็บเลเวลสามารถเข้าร่วม Eden Group เพื่อรับเควสต่างๆได้",
+		//element 1
+		"ไม่ควรรีบขายไอเท็มต่างๆที่ได้จากมอนสเตอร์จนกว่า Storage จะเต็ม เนื่องจากอาจเป็นไอเท็มที่ใช้ทำเควส หรือใช้สร้างไอเท็มต่างๆ ซึ่งสามารถขายหรือแบ่งปันให้ผู้เล่นอื่นได้",
+		//element 2
+		"ไอเท็มบางชนิด สามารถหาได้จากการทำเควส หรือจากดันเจี้ยนประเภท Instance ซึ่งจะเข้าได้จากการทำเควสเท่านั้น ผู้เล่นควรศึกษาข้อมูลของ Instance และเควสต่างๆ เพื่อสามารถหาไอเท็มที่ต้องการได้ครบทุกชนิด";
 		end;
 	
-	
-	OnMinute10:
-	OnMinute20:
-	OnMinute40:
-	OnMinute50:
-		announce .message$[rand(getarraysize(.message$))],0,0xf2ab28;
-		end;
+OnMinute10:
+OnMinute20:
+OnMinute40:
+OnMinute50:
+	if (.info_count == getarraysize(.info$)) {
+		deletearray .info$[0], getarraysize(.info$);
+	}
+	.@i = rand(getarraysize(.info$));
+	while (!.info_announced[.@i]) {
+		.@i = rand(getarraysize(.info$));
+	}
+	announce .info$[.@i],0,0xf2ab28;
+	setarray .info_announced[.@i], 1;
+	.info_count += 1;
+	end;
 }

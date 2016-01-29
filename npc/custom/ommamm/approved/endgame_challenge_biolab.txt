@@ -121,6 +121,6 @@ OnInit:
 	setarray .reward[0],31100,6238,6232,2383;	
 	setarray .reward_quantity[0],1,1,1,1;
 	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
-	.party = 1;
+	.party = 3;
 	end;
 	}
