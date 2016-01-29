@@ -36,7 +36,7 @@ OnMinute50:
 		deletearray .info$[0], getarraysize(.info$);
 	}
 	.@i = rand(getarraysize(.info$));
-	while (!.info_announced[.@i]) {
+	while (.info_announced[.@i]) {
 		.@i = rand(getarraysize(.info$));
 	}
 	announce .info$[.@i],0,0xf2ab28;
