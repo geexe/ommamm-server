@@ -182,8 +182,6 @@ OnEnchant:
 			close;			
 		}
 	}
-	@slotNormal = getequipcardid(EQI_HEAD_MID,2);
-	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
 	mes "An enchantment will cost";
 	mes "^ff32321,000,000^000000 zeny.";
 	mes "Please select the slot you want to enchant.";
@@ -320,10 +318,16 @@ OnNormal:
 		mes "^0000991,000,000z^000000";
 		close;
 	}
+	if( (getequipid(EQI_HEAD_MID)!=2286) ) {
+		mes "Please equip your ^000099Elven Ears^000000 if you want to have it enchanted.";
+		close;
+	}
 	Zeny -= 1000000;
 	mes "Your ^000099Elven Ears^000000 has been enchanted";
 	mes "^000099"+getitemname(.@enchant)+"^000000";
-	delitem 2286,1;
+	@slotNormal = getequipcardid(EQI_HEAD_MID,2);
+	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
+	delitem2 2286,1,1,0,0,0,0,@slotNormal,@slotSpecial;
 	getitem2 2286,1,1,0,0,0,0,.@enchant,@slotSpecial;
 	equip 2286;
 	specialeffect2 1019;
@@ -410,10 +414,16 @@ OnSpecial:
 		mes "^0000991,000,000z^000000";
 		close;
 	}
+	if( (getequipid(EQI_HEAD_MID)!=2286) ) {
+		mes "Please equip your ^000099Elven Ears^000000 if you want to have it enchanted.";
+		close;
+	}
 	Zeny -= 1000000;
 	mes "Your ^000099Elven Ears^000000 has been enchanted";
 	mes "^000099"+getitemname(.@enchant)+"^000000";
-	delitem 2286,1;
+	@slotNormal = getequipcardid(EQI_HEAD_MID,2);
+	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
+	delitem2 2286,1,1,0,0,0,0,@slotNormal,@slotSpecial;
 	getitem2 2286,1,1,0,0,0,0,@slotNormal,.@enchant;
 	equip 2286;
 	specialeffect2 1019;
