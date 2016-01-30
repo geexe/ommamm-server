@@ -34,6 +34,7 @@ OnMinute40:
 OnMinute50:
 	if (.info_count == getarraysize(.info$)) {
 		deletearray .info$[0], getarraysize(.info$);
+		.info_count = 0;
 	}
 	.@i = rand(getarraysize(.info$));
 	while (.info_announced[.@i]) {
