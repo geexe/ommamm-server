@@ -2459,7 +2459,7 @@ packet_keys: 0x62C86D09,0x75944F17,0x112C133D // [YomRawr]
 0x0815,-1,reqopenbuyingstore,2:4:8:9:89
 0x0883,18,bookingregreq,2:4:6
 // 0x02C4,8 CZ_JOIN_BATTLE_FIELD
-0x0960,-1, itemlistwindowselected,2:4:8:12
+0x0960,-1,itemlistwindowselected,2:4:8:12
 0x0363,19,wanttoconnection,2:6:10:14:18
 0x094A,26,partyinvite2,2
 // 0x0927,4 CZ_GANGSI_RANK
