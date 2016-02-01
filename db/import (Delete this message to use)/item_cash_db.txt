@@ -164,7 +164,7 @@
 6, 12214, 10 //Convex Mirror
 //--------------------------Others-----------------------
 7, 16770, 100 //Silvervine 10 Box
-7, 6293, 10 //Token of Ziegfried
+7, 7621, 10 //Token of Ziegfried
 7, 17068, 250 //Acidbomb Box50
 7, 17069, 450 //Acidbomb Box100
 7, 17070, 2000 //Acidbomb Box500
