@@ -146,7 +146,7 @@ OnTimer300000:
 	.event_ommammdef = 0;	
 	sleep 5000;
 	if (getmapusers("force_2-3.gat") == 0) { 
-		announce .npc$ + " : " +.npc$ + " ได้จบลงแล้ว",0; 
+		announce "Ommamm Defense ไม่มีผู้เข้าร่วมในรอบนี้",0; 
 		set $ppatd3,0; 
 		set $ppatd4,0;
 		killmonsterall "force_2-3.gat"; 

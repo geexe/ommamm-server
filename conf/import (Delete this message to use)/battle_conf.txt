@@ -75,3 +75,16 @@ party_even_share_bonus: 40
 // 333 = show announces for 3.33% or lower drop chance items
 // 10000 = show announces for all items
 rare_drop_announce: 99
+
+//-----------------misc.conf changes
+
+// Determines max number of characters that can stack within a single cell. 
+// Official - Only affects the walking routines of characters, including monsters.
+// If a unit stops walking and is on a cell with more than stack limit
+// characters on it, it will walk to the closest free cell.
+// Set to 0 for no cell stacking checks and free movement.
+// Custom - This variation will make every full cell to be considered a wall.
+// NOTE: For the custom setting to take effect you have to use a server compiled
+// with Cell Stack Limit support (see src/map/map.h)
+official_cell_stack_limit: 0
+custom_cell_stack_limit: 1

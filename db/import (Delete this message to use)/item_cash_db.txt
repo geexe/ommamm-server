@@ -161,7 +161,7 @@
 6, 12209, 20 //Insurance
 6, 12901, 180 //Insurance Box
 6, 13571, 50 //Giant Fly Wing 100 Box
-6, 12214, 10 //Convex Mirror
+6, 12214, 20 //Convex Mirror
 //--------------------------Others-----------------------
 7, 16770, 100 //Silvervine 10 Box
 7, 7621, 10 //Token of Ziegfried

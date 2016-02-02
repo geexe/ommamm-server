@@ -1,7 +1,7 @@
 izlude,129,153,5	script	ElvenEars Knight	420,{
 	mes .npc$;
 	mes "I can enchant ^000099Elven Ears^000000 (Dropped from monsters) for a fee.";
-	mes "Very.. powerful enchantments.";
+	mes "^ff3232However, unique slot enchantment and level 10 enchantment is not possible for Elven Ears^000000";
 	mes "Are you interested in enchanting Elven Ears?";
 	next;
 	goto EnchantMenu;
@@ -63,14 +63,15 @@ EnchantList:
 			mes "STR, AGI, VIT, INT, DEX, LUK";
 			next;
 			mes .npc$;
-			mes "There are 10 levels of enchantment possible. Each level gives you +1 for the chosen stat";
-			mes "So level 1 will give you +1 for the chosen stat, and level 10 will give you +10 for the chosen stat.";
+			mes "There are 9 levels of enchantment possible. Each level gives you +1 for the chosen stat";
+			mes "So level 1 will give you +1 for the chosen stat, and level 9 will give you +9 for the chosen stat.";
 			next;
 			goto EnchantList;
 			break;
 		case 2:
 			mes .npc$;
 			mes "Special slot boosts your power based on the category you choose.";
+			mes "Maximum level of enchantment is 9";
 			next;
 			mes .npc$;
 			mes "^54c354Fighting Spirit^000000 boosts your attack power and hit.";
@@ -95,7 +96,6 @@ EnchantListSpecial:
 	switch(select("Fighting Sprirt:Expert Archer:Spell Power:Back:Canel")) {
 		case 1:
 			mes .npc$;
-			mes "Level 10: ATK +50, HIT +15";
 			mes "Level 9: ATK +30, HIT +5";
 			mes "Level 8: ATK +27, HIT +5";
 			mes "Level 7: ATK +24, HIT +5";
@@ -110,7 +110,6 @@ EnchantListSpecial:
 			break;
 		case 2:
 			mes .npc$;
-			mes "Level 10: Ranged Attack Damage +20%, ASPD +1";
 			mes "Level 9: Ranged Attack Damage +18%";
 			mes "Level 8: Ranged Attack Damage +16%";
 			mes "Level 7: Ranged Attack Damage +14%";
@@ -125,7 +124,6 @@ EnchantListSpecial:
 			break;
 		case 3:
 			mes .npc$;
-			mes "Level 10: MATK +50, Casting Time -20%";
 			mes "Level 9: MATK +30, Casting Time -10%";
 			mes "Level 8: MATK +27, Casting Time -10%";
 			mes "Level 7: MATK +24, Casting Time -10%";
@@ -230,7 +228,7 @@ OnNormal:
 	}
 	switch( .@enc ){
 		case 1: //STR
-			set .@i, rand(1,140);
+			set .@i, rand(1,135);
 			if ( .@i<21) set .@enchant, 4700;
 			else if ( .@i<41) set .@enchant, 4701;
 			else if ( .@i<61) set .@enchant, 4702;
@@ -240,10 +238,9 @@ OnNormal:
 			else if ( .@i<116) set .@enchant, 4706;
 			else if ( .@i<126) set .@enchant, 4707;
 			else if ( .@i<136) set .@enchant, 4708;
-			else if ( .@i<141) set .@enchant, 4709;
 			break;
 		case 4:	//INT
-			set .@i, rand(1,140);
+			set .@i, rand(1,135);
 			if ( .@i<21) set .@enchant, 4710;
 			else if ( .@i<41) set .@enchant, 4711;
 			else if ( .@i<61) set .@enchant, 4712;
@@ -253,10 +250,9 @@ OnNormal:
 			else if ( .@i<116) set .@enchant, 4716;
 			else if ( .@i<126) set .@enchant, 4717;
 			else if ( .@i<136) set .@enchant, 4718;
-			else if ( .@i<141) set .@enchant, 4719;
 			break;
 		case 5: //DEX
-			set .@i, rand(1,140);
+			set .@i, rand(1,135);
 			if ( .@i<21) set .@enchant, 4720;
 			else if ( .@i<41) set .@enchant, 4721;
 			else if ( .@i<61) set .@enchant, 4722;
@@ -266,10 +262,9 @@ OnNormal:
 			else if ( .@i<116) set .@enchant, 4726;
 			else if ( .@i<126) set .@enchant, 4727;
 			else if ( .@i<136) set .@enchant, 4728;
-			else if ( .@i<141) set .@enchant, 4729;
 			break;
 		case 2: //AGI
-			set .@i, rand(1,140);
+			set .@i, rand(1,135);
 			if ( .@i<21) set .@enchant, 4730;
 			else if ( .@i<41) set .@enchant, 4731;
 			else if ( .@i<61) set .@enchant, 4732;
@@ -279,10 +274,9 @@ OnNormal:
 			else if ( .@i<116) set .@enchant, 4736;
 			else if ( .@i<126) set .@enchant, 4737;
 			else if ( .@i<136) set .@enchant, 4738;
-			else if ( .@i<141) set .@enchant, 4739;
 			break;
 		case 3: //VIT
-			set .@i, rand(1,140);
+			set .@i, rand(1,135);
 			if ( .@i<21) set .@enchant, 4740;
 			else if ( .@i<41) set .@enchant, 4741;
 			else if ( .@i<61) set .@enchant, 4742;
@@ -292,10 +286,9 @@ OnNormal:
 			else if ( .@i<116) set .@enchant, 4746;
 			else if ( .@i<126) set .@enchant, 4747;
 			else if ( .@i<136) set .@enchant, 4748;
-			else if ( .@i<141) set .@enchant, 4749;
 			break;
 		case 6: //LUK
-			set .@i, rand(1,140);
+			set .@i, rand(1,135);
 			if ( .@i<21) set .@enchant, 4750;
 			else if ( .@i<41) set .@enchant, 4751;
 			else if ( .@i<61) set .@enchant, 4752;
@@ -305,7 +298,6 @@ OnNormal:
 			else if ( .@i<116) set .@enchant, 4756;
 			else if ( .@i<126) set .@enchant, 4757;
 			else if ( .@i<136) set .@enchant, 4758;
-			else if ( .@i<141) set .@enchant, 4759;
 			break;
 		default:
 			mes .npc$;
@@ -365,7 +357,7 @@ OnSpecial:
 	}
 	switch( .@enc ){
 		case 1:
-			set .@i, rand(1000);
+			set .@i, rand(998);
 			if ( .@i<330) set .@enchant, 4815;
 			else if ( .@i<580) set .@enchant, 4814;
 			else if ( .@i<760) set .@enchant, 4813;
@@ -375,10 +367,9 @@ OnSpecial:
 			else if ( .@i<990) set .@enchant, 4828;
 			else if ( .@i<995) set .@enchant, 4829;
 			else if ( .@i<998) set .@enchant, 4830;
-			else if ( .@i<1000) set .@enchant, 4831;
 			break;
 		case 2:
-			set .@i, rand(1000);
+			set .@i, rand(998);
 			if ( .@i<330) set .@enchant, 4811;
 			else if ( .@i<580) set .@enchant, 4810;
 			else if ( .@i<760) set .@enchant, 4809;
@@ -388,10 +379,9 @@ OnSpecial:
 			else if ( .@i<990) set .@enchant, 4822;
 			else if ( .@i<995) set .@enchant, 4823;
 			else if ( .@i<998) set .@enchant, 4824;
-			else if ( .@i<1000) set .@enchant, 4825;
 			break;
 		case 3:
-			set .@i, rand(1000);
+			set .@i, rand(998);
 			if ( .@i<330) set .@enchant, 4832;
 			else if ( .@i<580) set .@enchant, 4833;
 			else if ( .@i<760) set .@enchant, 4834;
@@ -401,7 +391,6 @@ OnSpecial:
 			else if ( .@i<990) set .@enchant, 4838;
 			else if ( .@i<995) set .@enchant, 4839;
 			else if ( .@i<998) set .@enchant, 4840;
-			else if ( .@i<1000) set .@enchant, 4841;
 			break;
 		default:
 			mes .npc$;

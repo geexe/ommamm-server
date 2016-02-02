@@ -35,6 +35,15 @@ izlude,108,131,3	script	The Sign Challenge::endgame_thesign	804,{
 			if(countitem(2644) || getequipid(7) == 2644 || getequipid(8) == 2644) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
+				next;
+				switch(select("Yes:No")) {
+					case 1: 
+						break;
+					case 2:
+						mes "[Challenge]";
+						mes "Come back when you want to claim the reward";
+						close;
+					}
 				
 				//check weight and inventory 
 				if(checkweight(.reward,1)) {
@@ -43,8 +52,11 @@ izlude,108,131,3	script	The Sign Challenge::endgame_thesign	804,{
 					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 						getitembound .reward[.@k], .reward_quantity[.@k], 1;
 					}
+					mes "[Challenge]";
+					mes "Congratulations on your achievement! Enjoy your reward.";
 				}
 				else {
+					mes "[Challenge]";
 					mes "You do not enough space.";
 					mes "Please clear your inventory and come back again.";
 				}
@@ -66,7 +78,7 @@ izlude,108,131,3	script	The Sign Challenge::endgame_thesign	804,{
 OnInit:
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],6230,6234,7227,12246,616;	
-	setarray .reward_quantity[0],1,1,500,1,5;
+	setarray .reward[0],969,18503,7227,16755,16753;	
+	setarray .reward_quantity[0],4,1,500,3,3;
 	end;
 	}
