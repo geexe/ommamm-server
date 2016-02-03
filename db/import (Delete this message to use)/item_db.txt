@@ -68,3 +68,4 @@
 31101,blue_lhz_aura,Lhz Aura Blue,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1901,{},{},{}
 31102,green_lhz_aura,Lhz Aura Green,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1902,{},{},{}
 31103,green_lhz_aura,Lhz Aura Red,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1903,{},{},{}
+1837,Iron_nail,Iron Nail,5,10,,1500,100,,,1,0x00008100,63,2,2,3,50,1,12,{ bonus bAspdRate,-5; bonus bAspdRate,((getrefine()+1)/2);  if(getskilllv("MO_CHAINCOMBO")==5) bonus bBaseAtk,20; if(getskilllv("MO_COMBOFINISH")==5) bonus bBaseAtk,20; if(getskilllv("CH_TIGERFIST")==5) bonus bBaseAtk,20; if(getskilllv("CH_CHAINCRUSH")==5) bonus bBaseAtk,40;},{},{}
