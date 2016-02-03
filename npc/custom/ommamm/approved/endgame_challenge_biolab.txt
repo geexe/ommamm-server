@@ -118,8 +118,8 @@ OnInit:
 	setarray .biolabmvp[0],1651,1650,1649,1648,1647,1646;
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],31100,6238,6232,2383;	
-	setarray .reward_quantity[0],1,1,1,1;
+	setarray .reward[0],31100,6238,6232,2383,16753,16755;	
+	setarray .reward_quantity[0],1,1,1,1,15,15;
 	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
 	.party = 3;
 	end;
