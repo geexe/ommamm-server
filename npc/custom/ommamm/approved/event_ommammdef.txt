@@ -39,9 +39,9 @@ Event_desc:
 	mes "รางวัลที่จะได้รับขึ้นอยู่กับระดับความยากของห้องที่เจ้าเลือก";
 	next;
 	mes .npc$;
-	mes "ห้องที่ 1 (ง่าย): 20 TCG + 3 Old Card Album";
-	mes "ห้องที่ 2 (ปานกลาง): 50 TCG + 5 Old Card Album + 1 Gold + Armor Refine Ticket+6";
-	mes "ห้องที่ 3 (ยาก): 250 TCG + Mystic Card Album + 3 Gold + 15 Old Card Album + 2 Blessed Eluminium + 2 Blessed Oridicon";
+	mes "ห้องที่ 1 (ง่าย): 5 TCG + 3 Old Card Album";
+	mes "ห้องที่ 2 (ปานกลาง): 20 TCG + 5 Old Card Album + 1 Gold";
+	mes "ห้องที่ 3 (ยาก): 100 TCG + Mystic Card Album + 3 Gold + 15 Old Card Album + 2 Blessed Eluminium + 2 Blessed Oridicon";
 	mes "ห้องที่ 4 (หฤโหด): ยังไม่เปิดบริการ";
 	next;
 	goto Event_menu;
@@ -321,7 +321,7 @@ force_2-3,1,1,1	script	Ommammdef_room2	-1,{
 OnInit:
 	//Reward and quantity
 	setarray .reward[0], 7227, 616, 969;
-	setarray .reward_quantity[0], 15, 5, 1;
+	setarray .reward_quantity[0], 20, 5, 1;
 	end;
 
 OnOmmammdef_standby:
