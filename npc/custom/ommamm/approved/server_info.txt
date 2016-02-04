@@ -129,7 +129,7 @@ OnInit:
 	end;
 }
 
-izlude,116,126,3	script	Refill Info		815,{
+izlude,116,126,3	script	Donation Info		815,{
 	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
 	
 	mes .npc$;
@@ -141,7 +141,6 @@ izlude,116,126,3	script	Refill Info		815,{
 	mes "เงินที่ได้ ทีมงานจะนำไปพัฒนาเซิฟเวอร์ให้มีความพร้อม และความสเถียรมากขึ้น และหากยังเหลือ เงิน อาจมีการจัด Meeting เพื่อให้ได้สังสรรค์กัน";
 	next;
 	mes .npc$;
-	mes "^FF0000พิเศษ ช่วงโปรโมชั่น เติมเงินได้ cash x2 จากที่แสดงด้านล่าง!!^000000";
 	mes " ";
 	mes "50 Baht 500 Cash Point";
 	mes "100 Baht 1100 Cash Point";
@@ -159,6 +158,6 @@ izlude,116,126,3	script	Refill Info		815,{
 	mes "Line ID: nonxe_h";
 	close;
 OnInit:
-	waitingroom "Refill Info",0;
+	waitingroom "Donation Info",0;
 	end;
 }
