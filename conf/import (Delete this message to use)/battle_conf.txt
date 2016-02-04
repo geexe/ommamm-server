@@ -3,13 +3,13 @@
 //----------------exp.conf chages
 
 // Rate at which exp. is given. (Note 2)
-base_exp_rate: 2000
+base_exp_rate: 1500
 
 // Rate at which job exp. is given. (Note 2)
-job_exp_rate: 2000
+job_exp_rate: 1500
 
 // Rate of base/job exp given by NPCs. (Note 2)
-quest_exp_rate: 1000
+quest_exp_rate: 1500
 
 //----------------drops.conf changes
 
