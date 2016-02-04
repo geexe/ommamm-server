@@ -176,7 +176,7 @@ force_2-3,1,1,1	script	Ommammdef_room1	-1,{
 OnInit:
 	//Reward and quantity
 	setarray .reward[0], 7227, 616;
-	setarray .reward_quantity[0], 20, 3;
+	setarray .reward_quantity[0], 5, 3;
 	end;
 
 OnOmmammdef_standby:
@@ -320,8 +320,8 @@ force_2-3,1,1,1	script	Ommammdef_room2	-1,{
 
 OnInit:
 	//Reward and quantity
-	setarray .reward[0], 7227, 616, 969, 6235;
-	setarray .reward_quantity[0], 50, 5, 1, 1;
+	setarray .reward[0], 7227, 616, 969;
+	setarray .reward_quantity[0], 15, 5, 1;
 	end;
 
 OnOmmammdef_standby:
@@ -469,7 +469,7 @@ force_2-3,1,1,1	script	Ommammdef_room3	-1,{
 OnInit:
 	//Reward and quantity
 	setarray .reward[0], 7227, 616, 969, 16755, 16753;
-	setarray .reward_quantity[0], 250, 15, 3, 2, 2;
+	setarray .reward_quantity[0], 100, 15, 3, 2, 2;
 	end;
 
 OnOmmammdef_standby:
