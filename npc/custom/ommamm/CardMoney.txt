@@ -1,43 +1,30 @@
 izlude,119,124,5	script	Card Coin exchanger	751,{
 
-set .@i, countitem(6379);
-
-mes "[TCG Exchanger]";
-
-mes "You have ^0055FF"+.@i+" Card Coin^000000.";
-
-if (!.@i) { mes "Please come back later."; close; }
-
-mes "I can trade ^FF00001 Card Coin^000000 for ^FF0000 50000 Zeny^000000.";
-
-next;
-
-if(select(" - Trade: - ^777777Leave^000000")==2) close;
-
-mes "[TCG Exchanger]";
-
-mes "How many would you like to exchange?";
-
-next;
-
-input .@j;
-
-mes "[TCG Exchanger]";
-
-if (.@j < 1 || .@j > countitem(7227)) { mes "That's an invalid amount."; close; }
-
-mes "Are you sure you want to exchange ^0055FF"+.@j+" Card Coin^000000?";
-
-if(select(" - Yes: - No")==2) close;
-
-mes " ";
-
-delitem 6379, .@j;
-
-set Zeny, Zeny + (.@j*50000);
-
-mes "You now have "+Zeny+" Zeny.";
-
-close;
-
+	set .@i, countitem(6379);
+	
+	mes "[TCG Exchanger]";
+	mes "You have ^0055FF"+.@i+" Card Coin^000000.";
+	if (!.@i) { 
+		mes "Please come back later."; 
+		close; 
+	}
+	mes "I can trade ^FF00001 Card Coin^000000 for ^FF0000 50000 Zeny^000000.";
+	next;
+	if(select(" - Trade: - ^777777Leave^000000")==2) close;
+	mes "[TCG Exchanger]";
+	mes "How many would you like to exchange?";
+	next;
+	input .@j;
+	mes "[TCG Exchanger]";
+	if (.@j < 1 || .@j > countitem(6379)) { 
+		mes "That's an invalid amount."; 
+		close;
+	}
+	mes "Are you sure you want to exchange ^0055FF"+.@j+" Card Coin^000000?";
+	if(select(" - Yes: - No")==2) close;
+	mes " ";
+	delitem 6379, .@j;
+	set Zeny, Zeny + (.@j*50000);
+	mes "You acquired ^FF0000"+ (.@j*50000) +"^000000 Zeny.";
+	close;
 }
