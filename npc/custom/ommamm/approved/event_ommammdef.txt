@@ -182,6 +182,7 @@ OnInit:
 OnOmmammdef_standby:
 	if(getareausers("force_2-3.gat",11,146,29,90) == 0) {
 		disablenpc "Ommammdef_room1";
+		end;
 	}
 	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 1 ทั้งหมด "  + getareausers("force_2-3.gat",11,146,29,90) + " คน",0;
 	.killcount = 0;
@@ -327,6 +328,7 @@ OnInit:
 OnOmmammdef_standby:
 	if(getareausers("force_2-3.gat",130,109,149,50) == 0) {
 		disablenpc "Ommammdef_room2";
+		end;
 	}
 	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 2 ทั้งหมด "  + getareausers("force_2-3.gat",130,109,149,50) + " คน",0;
 	.killcount = 0;
@@ -475,6 +477,7 @@ OnInit:
 OnOmmammdef_standby:
 	if(getareausers("force_2-3.gat",90,69,109,11) == 0) {
 		disablenpc "Ommammdef_room3";
+		end;
 	}
 	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 3 ทั้งหมด "  + getareausers("force_2-3.gat",90,69,109,11) + " คน",0;
 	.killcount = 0;
@@ -623,8 +626,9 @@ OnInit:
 OnOmmammdef_standby:
 	if(getareausers("force_2-3.gat",50,90,109,109) == 0) {
 		disablenpc "Ommammdef_room4";
+		end;
 	}
-	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 3 ทั้งหมด "  + getareausers("force_2-3.gat",50,90,109,109) + " คน",0;
+	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 4 ทั้งหมด "  + getareausers("force_2-3.gat",50,90,109,109) + " คน",0;
 	.killcount = 0;
 	.roundcount = 1;
 	goto Round_1;
