@@ -338,7 +338,7 @@ OnOmmammdef_standby:
 	
 OnKill:
 	.killcount += 1;
-	areaannounce "force_2-3.gat",130,109,149,50,"เหลือมอนสเตอร์ทั้งหมด " + (.mobcount - .killcount) + " ตัว",0xFF5555;
+	areaannounce "force_2-3.gat",130,109,149,50,"เหลือมอนสเตอร์ทั้งหมด " + (.mobcount - .killcount) + " ตัว",0,0xFF5555;
 	if (.killcount == .mobcount) {
 		areaannounce "force_2-3.gat",130,109,149,50,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
 		.roundcount += 1;
@@ -383,6 +383,10 @@ Round_1:
 			areawarp "force_2-3.gat",130,109,149,50,"izlude",126,141;
 			killmonster "force_2-3.gat", "Ommammdef_room2::OnKill";
 			disablenpc "Ommammdef_room2";
+		} else {
+			areaannounce "force_2-3.gat",130,109,149,50,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
+			.killcount = 0;
+			goto Round_2;
 		}
 	}
 	end;
@@ -404,6 +408,10 @@ Round_2:
 			areawarp "force_2-3.gat",130,109,149,50,"izlude",126,141;
 			killmonster "force_2-3", "Ommammdef_room2::OnKill";
 			disablenpc "Ommammdef_room2";
+		} else {
+			areaannounce "force_2-3.gat",130,109,149,50,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
+			.killcount = 0;
+			goto Round_3;
 		}
 	}
 	end;
@@ -427,6 +435,10 @@ Round_3:
 			areawarp "force_2-3.gat",130,109,149,50,"izlude",126,141;
 			killmonster "force_2-3", "Ommammdef_room2::OnKill";
 			disablenpc "Ommammdef_room2";
+		} else {
+			areaannounce "force_2-3.gat",130,109,149,50,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
+			.killcount = 0;
+			goto Round_4;
 		}
 	}
 	end;
@@ -448,6 +460,10 @@ Round_4:
 			areawarp "force_2-3.gat",130,109,149,50,"izlude",126,141;
 			killmonster "force_2-3", "Ommammdef_room2::OnKill";
 			disablenpc "Ommammdef_room2";
+		} else {
+			areaannounce "force_2-3.gat",130,109,149,50,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
+			.killcount = 0;
+			goto Round_End;
 		}
 	}
 	end;
