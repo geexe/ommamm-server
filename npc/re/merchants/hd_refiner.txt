@@ -122,7 +122,7 @@
 	delitem .@material,1;
 	set Zeny, Zeny-.@price;
 	mes "[Blacksmith Mighty Hammer]";
-	mes "Tac! Tac! Tac!";
+	mes "Tac! Tac! Tac!" + getequippercentrefinery(.@part);
 	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
 		successrefitem .@part;
 		next;
@@ -130,7 +130,7 @@
 		mes "[Blacksmith Mighty Hammer]";
 		mes "The sound refreshes my mind everytime I hear it.";
 		mes "Here, have it. Refine succeeded flawlessly!";
-		close;
+		goto close;
 	}
 	downrefitem .@part;
 	next;
@@ -140,7 +140,50 @@
 	next;
 	mes "[Blacksmith Mighty Hammer]";
 	mes "I am sure a person like you would never blame me for a decrease in refine level by 1. Hmm.";
-	close;
+	next;
+	goto Repeat_refine;
+
+Repeat_refine: 
+	mes "[Blacksmith Mighty Hammer]";
+	mes "Would you like to continue refining?";
+	if(select("Yes:No") == 2) {
+		mes "[Blacksmith Mighty Hammer]";
+		mes "Only those who overcome fear of failure will obtain a masterpiece.";
+		close;
+	}
+	if (countitem(.@material) == 0 || Zeny < .@price) {
+		mes "[Blacksmith Mighty Hammer]";
+		mes "Didn't you just say you had everything ready?";
+		close;
+	}
+	delitem .@material,1;
+	set Zeny, Zeny-.@price;
+	mes "[Blacksmith Mighty Hammer]";
+	mes "Tac! Tac! Tac!" + getequippercentrefinery(.@part);
+	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
+		successrefitem .@part;
+		next;
+		emotion e_no1;
+		mes "[Blacksmith Mighty Hammer]";
+		mes "The sound refreshes my mind everytime I hear it.";
+		mes "Here, have it. Refine succeeded flawlessly!";
+		next;
+		goto Repeat_refine;
+		end;
+	}
+	downrefitem .@part;
+	next;
+	emotion e_omg;
+	mes "[Blacksmith Mighty Hammer]";
+	mes "Oops!!";
+	next;
+	mes "[Blacksmith Mighty Hammer]";
+	mes "I am sure a person like you would never blame me for a decrease in refine level by 1. Hmm.";
+	next;
+	goto Repeat_refine;
+	end;
+	
+	
 }
 prt_in,59,54,3	duplicate(MightyHammer)	Mighty Hammer#prt	826
 morocc_in,65,30,3	duplicate(MightyHammer)	Mighty Hammer#morocc	826
