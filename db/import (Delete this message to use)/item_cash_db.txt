@@ -90,11 +90,11 @@
 4, 5372, 2000 //Koneko Hat
 4, 18841, 2000 //Small Poring Band
 4, 5379, 2500 //Balloon Hat
-4, 5628, 2500 //Pecopeco Hairband
+4, 5286, 2500 //Pecopeco Hairband
 4, 18656, 2500 //Witch's Pumpkin Hat
 4, 18671, 2500 //Rudolf Hairband
 4, 5778, 2500 //Turkey on your Head
-4, 18565, 2500 //St Patrick's Hat
+//Not consistent 4, 18565, 2500 //St Patrick's Hat
 4, 5211, 2500 //Dress Hat
 4, 5547, 3000 //RJC katyusa
 4, 18539, 3000 //Skull Cap
@@ -103,7 +103,7 @@
 4, 5208, 3500 //Rideword Hat
 4, 18830, 3500 //RWC 2011 Runner
 4, 5585, 4000 //Rune Hairband
-4, 18673, 4000 //Chibi Pope
+//Not consistent combo 4, 18673, 4000 //Chibi Pope
 4, 18856, 4000 //White Dropping Eddga Hat
 4, 18600, 4000 //Cat Ear Beret
 4, 5564, 4000 //Crown of Deceit
@@ -119,11 +119,10 @@
 //4, 18821, 2500 // rainbow RWC
 //no item 4, 5904, 4000 //Very Normal Hat
 //---------Mid
+4, 5389, 500 //Angel Spirit
 4, 5475, 1500 //Gozarian Mask (Mid, Low)
-4, 5641, 1500 //Robo Eye
-4, 5389, 1500 //Angel Spirit
-4, 5788, 1500 //3D Glasses
-4, 5664, 1500 //Filir's Pini
+4, 5325, 1500 //Robo Eye
+//Not consistent 4, 5664, 1500 //Filir's Pini
 4, 5402, 1500 //Mischievous Fairy
 4, 5102, 1800 //Blank Eye
 4, 5800, 2000 //Blush of Groom
@@ -137,7 +136,7 @@
 4, 18670, 1000 //Handkerchief in Mouth
 4, 5305, 1000 //Pirate Dagger
 4, 5574, 1000 //Well-chewed pencil
-4, 5596, 1000 //FOur Leaf Clover
+4, 5596, 1000 //Four Leaf Clover
 4, 5362, 1500 //Ninja Scroll
 4, 5463, 1500 //Rainbow Scarf
 4, 18918, 1500 //Long Octopus Ballon
@@ -147,6 +146,7 @@
 4, 2576, 5000 //Adventurer's Backpack
 4, 2589, 5500 //Fallen Angel Wing
 //--------Accessory
+4, 2959, 500 //Fidelity Necklace
 4, 2967, 1500 //RWC ring
 4, 2967, 1500 //RWC Ring
 4, 2969, 1500 //RWC chamber
