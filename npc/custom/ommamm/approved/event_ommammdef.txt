@@ -127,7 +127,7 @@ Event_start:
 	initnpctimer;
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว มีเวลา 5 นาทีในการเข้าร่วมกิจกรรม" ,bc_all,0xFFFF00;
 	end;
-OnTimer60000:
+/*OnTimer60000:
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 4 นาทีในการเข้าร่วมกิจกรรม",bc_all;
 	end;
 OnTimer120000:
@@ -138,8 +138,8 @@ OnTimer180000:
 	end;
 OnTimer240000:
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 1 นาทีในการเข้าร่วมกิจกรรม",bc_all;
-	end;
-OnTimer300000:
+	end;*/
+OnTimer10000:
 	stopnpctimer;
 	setnpctimer 0;
 	announce "หมดเวลาเข้าร่วมกิจกรรม Ommamm Defense แล้ว",bc_all;
@@ -147,8 +147,6 @@ OnTimer300000:
 	sleep 5000;
 	if (getmapusers("force_2-3.gat") == 0) { 
 		announce "Ommamm Defense ไม่มีผู้เข้าร่วมในรอบนี้",0; 
-		set $ppatd3,0; 
-		set $ppatd4,0;
 		killmonsterall "force_2-3.gat"; 
 	} else {
 		announce "Ommamm Defense ได้เริ่มต้นขึ้นแล้ว ณ บัดนี้!!",0;
@@ -185,32 +183,28 @@ OnOmmammdef_standby:
 		end;
 	}
 	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 1 ทั้งหมด "  + getareausers("force_2-3.gat",11,146,29,90) + " คน",0;
-	.killcount = 0;
 	.roundcount = 1;
 	goto Round_1;
 	end;
 	
 OnKill:
-	.killcount += 1;
-	if (.killcount == .mobcount) {
+	.@mob_remain = mobcount("force_2-3.gat","Ommammdef_room1::OnKill");
+	areaannounce "force_2-3.gat",11,146,29,90,"เหลือมอนสเตอร์ทั้งหมด " + .@mob_remain + " ตัว",0,0xFF5555;
+	if (.@mob_remain < 1) {
 		areaannounce "force_2-3.gat",11,146,29,90,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
 		.roundcount += 1;
 		sleep 5000;
 		switch (.roundcount) {
 			case 2:
-				.killcount = 0;
 				goto Round_2;
 				break;
 			case 3:
-				.killcount = 0;
 				goto Round_3;
 				break;
 			case 4:
-				.killcount = 0;
 				goto Round_4;
 				break;
 			case 5:
-				.killcount = 0;
 				goto Round_End;
 				break;
 		}
@@ -331,33 +325,28 @@ OnOmmammdef_standby:
 		end;
 	}
 	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 2 ทั้งหมด "  + getareausers("force_2-3.gat",130,109,149,50) + " คน",0;
-	.killcount = 0;
 	.roundcount = 1;
 	goto Round_1;
 	end;
 	
 OnKill:
-	.killcount += 1;
-	areaannounce "force_2-3.gat",130,109,149,50,"เหลือมอนสเตอร์ทั้งหมด " + (.mobcount - .killcount) + " ตัว",0,0xFF5555;
-	if (.killcount == .mobcount) {
+	.@mob_remain = mobcount("force_2-3.gat","Ommammdef_room2::OnKill");
+	areaannounce "force_2-3.gat",130,109,149,50,"เหลือมอนสเตอร์ทั้งหมด " + .@mob_remain + " ตัว",0,0xFF5555;
+	if (.@mob_remain < 1) {
 		areaannounce "force_2-3.gat",130,109,149,50,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
 		.roundcount += 1;
 		sleep 5000;
 		switch (.roundcount) {
 			case 2:
-				.killcount = 0;
 				goto Round_2;
 				break;
 			case 3:
-				.killcount = 0;
 				goto Round_3;
 				break;
 			case 4:
-				.killcount = 0;
 				goto Round_4;
 				break;
 			case 5:
-				.killcount = 0;
 				goto Round_End;
 				break;
 		}
@@ -500,32 +489,28 @@ OnOmmammdef_standby:
 		end;
 	}
 	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 3 ทั้งหมด "  + getareausers("force_2-3.gat",90,69,109,11) + " คน",0;
-	.killcount = 0;
 	.roundcount = 1;
 	goto Round_1;
 	end;
 	
 OnKill:
-	.killcount += 1;
-	if (.killcount == .mobcount) {
+	.@mob_remain = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
+	areaannounce "force_2-3.gat",90,69,109,11,"เหลือมอนสเตอร์ทั้งหมด " + .@mob_remain + " ตัว",0,0xFF5555;
+	if (.@mob_remain < 1) {
 		areaannounce "force_2-3.gat",90,69,109,11,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
 		.roundcount += 1;
 		sleep 5000;
 		switch (.roundcount) {
 			case 2:
-				.killcount = 0;
 				goto Round_2;
 				break;
 			case 3:
-				.killcount = 0;
 				goto Round_3;
 				break;
 			case 4:
-				.killcount = 0;
 				goto Round_4;
 				break;
 			case 5:
-				.killcount = 0;
 				goto Round_End;
 				break;
 		}
@@ -649,32 +634,28 @@ OnOmmammdef_standby:
 		end;
 	}
 	announce "ขณะนี้มีผู้เล่นอยู่ในห้องที่ 4 ทั้งหมด "  + getareausers("force_2-3.gat",50,90,109,109) + " คน",0;
-	.killcount = 0;
 	.roundcount = 1;
 	goto Round_1;
 	end;
 	
 OnKill:
-	.killcount += 1;
-	if (.killcount == .mobcount) {
+	.@mob_remain = mobcount("force_2-3.gat","Ommammdef_room4::OnKill");
+	areaannounce "force_2-3.gat",50,90,109,109,"เหลือมอนสเตอร์ทั้งหมด " + .@mob_remain + " ตัว",0,0xFF5555;
+	if (.@mob_remain < 1) {
 		areaannounce "force_2-3.gat",50,90,109,109,"มอนสเตอร์ในรอบนี้ได้ถูกกำจัดหมดแล้ว",0;
 		.roundcount += 1;
 		sleep 5000;
 		switch (.roundcount) {
 			case 2:
-				.killcount = 0;
 				goto Round_2;
 				break;
 			case 3:
-				.killcount = 0;
 				goto Round_3;
 				break;
 			case 4:
-				.killcount = 0;
 				goto Round_4;
 				break;
 			case 5:
-				.killcount = 0;
 				goto Round_End;
 				break;
 		}
