@@ -169,7 +169,7 @@ OnClock0430:
 	end;
 }
 
-force_2-3,1,1,1	script	Ommammdef_room1	-1,{
+force_2-3,20,140,1	script	Ommammdef_room1	-1,{
 
 OnInit:
 	//Reward and quantity
@@ -259,7 +259,7 @@ Round_3:
 	monster "force_2-3.gat",20,140,"Ancient Mimic",1699,5,"Ommammdef_room1::OnKill";
 	monster "force_2-3.gat",20,140,"Anolian",1206,5,"Ommammdef_room1::OnKill";
 	monster "force_2-3.gat",20,140,"Bloody Murderer",1507,5,"Ommammdef_room1::OnKill";
-	monster "force_2-3.gat",20,140,"Flame Skull",2951,5,"Ommammdef_room1::OnKill";
+	monster "force_2-3.gat",20,140,"Flame Skull",1869,5,"Ommammdef_room1::OnKill";
 	monster "force_2-3.gat",20,140,"False Angel",1371,5,"Ommammdef_room1::OnKill";
 	.mobcount = mobcount("force_2-3.gat","Ommammdef_room1::OnKill");
 	areaannounce "force_2-3.gat",11,146,29,90, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
@@ -311,7 +311,7 @@ Round_End:
 	end;
 }
 
-force_2-3,1,1,1	script	Ommammdef_room2	-1,{
+force_2-3,140,100,1	script	Ommammdef_room2	-1,{
 
 OnInit:
 	//Reward and quantity
@@ -475,7 +475,7 @@ Round_End:
 	end;
 }
 
-force_2-3,1,1,1	script	Ommammdef_room3	-1,{
+force_2-3,100,60,1	script	Ommammdef_room3	-1,{
 
 OnInit:
 	//Reward and quantity
@@ -620,7 +620,7 @@ Round_End:
 	end;
 }
 
-force_2-3,1,1,1	script	Ommammdef_room4	-1,{
+force_2-3,60,100,1	script	Ommammdef_room4	-1,{
 
 OnInit:
 	//Reward and quantity
