@@ -179,9 +179,10 @@
 6, 12901, 180 //Insurance Box
 6, 13571, 50 //Giant Fly Wing 100 Box
 6, 12214, 20 //Convex Mirror
+6, 14168, 180//Convex Mirror 10 Box
 //--------------------------Others-----------------------
 7, 7227, 10 //Bossania Entrance Ticket
-7, 16770, 1000 //Silvervine 10 Box
+7, 16770, 350 //Silvervine 10 Box
 7, 7621, 10 //Token of Ziegfried
 7, 17068, 250 //Acidbomb Box50
 7, 17069, 450 //Acidbomb Box100

@@ -71,7 +71,8 @@ Join_event:
 Select_room:
 	mes .npc$;
 	mes "โปรดเลือกห้องที่ต้องการจะเล่น";
-	mes "ห้องหนึ่งจะมีผู้กล้าได้ไม่เกิน 7 คน";
+	mes "ห้องที่ 1 และ 2 สูงสุด 7 คน";
+	mes "ห้องที่ 3 สูงสุด 10 คน";
 	next;
 	menu 
 		"ห้องที่ 1 (ง่าย) จำนวน [" + getareausers("force_2-3.gat",11,146,29,90) + "] คน",Roomatd1,
@@ -99,7 +100,7 @@ Roomatd2:
 	end;
 
 Roomatd3:
-	if(getareausers("force_2-3.gat",90,69,109,11) > 6) {
+	if(getareausers("force_2-3.gat",90,69,109,11) > 9) {
 		goto L_error;
 	} else {
 		warp "force_2-3.gat",100,40; 
