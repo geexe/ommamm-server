@@ -1,0 +1,129 @@
+//===== rAthena Script =======================================
+//= Card Removal NPC
+//===== By: ==================================================
+//= TyrNemesis^
+//===== Current Version: =====================================
+//= 1.2a
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Removes cards from equipped items.
+//===== Additional Comments: =================================
+//= 1.0 First version. [TyrNemesis^]
+//= 1.2 Optimized and fixed getequipname menu. [Kisuka]
+//= 1.2a Added 'disable_items' command. [Euphy]
+//= modified by Geexe
+//============================================================
+
+prt_in,28,73,4	script	Wise Old Woman#eAcustom	78,{
+
+	set .zenycost,20000000;    // base cost of the card remover services (in Zeny)
+	set .percardcost,10000000;  // cost per card of the card remover services (in Zeny)
+	setarray .cost_item[0],7227; //Item required to remove cards
+	setarray .cost_item_quantity[0],200; //Quantity of each item
+
+	disable_items;
+	mes "[Wise Old Woman]";
+	mes "Good day, young one. I have the power to remove cards that you have compounded onto your equipment. Does this idea please you?";
+	next;
+	switch(select("Yes, it does.:What do you charge?:No thanks.")) {
+	case 1:
+		mes "[Wise Old Woman]";
+		mes "Very well. Which item shall I examine for you?";
+		next;
+
+		setarray .@position$[1], "Head","Body","Left hand","Right hand","Robe","Shoes","Accessory 1","Accessory 2","Head 2","Head 3";
+		set .@menu$,"";
+		for( set .@i,1; .@i <= 10; set .@i,.@i+1 )
+		{
+			if( getequipisequiped(.@i) )
+			set .@menu$, .@menu$ + .@position$[.@i] + "-" + "[" + getequipname(.@i) + "]";
+
+			set .@menu$, .@menu$ + ":";
+		}
+		set .@part,select(.@menu$);
+		if(!getequipisequiped(.@part)) {
+			mes "[Wise Old Woman]";
+			mes "Young one... Your not wearing anything there that I can remove cards from.";
+			close;
+		}
+		if(getequipcardcnt(.@part) == 0) {
+			mes "[Wise Old Woman]";
+			mes "Young one... There are no cards compounded on this item. I can do nothing with it, I'm afraid.";
+			close;
+		}
+		set .@cardcount,getequipcardcnt(.@part);
+		
+		if (!checkweight(1202,(.@cardcount+1))) { 
+			mes "^3355FFJust a minute!";
+			mes "I can't offer any of my";
+			mes "services to you because";
+			mes "you're carrying too much";
+			mes "stuff. Put your extra items in";
+			mes "Kafra Storage and come again~";
+			close;
+		}
+		mes "[Wise Old Woman]";
+		mes "This item has " + .@cardcount + " cards compounded on it. To perform my magic, I will need " + (.zenycost+(.@cardcount * .percardcost)) + " zeny, and the follwing items:";
+		for (.@i = 0; .@i < getarraysize(.cost_item); .@i++) {
+			mes "^0000FF" + .cost_item_quantity[.@i] + " " + getitemname(.cost_item[.@i]) + "^000000";
+		}
+		next;
+		if(select("Very well. Do it.:Nevermind.") == 2) {
+			mes "[Wise Old Woman]";
+			mes "Very well. Return at once if you seek my services.";
+			close;
+		}
+		if(zeny < (.zenycost+(.@cardcount * .percardcost))) {
+			for (.@i = 0; .@i < getarraysize(.cost_item); .@i++) {
+				if (countitem(.cost_item[.@i]) < .cost_item_quantity[.@i]) {
+					mes "[Wise Old Woman]";
+					mes "You do not have all the items I require to work my magic, child. Come again when you do.";
+					close;
+				}
+			}
+		}
+		mes "[Wise Old Woman]";
+		mes "There is no chance of failure. However, ^ff3232I cannot preserve both the equipment and the cards. You must choose which one you want to keep--the equipment or the cards^000000";
+		next;
+		switch(select("I changed my mind about this.:Keep the equipment.:Keep the cards")) {
+		case 1:
+			mes "[Wise Old Woman]";
+			mes "Very well. Return at once if you seek my services.";
+			close;
+		case 2:
+			.@failtype = 1;
+			break;
+		case 3:
+			.@failtype = 2;
+			break;
+		}
+		mes "[Wise Old Woman]";
+		mes "Very well. I shall begin.";
+		set Zeny, Zeny - (.zenycost+(.@cardcount * .percardcost));
+		for (.@i = 0; .@i < getarraysize(.cost_item); .@i++) {
+			delitem .cost_item[.@i], .cost_item_quantity[.@i];
+		}
+		next;
+		failedremovecards .@part, .@failtype;
+		mes "[Wise Old Woman]";
+		if (.@failtype == 1) {
+			mes "The process was a success. Here is your equipment. The card could not be retained, as I have already informed you. Farewell.";
+			close;
+		} else {
+			mes "The process was a success. Here are your cards. The equipment could not be retained, as I have already informed you. Farewell.";
+			close;
+		}
+	case 2:
+		mes "[Wise Old Woman]";
+		mes "I charge a flat fee of "+callfunc("F_InsertComma",.zenycost)+" zeny, plus "+callfunc("F_InsertComma",.percardcost)+" zeny for each card I remove from the item. In addition, I need the following items:"; 
+		for (.@i = 0; .@i < getarraysize(.cost_item); .@i++) {
+			mes .cost_item_quantity[.@i] + " " + getitemname(.cost_item[.@i]);
+		}
+		close;
+	case 3:
+		mes "[Wise Old Woman]";
+		mes "Very well. Return at once if you seek my services.";
+		close;
+	}	
+}
