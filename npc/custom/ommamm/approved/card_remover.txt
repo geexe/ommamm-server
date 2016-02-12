@@ -19,8 +19,8 @@ prt_in,28,73,4	script	Wise Old Woman#eAcustom	78,{
 
 	set .zenycost,10000000;    // base cost of the card remover services (in Zeny)
 	set .percardcost,10000000;  // cost per card of the card remover services (in Zeny)
-	setarray .cost_item[0],7227; //Item required to remove cards
-	setarray .cost_item_quantity[0],200; //Quantity of each item
+	setarray .cost_item[0],7227,616; //Item required to remove cards
+	setarray .cost_item_quantity[0],200,20; //Quantity of each item
 
 	disable_items;
 	mes "[Wise Old Woman]";
