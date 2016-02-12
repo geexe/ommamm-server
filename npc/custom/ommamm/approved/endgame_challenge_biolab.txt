@@ -1,6 +1,6 @@
 //Biolab Hunting Challenge
 
-izlude,100,140,5	script	Biolab Challenge::endgame_biolab	468,{
+izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -19,7 +19,8 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	468,{
 		next;
 		mes "[Challenge]";
 		mes "When you have killed all " + getarraysize(.biolabmvp) + " MVPs, you can claim the reward from me.";
-		mes " ";
+		next;
+		mes "[Challenge]";
 		mes "The reward for this quest is";
 		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";

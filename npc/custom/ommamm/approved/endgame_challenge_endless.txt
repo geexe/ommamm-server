@@ -1,6 +1,6 @@
 //Endless Tower Challenge
 
-izlude,105,140,3	script	Endeless Tower Challenge::endgame_endless	469,{
+izlude,105,140,3	script	Endeless Tower Challenge::endgame_endless	709,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -22,7 +22,8 @@ izlude,105,140,3	script	Endeless Tower Challenge::endgame_endless	469,{
 		next;
 		mes "[Challenge]";
 		mes "When you have completed Endless Tower instance, you can claim the reward from me.";
-		mes " ";
+		next;
+		mes "[Challenge]";
 		mes "The reward for this quest is";
 		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";

@@ -1,6 +1,6 @@
 //New World Challenge
 
-izlude,108,136,3	script	New World Challenge::endgame_newworld	470,{
+izlude,108,136,3	script	New World Challenge::endgame_newworld	459,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -17,11 +17,11 @@ izlude,108,136,3	script	New World Challenge::endgame_newworld	470,{
 		mes "[Challenge]";
 		mes "You must complete the quest:";
 		mes "^e53535Report from the New World^000000";
-		
 		next;
 		mes "[Challenge]";
 		mes "When you have completed the quest, you can claim the reward from me.";
-		mes " ";
+		next;
+		mes "[Challenge]";
 		mes "The reward for this quest is";
 		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
