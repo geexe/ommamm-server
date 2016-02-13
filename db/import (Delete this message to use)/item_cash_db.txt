@@ -147,9 +147,8 @@
 4, 2589, 5500 //Fallen Angel Wing
 //--------Accessory
 4, 2959, 500 //Fidelity Necklace
-4, 2967, 1500 //RWC ring
-4, 2967, 1500 //RWC Ring
-4, 2969, 1500 //RWC chamber
+4, 2966, 1500 //RWC Ring
+4, 2968, 1500 //RWC chamber
 4, 2828, 1500 //Upg Clip
 4, 2829, 1500 //Greed Clip
 //--------Weapon
