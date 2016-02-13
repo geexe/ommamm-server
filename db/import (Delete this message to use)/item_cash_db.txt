@@ -191,8 +191,8 @@
 7, 17067, 450 //Poison Bottle Box100
 7, 6241, 25 //HD Elunium
 7, 6240, 25 //HD Oridecon
-7, 6225, 25 //HD Carnium
-7, 6224, 25 //HD Bradium
+7, 6225, 50 //HD Carnium
+7, 6226, 50 //HD Bradium
 //7, 16753, 450 //Blessed Ori
 //7, 16755, 450 //Blessed Elu
 7, 7776, 100 //Gym Pass
