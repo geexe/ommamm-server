@@ -123,7 +123,7 @@
 	set Zeny, Zeny-.@price;
 	mes "[Blacksmith Mighty Hammer]";
 	mes "Tac! Tac! Tac!" + getequippercentrefinery(.@part);
-	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
+	if (getequippercentrefinery(.@part) > rand(100)) {
 		successrefitem .@part;
 		next;
 		emotion e_no1;
@@ -160,7 +160,7 @@ Repeat_refine:
 	set Zeny, Zeny-.@price;
 	mes "[Blacksmith Mighty Hammer]";
 	mes "Tac! Tac! Tac!" + getequippercentrefinery(.@part);
-	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
+	if (getequippercentrefinery(.@part) > rand(100)) {
 		successrefitem .@part;
 		next;
 		emotion e_no1;
