@@ -140,7 +140,7 @@
 4, 5362, 1500 //Ninja Scroll
 4, 5463, 1500 //Rainbow Scarf
 4, 18918, 1500 //Long Octopus Ballon
-4, 18666, 1500 //CD In Mouth
+4, 18666, 3500 //CD In Mouth
 //No item 4, 18968, 1500 //Jinn Marin Balloon
 //-------Garment
 4, 2576, 5000 //Adventurer's Backpack
@@ -188,10 +188,12 @@
 7, 17070, 2000 //Acidbomb Box500
 7, 17066, 250 //Poison Bottle Box50
 7, 17067, 450 //Poison Bottle Box100
-7, 6241, 25 //HD Elunium
-7, 6240, 25 //HD Oridecon
-7, 6225, 50 //HD Carnium
-7, 6226, 50 //HD Bradium
+7, 6241, 35 //HD Elunium
+7, 6240, 35 //HD Oridecon
+7, 6225, 60 //HD Carnium
+7, 6226, 60 //HD Bradium
+7, 7619, 45 //Enriched Elunium
+7, 7620, 45 //Enriched Oridecon
 //7, 16753, 450 //Blessed Ori
 //7, 16755, 450 //Blessed Elu
 7, 7776, 100 //Gym Pass
