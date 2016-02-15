@@ -289,7 +289,7 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	826
 	if (getequippercentrefinery(.@part) < 100) {
 		mes "[Basta]";
 		mes "This "+.@type$+" has already been refined pretty high.";
-		mes "If you try to refine it more, the refine level could decrease.";
+		mes "If you try to refine it more, the refine level could decrease ^FF0000(Will not decrease below +10)^000000.";
 		next;
 		mes "[Basta]";
 		mes "I am different from the blacksmiths in others places.";
@@ -316,13 +316,18 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	826
 	delitem .@material,1;
 	set Zeny, Zeny-.@price;
 	mes "Pow! Pow! Pow! Pow!";
-	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
+	if (getequippercentrefinery(.@part) > rand(100)) {
 		successrefitem .@part;
 		next;
 		emotion e_no1;
 		mes "[Basta]";
 		mes "Great! Nicely done!!";
 		mes "I really am the best blacksmith in the whole wide world!";
+		close;
+	} else if (getequiprefinerycnt(.@part) == 10) {
+		mes "[Basta]";
+		mes "Damn it!";
+		mes "Refining failed. Fortunately, the refine level cannot fall below +10.";
 		close;
 	}
 	downrefitem .@part;
