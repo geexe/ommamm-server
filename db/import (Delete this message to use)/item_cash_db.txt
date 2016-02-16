@@ -181,7 +181,7 @@
 6, 14168, 180//Convex Mirror 10 Box
 //--------------------------Others-----------------------
 7, 7227, 10 //Bossania Entrance Ticket
-7, 16770, 350 //Silvervine 10 Box
+7, 16770, 250 //Silvervine 10 Box
 7, 6665, 100 //RWC_Inicializer
 7, 7621, 10 //Token of Ziegfried
 7, 17068, 250 //Acidbomb Box50
@@ -189,12 +189,12 @@
 7, 17070, 2000 //Acidbomb Box500
 7, 17066, 250 //Poison Bottle Box50
 7, 17067, 450 //Poison Bottle Box100
-7, 6241, 35 //HD Elunium
-7, 6240, 35 //HD Oridecon
-7, 6225, 60 //HD Carnium
-7, 6226, 60 //HD Bradium
-7, 7619, 45 //Enriched Elunium
-7, 7620, 45 //Enriched Oridecon
+7, 6241, 25 //HD Elunium
+7, 6240, 25 //HD Oridecon
+7, 6225, 40 //HD Carnium
+7, 6226, 40 //HD Bradium
+7, 7619, 35 //Enriched Elunium
+7, 7620, 35 //Enriched Oridecon
 //7, 16753, 450 //Blessed Ori
 //7, 16755, 450 //Blessed Elu
 7, 7776, 100 //Gym Pass
