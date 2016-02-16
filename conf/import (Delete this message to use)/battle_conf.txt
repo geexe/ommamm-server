@@ -93,3 +93,9 @@ rare_drop_announce: 99
 // with Cell Stack Limit support (see src/map/map.h)
 official_cell_stack_limit: 0
 custom_cell_stack_limit: 1
+
+//------------------features.conf changes
+
+// Autotrade persistency (Note 1)
+// Should vendors that used @autotrade be restored after a restart?
+feature.autotrade: off
