@@ -93,3 +93,8 @@ rare_drop_announce: 99
 // with Cell Stack Limit support (see src/map/map.h)
 official_cell_stack_limit: 0
 custom_cell_stack_limit: 1
+
+//-----------------homunc.conf changes
+
+// The rate a homunculus will get friendly by feeding it. (Note 2)
+homunculus_friendly_rate: 200
