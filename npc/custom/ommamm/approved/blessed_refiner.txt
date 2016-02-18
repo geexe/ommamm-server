@@ -142,7 +142,7 @@
 	set Zeny, Zeny-.@price;
 	mes "[Blacksmith Dister]";
 	mes "Tac! Tac! Tac!";
-	if (getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100)) {
+	if (getequippercentrefinery(.@part) > rand(100)) {
 		specialeffect EF_BLESSING;
 		successrefitem .@part;
 		next;

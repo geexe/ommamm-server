@@ -129,7 +129,7 @@ Event_start:
 	initnpctimer;
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว มีเวลา 5 นาทีในการเข้าร่วมกิจกรรม" ,bc_all,0xFFFF00;
 	end;
-/*OnTimer60000:
+OnTimer60000:
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 4 นาทีในการเข้าร่วมกิจกรรม",bc_all;
 	end;
 OnTimer120000:
@@ -140,8 +140,8 @@ OnTimer180000:
 	end;
 OnTimer240000:
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 1 นาทีในการเข้าร่วมกิจกรรม",bc_all;
-	end;*/
-OnTimer10000:
+	end;
+OnTimer300000:
 	stopnpctimer;
 	setnpctimer 0;
 	announce "หมดเวลาเข้าร่วมกิจกรรม Ommamm Defense แล้ว",bc_all;
