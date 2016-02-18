@@ -78,8 +78,8 @@ Select_room:
 	menu 
 		"ห้องที่ 1 (ง่าย) จำนวน [" + getareausers("force_2-3.gat",11,146,29,90) + "] คน",Roomatd1,
 		"ห้องที่ 2 (ปานกลาง) จำนวน [" + getareausers("force_2-3.gat",130,109,149,50) + "] คน",Roomatd2,
-		"ห้องที่ 3 (ยาก) จำนวน ["+$ppatd3+"] คน",Roomatd3,
-		"ห้องที่ 4 (หฤโหด) จำนวน ["+$ppatd4+"] คน",Roomatd4;
+		"ห้องที่ 3 (ยาก) จำนวน [" + getareausers("force_2-3.gat",90,69,109,11) + "] คน",Roomatd3,
+		"ห้องที่ 4 (หฤโหด) จำนวน [" + getareausers("force_2-3.gat",50,90,109,109) + "] คน",Roomatd4;
 	end;
 
 Roomatd1:
@@ -110,7 +110,7 @@ Roomatd3:
 	end;
 
 Roomatd4:
-	if(getareausers("force_2-3.gat",50,90,109,109) > 6) {
+	if(getareausers("force_2-3.gat",50,90,109,109) > 11) {
 		goto L_error;
 	} else {
 		warp "force_2-3.gat",80,100; 
@@ -140,7 +140,7 @@ OnTimer180000:
 	end;
 OnTimer240000:
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 1 นาทีในการเข้าร่วมกิจกรรม",bc_all;
-	end;/*
+	end;*/
 OnTimer10000:
 	stopnpctimer;
 	setnpctimer 0;
@@ -522,12 +522,12 @@ OnKill:
 Round_1:
 	areaannounce "force_2-3.gat",90,69,109,11, "เราจะเริ่มรอบที่่ 1 ภายใน 20 วินาที",0;
 	sleep 20000;
-	monster "force_2-3.gat", 100,60, "Antique Book", 2366, 5, "Ommammdef_room3::OnKill";
-	monster "force_2-3.gat", 100,60, "Corrupted Palace Guard", 2468, 5, "Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,60,"Wandering Archer",2469,4,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,60,"Skeggoid",1755,5,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,60,"Furious Incanation of Morroc",2742,1,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,60,"Incanation of Morroc",1919,3,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat",95,55,105,65,"Antique Book", 2366, 5, "Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat",95,55,105,65,"Corrupted Palace Guard", 2468, 5, "Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat",95,55,105,65,"Wandering Archer",2469,4,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,55,105,65,"Skeggoid",1755,5,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,55,105,65,"Furious Incanation of Morroc",2742,1,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,55,105,65,"Incanation of Morroc",1919,3,"Ommammdef_room3::OnKill";
 	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
 	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
 	sleep 300000;
@@ -545,10 +545,10 @@ Round_1:
 Round_2:
 	areaannounce "force_2-3.gat",90,69,109,11, "เราจะเริ่มรอบที่่ 2 ภายใน 20 วินาที",0;
 	sleep 20000;	
-	monster "force_2-3.gat",100,20,"Dark Lord",1272,1,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,20,"Rhyncho",2020,2,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,20,"Hydro",1720,3,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,20,"Dark Kobold Archer",2287,10,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,15,105,25,"Dark Lord",1272,1,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,15,105,25,"Rhyncho",2020,2,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,15,105,25,"Hydro",1720,3,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,15,105,25,"Dark Kobold Archer",2287,10,"Ommammdef_room3::OnKill";
 	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
 	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
 	sleep 300000;
@@ -566,11 +566,11 @@ Round_2:
 Round_3:
 	areaannounce "force_2-3.gat",90,69,109,11, "เราจะเริ่มรอบที่่ 3 ภายใน 20 วินาที",0;
 	sleep 20000;
-	monster "force_2-3.gat",100,60,"Cecil Demon",1638,2,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,60,"Margaretta Sorin",1637,1,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,60,"Kathryne Keyron",1639,2,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,60,"Sword Guardian",1829,4,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,60,"Nightmare Amon ra",2362,1,"Ommammdef_room3::OnKill"; 
+	areamonster "force_2-3.gat", 95,55,105,65,"Cecil Demon",1638,2,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,55,105,65,"Margaretta Sorin",1637,1,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,55,105,65,"Kathryne Keyron",1639,2,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,55,105,65,"Sword Guardian",1829,4,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,55,105,65,"Nightmare Amon ra",2362,1,"Ommammdef_room3::OnKill"; 
 	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
 	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
 	sleep 300000;
@@ -588,11 +588,11 @@ Round_3:
 Round_4:
 	areaannounce "force_2-3.gat",90,69,109,11, "เราจะเริ่มรอบที่่ 4 ภายใน 20 วินาที",0;
 	sleep 20000;
-	monster "force_2-3.gat",100,20,"Detale",1719,1,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,20,"Gloom Under Night",1768,1,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,20,"Faithful Manager",2371,5,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,20,"Soheon",2254,2,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,20,"Odium of Thanatos",1709,5,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,15,105,25,"Detale",1719,1,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,15,105,25,"Gloom Under Night",1768,1,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,15,105,25,"Faithful Manager",2371,5,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,15,105,25,"Soheon",2254,2,"Ommammdef_room3::OnKill";
+	areamonster "force_2-3.gat", 95,15,105,25,"Odium of Thanatos",1709,5,"Ommammdef_room3::OnKill";
 	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
 	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
 	sleep 300000;
