@@ -1,6 +1,7 @@
 force_2-3.gat	mapflag	noicewall
 force_2-3.gat	mapflag	noteleport
 force_2-3.gat	mapflag	noreturn
+force_2-3.gat	mapflag	monster_noteleport
 
 izlude,141,138,5	script	Ommamm Defense::ommammdef	576,{
 
@@ -41,7 +42,7 @@ Event_desc:
 	mes .npc$;
 	mes "ห้องที่ 1 (ง่าย): 5 TCG + 3 Old Card Album";
 	mes "ห้องที่ 2 (ปานกลาง): 15 TCG + 5 Old Card Album + 1 Gold";
-	mes "ห้องที่ 3 (ยาก): 30 TCG + Mystic Card Album + 3 Gold + 15 Old Card Album + 2 Blessed Eluminium + 2 Blessed Oridicon";
+	mes "ห้องที่ 3 (ยาก): 30 TCG + 3 Gold + 10 Old Card Album + 1 Blessed Eluminium + 1 Blessed Oridicon";
 	mes "ห้องที่ 4 (หฤโหด): ยังไม่เปิดบริการ";
 	next;
 	goto Event_menu;
@@ -128,7 +129,7 @@ Event_start:
 	initnpctimer;
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว มีเวลา 5 นาทีในการเข้าร่วมกิจกรรม" ,bc_all,0xFFFF00;
 	end;
-OnTimer60000:
+/*OnTimer60000:
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 4 นาทีในการเข้าร่วมกิจกรรม",bc_all;
 	end;
 OnTimer120000:
@@ -139,8 +140,8 @@ OnTimer180000:
 	end;
 OnTimer240000:
 	announce "Ommamm Defense เปิดให้ผู้กล้าได้เข้าร่วมท้าทายแล้ว เหลือเวลา 1 นาทีในการเข้าร่วมกิจกรรม",bc_all;
-	end;
-OnTimer300000:
+	end;/*
+OnTimer10000:
 	stopnpctimer;
 	setnpctimer 0;
 	announce "หมดเวลาเข้าร่วมกิจกรรม Ommamm Defense แล้ว",bc_all;
@@ -481,7 +482,7 @@ force_2-3,100,60,1	script	Ommammdef_room3	-1,{
 OnInit:
 	//Reward and quantity
 	setarray .reward[0], 7227, 616, 969, 16755, 16753;
-	setarray .reward_quantity[0], 30, 15, 3, 2, 2;
+	setarray .reward_quantity[0], 30, 10, 3, 1, 1;
 	end;
 
 OnOmmammdef_standby:
@@ -544,10 +545,10 @@ Round_1:
 Round_2:
 	areaannounce "force_2-3.gat",90,69,109,11, "เราจะเริ่มรอบที่่ 2 ภายใน 20 วินาที",0;
 	sleep 20000;	
-	monster "force_2-3.gat",100,20,"Doppleganger",1046,1,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Dark Lord",1272,1,"Ommammdef_room3::OnKill";
 	monster "force_2-3.gat",100,20,"Rhyncho",2020,2,"Ommammdef_room3::OnKill";
-	monster "force_2-3.gat",100,20,"Odium of Thanatos",1704,4,"Ommammdef_room3::OnKill";
 	monster "force_2-3.gat",100,20,"Hydro",1720,3,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Dark Kobold Archer",2287,10,"Ommammdef_room3::OnKill";
 	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
 	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
 	sleep 300000;
@@ -589,6 +590,9 @@ Round_4:
 	sleep 20000;
 	monster "force_2-3.gat",100,20,"Detale",1719,1,"Ommammdef_room3::OnKill";
 	monster "force_2-3.gat",100,20,"Gloom Under Night",1768,1,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Faithful Manager",2371,5,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Soheon",2254,2,"Ommammdef_room3::OnKill";
+	monster "force_2-3.gat",100,20,"Odium of Thanatos",1709,5,"Ommammdef_room3::OnKill";
 	.mobcount = mobcount("force_2-3.gat","Ommammdef_room3::OnKill");
 	areaannounce "force_2-3.gat",90,69,109,11, "คุณมีเวลา 5 นาที่ในการกำจัดมอนสเตอร์ทั้งหมด",0;
 	sleep 300000;
