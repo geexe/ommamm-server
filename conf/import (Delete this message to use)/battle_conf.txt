@@ -97,4 +97,4 @@ custom_cell_stack_limit: 1
 //-----------------homunc.conf changes
 
 // The rate a homunculus will get friendly by feeding it. (Note 2)
-homunculus_friendly_rate: 300
+homunculus_friendly_rate: 400
