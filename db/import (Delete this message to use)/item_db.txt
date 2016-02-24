@@ -88,3 +88,4 @@
 31101,blue_lhz_aura,Lhz Aura Blue,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1901,{},{},{}
 31102,green_lhz_aura,Lhz Aura Green,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1902,{},{},{}
 31103,green_lhz_aura,Lhz Aura Red,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1903,{},{},{}
+31104,kafra_blossom_card,Kafra Blossom Card,6,20,,10,,,,,,,,136,,,,,{ bonus2 bSubEle,Ele_ALL,10;  autobonus2 "{ bonus2 bSubEle,Ele_ALL,10; }",20,10000,BF_MAGIC,"{ specialeffect2 440; }";},{},{}
