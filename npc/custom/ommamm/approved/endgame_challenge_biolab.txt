@@ -12,13 +12,13 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 	switch(select("Quest Info:Claim Reward:Cancel")){
 	case 1:
 		mes "[Challenge]";
-		mes "You must kill all " + getarraysize(.biolabmvp) + " Biolab MVPs:";
-		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-			mes .@i+1 + ". " + "^e53535" + strmobinfo(1,.biolabmvp[.@i]) + "^000000";
+		mes "You must kill all " + getarraysize($@biolabmvp) + " Biolab MVPs:";
+		for (.@i = 0; .@i < getarraysize($@biolabmvp); .@i++) {
+			mes .@i+1 + ". " + "^e53535" + strmobinfo(1,$@biolabmvp[.@i]) + "^000000";
 		}
 		next;
 		mes "[Challenge]";
-		mes "When you have killed all " + getarraysize(.biolabmvp) + " MVPs, you can claim the reward from me.";
+		mes "When you have killed all " + getarraysize($@biolabmvp) + " MVPs, you can claim the reward from me.";
 		next;
 		mes "[Challenge]";
 		mes "The reward for this quest is";
@@ -30,8 +30,8 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 
 		if(getarraysize(biolabkill)) {
 			mes "MVPs you have completed:";
-			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(biolabkill[.@i] == .biolabmvp[.@i]) {
+			for (.@i = 0; .@i < getarraysize($@biolabmvp); .@i++) {
+				if(biolabkill[.@i] == $@biolabmvp[.@i]) {
 					mes strmobinfo(1,biolabkill[.@i]);
 				}
 			}
@@ -44,18 +44,18 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 		mes "[Challenge]";
 		//check to see if character has received the reward
 		if(!getommammreward_biolab) {
-			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(biolabkill[.@i] == .biolabmvp[.@i]) {
+			for (.@i = 0; .@i < getarraysize($@biolabmvp); .@i++) {
+				if(biolabkill[.@i] == $@biolabmvp[.@i]) {
 					.@mvpcount += 1;
 				}
 			}
 			//check to see if all MVPs have been completed
-			if(.@mvpcount == getarraysize(.biolabmvp)) {
+			if(.@mvpcount == getarraysize($@biolabmvp)) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
 				
 				//check weight and inventory 
-				if(checkweight(.reward,1)) {
+				if(checkweight2(.reward,.reward_quantity)) {
 					//Set variable to prevent player from getting multiple items
 					getommammreward_biolab = 1;
 					//Cycle through the reward array
@@ -64,7 +64,7 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 					}
 				}
 				else {
-					mes "You do not enough space.";
+					mes "You do not have enough space.";
 					mes "Please clear your inventory and come back again.";
 				}
 			}
@@ -81,42 +81,9 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 	}
 	close;
 	
-OnNPCKillEvent:
-	if(!.party || !getcharid(1)) {	
-		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-			if(killedrid == .biolabmvp[.@i]) {
-				setarray biolabkill[.@i], killedrid;
-				dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid);
-			}
-		}
-	} else if (.party) {
-		for (.@j = 0; .@j < getarraysize(.biolabmvp); .@j++) {
-			if(killedrid == .biolabmvp[.@j]) {
-				getmapxy(.@map1$,.@x1,.@y1,0);
-				getpartymember getcharid(1), 0;
-				getpartymember getcharid(1), 1;
-				getpartymember getcharid(1), 2;
-				for (.@i = 0; .@i < $@partymembercount; .@i++) {
-					if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
-						set .@HP, getvar(HP, $@partymembercid[.@i]);
-						if (.@HP > 0) {
-							getmapxy(.@map2$,.@x2,.@y2,0);
-							if ((.@map1$ == .@map2$ || .Party == 1) && (distance(.@x1,.@y1,.@x2,.@y2) <= 30 || .Party < 3)) {
-								attachrid($@partymemberaid[.@i]);
-								setarray biolabkill[.@j], killedrid;
-								dispbottom "[Challenge] Biolab MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	end;
-	
 OnInit:
 	//monsters to kill
-	setarray .biolabmvp[0],1651,1650,1649,1648,1647,1646;
+	setarray $@biolabmvp[0],1651,1650,1649,1648,1647,1646;
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
 	setarray .reward[0],31100,6238,6232,2383,16753,16755;	

@@ -31,13 +31,13 @@ izlude,108,136,3	script	New World Challenge::endgame_newworld	459,{
 		mes "[Challenge]";
 		//check to see if character has received the reward
 		if(!getommammreward_newworld) {
-			//check to see if all MVPs have been completed
+			//check to see if all requirements are met
 			if(checkquest(3094) == 2) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
 				
 				//check weight and inventory 
-				if(checkweight(.reward,1)) {
+				if(checkweight2(.reward,.reward_quantity)) {
 					//Set variable to prevent player from getting multiple items
 					getommammreward_newworld = 1;
 					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
@@ -45,7 +45,7 @@ izlude,108,136,3	script	New World Challenge::endgame_newworld	459,{
 					}
 				}
 				else {
-					mes "You do not enough space.";
+					mes "You do not have enough space.";
 					mes "Please clear your inventory and come back again.";
 				}
 			}

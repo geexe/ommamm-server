@@ -100,6 +100,37 @@ OnInit:
 	end;
 
 OnMyMVPDead:
+	.party = getvariableofnpc(.party,"endgame_biolab");
+	if(!.party || !getcharid(1)) {	
+		for (.@i = 0; .@i < getarraysize($@biolabmvp); .@i++) {
+			if(killedrid == $@biolabmvp[.@i]) {
+				setarray biolabkill[.@i], killedrid;
+				dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid);
+			}
+		}
+	} else if (.party) {
+		for (.@j = 0; .@j < getarraysize($@biolabmvp); .@j++) {
+			if(killedrid == $@biolabmvp[.@j]) {
+				getmapxy(.@map1$,.@x1,.@y1,0);
+				getpartymember getcharid(1), 0;
+				getpartymember getcharid(1), 1;
+				getpartymember getcharid(1), 2;
+				for (.@i = 0; .@i < $@partymembercount; .@i++) {
+					if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
+						set .@HP, getvar(HP, $@partymembercid[.@i]);
+						if (.@HP > 0) {
+							getmapxy(.@map2$,.@x2,.@y2,0);
+							if ((.@map1$ == .@map2$ || .party == 1) && (distance(.@x1,.@y1,.@x2,.@y2) <= 30 || .party < 3)) {
+								attachrid($@partymemberaid[.@i]);
+								setarray biolabkill[.@j], killedrid;
+								dispbottom "[Challenge] Biolab MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	killmonster "lhz_dun03",strnpcinfo(3)+"::OnMy99Dead";
 	initnpctimer;
 OnMy99Dead:

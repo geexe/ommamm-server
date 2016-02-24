@@ -31,7 +31,7 @@ izlude,108,131,3	script	The Sign Challenge::endgame_thesign	804,{
 		mes "[Challenge]";
 		//check to see if character has received the reward
 		if(!getommammreward_thesign) {
-			//check to see if all MVPs have been completed
+			//check to see if all requirements are met
 			if(countitem(2644) || getequipid(7) == 2644 || getequipid(8) == 2644) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
@@ -46,7 +46,7 @@ izlude,108,131,3	script	The Sign Challenge::endgame_thesign	804,{
 					}
 				
 				//check weight and inventory 
-				if(checkweight(.reward,1)) {
+				if(checkweight2(.reward,.reward_quantity)) {
 					//Set variable to prevent player from getting multiple items
 					getommammreward_thesign = 1;
 					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
