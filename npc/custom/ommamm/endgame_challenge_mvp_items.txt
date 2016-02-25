@@ -1,6 +1,6 @@
 //MPV Item Challenges
 
-izlude,102,135,3	script	MVP Item Challenge::endgame_mvpitem	804,{
+izlude,96,131,5	script	MVP Item Challenge::endgame_mvpitem	902,{
 	disable_items;
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";

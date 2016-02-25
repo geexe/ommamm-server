@@ -12,13 +12,13 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 	switch(select("Quest Info:Claim Reward:Cancel")){
 	case 1:
 		mes "[Challenge]";
-		mes "You must kill all " + getarraysize($@biolabmvp) + " Biolab MVPs:";
-		for (.@i = 0; .@i < getarraysize($@biolabmvp); .@i++) {
-			mes .@i+1 + ". " + "^e53535" + strmobinfo(1,$@biolabmvp[.@i]) + "^000000";
+		mes "You must kill all " + getarraysize(.biolabmvp) + " Biolab MVPs:";
+		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+			mes .@i+1 + ". " + "^e53535" + strmobinfo(1,.biolabmvp[.@i]) + "^000000";
 		}
 		next;
 		mes "[Challenge]";
-		mes "When you have killed all " + getarraysize($@biolabmvp) + " MVPs, you can claim the reward from me.";
+		mes "When you have killed all " + getarraysize(.biolabmvp) + " MVPs, you can claim the reward from me.";
 		next;
 		mes "[Challenge]";
 		mes "The reward for this quest is";
@@ -30,8 +30,8 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 
 		if(getarraysize(biolabkill)) {
 			mes "MVPs you have completed:";
-			for (.@i = 0; .@i < getarraysize($@biolabmvp); .@i++) {
-				if(biolabkill[.@i] == $@biolabmvp[.@i]) {
+			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+				if(biolabkill[.@i] == .biolabmvp[.@i]) {
 					mes strmobinfo(1,biolabkill[.@i]);
 				}
 			}
@@ -44,16 +44,23 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 		mes "[Challenge]";
 		//check to see if character has received the reward
 		if(!getommammreward_biolab) {
-			for (.@i = 0; .@i < getarraysize($@biolabmvp); .@i++) {
-				if(biolabkill[.@i] == $@biolabmvp[.@i]) {
+			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+				if(biolabkill[.@i] == .biolabmvp[.@i]) {
 					.@mvpcount += 1;
 				}
 			}
 			//check to see if all MVPs have been completed
-			if(.@mvpcount == getarraysize($@biolabmvp)) {
+			if(.@mvpcount == getarraysize(.biolabmvp)) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
-				
+				switch(select("Yes:No")) {
+				case 1: 
+					break;
+				case 2:
+					mes "[Challenge]";
+					mes "Come back when you want to claim the reward";
+					close;
+				}
 				//check weight and inventory 
 				if(checkweight2(.reward,.reward_quantity)) {
 					//Set variable to prevent player from getting multiple items
@@ -62,8 +69,10 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 						getitembound .reward[.@k], .reward_quantity[.@k], 1;
 					}
-				}
-				else {
+					mes "[Challenge]";
+					mes "Congratulations on your achievement! Enjoy your reward.";
+					close;
+				} else {
 					mes "You do not have enough space.";
 					mes "Please clear your inventory and come back again.";
 				}
@@ -83,7 +92,7 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 	
 OnInit:
 	//monsters to kill
-	setarray $@biolabmvp[0],1651,1650,1649,1648,1647,1646;
+	setarray .biolabmvp[0],1651,1650,1649,1648,1647,1646;
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
 	setarray .reward[0],31100,6238,6232,2383,16753,16755;	

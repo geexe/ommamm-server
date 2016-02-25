@@ -35,6 +35,14 @@ izlude,108,136,3	script	New World Challenge::endgame_newworld	459,{
 			if(checkquest(3094) == 2) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
+				switch(select("Yes:No")) {
+				case 1: 
+					break;
+				case 2:
+					mes "[Challenge]";
+					mes "Come back when you want to claim the reward";
+					close;
+				}
 				
 				//check weight and inventory 
 				if(checkweight2(.reward,.reward_quantity)) {
@@ -43,6 +51,9 @@ izlude,108,136,3	script	New World Challenge::endgame_newworld	459,{
 					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 						getitembound .reward[.@k], .reward_quantity[.@k], 1;
 					}
+					mes "[Challenge]";
+					mes "Congratulations on your achievement! Enjoy your reward.";
+					close;
 				}
 				else {
 					mes "You do not have enough space.";

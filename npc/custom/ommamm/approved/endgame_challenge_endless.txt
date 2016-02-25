@@ -38,7 +38,15 @@ izlude,105,140,3	script	Endeless Tower Challenge::endgame_endless	709,{
 			if(endless_complete) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
-				
+				next;
+				switch(select("Yes:No")) {
+				case 1: 
+					break;
+				case 2:
+					mes "[Challenge]";
+					mes "Come back when you want to claim the reward";
+					close;
+				}
 				//check weight and inventory 
 				if(checkweight2(.reward,.reward_quantity)) {
 					//Set variable to prevent player from getting multiple items
@@ -46,6 +54,9 @@ izlude,105,140,3	script	Endeless Tower Challenge::endgame_endless	709,{
 					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 						getitembound .reward[.@k], .reward_quantity[.@k], 1;
 					}
+					mes "[Challenge]";
+					mes "Congratulations on your achievement! Enjoy your reward.";
+					close;
 				}
 				else {
 					mes "You do not have enough space.";
@@ -71,4 +82,4 @@ OnInit:
 	setarray .reward[0],20737,6233,6228,16755,16753;	
 	setarray .reward_quantity[0],1,1,1,5,5;
 	end;
-	}
+}

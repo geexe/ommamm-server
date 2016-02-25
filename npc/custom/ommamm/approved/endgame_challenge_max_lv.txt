@@ -1,6 +1,6 @@
 //Max Level Challenge
 
-izlude,102,131,3	script	Max Level Challenge::endgame_maxlv	709,{
+izlude,96,136,5	script	Max Level Challenge::endgame_maxlv	936,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -69,7 +69,7 @@ izlude,102,131,3	script	Max Level Challenge::endgame_maxlv	709,{
 OnInit:
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],20737,6233,6228,16755,16753;	
-	setarray .reward_quantity[0],1,1,1,5,5;
+	setarray .reward[0],7608,20500,7227,16755,16753;	
+	setarray .reward_quantity[0],1,1,700,5,5;
 	end;
 	}

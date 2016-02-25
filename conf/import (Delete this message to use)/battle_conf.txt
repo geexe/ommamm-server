@@ -104,3 +104,8 @@ homunculus_friendly_rate: 400
 // Allow changing of equipment while interacting with NPCs? (Note 1)
 // Default: yes
 item_enabled_npc: no
+
+//-----------------skill.conf changes
+
+// Angel of the Sun, Moon and Stars skill ratio (100% = 10000)
+sg_angel_skill_ratio: 3000
