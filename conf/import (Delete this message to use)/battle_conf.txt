@@ -98,3 +98,9 @@ custom_cell_stack_limit: 1
 
 // The rate a homunculus will get friendly by feeding it. (Note 2)
 homunculus_friendly_rate: 400
+
+//-----------------items.conf changes
+
+// Allow changing of equipment while interacting with NPCs? (Note 1)
+// Default: yes
+item_enabled_npc: no
