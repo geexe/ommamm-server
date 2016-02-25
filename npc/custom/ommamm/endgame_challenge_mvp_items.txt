@@ -1,0 +1,91 @@
+//MPV Item Challenges
+
+izlude,102,135,3	script	MVP Item Challenge::endgame_mvpitem	804,{
+	disable_items;
+	mes "[Challenge]";
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Welcome to Ommamm Challenge.";
+	mes " ";
+	mes "Prove yourself that you really love Ragnarok Online.";
+	mes "We will reward only the utmost dedication to the game.";
+	next;
+	mes "[Challenge]";
+	mes "This is a challenge to prove that your hunger for MVP is insatiable.";
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	case 1:
+		mes "[Challenge]";
+		mes "You must collect these MVP loots:";
+		for (.@i = 0; .@i < getarraysize(.mvp_item) ;.@i += 2) {
+			mes ((.@i+2)/2) + ". " + "^e53535" + getitemname(.mvp_item[.@i]) + "^000000" + " x " + "^1c3f89" + .mvp_item[.@i+1] + "^000000";
+		}
+		next;
+		mes "[Challenge]";
+		mes "When you have collected all the items you can claim the reward from me.";
+		mes " ";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
+		}
+		break;
+	case 2:
+		mes "[Challenge]";
+		//check to see if character has received the reward
+		if(getommammreward_mvpitem) {
+			mes "You have already received reward for this challenge.";
+			close;
+		}
+		//check to see if all requirements are met
+		for (.@i = 0; .@i < getarraysize(.mvp_item) ;.@i += 2) {
+			if(countitem(.mvp_item[.@i]) < .mvp_item[.@i+1] ) {
+				mes "You have not completed the challenge.";
+				close;
+			}
+		}
+		mes "You have completed the challenge";
+		mes "Do you want to claim the reward?";
+		next;
+		switch(select("Yes:No")) {
+			case 1: 
+				break;
+			case 2:
+				mes "[Challenge]";
+				mes "Come back when you want to claim the reward";
+				close;
+		}			
+		//check weight and inventory 
+		if(!checkweight2(.reward,.reward_quantity)) {
+			mes "[Challenge]";
+			mes "You do not enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		//Set variable to prevent player from getting multiple items
+		getommammreward_mvpitem= 1;
+		for (.@i = 0; .@i < getarraysize(.mvp_item) ;.@i += 2) {
+			delitem .mvp_item[.@i],.mvp_item[.@i+1];
+		}
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			getitembound .reward[.@k], .reward_quantity[.@k], 1;
+		}
+		mes "[Challenge]";
+		mes "Congratulations on your achievement! Enjoy your reward.";
+		close;
+		break;	
+	case 3:
+		close;
+		break;
+	}
+	close;
+	
+OnInit:
+	//MVP loots required. Format <item ID1>, <item quantity1>, <item ID2>, <item quantity2>, ..., ...;
+	setarray .mvp_item[0],
+		7451,10, //Fire Dragon Scale
+		7020,10; //mother's nightmare
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],969,18503,7227,16755,16753;	
+	setarray .reward_quantity[0],6,1,350,3,3;
+	end;
+	}
