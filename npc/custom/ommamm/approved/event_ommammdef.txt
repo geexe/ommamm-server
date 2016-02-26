@@ -117,6 +117,11 @@ Roomatd1:
 	end;
 
 Roomatd2:
+	if(BaseLevel < 100) {
+		mes .npc$;
+		mes "อนุญาตให้เข้าร่วมเฉพาะตัวละครที่มีเลเวล 100 ขึ้นไปเท่านั้น;
+		close;
+	}
 	if(getareausers("force_2-3.gat",130,109,149,50) >= .maxuser_room2) {
 		goto L_error;
 	} else {
@@ -126,6 +131,11 @@ Roomatd2:
 	end;
 
 Roomatd3:
+	if(BaseLevel < 130) {
+		mes .npc$;
+		mes "อนุญาตให้เข้าร่วมเฉพาะตัวละครที่มีเลเวล 130 ขึ้นไปเท่านั้น;
+		close;
+	}
 	if(getareausers("force_2-3.gat",90,69,109,11) >= .maxuser_room3) {
 		goto L_error;
 	} else {
@@ -135,6 +145,11 @@ Roomatd3:
 	end;
 
 Roomatd4:
+	if(BaseLevel < 160) {
+		mes .npc$;
+		mes "อนุญาตให้เข้าร่วมเฉพาะตัวละครที่มีเลเวล 160 ขึ้นไปเท่านั้น;
+		close;
+	}
 	if(getareausers("force_2-3.gat",50,90,109,109) >= .maxuser_room4) {
 		goto L_error;
 	} else {
