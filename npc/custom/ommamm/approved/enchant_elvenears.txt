@@ -1,0 +1,424 @@
+izlude,129,153,5	script	ElvenEars Knight	420,{
+	mes .npc$;
+	mes "I can enchant ^000099Elven Ears^000000 (Dropped from monsters) for a fee.";
+	mes "^ff3232However, unique slot enchantment and level 10 enchantment is not possible for Elven Ears^000000";
+	mes "Are you interested in enchanting Elven Ears?";
+	next;
+	goto EnchantMenu;
+	end;
+
+EnchantMenu:
+	menu
+		"More Info",EnchantInfoMenu,
+		"^ff3232Enchant Elven Ears^000000",OnEnchant,
+		"Cancel",L_end;
+	end;
+
+L_end:
+	mes .npc$;
+	mes "Come back when you want super OP enchant.";
+	close;
+	end;
+		
+EnchantInfoMenu:
+	mes .npc$;
+	mes "What do want to know more?";
+	next;
+	menu
+		"How does it work?",EnchantInfo,
+		"Enchantment List",EnchantList,
+		"Back",EnchantMenu,
+		"Cancel",L_end;
+	end;
+		
+EnchantInfo:
+	mes .npc$;
+	mes "I can enchant Elven Ears on 2 slots. There is no risk of destroying the item. Each enchantment will cost";
+	mes "^ff32321,000,000^000000 zeny";
+	next;
+	mes .npc$;
+	mes "Each slot provides different types of effect. You will be able to choose your preferred effect category for each enchantment slot.";
+	next;
+	mes .npc$;
+	mes "The actual enchantment will be randomly chosen from all possible enchantments in the selected category.";
+	next;
+	mes .npc$;
+	mes "You can re-enchant to get a new enchantment on an existing slot if you are not satisfied with previous enchantment.";
+	next;
+	mes .npc$;
+	mes "Re-enchantment will replace, not increase, an existing enchantment.";
+	mes "You cannot get the old enchantment back once you have re-enchanted, so please keep that in mind.";
+	next;
+	goto EnchantInfoMenu;
+	end;
+
+EnchantList:
+	mes .npc$;
+	mes "Please select an enchantment slot for more information";
+	next;
+	switch(select("Normal slot:Special slot:Back:Cancel")) {
+		case 1:
+			mes .npc$;
+			mes "The normal slot gives you primary stat increase. You can choose one from among the 6 stats.";
+			mes "STR, AGI, VIT, INT, DEX, LUK";
+			next;
+			mes .npc$;
+			mes "There are 9 levels of enchantment possible. Each level gives you +1 for the chosen stat";
+			mes "So level 1 will give you +1 for the chosen stat, and level 9 will give you +9 for the chosen stat.";
+			next;
+			goto EnchantList;
+			break;
+		case 2:
+			mes .npc$;
+			mes "Special slot boosts your power based on the category you choose.";
+			mes "Maximum level of enchantment is 9";
+			next;
+			mes .npc$;
+			mes "^54c354Fighting Spirit^000000 boosts your attack power and hit.";
+			mes "^eed331Expert Archer^000000 boosts your ranged attack damage.";
+			mes "^504cbaSpell Power^000000 boosts your magic attack and reduces variable cast time.";
+			next;
+			goto EnchantListSpecial;
+			break;
+		case 3:
+			goto EnchantInfoMenu;
+			break;
+		case 4:
+			goto L_end;
+			break;
+	}
+	end;
+	
+EnchantListSpecial:
+	mes .npc$;
+	mes "Please select enchantment category to view enchantment effect for each level.";
+	next;
+	switch(select("Fighting Sprirt:Expert Archer:Spell Power:Back:Canel")) {
+		case 1:
+			mes .npc$;
+			mes "Level 9: ATK +30, HIT +5";
+			mes "Level 8: ATK +27, HIT +5";
+			mes "Level 7: ATK +24, HIT +5";
+			mes "Level 6: ATK +21, HIT +5";
+			mes "Level 5: ATK +18, HIT +5";
+			mes "Level 4: ATK +15, HIT +5";
+			mes "Level 3: ATK +12, HIT +4";
+			mes "Level 2: ATK +9, HIT +3";
+			mes "Level 1: ATK +6, HIT +2";
+			next;
+			goto EnchantListSpecial;
+			break;
+		case 2:
+			mes .npc$;
+			mes "Level 9: Ranged Attack Damage +18%";
+			mes "Level 8: Ranged Attack Damage +16%";
+			mes "Level 7: Ranged Attack Damage +14%";
+			mes "Level 6: Ranged Attack Damage +12%";
+			mes "Level 5: Ranged Attack Damage +10%";
+			mes "Level 4: Ranged Attack Damage +8%";
+			mes "Level 3: Ranged Attack Damage +6%";
+			mes "Level 2: Ranged Attack Damage +4%";
+			mes "Level 1: Ranged Attack Damage +2%";
+			next;
+			goto EnchantListSpecial;
+			break;
+		case 3:
+			mes .npc$;
+			mes "Level 9: MATK +30, Casting Time -10%";
+			mes "Level 8: MATK +27, Casting Time -10%";
+			mes "Level 7: MATK +24, Casting Time -10%";
+			mes "Level 6: MATK +21, Casting Time -10%";
+			mes "Level 5: MATK +18, Casting Time -10%";
+			mes "Level 4: MATK +15, Casting Time -10%";
+			mes "Level 3: MATK +12, Casting Time -8%";
+			mes "Level 2: MATK +9, Casting Time -6%";
+			mes "Level 1: MATK +6, Casting Time -4%";
+			next;
+			goto EnchantListSpecial;
+			break;
+		case 4:
+			goto EnchantList;
+			break;
+		case 5:
+			goto L_end;
+			break;
+	}
+	end;
+	
+	
+	if(countitem(2286)){
+		mes "What can I help you on your ^000099Elven Ears^000000?";
+
+		next;
+		
+		switch(select("Enchantment:Cancel")){
+			case 1: goto OnEnchant;
+			case 2: close;
+		}
+		close;
+	}else{
+		mes "Sorry, but you didn't have ^000099Elven Ears^000000.";
+		close;
+	}
+	close;
+
+OnEnchant:
+	mes .npc$;
+	if( (getequipid(EQI_HEAD_MID)!=2286) ) {
+		if(countitem(2286)){
+			mes "Please equip your ^000099Elven Ears^000000 if you want to have it enchanted.";
+			next;
+			switch(select("Equip:Don't equip")){
+				case 1:
+					equip 2286;
+					break;
+				case 2:
+					close;
+			}
+		} else {
+			mes "Sorry, but you do not have ^000099Elven Ears^000000.";
+			close;			
+		}
+	}
+	mes "An enchantment will cost";
+	mes "^ff32321,000,000^000000 zeny.";
+	mes "Please select the slot you want to enchant.";
+	next;
+	switch(select("Special Enchantment (Slot4):Normal Enchantment (Slot3)")){
+		case 1: goto OnSpecial;
+		case 2: goto OnNormal;
+	}
+	close;
+
+OnNormal:
+	mes .npc$;
+	mes "This slot increases Primary Stat.";
+	mes "STR AGI VIT INT DEX LUK"; 
+	mes "Select your preferred enchantment.";
+	next;
+	switch(select("STR Enchant:AGI Enchant:VIT Enchant:INT Enchant:DEX Enchant:LUK Enchant")){
+		case 1:
+			set .@enc, 1;
+			break;
+		case 2:
+			set .@enc, 2;
+			break;
+		case 3:
+			set .@enc, 3;
+			break;
+		case 4:
+			set .@enc, 4;
+			break;
+		case 5:
+			set .@enc, 5;
+			break;
+		case 6:
+			set .@enc, 6;
+			break;
+	}
+	if( @slotNormal ) {
+		mes .npc$;
+		mes "Hmm.. it seems that slot has already been enchanted.";
+		mes "Do you want to re-enchanted?";
+		switch(select("No:Yes")){
+			case 1: close;
+			case 2: break;
+		}
+		next;
+	}
+	switch( .@enc ){
+		case 1: //STR
+			set .@i, rand(1,135);
+			if ( .@i<21) set .@enchant, 4700;
+			else if ( .@i<41) set .@enchant, 4701;
+			else if ( .@i<61) set .@enchant, 4702;
+			else if ( .@i<76) set .@enchant, 4703;
+			else if ( .@i<91) set .@enchant, 4704;
+			else if ( .@i<106) set .@enchant, 4705;
+			else if ( .@i<116) set .@enchant, 4706;
+			else if ( .@i<126) set .@enchant, 4707;
+			else if ( .@i<136) set .@enchant, 4708;
+			break;
+		case 4:	//INT
+			set .@i, rand(1,135);
+			if ( .@i<21) set .@enchant, 4710;
+			else if ( .@i<41) set .@enchant, 4711;
+			else if ( .@i<61) set .@enchant, 4712;
+			else if ( .@i<76) set .@enchant, 4713;
+			else if ( .@i<91) set .@enchant, 4714;
+			else if ( .@i<106) set .@enchant, 4715;
+			else if ( .@i<116) set .@enchant, 4716;
+			else if ( .@i<126) set .@enchant, 4717;
+			else if ( .@i<136) set .@enchant, 4718;
+			break;
+		case 5: //DEX
+			set .@i, rand(1,135);
+			if ( .@i<21) set .@enchant, 4720;
+			else if ( .@i<41) set .@enchant, 4721;
+			else if ( .@i<61) set .@enchant, 4722;
+			else if ( .@i<76) set .@enchant, 4723;
+			else if ( .@i<91) set .@enchant, 4724;
+			else if ( .@i<106) set .@enchant, 4725;
+			else if ( .@i<116) set .@enchant, 4726;
+			else if ( .@i<126) set .@enchant, 4727;
+			else if ( .@i<136) set .@enchant, 4728;
+			break;
+		case 2: //AGI
+			set .@i, rand(1,135);
+			if ( .@i<21) set .@enchant, 4730;
+			else if ( .@i<41) set .@enchant, 4731;
+			else if ( .@i<61) set .@enchant, 4732;
+			else if ( .@i<76) set .@enchant, 4733;
+			else if ( .@i<91) set .@enchant, 4734;
+			else if ( .@i<106) set .@enchant, 4735;
+			else if ( .@i<116) set .@enchant, 4736;
+			else if ( .@i<126) set .@enchant, 4737;
+			else if ( .@i<136) set .@enchant, 4738;
+			break;
+		case 3: //VIT
+			set .@i, rand(1,135);
+			if ( .@i<21) set .@enchant, 4740;
+			else if ( .@i<41) set .@enchant, 4741;
+			else if ( .@i<61) set .@enchant, 4742;
+			else if ( .@i<76) set .@enchant, 4743;
+			else if ( .@i<91) set .@enchant, 4744;
+			else if ( .@i<106) set .@enchant, 4745;
+			else if ( .@i<116) set .@enchant, 4746;
+			else if ( .@i<126) set .@enchant, 4747;
+			else if ( .@i<136) set .@enchant, 4748;
+			break;
+		case 6: //LUK
+			set .@i, rand(1,135);
+			if ( .@i<21) set .@enchant, 4750;
+			else if ( .@i<41) set .@enchant, 4751;
+			else if ( .@i<61) set .@enchant, 4752;
+			else if ( .@i<76) set .@enchant, 4753;
+			else if ( .@i<91) set .@enchant, 4754;
+			else if ( .@i<106) set .@enchant, 4755;
+			else if ( .@i<116) set .@enchant, 4756;
+			else if ( .@i<126) set .@enchant, 4757;
+			else if ( .@i<136) set .@enchant, 4758;
+			break;
+		default:
+			mes .npc$;
+			mes "There is something wrong. Please try again.";
+			close;
+	}
+	mes .npc$;
+	if(Zeny<1000000){
+		mes "You don't have enough zeny.";
+		mes "^0000991,000,000z^000000";
+		close;
+	}
+	if( (getequipid(EQI_HEAD_MID)!=2286) ) {
+		mes "Please equip your ^000099Elven Ears^000000 if you want to have it enchanted.";
+		close;
+	}
+	Zeny -= 1000000;
+	mes "Your ^000099Elven Ears^000000 has been enchanted";
+	mes "^000099"+getitemname(.@enchant)+"^000000";
+	@slotNormal = getequipcardid(EQI_HEAD_MID,2);
+	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
+	delitem2 2286,1,1,0,0,0,0,@slotNormal,@slotSpecial;
+	getitem2 2286,1,1,0,0,0,0,.@enchant,@slotSpecial;
+	equip 2286;
+	specialeffect2 1019;
+	specialeffect2 98;
+	close;
+
+OnSpecial:
+	mes .npc$;
+	mes "This slot increases Special Stats.";
+	mes "Spell: MATK and Casting Time.";
+	mes "Fighting Spirit: ATK and HIT.";
+	mes "Expert Archer: Ranged Attack.";
+	mes "Select your preferred enchantment.";
+	next;
+	switch(select("Spell (Force):Fighting Spirit:Expert Archer")){
+		case 1:
+			set .@enc, 1;
+			break;
+		case 2:
+			set .@enc, 2;
+			break;
+		case 3:
+			set .@enc, 3;
+			break;
+	}
+	if( @slotSpecial ) {
+		mes .npc$;
+		mes "Hmm.. it seems that slot has already been enchanted.";
+		mes "Do you want to re-enchanted?";
+		switch(select("No:Yes")){
+			case 1: close;
+			case 2: break;
+		}
+		next;
+	}
+	switch( .@enc ){
+		case 1:
+			set .@i, rand(998);
+			if ( .@i<330) set .@enchant, 4815;
+			else if ( .@i<580) set .@enchant, 4814;
+			else if ( .@i<760) set .@enchant, 4813;
+			else if ( .@i<880) set .@enchant, 4812;
+			else if ( .@i<950) set .@enchant, 4826;
+			else if ( .@i<980) set .@enchant, 4827;
+			else if ( .@i<990) set .@enchant, 4828;
+			else if ( .@i<995) set .@enchant, 4829;
+			else if ( .@i<998) set .@enchant, 4830;
+			break;
+		case 2:
+			set .@i, rand(998);
+			if ( .@i<330) set .@enchant, 4811;
+			else if ( .@i<580) set .@enchant, 4810;
+			else if ( .@i<760) set .@enchant, 4809;
+			else if ( .@i<880) set .@enchant, 4808;
+			else if ( .@i<950) set .@enchant, 4820;
+			else if ( .@i<980) set .@enchant, 4821;
+			else if ( .@i<990) set .@enchant, 4822;
+			else if ( .@i<995) set .@enchant, 4823;
+			else if ( .@i<998) set .@enchant, 4824;
+			break;
+		case 3:
+			set .@i, rand(998);
+			if ( .@i<330) set .@enchant, 4832;
+			else if ( .@i<580) set .@enchant, 4833;
+			else if ( .@i<760) set .@enchant, 4834;
+			else if ( .@i<880) set .@enchant, 4835;
+			else if ( .@i<950) set .@enchant, 4836;
+			else if ( .@i<980) set .@enchant, 4837;
+			else if ( .@i<990) set .@enchant, 4838;
+			else if ( .@i<995) set .@enchant, 4839;
+			else if ( .@i<998) set .@enchant, 4840;
+			break;
+		default:
+			mes .npc$;
+			mes "There is something wrong. Please try again.";
+			close;
+	}
+	mes .npc$;
+	if(Zeny<1000000){
+		mes "You don't have enough zeny.";
+		mes "^0000991,000,000z^000000";
+		close;
+	}
+	if( (getequipid(EQI_HEAD_MID)!=2286) ) {
+		mes "Please equip your ^000099Elven Ears^000000 if you want to have it enchanted.";
+		close;
+	}
+	Zeny -= 1000000;
+	mes "Your ^000099Elven Ears^000000 has been enchanted";
+	mes "^000099"+getitemname(.@enchant)+"^000000";
+	@slotNormal = getequipcardid(EQI_HEAD_MID,2);
+	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
+	delitem2 2286,1,1,0,0,0,0,@slotNormal,@slotSpecial;
+	getitem2 2286,1,1,0,0,0,0,@slotNormal,.@enchant;
+	equip 2286;
+	specialeffect2 1019;
+	specialeffect2 98;
+	close;
+
+OnInit:
+	.npc$ = "[^AA0000ElvenEars Knight^000000]";
+}

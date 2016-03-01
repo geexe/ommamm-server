@@ -1,13 +1,12 @@
 //Endless Tower Challenge
 
-izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	469,{
+izlude,105,140,3	script	Endeless Tower Challenge::endgame_endless	709,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
 	mes " ";
 	mes "Prove yourself that you really love Ragnarok Online.";
 	mes "We will reward only the utmost dedication to the game.";
-	
 	next;
 	mes "[Challenge]";
 	mes "This is a challenge to prove that your knowledge and preparation are second to none.";
@@ -15,57 +14,52 @@ izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	469,{
 	switch(select("Quest Info:Claim Reward:Cancel")){
 	case 1:
 		mes "[Challenge]";
-		mes "You must finish 100 rooms in the Endless Tower and slay the bosses:";
-		for (.@i = 0; .@i < getarraysize(.endlessmvp); .@i++) {
-			mes .@i+1 + ". " + strmobinfo(1,.endlessmvp[.@i]);
+		mes "You must ascend 100 floors of the Endless Tower, slay the bosses at the top of the tower and liberate";
+		mes "^e53535Lost Souls^000000";
+		next;
+		mes "[Challenge]";
+		mes "When you have completed Endless Tower and liberated Lost Souls, you can claim the reward from me.";
+		next;
+		mes "[Challenge]";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
 		}
 		next;
 		mes "[Challenge]";
-		mes "When you have completed Endless Tower instance, you can claim the reward from me.";
-		mes " ";
-		mes "The reward for this quest is";
-		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
-			mes .@k+1 + ". " + getitemname(.reward[.@k]);
-		}
-		next;
-		//display completed MVPs
-
-		if(getarraysize(endlesskill)) {
-			mes "MVPs you have completed:";
-			for (.@i = 0; .@i < getarraysize(.endlessmvp); .@i++) {
-				if(endlesskill[.@i] == .endlessmvp[.@i]) {
-					mes strmobinfo(1,endlesskill[.@i]);
-				}
-			}
-		}
-		else {
-			mes "End the Endless!";
-		}
+		mes "Lost Souls await salvation.";
 		break;
 	case 2:
 		mes "[Challenge]";
 		//check to see if character has received the reward
 		if(!getommammreward_endless) {
-			for (.@i = 0; .@i < getarraysize(.endlessmvp); .@i++) {
-				if(endlesskill[.@i] == .endlessmvp[.@i]) {
-					.@mvpcount += 1;
-				}
-			}
-			//check to see if all MVPs have been completed
-			if(.@mvpcount == getarraysize(.endlessmvp)) {
+		
+			//check to see if ET has been completed
+			if(endless_complete) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
-				
+				next;
+				switch(select("Yes:No")) {
+				case 1: 
+					break;
+				case 2:
+					mes "[Challenge]";
+					mes "Come back when you want to claim the reward";
+					close;
+				}
 				//check weight and inventory 
-				if(checkweight(.reward,1)) {
+				if(checkweight2(.reward,.reward_quantity)) {
 					//Set variable to prevent player from getting multiple items
 					getommammreward_endless = 1;
 					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 						getitembound .reward[.@k], .reward_quantity[.@k], 1;
 					}
+					mes "[Challenge]";
+					mes "Congratulations on your achievement! Enjoy your reward.";
+					close;
 				}
 				else {
-					mes "You do not enough space.";
+					mes "You do not have enough space.";
 					mes "Please clear your inventory and come back again.";
 				}
 			}
@@ -82,47 +76,10 @@ izlude,105,140,4	script	Endeless Tower Challenge::endgame_endless	469,{
 	}
 	close;
 	
-OnNPCKillEvent:
-	if(!.party || !getcharid(1)) {	
-		for (.@i = 0; .@i < getarraysize(.endlessmvp); .@i++) {
-			if(killedrid == .endlessmvp[.@i]) {
-				setarray endlesskill[.@i], killedrid;
-				dispbottom "[Challenge] Endless MVP killed: " + strmobinfo(1,killedrid);
-			}
-		}
-	} else if (.party) {
-		for (.@j = 0; .@j < getarraysize(.endlessmvp); .@j++) {
-			if(killedrid == .endlessmvp[.@j]) {
-				getmapxy(.@map1$,.@x1,.@y1,0);
-				getpartymember getcharid(1), 0;
-				getpartymember getcharid(1), 1;
-				getpartymember getcharid(1), 2;
-				for (.@i = 0; .@i < $@partymembercount; .@i++) {
-					if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
-						set .@HP, getvar(HP, $@partymembercid[.@i]);
-						if (.@HP > 0) {
-							getmapxy(.@map2$,.@x2,.@y2,0);
-							if ((.@map1$ == .@map2$ || .Party == 1) && (distance(.@x1,.@y1,.@x2,.@y2) <= 30 || .Party < 3)) {
-								attachrid($@partymemberaid[.@i]);
-								setarray endlesskill[.@j], killedrid;
-								dispbottom "[Challenge] Endless MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	end;
-	
 OnInit:
-	//monsters to kill
-	setarray .endlessmvp[0],1956,1957;
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
 	setarray .reward[0],20737,6233,6228,16755,16753;	
 	setarray .reward_quantity[0],1,1,1,5,5;
-	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
-	.party = 2;
 	end;
-	}
+}

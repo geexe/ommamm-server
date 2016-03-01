@@ -1,46 +1,194 @@
-izlude,118,145,4	script	Server Info	837,{
+izlude,121,153,4	script	Server Info	837,{
+	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
 	
-	mes "[Server Info]";
-	mes "Temporary up/down time until Ommamm cafe opens.";
-	mes "Up time: All-day on Weekend";
-	mes "All-night weekday";
-	mes "Monday Night, Tuesday Morning";
-	mes "Friday Morning";
-	mes "Other times depending on our schedule";
+	mes .npc$;
+	mes "สวัสดี  " + strcharinfo(0);
+	mes "คุณสามารถดูข้อมูลพื้นฐานของ Ommamm Server ได้ที่นี่";
 	next;
-	mes "[Server Info]";
+	goto Info_Menu;
+
+Info_Menu:
+	menu "^FF0000Update^000000",Update_Info,"แนวคิดของ Ommamm RO", Ommamm_principles, "ข้อมูลเซิฟเวอร์", Basic_info, "@ Command ที่อนุญาตให้ใช้", Command_allow, "Cancel", Lend;
+
+Update_Info:
+	mes .npc$;
+	mes "^FF0000Update 4 ภุมภาพันธ์ 2559^000000";
+	mes "^FF0000***โปรด Download Mini-Client ตัวใหม่ เพื่อสามารถใช้ Features ใหม่ และป้องกันการ Crash***^000000";
+	mes "Balance:";
+	mes "1.  ปรับลด Exp จาก x20 เป็น x15";
+	mes "2.  หลัง lv 150 Exp ที่ใช้ในการ อัพแต่ละ lv จะมากขึ้น  1.5 เท่า";
+	mes "3. เพิ่ม Drop Rate ของหายาก ของ Mini Boss หลายๆ ตัว";
+	next;
+	mes "NPC";
+	mes "1.CardTrader แลก Card เป็น point เพื่อแลก item ต่างๆใน อนาคต";
+	mes "2.แลก Card Point เป็นเงิน, ต้องการเงินสด Card คุณช่วยได้";
+	mes "3.NPC เปลี่ยน อาชีพ Rebellion";
+	mes "4.ยกเลิก Donationx2";
+	next;
+	mes "Event";
+	mes "1.ommamm Defense มีการแบ่งระดับ ตามความ เหมาะสม และสามารถเล่นได้ทุกๆคนแล้ว (เลเวล 100+)";
+	mes "โดยมี ระดับ ง่าย กลาง ยาก และ หฤโหด";
+	mes "และมีรางวัลแตกต่างกันไปตามระดับความยาก";
+	next;
+	mes "Challenge";
+	mes "^FF0000The Sign Challenge^000000: หนึ่งใน เควส ที่ยากมากในเกมนี้ รางวัลคือ";
+	mes "		gold x6";
+	mes "		Small Devil Horns x1";
+	mes "		TCG Card x500";
+	mes "		Unbreakable Armor Box x3";
+	mes "		Unbreakable Weapon Box x3";
+	next;
+	mes " Cash Shop Update";
+	mes "^FF0000ทั้งหมดเป็นของ Limited หมดเขตวันที่ 29 กุมภาพันธ์^000000";
+	mes "1. Palace Guard Cap";
+	mes "2. Iron Nail";
+	mes "3. Headgear of Siegfried";
+	mes "4. Kaften";
+	mes "5. Circlet of Kriem Hild";
+	mes "6. Exorcist Robe";
+	mes "7. Diadem of Brinhild";
+	mes "8. Gyges Ring";
+	next;
+	goto Info_Menu;
+	end;
+	
+Ommamm_principles:
+	mes .npc$;
+	mes "Ommamm RO สร้างขึ้นเพื่อต้องการรวมกลุ่มผู้ที่รักเกม Ragnarok Online และต้องการจะสัมผัส Ragnarok ตามแบบฉบับ Renewal ในบรรยากาศที่เป็นกันเอง โดยไม่จำเป็นต้องเล่นใน Ragnarok Online Official Server ซึ่งมีบรรยากาศการแข่งขันที่สูง รวมถึงมีบอทและผู้เล่นที่ไม่พึงประสงค์เป็นจำนวนมาก";
+	next;
+	mes .npc$;
+	mes "เพื่อให้บรรลุจุดประสงค์ดังกล่าว Ommamm RO จึงได้ใช้ Ragnarok Online Server เวอร์ชั่นใหม่ล่าสุดจาก rAthena ผู้พัฒนา Ragnarok Online Emulator (หรือที่เรียกกันง่ายๆว่าเซิฟเถื่อน) ";
+	mes "โดยตัวเซิฟเวอร์มีความใกล้เคียงกับ Official kRO จาก Gravity (ผู้พัฒนาเกม Ragnarok Online) มากที่สุดในปัจจุบัน";
+	next;
+	mes .npc$;
+	mes "แต่เนื่องจาก Database ของตัวเกมที่เป็นภาษาไทยยังตามหลัง kRO อยู่มาก (ประมาณ 3 ปี) ทีมงานจึงเห็นควรนำ Database ภาษาอังกฤษ ที่มีการ update มากกว่า (ตามหลังไม่เกิน 1 ปี) มาใช้งานแทน";
+	next;
+	mes .npc$;
+	mes "ในการพัฒนา Ommamm RO ทีมงานต้องการจะให้การเล่นมีเป้าหมายที่แตกต่างไปจากการเล่น Ragnarok Online ในแบบที่ทุกคนคุ้นเคย โดย Ommamm RO จะไม่มุ่งเน้นการเล่นในรูปแบบ PvP หรือว่า Guildwar เหมือนเช่นเซิฟเวอร์อื่นๆ";
+	mes "ระบบ PvP จะยึดตาม Official Server เพื่อให้ผู้เล่นสามารถสนุกกับการดวลกับเพื่อนๆ ได้ แต่จะไม่มีการเปิดระบบ Guildwar เนื่องจากข้อจำกัดในเรื่องจำนวนผู้เล่น";
+	next;
+	mes .npc$;
+	mes "ทีมงาน Ommamm RO ต้องการให้ทุกคนได้สัมผัส Ragnarok Online ในมิติของการค้นพบสิ่งใหม่ๆ จากโลกของ RO ร่วมกับเพื่อนๆ และสร้างสังคมในเกมส์ที่เกื้อกูลกันให้สามารถบรรลุวัตุประสงค์ และ 'ชนะ' เกมส์ให้ได้";
+	mes "ไม่ใช่เป็นการเล่นเพื่อสร้างตัวละครไป 'วอ' ได้อย่างเดียว แต่ต้องการให้ทุกคนได้สนุกไปกับการสร้างตัวละคร เก็บเวล หาของ และปาร์ตี้ร่วมกัน";
+	next;
+	mes .npc$;
+	mes "ด้วยเหตุนี้ ทีมงานจึงได้ปรับแต่ง Ommamm RO ให้มีความใกล้เคียงกับ Official Ragnarok Online มากที่สุด";
+	mes "การเพิ่มค่าประสบการณ์ โอกาสการดรอปไอเท็ม และสิ่งอำนวยความสะดวกที่นอกเหนือจาก Official RO เพียงเพื่อให้เหมาะสมกับจำนวนผู้เล่น และลดเวลาการเล่นในส่วนที่ได้อรรถรสต่ำเท่านั้น";
+	next;
+	mes .npc$;
+	mes "สุดท้ายนี้หวังว่าทุกคนจะสนุกกับการเล่นใน Ommamm RO และหาแนวทางการเล่นที่เหมาะสมกับตัวเองได้มากสุด";
+	mes "ทีมงาน Ommamm RO ขอบคุณทุกคนที่ร่วมเป็นส่วนหนึ่งของการสร้างสรรค์เล็กๆ ของพวกเรา";
+	next;
+	goto Info_Menu;
+	end;
+
+Basic_info:
+	mes .npc$;
+	mes "^FF00001. อัตราการคูณพื้นฐาน:^000000";
+	mes "สามารถดูได้โดยใช้คำสั่ง @rates";
+	next;
+	mes .npc$;
+	mes "^FF00002. Party:^000000";
+	mes "ปรับ Party Share Bonus เพิ่มจาก 20% เป็น 40% ต่อสมาชิก 1 คน";
+	mes "ปรับช่วงเวเวลที่สามารถแชกันได้จาก 15 เวเวล เป็น 17 เวเวล";
+	next;
+	mes .npc$;
+	mes "^FF00003. NPC ต่างๆ  ในเมือง Izlude :^000000";
+	mes "<ชื่อ NPC> (พิกัด)";
+	mes "Healer (134,147)";
+	mes "warper (131,148)";
+	mes "kafra (124,148)";
+	mes "Tool Dealer (121,147)";
+	mes "Production Shop (152,120)"; 
+	mes "BlankEyes Knight (129,153)";
+	mes "ElvenEars Knight (132,153)";
+	mes "Stylist (136,126)";
+	mes "Reset Girl (153,147)";
+	mes "Bomb Lucky (147,142)";
+	mes "Ommamm Defense (150,142)";
+	mes "TCG Converter (119,126)";
+	mes "Biolab Challenge (100,140)";
+	mes "New World Challenge (108,136)";
+	mes "Endless Tower Challenge (105,140)";
+	mes "Refine Master (157,129)";
+	mes "Rebellion Job Changer (160,137)";
+	next;
+	
+	mes .npc$;
+	mes "^FF00004. Function อื่นๆ^000000";
+	mes "สามารถเปิดดูอุปกรณ์สวมใส่ของผู้เล่นอื่นได้";
+	mes "ทรงผม 97 ทรง";
+	mes "สีผม 10 สี";
+	mes "สีชุด 3 สี (มีสีดำสนิทเป็นสีที่ 4)";
+	mes "Sprite jRO ของอาชีพ Genetics และ Guillotine Cross";
+	next;
+	goto Info_Menu;
+	end;
+	
+Command_allow:
+	mes .npc$;
+	mes "Available @ Command:";
+	mes "^FF0000@rates^000000 - แสดงอัตราการคูณของเซิฟเวอร์";
+	mes "^FF0000@mi <monster name OR monster ID>^000000 - แสดงข้อมูลมอนสเตอร์";
+	mes "^FF0000@time^000000 - แสดงเวลาของเซิฟเวอร์";
+	mes "^FF0000@autotrade^000000 - สามารถตั้งร้านรับ/ขายของ โดยไม่ต้องออนไลน์ (เมื่อกดคำสั่งหลังจากตั้งร้านจะ logout แต่ร้านจะตั้งอยู่จนกว่าจะเข้าตัวละครอีกครั้ง หรือของหมด) ";
+	next;
+	goto Info_Menu;
+	end;
+	
+Lend:
+	mes .npc$;
+	mes "แล้วอย่าลืมเข้ามา Update เรื่อยๆนะ";
+	close;
+	end;
+	
+	/*mes .npc$;
 	mes "Maintainace: Wednesday morning";
 	mes " ";
-	mes "Down Time: Monday Morning";
-	mes "Tuesday Night, Wednesday Night";
-	mes "Friday Night";
+	mes "Down time only due to unexpected events such as electrical or internet outage.";
 	next;
-	mes "Other features will be released";
-	mes "as necessarily";
+	mes .npc$;
+	mes "Other features will be released periodically";
 	mes " ";
-	mes "It would be great if we can";
-	mes "here your feed back";
+	mes "Please tell us what you think!";
+	mes "We appreciate all feedback.";
 	mes "    Thank You ";
-	close;
+	close;*/
 	
 OnInit:
 	waitingroom "Server Info",0;
 	end;
 }
 
-izlude,153,120,4	script	Refill Info		815,{
+izlude,116,126,3	script	Donation Info		815,{
+	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
 	
-	mes "[Refill Rate]";
+	mes .npc$;
+	mes "Ommamm RO เกิดขึ้นจากความรัก (ความบ้า) เกม Ragnarok Online ของทีมงาน และต้องการให้เพื่อนๆ มาติดเกมร่วมกัน โดยไม่ได้หวังผลกำไรแต่อย่างใด";
+	mes "ผู้เล่นทุกคนสามารถหา Cash Point ได้มากมายจากกิจกรรมต่างๆในเกม โดยไม่จำเป็นจะต้องเติมเงิน";
+	next;
+	mes .npc$;
+	mes "จุดประสงค์ในการเติมเงินนั้นเพื่อให้ไอเท็มต่างๆมีคุณค่าต่อผู้เล่น รวมถึงเป็นช่องทางในการบริจาคเพื่อเป็นกำลังใจให้กับทีมงาน";
+	mes "เงินที่ได้ ทีมงานจะนำไปพัฒนาเซิฟเวอร์ให้มีความพร้อม และความสเถียรมากขึ้น และหากยังเหลือ เงิน อาจมีการจัด Meeting เพื่อให้ได้สังสรรค์กัน";
+	next;
+	mes .npc$;
+	mes " ";
 	mes "50 Baht 500 Cash Point";
 	mes "100 Baht 1100 Cash Point";
 	mes "200 Baht 2300 Cash Point";
 	mes "300 Baht 3600 Cash Point";
 	mes "500 Baht 6500 Cash Point";
 	mes "1000 Baht 15000 Cash Point";
-	mes "โอนเงินได้ที่เลขบัญชี ธนาคารไทยพาณิชย์ 045-573800-4";
-	mes "สรกฤต หอวงศ์รัตนะ";
+	next;
+	mes .npc$;
+	mes "โอนเงินได้ที่บัญชี";
+	mes "เลขที่ 128-2-24276-5";
+	mes "นาย ธันยกร หอวงศ์รัตนะ";
+	mes "ธนาคารทหารไทย";
+	mes "โทรศัพท์ 092-270-0972 หรือ 080-244-7769";
+	mes "Line ID: nonxe_h";
 	close;
 OnInit:
-	waitingroom "Refill Info",0;
+	waitingroom "Donation Info",0;
 	end;
 }

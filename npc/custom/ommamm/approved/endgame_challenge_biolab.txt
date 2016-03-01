@@ -1,6 +1,6 @@
 //Biolab Hunting Challenge
 
-izlude,100,140,4	script	Biolab Challenge::endgame_biolab	468,{
+izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -14,15 +14,16 @@ izlude,100,140,4	script	Biolab Challenge::endgame_biolab	468,{
 		mes "[Challenge]";
 		mes "You must kill all " + getarraysize(.biolabmvp) + " Biolab MVPs:";
 		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-			mes .@i+1 + ". " + strmobinfo(1,.biolabmvp[.@i]);
+			mes .@i+1 + ". " + "^e53535" + strmobinfo(1,.biolabmvp[.@i]) + "^000000";
 		}
 		next;
 		mes "[Challenge]";
 		mes "When you have killed all " + getarraysize(.biolabmvp) + " MVPs, you can claim the reward from me.";
-		mes " ";
+		next;
+		mes "[Challenge]";
 		mes "The reward for this quest is";
 		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
-			mes .@k+1 + ". " + getitemname(.reward[.@k]);
+			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
 		}
 		next;
 		//display completed MVPs
@@ -52,18 +53,27 @@ izlude,100,140,4	script	Biolab Challenge::endgame_biolab	468,{
 			if(.@mvpcount == getarraysize(.biolabmvp)) {
 				mes "You have completed the challenge";
 				mes "Do you want to claim the reward?";
-				
+				switch(select("Yes:No")) {
+				case 1: 
+					break;
+				case 2:
+					mes "[Challenge]";
+					mes "Come back when you want to claim the reward";
+					close;
+				}
 				//check weight and inventory 
-				if(checkweight(.reward,1)) {
+				if(checkweight2(.reward,.reward_quantity)) {
 					//Set variable to prevent player from getting multiple items
 					getommammreward_biolab = 1;
 					//Cycle through the reward array
 					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 						getitembound .reward[.@k], .reward_quantity[.@k], 1;
 					}
-				}
-				else {
-					mes "You do not enough space.";
+					mes "[Challenge]";
+					mes "Congratulations on your achievement! Enjoy your reward.";
+					close;
+				} else {
+					mes "You do not have enough space.";
 					mes "Please clear your inventory and come back again.";
 				}
 			}
@@ -80,47 +90,14 @@ izlude,100,140,4	script	Biolab Challenge::endgame_biolab	468,{
 	}
 	close;
 	
-OnNPCKillEvent:
-	if(!.party || !getcharid(1)) {	
-		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-			if(killedrid == .biolabmvp[.@i]) {
-				setarray biolabkill[.@i], killedrid;
-				dispbottom "[Challenge] Biolab MVP killed: " + strmobinfo(1,killedrid);
-			}
-		}
-	} else if (.party) {
-		for (.@j = 0; .@j < getarraysize(.biolabmvp); .@j++) {
-			if(killedrid == .biolabmvp[.@j]) {
-				getmapxy(.@map1$,.@x1,.@y1,0);
-				getpartymember getcharid(1), 0;
-				getpartymember getcharid(1), 1;
-				getpartymember getcharid(1), 2;
-				for (.@i = 0; .@i < $@partymembercount; .@i++) {
-					if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i])) {
-						set .@HP, getvar(HP, $@partymembercid[.@i]);
-						if (.@HP > 0) {
-							getmapxy(.@map2$,.@x2,.@y2,0);
-							if ((.@map1$ == .@map2$ || .Party == 1) && (distance(.@x1,.@y1,.@x2,.@y2) <= 30 || .Party < 3)) {
-								attachrid($@partymemberaid[.@i]);
-								setarray biolabkill[.@j], killedrid;
-								dispbottom "[Challenge] Biolab MVP killed: " +strmobinfo(1,killedrid),0x99CC66,$@partymembercid[.@i];
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	end;
-	
 OnInit:
 	//monsters to kill
 	setarray .biolabmvp[0],1651,1650,1649,1648,1647,1646;
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],31100,6238,6232,2383;	
-	setarray .reward_quantity[0],1,1,1,1;
+	setarray .reward[0],31100,6238,6232,2383,16753,16755;	
+	setarray .reward_quantity[0],1,1,1,1,15,15;
 	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
-	.party = 1;
+	.party = 3;
 	end;
 	}

@@ -1,0 +1,3 @@
+//Biolab 4 EXP increase
+lhz_dun04	mapflag	bexp	250
+lhz_dun04	mapflag	jexp	250

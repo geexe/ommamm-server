@@ -1,0 +1,75 @@
+//Max Level Challenge
+
+izlude,96,136,5	script	Max Level Challenge::endgame_maxlv	936,{
+	mes "[Challenge]";
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Welcome to Ommamm Challenge.";
+	mes " ";
+	mes "Prove yourself that you really love Ragnarok Online.";
+	mes "We will reward only the utmost dedication to the game.";
+	next;
+	mes "[Challenge]";
+	mes "This is a challenge to prove that your determination in character-building is resolute.";
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	case 1:
+		mes "[Challenge]";
+		mes "You must build your character to the maximum level of";
+		mes "^e53535Base Lv 175^000000";
+		mes "^e53535Job Lv 60^000000";
+		next;
+		mes "[Challenge]";
+		mes "When you have reached the maximun level for both your base level and job level, you can claim the reward from me.";
+		next;
+		mes "[Challenge]";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
+		}
+		next;
+		mes "[Challenge]";
+		mes "Push it to the limit.";
+		break;
+	case 2:
+		mes "[Challenge]";
+		//check to see if character has received the reward
+		if(!getommammreward_maxlv) {
+		
+			//check to see ifthe requirements are met
+			if(BaseLevel == 175 && JobLevel == 60) {
+				mes "You have completed the challenge";
+				mes "Do you want to claim the reward?";
+				
+				//check weight and inventory 
+				if(checkweight2(.reward,.reward_quantity)) {
+					//Set variable to prevent player from getting multiple items
+					getommammreward_maxlv = 1;
+					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+						getitembound .reward[.@k], .reward_quantity[.@k], 1;
+					}
+				}
+				else {
+					mes "You do not have enough space.";
+					mes "Please clear your inventory and come back again.";
+				}
+			}
+			else {
+				mes "You have not completed the challenge.";
+			}
+		}
+		else {
+			mes "You have already received reward for this challenge.";
+		}
+		break;	
+	case 3:
+		break;
+	}
+	close;
+	
+OnInit:
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],7608,20500,7227,16755,16753;	
+	setarray .reward_quantity[0],1,1,700,5,5;
+	end;
+	}

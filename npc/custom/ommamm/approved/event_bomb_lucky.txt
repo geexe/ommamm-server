@@ -2,42 +2,44 @@
 
 //Reward NPCs=========================================================================================
 force_2-3,20,29,4	script	พนักงานของกิจกรรม#แพ้	10096,{
-set @npc$,"[^000080"+strnpcinfo(0)+"^000000]";
-set .@s$,strcharinfo(0);
+	set @npc$,"[^000080"+strnpcinfo(0)+"^000000]";
+	set .@s$,strcharinfo(0);
 
-mes "เสียใจด้วยนะถึงแพ้ก็ไม่เป็นไรหรอกนะ";
-mes "รับรางวัลสมน้ำหน้าคุณไปเลย...!!";
-getitem 7227,1;
-set Zeny, Zeny + 100000;
-dispbottom "คุณได้รับรางวัล TCG 1 ใบและ Cash Coin 1 อัน พร้อมเงิน 100,000z";
-warp "izlude",128,144;
-end;
+	mes "เสียใจด้วยนะถึงแพ้ก็ไม่เป็นไรหรอกนะ";
+	mes "รับรางวัลสมน้ำหน้าคุณไปเลย...!!";
+	getitem 7227,1;
+	set Zeny, Zeny + 100000;
+	dispbottom "คุณได้รับรางวัล TCG 1 ใบ พร้อมเงิน 100,000z";
+	next;
+	warp "izlude",128,144;
+	end;
 
 OnInit:
-waitingroom "แจกรางวัลสำหรับคนตกรอบ",0;
-end;
+	waitingroom "แจกรางวัลสำหรับคนตกรอบ",0;
+	end;
 }
 
 force_2-3,60,29,4	script	พนักงานของกิจกรรม#ชนะ	10095,{
-set @npc$,"[^000080"+strnpcinfo(0)+"^000000]";
-set .@s$,strcharinfo(0);
+	set @npc$,"[^000080"+strnpcinfo(0)+"^000000]";
+	set .@s$,strcharinfo(0);
 
-mes "ยินดีด้วยนะสำหรับผู้ชนะทุกท่าน คุณถือได้ว่าดวงดีมากๆ";
-mes "ผ่านมาได้ถือว่าแจ่มสุดๆ แต่คุณอย่าคิดว่าคุณจะดวงดีทุกวันเชียวนะ";
-mes "แต่ในเมื่อผ่านมาได้ถึงขนาดนี้ ก็สมควรที่จะได้รับรางวัลตอบแทน";
-getitem 7227,10;
-set Zeny, Zeny + 1000000;
-dispbottom "คุณได้รับรางวัล Zeny 1,000,000z";
-warp "izlude",128,144;
-end;
+	mes "ยินดีด้วยนะสำหรับผู้ชนะทุกท่าน คุณถือได้ว่าดวงดีมากๆ";
+	mes "ผ่านมาได้ถือว่าแจ่มสุดๆ แต่คุณอย่าคิดว่าคุณจะดวงดีทุกวันเชียวนะ";
+	mes "แต่ในเมื่อผ่านมาได้ถึงขนาดนี้ ก็สมควรที่จะได้รับรางวัลตอบแทน";
+	getitem 7227,10;
+	set Zeny, Zeny + 1000000;
+	dispbottom "คุณได้รับรางวัล TCG 10 ใบ พร้อมเงิน 1,000,000z";
+	next;
+	warp "izlude",128,144;
+	end;
 
 OnInit:
-waitingroom "แจกรางวัลสำหรับผู้ดวงดี",0;
-end;
+	waitingroom "แจกรางวัลสำหรับผู้ดวงดี",0;
+	end;
 }
 
 //Event NPCs=========================================================================================
-izlude,144,132,3	script	Bomb Lucky	577,{
+izlude,144,138,3	script	Bomb Lucky	577,{
 	
 	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
 	
@@ -62,40 +64,32 @@ Event_menu:
 	
 //--------------------------------GM-only Menu-----------------------
 Open_event:
-	.event_bomblucky = 1;
 	mes "The event is opened";
 	goto Event_start;
 //-------------------------------------------------------------------
 	
 Event_desc:
 	mes .npc$;
-	mes "^880000การเตรียมตัว: ไม่จำเป็นต้องนำอะไรไปขอให้นำใจและดวงไปอย่างเดี่ยว";
-	mes "^330000รายละเอียด: กิจกรรมนี้ จะให้คุณเลือก 4 ห้อง ซึ่ง ห้องใด ห้อง 1 จะมีระเบิด อยู่ และระเบิดจะตูมทีละห้อง ทั้งหมด 3 ครั้ง ถ้ายังรอดอยู่ก็จะได้รับรางวัล";
-	mes "^770000รางวัล: TCG 10ea และ Zeny 1m/คน^000000";
-	mes "^660000ผู้เข้าร่วม(ไม่ได้รางวัล): TCG 1ea/คน^000000";
+	mes "^e53535ผู้เล่นที่จะเข้าร่วมกิจกรรมต้องมีเวเวล 90 ขึ้นไป^000000";
+	mes "วิธีเข้าร่วมกิจกรรม คือ ให้คุณเลือกเข้าห้องทีคิดว่าจะไม่มีระเบิด ไปจนกว่าจะตกรอบหรือชนะ โดยรอบแรกจะมีให้เลือก 4 ห้อง และจะลดจำนวนลงรอบละ 1 ห้อง จนเหลือเพียงห้องสุดท้าย";
+	mes "ถ้าคุณเข้าห้องผิดเป็นห้องที่มีระเบิด ก็จะตกรอบแล้วได้รับรางวัลสมน้ำหน้า ก่อนจะถูกส่งกลับเมือง";
+	mes "รางวัลผู้ชนะ: ^1c3f89TCG 10ea และ Zeny 1,000,000^000000";
+	mes "รางวัลสมน้ำหน้า: ^1c3f89TCG 1ea และ Zeny 100,000^000000";
 	next;
 	goto Event_menu;
 	
 Event_time:
 	mes "เวลาเริ่มกิจกรรม";
-	mes "03:00, 07:00, 12:00, 17:00, 22:00";
+	mes "03:30, 07:30, 12:30, 17:30, 22:30";
 	next;
 	goto Event_menu;
 	
 Join_event:
-	mes "โชคดีนะท่าน";
-	for (.@i = 0; .@i < getarraysize(.charip$); .@i++) {
-		if (getcharip() == .charip$[.@i]) {
-			.@charcount += 1; 
-		}
-	}
-	if (.@charcount > 2) {
-		mes "กิจกรรมนี้อนุญาตให้เข้าร่วมได้ไม่เกิน 3 ตัวละครต่อ 1 IP";
-
+	if (BaseLevel < 90) {
+		mes "กิจกรรมนี้อนุญาตเฉพาะผู้ที่มีเลเวลมากกว่า 90 เท่านั้น";
 		close;
 	} else {
-		.@char_ip$ = getcharip();
-		setarray .charip$[getarraysize(.charip$)], getcharip();
+		mes "โชคดีนะท่าน";
 		warp "quiz_02",337,73;
 	}
 	end;
@@ -114,29 +108,34 @@ OnTimer5000:
 	announce "ขออภัยผู้เล่นทุกท่านในความไม่สะดวก....",bc_all,0xFFFF00;
 	end;
 OnTimer10000:
-	announce "ซึงตอนนี้ก็ถึงเวลา "+.@current_hour+.@current_min+" น. ซึ่งเป็นเวลาของ....",bc_all,0xFFFF00;
+	announce "ซึงตอนนี้ก็ถึงเวลา "+$@current_hour$+":"+$@current_min$+" น. ซึ่งเป็นเวลาของ....",bc_all,0xFFFF00;
 	end;
 OnTimer15000:
 	announce "......กิจกรรม Bomb Lucky (วัดดวง).....",bc_all,0xFFFF00;
 	end;
 OnTimer20000:
-	announce "มีเวลา 5 นาที ในการรับผู้เข้าร่วมเล่นกิจกรรม",bc_all,0xFFFF00;
+	announce "อีก 5 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที" ,bc_all,0xFFFF00;
 	end;
 OnTimer60000:
-	announce "เหลือเวลาอีก 4 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	announce "อีก 4 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที",bc_all;
 	end;
 OnTimer120000:
-	announce "เหลือเวลาอีก 3 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	announce "อีก 3 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที",bc_all;
 	end;
 OnTimer180000:
-	announce "เหลือเวลาอีก 2 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	announce "อีก 2 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที",bc_all;
 	end;
 OnTimer240000:
-	announce "เหลือเวลาอีก 1 นาทีในการเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	announce "อีก 1 นาที จะเปิดให้เข้าร่วมกิจกรรม Bomb Lucky ซึ่งจะเปิดให้เข้าร่วมเพียง 20 วินาที",bc_all;
 	end;
 OnTimer300000:
-	.event_bomblucky = 0;
+	stopnpctimer;
+	setnpctimer 0;
+	announce "กิจกรรม Bomb Lucky เปิดแล้ว รีบเข้าไปก่อนที่เวลาจะหมด!!",bc_all;
+	.event_bomblucky = 1;
+	sleep 20000;
 	announce "หมดเวลาเข้าร่วมกิจกรรม Bomb Lucky",bc_all;
+	.event_bomblucky = 0;
 	sleep 8000;
 	areaannounce "quiz_02",310,87,359,34,"วิธีเข้าร่วมกิจกรรม คือ ให้คุณเลือกเข้าห้องทีคิดว่าจะไม่มีระเบิด ไปจนกว่าจะตกรอบหรือชนะ",0xFFFF00;
 	sleep 4000;
@@ -162,8 +161,8 @@ Round_standby:
 	if(.warp4) {
 		enablenpc "BombLucky_Warp4";
 	}
-	areaannounce "quiz_02",310,87,359,34,"กรุณาเลือกห้องที่คุณคิดว่าน่าจะไม่มีระเบิดภายในเวลา 1 นาที",0xFFFF00;
-	sleep 60000;
+	areaannounce "quiz_02",310,87,359,34,"กรุณาเลือกห้องที่คุณคิดว่าน่าจะไม่มีระเบิดภายในเวลา 20 วินาที",0xFFFF00;
+	sleep 20000;
 	areaannounce "quiz_02",310,87,359,34,"หมดเวลาในการเข้าห้อง ผู้ที่ไม่ได้อยู่ในห้องจะถูกส่งกลับโดยไม่ได้รับรางวัลอะไรเลยเนื่องจากไม่ทำตามข้อตกลง",0xFFFF00;
 	areawarp "quiz_02",310,87,358,59,"izlude",126,141;
 	disablenpc "BombLucky_Warp1";
@@ -184,7 +183,7 @@ Round_standby:
 	}
 
 Round_1:
-	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่าละ....",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่า....",0xFFFF00;
 	sleep 5000;
 	areaannounce "quiz_02",310,87,359,34,"3",0xFFFF00;
 	sleep 1000;
@@ -193,7 +192,7 @@ Round_1:
 	areaannounce "quiz_02",310,87,359,34,"1",0xFFFF00;
 	sleep 1000;
 	.@bomb = rand(1,4);
-	areaannounce "quiz_02",310,87,359,34,"ระเบิดนั้นอยู่ในห้องหมายเลย ..."+.@bomb+"...ค่ะ....",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"ระเบิดนั้นอยู่ในห้องหมายเลย ..."+.@bomb+"...",0xFFFF00;
 	sleep 1000;
 	areaannounce "quiz_02",310,87,359,34,"........ระเบิดทำงาน.......",0xFFFF00;
 	switch(.@bomb) {
@@ -223,16 +222,16 @@ Round_1:
 			break;
 	}
 	sleep 6000;
-	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
-	sleep 3000;
 	areaannounce "quiz_02",310,87,359,34,"เล่นเอาหายใจไม่ทั่วท้องกันเลยเดียว...",0xFFFF00;
 	sleep 3000;
-	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่านะคะ",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่า",0xFFFF00;
 	sleep 4000;
+	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
+	sleep 2000;
 	goto Round_standby;
 	
 Round_2:
-	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่าละ....",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่า....",0xFFFF00;
 	sleep 5000;
 	areaannounce "quiz_02",310,87,359,34,"3",0xFFFF00;
 	sleep 1000;
@@ -245,7 +244,7 @@ Round_2:
 	while (.@BombLuckyWarp[.@bomb - 1] == 0) {
 		.@bomb = rand(1,4);
 	}
-	areaannounce "quiz_02",310,87,359,34,"ระเบิดนั้นอยู่ในห้องหมายเลย ..."+.@bomb+"...ค่ะ....",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"ระเบิดนั้นอยู่ในห้องหมายเลย ..."+.@bomb+"...",0xFFFF00;
 	sleep 1000;
 	areaannounce "quiz_02",310,87,359,34,"........ระเบิดทำงาน.......",0xFFFF00;
 	switch(.@bomb) {
@@ -275,16 +274,16 @@ Round_2:
 			break;
 	}
 	sleep 6000;
-	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
-	sleep 3000;
 	areaannounce "quiz_02",310,87,359,34,"เล่นเอาหายใจไม่ทั่วท้องกันเลยเดียว...",0xFFFF00;
 	sleep 3000;
-	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่านะคะ",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"งั้นเรามาเริ่มกันต่อเลยดีกว่า",0xFFFF00;
 	sleep 4000;
+	areawarp "quiz_02",314,34,359,57,"quiz_02",337,73;
+	sleep 2000;
 	goto Round_standby;
 
 Round_3:
-	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่าละ....",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็มาเริ่มวัดดวงกันดีกว่า....",0xFFFF00;
 	sleep 5000;
 	areaannounce "quiz_02",310,87,359,34,"3",0xFFFF00;
 	sleep 1000;
@@ -297,7 +296,7 @@ Round_3:
 	while (.@BombLuckyWarp[.@bomb - 1] == 0) {
 		.@bomb = rand(1,4);
 	}
-	areaannounce "quiz_02",310,87,359,34,"ระเบิดนั้นอยู่ในห้องหมายเลย ..."+.@bomb+"...ค่ะ....",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"ระเบิดนั้นอยู่ในห้องหมายเลย ..."+.@bomb+"...",0xFFFF00;
 	sleep 1000;
 	areaannounce "quiz_02",310,87,359,34,"........ระเบิดทำงาน.......",0xFFFF00;
 	switch(.@bomb) {
@@ -327,9 +326,9 @@ Round_3:
 			break;
 	}
 	sleep 6000;
-	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็เหลือแค่ห้องเดียวแล้วนะคะ ที่ไม่มีระเบิด",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"ตอนนี้เราก็เหลือแค่ห้องเดียวแล้วที่ไม่มีระเบิด",0xFFFF00;
 	sleep 4000;
-	areaannounce "quiz_02",310,87,359,34,"ขอแสดงความยินดีกับผู้ชนะด้วยนะคะ...และขอขอบคุณทุกท่านที่สละเวลามาเข้าร่วมกิจกรรม ตอนนี้ให้ผู้ชนะไปรับรางวัลกันได้เลยค่ะ",0xFFFF00;
+	areaannounce "quiz_02",310,87,359,34,"ขอแสดงความยินดีกับผู้ชนะ..และขอขอบคุณทุกท่านที่สละเวลามาเข้าร่วมกิจกรรม ตอนนี้ให้ผู้ชนะไปรับรางวัลกันได้เลย",0xFFFF00;
 	if(.warp1) {
 		donpcevent "::OnBombLuckyWin1";
 	}
@@ -347,14 +346,17 @@ Round_3:
 	end;
 	
 //Event Time
-OnClock0300:
-OnClock0700:
-OnClock1200:
-OnClock1700:
-OnClock2200:
-	.event_bomblucky = 1;
-	.@current_hour = gettime(3);
-	.@current_min = gettime(2);
+OnClock0330:
+OnClock0730:
+OnClock1230:
+OnClock1730:
+OnClock2230:
+	$@current_hour$ = gettime(3);
+	$@current_min$ = gettime(2);
+	.warp1 = 1;
+	.warp2 = 1;
+	.warp3 = 1;
+	.warp4 = 1;
 	goto Event_start;
 	end;		
 	
@@ -640,6 +642,15 @@ quiz_02,356,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-3	139
 quiz_02,359,35,4	duplicate(BombLuckyEffect4)	BombLuckyEffect4#8-4	139
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+force_2-3	mapflag	nowarpto
+force_2-3	mapflag	noteleport
+force_2-3	mapflag	nosave	SavePoint
+force_2-3	mapflag	nomemo
+force_2-3	mapflag	nowarp
+force_2-3	mapflag	noreturn
+force_2-3	mapflag	noicewall
+force_2-3	mapflag	nobranch
 
 quiz_02	mapflag	nowarpto
 quiz_02	mapflag	noteleport

@@ -1,4 +1,4 @@
-izlude,132,153,3	script	BlankEyes Knight	420,{
+izlude,132,153,3	script	BlankEyes Knight	416,{
 	mes .npc$;
 	if(countitem(5102)){
 		mes "What can I help you on your ^000099Blank Eyes^000000?";

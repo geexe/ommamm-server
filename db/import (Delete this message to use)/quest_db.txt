@@ -5,3 +5,4 @@
 //
 // The MobID*, NameID*, and Rate* reflect special values for quests that can drop an item at given rate from given mob.
 // If no MobID* is given, then any mob has a chance to drop the given ItemID*.
+12322,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Leave Old Glast Heim"

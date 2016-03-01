@@ -1,4 +1,4 @@
-izlude,124,148,5	script	Kafra	94,{
+izlude,124,148,5	script	Kafra	861,{
 	mes .npc$;
 	mes "^000099"+strcharinfo(0)+"^000000";
 	mes "The Kafra Corporation is always working to provide you with convenient services. How may I be of assistance?";

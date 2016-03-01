@@ -1,2 +1,2 @@
 //import: db/import/item_groupid.txt
-
+import: db/import/item_costumebox.txt
