@@ -900,28 +900,28 @@ int unit_escape(struct block_list *bl, struct block_list *target, short dist)
  * @param dst_y: Y coordinate to warp to
  * @param easy: Easy(1) or Hard(0) path check (hard attempts to go around obstacles)
  * @param checkpath: Whether or not to do a cell and path check for NOPASS and NOREACH
- * @return 1: Success 0: Fail
+ * @return True: Success False: Fail
  */
-int unit_movepos(struct block_list *bl, short dst_x, short dst_y, int easy, bool checkpath)
+bool unit_movepos(struct block_list *bl, short dst_x, short dst_y, int easy, bool checkpath)
 {
 	short dx,dy;
 	uint8 dir;
 	struct unit_data        *ud = NULL;
 	struct map_session_data *sd = NULL;
 
-	nullpo_ret(bl);
+	nullpo_retr(false,bl);
 
 	sd = BL_CAST(BL_PC, bl);
 	ud = unit_bl2ud(bl);
 
 	if(ud == NULL)
-		return 0;
+		return false;
 
 	unit_stop_walking(bl, 1);
 	unit_stop_attack(bl);
 
 	if( checkpath && (map_getcell(bl->m,dst_x,dst_y,CELL_CHKNOPASS) || !path_search(NULL,bl->m,bl->x,bl->y,dst_x,dst_y,easy,CELL_CHKNOREACH)) )
-		return 0; // Unreachable
+		return false; // Unreachable
 
 	ud->to_x = dst_x;
 	ud->to_y = dst_y;
@@ -948,7 +948,7 @@ int unit_movepos(struct block_list *bl, short dst_x, short dst_y, int easy, bool
 			npc_touch_areanpc(sd, bl->m, bl->x, bl->y);
 
 			if (bl->prev == NULL) // Script could have warped char, abort remaining of the function.
-				return 0;
+				return false;
 		} else
 			sd->areanpc_id=0;
 
@@ -969,7 +969,7 @@ int unit_movepos(struct block_list *bl, short dst_x, short dst_y, int easy, bool
 		}
 	}
 
-	return 1;
+	return true;
 }
 
 /**
@@ -1236,6 +1236,7 @@ int unit_warp(struct block_list *bl,short m,short x,short y,clr_type type)
  *	&0x2: Force the unit to move one cell if it hasn't yet
  *	&0x4: Enable moving to the next cell when unit was already half-way there
  *		(may cause on-touch/place side-effects, such as a scripted map change)
+ *	&0x8: Force stop moving, even if walktimer is currently INVALID_TIMER
  * @return Success(1); Failed(0);
  */
 int unit_stop_walking(struct block_list *bl,int type)
@@ -1248,15 +1249,17 @@ int unit_stop_walking(struct block_list *bl,int type)
 
 	ud = unit_bl2ud(bl);
 
-	if(!ud || ud->walktimer == INVALID_TIMER)
+	if(!ud || (!(type&0x08) && ud->walktimer == INVALID_TIMER))
 		return 0;
 
 	// NOTE: We are using timer data after deleting it because we know the
 	// delete_timer function does not mess with it. If the function's
 	// behaviour changes in the future, this code could break!
-	td = get_timer(ud->walktimer);
-	delete_timer(ud->walktimer, unit_walktoxy_timer);
-	ud->walktimer = INVALID_TIMER;
+	if (ud->walktimer != INVALID_TIMER) {
+		td = get_timer(ud->walktimer);
+		delete_timer(ud->walktimer, unit_walktoxy_timer);
+		ud->walktimer = INVALID_TIMER;
+	}
 	ud->state.change_walk_target = 0;
 	tick = gettick();
 
@@ -1436,8 +1439,10 @@ int unit_set_walkdelay(struct block_list *bl, unsigned int tick, int delay, int 
 			return 0;
 	} else {
 		// Don't set walk delays when already trapped.
-		if (!unit_can_move(bl))
+		if (!unit_can_move(bl)) {
+			unit_stop_walking(bl,4); //Unit might still be moving even though it can't move
 			return 0;
+		}
 		//Immune to being stopped for double the flinch time
 		if (DIFF_TICK(ud->canmove_tick, tick-delay) > 0)
 			return 0;
@@ -1447,7 +1452,7 @@ int unit_set_walkdelay(struct block_list *bl, unsigned int tick, int delay, int 
 
 	if (ud->walktimer != INVALID_TIMER) { // Stop walking, if chasing, readjust timers.
 		if (delay == 1) // Minimal delay (walk-delay) disabled. Just stop walking.
-			unit_stop_walking(bl,4);
+			unit_stop_walking(bl,0);
 		else {
 			// Resume running after can move again [Kevin]
 			if(ud->state.running)
@@ -1710,7 +1715,7 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 		} else if( src->type == BL_MER && skill_id == MA_REMOVETRAP ) {
 			if( !battle_check_range(battle_get_master(src), target, range + 1) )
 				return 0; // Aegis calc remove trap based on Master position, ignoring mercenary O.O
-		} else if( !battle_check_range(src, target, range + (skill_id == RG_CLOSECONFINE?0:2)) )
+		} else if( !battle_check_range(src, target, range) )
 			return 0; // Arrow-path check failed.
 	}
 
@@ -1765,15 +1770,16 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 			if( sc && sc->data[SC_BASILICA] )
 				casttime = -1; // No Casting time on basilica cancel
 		break;
-		case KN_CHARGEATK: {
-			unsigned int k = (distance_bl(src,target)-1)/3; // +100% every 3 cells of distance
-
-			if( k > 2 )
-				k = 2; // ...but hard-limited to 300%.
-
+#ifndef RENEWAL_CAST
+		case KN_CHARGEATK:
+		{
+			unsigned int k = (distance_bl(src,target)-1)/3; //Range 0-3: 500ms, Range 4-6: 1000ms, Range 7+: 1500ms
+			if(k > 2)
+				k = 2;
 			casttime += casttime * k;
 		}
 		break;
+#endif
 		case GD_EMERGENCYCALL: // Emergency Call double cast when the user has learned Leap [Daegaladh]
 			if( sd && pc_checkskill(sd,TK_HIGHJUMP) )
 				casttime *= 2;
@@ -1803,8 +1809,7 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 
 	// Moved here to prevent Suffragium from ending if skill fails
 #ifndef RENEWAL_CAST
-	if (!(skill_get_castnodex(skill_id)&2))
-		casttime = skill_castfix_sc(src, casttime);
+	casttime = skill_castfix_sc(src, casttime, skill_get_castnodex(skill_id));
 #else
 	casttime = skill_vfcastfix(src, casttime, skill_id, skill_lv);
 #endif
@@ -1814,6 +1819,9 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 
 	if(!ud->state.running) // Need TK_RUN or WUGDASH handler to be done before that, see bugreport:6026
 		unit_stop_walking(src, 1); // Even though this is not how official works but this will do the trick. bugreport:6829
+
+	// SC_MAGICPOWER needs to switch states at start of cast
+	skill_toggle_magicpower(src, skill_id);
 
 	// In official this is triggered even if no cast time.
 	clif_skillcasting(src, src->id, target_id, 0,0, skill_id, skill_get_ele(skill_id, skill_lv), casttime);
@@ -1850,8 +1858,8 @@ int unit_skilluse_id2(struct block_list *src, int target_id, uint16 skill_id, ui
 	if( casttime <= 0 )
 		ud->state.skillcastcancel = 0;
 
-	if( !sd || sd->skillitem != skill_id || skill_get_cast(skill_id,skill_lv) )
-		ud->canact_tick = tick + casttime + 100;
+	if (!sd || sd->skillitem != skill_id || skill_get_cast(skill_id, skill_lv))
+		ud->canact_tick = tick + max(casttime, max(status_get_amotion(src), battle_config.min_skill_delay_limit)) + SECURITY_CASTTIME;
 
 	if( sd ) {
 		switch( skill_id ) {
@@ -2020,8 +2028,7 @@ int unit_skilluse_pos2( struct block_list *src, short skill_x, short skill_y, ui
 
 	// Moved here to prevent Suffragium from ending if skill fails
 #ifndef RENEWAL_CAST
-	if (!(skill_get_castnodex(skill_id)&2))
-		casttime = skill_castfix_sc(src, casttime);
+	casttime = skill_castfix_sc(src, casttime, skill_get_castnodex(skill_id));
 #else
 	casttime = skill_vfcastfix(src, casttime, skill_id, skill_lv );
 #endif
@@ -2030,8 +2037,8 @@ int unit_skilluse_pos2( struct block_list *src, short skill_x, short skill_y, ui
 		casttime = 0;
 
 	ud->state.skillcastcancel = castcancel&&casttime>0?1:0;
-	if( !sd || sd->skillitem != skill_id || skill_get_cast(skill_id,skill_lv) )
-		ud->canact_tick  = tick + casttime + 100;
+	if (!sd || sd->skillitem != skill_id || skill_get_cast(skill_id, skill_lv))
+		ud->canact_tick = tick + max(casttime, max(status_get_amotion(src), battle_config.min_skill_delay_limit)) + SECURITY_CASTTIME;
 
 // 	if( sd )
 // 	{
@@ -2064,6 +2071,9 @@ int unit_skilluse_pos2( struct block_list *src, short skill_x, short skill_y, ui
 	}
 
 	unit_stop_walking(src,1);
+
+	// SC_MAGICPOWER needs to switch states at start of cast
+	skill_toggle_magicpower(src, skill_id);
 
 	// In official this is triggered even if no cast time.
 	clif_skillcasting(src, src->id, 0, skill_x, skill_y, skill_id, skill_get_ele(skill_id, skill_lv), casttime);
@@ -2319,6 +2329,7 @@ bool unit_can_reach_pos(struct block_list *bl,int x,int y, int easy)
  */
 bool unit_can_reach_bl(struct block_list *bl,struct block_list *tbl, int range, int easy, short *x, short *y)
 {
+	struct walkpath_data wpd;
 	short dx, dy;
 
 	nullpo_retr(false, bl);
@@ -2357,7 +2368,17 @@ bool unit_can_reach_bl(struct block_list *bl,struct block_list *tbl, int range, 
 	if (y)
 		*y = tbl->y-dy;
 
-	return path_search(NULL,bl->m,bl->x,bl->y,tbl->x-dx,tbl->y-dy,easy,CELL_CHKNOREACH);
+	if (!path_search(&wpd,bl->m,bl->x,bl->y,tbl->x-dx,tbl->y-dy,easy,CELL_CHKNOREACH))
+		return false;
+
+#ifdef OFFICIAL_WALKPATH
+	if( !path_search_long(NULL, bl->m, bl->x, bl->y, tbl->x-dx, tbl->y-dy, CELL_CHKNOPASS) // Check if there is an obstacle between
+	  && wpd.path_len > 14	// Official number of walkable cells is 14 if and only if there is an obstacle between. [malufett]
+	  && (bl->type != BL_NPC) ) // If type is a NPC, please disregard.
+		return false;
+#endif
+
+	return true;
 }
 
 /**
@@ -2561,10 +2582,9 @@ static int unit_attack_timer_sub(struct block_list* src, int tid, unsigned int t
 			if(md->state.skillstate == MSS_ANGRY || md->state.skillstate == MSS_BERSERK) {
 				if (mobskill_use(md,tick,-1))
 					return 1;
-			} else {
-				// Set mob's ANGRY/BERSERK states.
-				md->state.skillstate = md->state.aggressive?MSS_ANGRY:MSS_BERSERK;
 			}
+			// Set mob's ANGRY/BERSERK states.
+			md->state.skillstate = md->state.aggressive?MSS_ANGRY:MSS_BERSERK;
 
 			if (sstatus->mode&MD_ASSIST && DIFF_TICK(md->last_linktime, tick) < MIN_MOBLINKTIME) { 
 				// Link monsters nearby [Skotlex]

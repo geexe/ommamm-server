@@ -35,8 +35,8 @@ struct party_booking_ad_info;
 enum { // packet DB
 	MIN_PACKET_DB  = 0x064,
 	MAX_PACKET_DB  = 0xAFF,
-	MAX_PACKET_VER = 52,
-	MAX_PACKET_POS = 52,
+	MAX_PACKET_VER = 54,
+	MAX_PACKET_POS = 20,
 };
 
 enum e_packet_ack {
@@ -524,6 +524,7 @@ int clif_damage(struct block_list* src, struct block_list* dst, unsigned int tic
 void clif_takeitem(struct block_list* src, struct block_list* dst);
 void clif_sitting(struct block_list* bl);
 void clif_standing(struct block_list* bl);
+void clif_sprite_change(struct block_list *bl, int id, int type, int val, int val2, enum send_target target);
 void clif_changelook(struct block_list *bl,int type,int val);	// area
 void clif_changetraplook(struct block_list *bl,int val); // area
 void clif_refreshlook(struct block_list *bl,int id,int type,int val,enum send_target target); //area specified in 'target'
@@ -815,7 +816,7 @@ void clif_quest_delete(struct map_session_data * sd, int quest_id);
 void clif_quest_update_status(struct map_session_data * sd, int quest_id, bool active);
 void clif_quest_update_objective(struct map_session_data * sd, struct quest * qd, int mobid);
 void clif_quest_show_event(struct map_session_data *sd, struct block_list *bl, short state, short color);
-void clif_displayexp(struct map_session_data *sd, unsigned int exp, char type, bool quest);
+void clif_displayexp(struct map_session_data *sd, unsigned int exp, char type, bool quest, bool lost);
 
 int clif_send(const uint8* buf, int len, struct block_list* bl, enum send_target type);
 void do_init_clif(void);
@@ -968,6 +969,7 @@ void clif_merge_item_open(struct map_session_data *sd);
 
 void clif_broadcast_obtain_special_item(const char *char_name, unsigned short nameid, unsigned short container, enum BROADCASTING_SPECIAL_ITEM_OBTAIN type, const char *srcname);
 
-void clif_dressing_room(struct map_session_data *sd, int view);
+void clif_dressing_room(struct map_session_data *sd, int flag);
+void clif_SelectCart(struct map_session_data *sd);
 
 #endif /* _CLIF_H_ */

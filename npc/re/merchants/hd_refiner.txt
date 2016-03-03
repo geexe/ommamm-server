@@ -122,7 +122,8 @@
 	delitem .@material,1;
 	set Zeny, Zeny-.@price;
 	mes "[Blacksmith Mighty Hammer]";
-	mes "Tac! Tac! Tac!" + getequippercentrefinery(.@part);
+	mes "Tac! Tac! Tac!";
+	//Adjusted success rate to be equal to normal ore [Ommamm changes]
 	if (getequippercentrefinery(.@part) > rand(100)) {
 		successrefitem .@part;
 		next;
@@ -142,7 +143,8 @@
 	mes "I am sure a person like you would never blame me for a decrease in refine level by 1. Hmm.";
 	next;
 	goto Repeat_refine;
-
+	
+//Added refine loop when failed [Ommamm changes]
 Repeat_refine: 
 	mes "[Blacksmith Mighty Hammer]";
 	mes "Would you like to continue refining?";
@@ -316,6 +318,7 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	826
 	delitem .@material,1;
 	set Zeny, Zeny-.@price;
 	mes "Pow! Pow! Pow! Pow!";
+	//Adjusted success rate to be equal to normal ore [Ommamm changes]
 	if (getequippercentrefinery(.@part) > rand(100)) {
 		successrefitem .@part;
 		next;
@@ -324,6 +327,7 @@ lhz_in02,280,19,3	duplicate(MightyHammer)	Mighty Hammer#lhz	826
 		mes "Great! Nicely done!!";
 		mes "I really am the best blacksmith in the whole wide world!";
 		close;
+	//Prevents refine rate to go below +10 [Ommamm changes]
 	} else if (getequiprefinerycnt(.@part) == 10) {
 		mes "[Basta]";
 		mes "Damn it!";

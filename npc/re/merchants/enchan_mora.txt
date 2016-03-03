@@ -566,8 +566,8 @@ mora,152,97,5	script	Guardian of Power#pa082	515,{
 	next;
 	switch(.@job) {
 	case 0: // Rune Knight
-		setarray .@items[0],2475,2476,2574,2575,2883,2884;
-		set .@i, select("Cancel:Ur's Greaves (Shoes):Peuz's Greaves (Shoes):Ur's Manteau (Garment):Peuz's Manteau (Garment):Ur's Seal (Accessory):Peuz's Seal (Accessory)")-2;
+		setarray .@items[0],2475,2476,2574,2575;
+		set .@i, select("Cancel:Ur's Greaves (Shoes):Peuz's Greaves (Shoes):Ur's Manteau (Garment):Peuz's Manteau (Garment)")-2;
 		break;
 	case 1: // Guillotine Cross
 		setarray .@items[0],2477,2478,2577,2578;

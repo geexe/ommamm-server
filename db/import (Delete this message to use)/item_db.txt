@@ -85,6 +85,8 @@
 
 // Ommamm Custom Items
 //=============================================================
+12208,Battle_Manual,Battle Manual,2,2,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ sc_start SC_EXPBOOST,1800000,50; },{},{}
+12210,Bubble_Gum,Bubble Gum,2,2,,0,,,,,0xFFFFFFFF,63,2,,,,,,{ sc_start SC_ITEMBOOST,1800000,200; },{},{}
 31100,black_lhz_aura,Lhz Aura Black,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1900,{},{},{}
 31101,blue_lhz_aura,Lhz Aura Blue,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1901,{},{},{}
 31102,green_lhz_aura,Lhz Aura Green,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1902,{},{},{}

@@ -1728,6 +1728,40 @@ ACMD_FUNC(model)
 }
 
 /*==========================================
+ * @bodystyle [Rytech]
+ *------------------------------------------*/
+ACMD_FUNC(bodystyle)
+{
+	int body_style = 0;
+	nullpo_retr(-1, sd);
+
+	memset(atcmd_output, '\0', sizeof(atcmd_output));
+
+	// Limit body styles to certain jobs since not all of them are released yet.
+	if (!((sd->class_&MAPID_THIRDMASK) == MAPID_GUILLOTINE_CROSS || (sd->class_&MAPID_THIRDMASK) == MAPID_GENETIC
+		|| (sd->class_&MAPID_THIRDMASK) == MAPID_MECHANIC) || (sd->class_&MAPID_THIRDMASK) == MAPID_ROYAL_GUARD) {
+		clif_displaymessage(fd, msg_txt(sd,770));	// This job has no alternate body styles.
+		return -1;
+	}
+
+	if (!message || !*message || sscanf(message, "%d", &body_style) < 1) {
+		sprintf(atcmd_output, msg_txt(sd,739), MIN_BODY_STYLE, MAX_BODY_STYLE);		// Please enter a body style (usage: @bodystyle <body ID: %d-%d>).
+		clif_displaymessage(fd, atcmd_output);
+		return -1;
+	}
+
+	if (body_style >= MIN_BODY_STYLE && body_style <= MAX_BODY_STYLE) {
+			pc_changelook(sd, LOOK_BODY2, body_style);
+			clif_displaymessage(fd, msg_txt(sd,36)); // Appearence changed.
+	} else {
+		clif_displaymessage(fd, msg_txt(sd,37)); // An invalid number was specified.
+		return -1;
+	}
+
+	return 0;
+}
+
+/*==========================================
  * @dye && @ccolor
  *------------------------------------------*/
 ACMD_FUNC(dye)
@@ -1840,7 +1874,11 @@ ACMD_FUNC(go)
 		{ MAP_UMBALA,       89, 157 }, // 12=Umbala
 		{ MAP_NIFLHEIM,     21, 153 }, // 13=Niflheim
 		{ MAP_LOUYANG,     217,  40 }, // 14=Louyang
+#ifdef RENEWAL
+		{ MAP_NOVICE,       97, 90  }, // 15=Training Grounds (Renewal)
+#else
 		{ MAP_NOVICE,       53, 111 }, // 15=Training Grounds
+#endif
 		{ MAP_JAIL,         23,  61 }, // 16=Prison
 		{ MAP_JAWAII,      249, 127 }, // 17=Jawaii
 		{ MAP_AYOTHAYA,    151, 117 }, // 18=Ayothaya
@@ -3761,39 +3799,39 @@ ACMD_FUNC(reload) {
 		memcpy(&prev_config, &battle_config, sizeof(prev_config));
 
 		battle_config_read(BATTLE_CONF_FILENAME);
-
-	if( prev_config.item_rate_mvp				!= battle_config.item_rate_mvp
-	||  prev_config.item_rate_common			!= battle_config.item_rate_common
-	||  prev_config.item_rate_common_boss		!= battle_config.item_rate_common_boss
-	||  prev_config.item_rate_card				!= battle_config.item_rate_card
-	||  prev_config.item_rate_card_boss			!= battle_config.item_rate_card_boss
-	||  prev_config.item_rate_equip				!= battle_config.item_rate_equip
-	||  prev_config.item_rate_equip_boss		!= battle_config.item_rate_equip_boss
-	||  prev_config.item_rate_heal				!= battle_config.item_rate_heal
-	||  prev_config.item_rate_heal_boss			!= battle_config.item_rate_heal_boss
-	||  prev_config.item_rate_use				!= battle_config.item_rate_use
-	||  prev_config.item_rate_use_boss			!= battle_config.item_rate_use_boss
-	||  prev_config.item_rate_treasure			!= battle_config.item_rate_treasure
-	||  prev_config.item_rate_adddrop			!= battle_config.item_rate_adddrop
-	||  prev_config.logarithmic_drops			!= battle_config.logarithmic_drops
-	||  prev_config.item_drop_common_min		!= battle_config.item_drop_common_min
-	||  prev_config.item_drop_common_max		!= battle_config.item_drop_common_max
-	||  prev_config.item_drop_card_min			!= battle_config.item_drop_card_min
-	||  prev_config.item_drop_card_max			!= battle_config.item_drop_card_max
-	||  prev_config.item_drop_equip_min			!= battle_config.item_drop_equip_min
-	||  prev_config.item_drop_equip_max			!= battle_config.item_drop_equip_max
-	||  prev_config.item_drop_equip_min_boss	!= battle_config.item_drop_equip_min_boss
-	||  prev_config.item_drop_equip_max_boss	!= battle_config.item_drop_equip_max_boss
-	||  prev_config.item_drop_mvp_min			!= battle_config.item_drop_mvp_min
-	||  prev_config.item_drop_mvp_max			!= battle_config.item_drop_mvp_max
-	||  prev_config.item_drop_heal_min			!= battle_config.item_drop_heal_min
-	||  prev_config.item_drop_heal_max			!= battle_config.item_drop_heal_max
-	||  prev_config.item_drop_use_min			!= battle_config.item_drop_use_min
-	||  prev_config.item_drop_use_max			!= battle_config.item_drop_use_max
-	||  prev_config.item_drop_treasure_min		!= battle_config.item_drop_treasure_min
-	||  prev_config.item_drop_treasure_max		!= battle_config.item_drop_treasure_max
-	||  prev_config.base_exp_rate				!= battle_config.base_exp_rate
-	||  prev_config.job_exp_rate				!= battle_config.job_exp_rate
+		
+		if( prev_config.item_rate_mvp				!= battle_config.item_rate_mvp
+		||  prev_config.item_rate_common			!= battle_config.item_rate_common
+		||  prev_config.item_rate_common_boss		!= battle_config.item_rate_common_boss
+		||  prev_config.item_rate_card				!= battle_config.item_rate_card
+		||  prev_config.item_rate_card_boss			!= battle_config.item_rate_card_boss
+		||  prev_config.item_rate_equip				!= battle_config.item_rate_equip
+		||  prev_config.item_rate_equip_boss		!= battle_config.item_rate_equip_boss
+		||  prev_config.item_rate_heal				!= battle_config.item_rate_heal
+		||  prev_config.item_rate_heal_boss			!= battle_config.item_rate_heal_boss
+		||  prev_config.item_rate_use				!= battle_config.item_rate_use
+		||  prev_config.item_rate_use_boss			!= battle_config.item_rate_use_boss
+		||  prev_config.item_rate_treasure			!= battle_config.item_rate_treasure
+		||  prev_config.item_rate_adddrop			!= battle_config.item_rate_adddrop
+		||  prev_config.logarithmic_drops			!= battle_config.logarithmic_drops
+		||  prev_config.item_drop_common_min		!= battle_config.item_drop_common_min
+		||  prev_config.item_drop_common_max		!= battle_config.item_drop_common_max
+		||  prev_config.item_drop_card_min			!= battle_config.item_drop_card_min
+		||  prev_config.item_drop_card_max			!= battle_config.item_drop_card_max
+		||  prev_config.item_drop_equip_min			!= battle_config.item_drop_equip_min
+		||  prev_config.item_drop_equip_max			!= battle_config.item_drop_equip_max
+		||  prev_config.item_drop_equip_min_boss	!= battle_config.item_drop_equip_min_boss //MVP Equip min drop  rate [Xantara] [Ommamm changes]
+		||  prev_config.item_drop_equip_max_boss	!= battle_config.item_drop_equip_max_boss //MVP Equip max drop rate [Xantara] [Ommamm changes]
+		||  prev_config.item_drop_mvp_min			!= battle_config.item_drop_mvp_min
+		||  prev_config.item_drop_mvp_max			!= battle_config.item_drop_mvp_max
+		||  prev_config.item_drop_heal_min			!= battle_config.item_drop_heal_min
+		||  prev_config.item_drop_heal_max			!= battle_config.item_drop_heal_max
+		||  prev_config.item_drop_use_min			!= battle_config.item_drop_use_min
+		||  prev_config.item_drop_use_max			!= battle_config.item_drop_use_max
+		||  prev_config.item_drop_treasure_min		!= battle_config.item_drop_treasure_min
+		||  prev_config.item_drop_treasure_max		!= battle_config.item_drop_treasure_max
+		||  prev_config.base_exp_rate				!= battle_config.base_exp_rate
+		||  prev_config.job_exp_rate				!= battle_config.job_exp_rate
 		)
 		{	// Exp or Drop rates changed.
 			mob_reload(); //Needed as well so rate changes take effect.
@@ -5738,14 +5776,14 @@ ACMD_FUNC(divorce)
 ACMD_FUNC(changelook)
 {
 	int i, j = 0, k = 0;
-	int pos[7] = { LOOK_HEAD_TOP,LOOK_HEAD_MID,LOOK_HEAD_BOTTOM,LOOK_WEAPON,LOOK_SHIELD,LOOK_SHOES,LOOK_ROBE };
+	int pos[8] = { LOOK_HEAD_TOP,LOOK_HEAD_MID,LOOK_HEAD_BOTTOM,LOOK_WEAPON,LOOK_SHIELD,LOOK_SHOES,LOOK_ROBE, LOOK_BODY2 };
 
 	if((i = sscanf(message, "%11d %11d", &j, &k)) < 1) {
 		clif_displaymessage(fd, msg_txt(sd,1177)); // Usage: @changelook {<position>} <view id>
-		clif_displaymessage(fd, msg_txt(sd,1178)); // Position: 1-Top 2-Middle 3-Bottom 4-Weapon 5-Shield 6-Shoes 7-Robe
+		clif_displaymessage(fd, msg_txt(sd,1178)); // Position: 1-Top 2-Middle 3-Bottom 4-Weapon 5-Shield 6-Shoes 7-Robe 8-Body
 		return -1;
 	} else if ( i == 2 ) {
-		if (j < 1 || j > 7)
+		if (j < 1 || j > 8)
 			j = 1;
 		j = pos[j - 1];
 	} else if( i == 1 ) {	// position not defined, use HEAD_TOP as default
@@ -7029,8 +7067,8 @@ ACMD_FUNC(mobinfo)
 
 #ifdef RENEWAL_EXP
 		if( battle_config.atcommand_mobinfo_type ) {
-			base_exp = base_exp * pc_level_penalty_mod(sd, mob->lv, mob->status.class_, 1) / 100;
-			job_exp = job_exp * pc_level_penalty_mod(sd, mob->lv, mob->status.class_, 1) / 100;
+			base_exp = base_exp * pc_level_penalty_mod(sd, mob->lv, mob->status.class_, mob->status.mode, 1) / 100;
+			job_exp = job_exp * pc_level_penalty_mod(sd, mob->lv, mob->status.class_, mob->status.mode, 1) / 100;
 		}
 #endif
 #ifdef VIP_ENABLE
@@ -7070,7 +7108,7 @@ ACMD_FUNC(mobinfo)
 
 #ifdef RENEWAL_DROP
 			if( battle_config.atcommand_mobinfo_type ) {
-				droprate = droprate * pc_level_penalty_mod(sd, mob->lv, mob->status.class_, 2) / 100;
+				droprate = droprate * pc_level_penalty_mod(sd, mob->lv, mob->status.class_, mob->status.mode, 2) / 100;
 				if (droprate <= 0 && !battle_config.drop_rate0item)
 						droprate = 1;
 			}
@@ -7613,7 +7651,7 @@ ACMD_FUNC(whodrops)
 
 #ifdef RENEWAL_DROP
 				if( battle_config.atcommand_mobinfo_type )
-					dropchance = dropchance * pc_level_penalty_mod(sd, mob_db(item_data->mob[j].id)->lv, mob_db(item_data->mob[j].id)->status.class_,  2) / 100;
+					dropchance = dropchance * pc_level_penalty_mod(sd, mob_db(item_data->mob[j].id)->lv, mob_db(item_data->mob[j].id)->status.class_, mob_db(item_data->mob[j].id)->status.mode, 2) / 100;
 #endif
 #ifdef VIP_ENABLE
 				// Display item rate increase for VIP.
@@ -10038,6 +10076,7 @@ void atcommand_basecommands(void) {
 		ACMD_DEF(costume),
 		ACMD_DEF(cloneequip),
 		ACMD_DEF(clonestat),
+		ACMD_DEF(bodystyle),
 	};
 	AtCommandInfo* atcommand;
 	int i;

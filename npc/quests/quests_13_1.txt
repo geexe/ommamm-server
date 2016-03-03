@@ -8487,6 +8487,7 @@ sec_in02,80,171,0	script	Piece of crack#sec	406,{
 mid_campin,90,121,5	script	Hibba Agip	459,{
 	cutin "ep13_captin_edq",2;
 	set .@start,(ep13_newbs + ep13_ryu + mao_morocc2 + ep13_1_rhea + ep13_animal + ep13_start);
+	//Ommamm changes to match iRO description
 	if ((ep13_1_edq == 0) && (.@start > 399)) {
 		mes "[Hibba Agip]";
 		mes "*Sigh* Look at me, I used to command the desert of Morroc, but I've been deployed to a world that only God knows where...";

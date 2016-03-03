@@ -2162,7 +2162,7 @@ OnMyMobDead:
 	next;
 	mes "[Lost Souls]";
 	mes "Farewell, young adventurer. I wish you good luck.";
-	endless_complete = 1;
+	endless_complete = 1; //Ommamm changes
 	close2;
 	warp "alberta",223,36;
 	end;
