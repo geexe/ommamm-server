@@ -42,10 +42,10 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 			close;
 		}
 		mes "[Challenge]";
-		mes "MVPs you have completed:";
+		mes "You have defeated ^551A8B" + .@mvpcount + "^000000 MVPs:";
 		for(.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
 			if(checkquest(70000 + .biolabmvp[.@i],HUNTING) == 2) {			
-				mes strmobinfo(1,.biolabmvp[.@i]);
+				mes .@i+1 + ". " + "^551A8B" + strmobinfo(1,.biolabmvp[.@i]) + "^000000";
 			}
 		}
 		close;
@@ -64,9 +64,11 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 				mes "You have not completed the challenge.";
 				close;
 			}
-		}	
+		}
+		mes "[Challenge]";		
 		mes "You have completed the challenge";
 		mes "Do you want to claim the reward?";
+		next;
 		switch(select("Yes:No")) {
 			case 1: 
 				break;
@@ -77,6 +79,7 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 		}
 		//check weight and inventory 
 		if(!checkweight2(.reward,.reward_quantity)) {
+			mes "[Challenge]";
 			mes "You do not have enough space.";
 			mes "Please clear your inventory and come back again.";
 			close;

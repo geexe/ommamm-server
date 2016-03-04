@@ -1,0 +1,215 @@
+//===== eAthena Script =======================================
+//= Reward for Challengers
+//===== Compatible With: =====================================
+//= TXT & SQL, Must have a newer revision and updated item_db
+//===== Description: =========================================
+//= Makes Unique to Epic item to those who bring extremely rare item
+//============================================================
+//= For Test (Use fruits as the item)
+izlude,127,130,3	script	Ancient Craftter	71,{
+ 
+	mes "[Ancient Crafter]";  
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "I am the last costume maker";
+	mes "in Rune Midguard";
+	mes "Only 'Rare Headgears' are aplicable";
+	next;
+	mes "[Ancient Crafter]";
+	mes "What is your bussiness, today?";
+	next;
+	goto C_top;
+ 
+C_top:
+	menu "Create Costume",C_Costume,"Exchange Premium ticket",C_Premium,"Cancel",C_cancel;
+//_____________Item requirements_______________//
+ 
+//________model___________//
+//I_:
+C_Costume:
+	next;
+	mes "[Ancient Crafter]";
+	mes "These are the avaiable costumes";
+	next;
+	mes "[Ancient Crafter]";
+	mes "Costume Angel Wing";
+	mes "Costume Coronet";
+	mes "Costume Crown";
+	mes "Costume Corsair";
+	mes "Costume Grand Circlet";
+	mes "Costume Tiara";
+	next;
+	mes "[Ancient Crafter]";
+	mes "Which one of these are you interested in?";
+	next;
+	menu "AngelWing",M_Angelwing,"Coronet",M_Coronet,"Crown",M_Crown,"Corsair",M_Corsair,"Grand Circlet",M_Grand,"Tiara",M_Tiara,"Cancel",C_cancel;
+ 
+C_Premium:
+	next;
+	mes "[Ancient Crafter]";
+	mes "In Exchange of the Premium Ticket";
+	mes "I need these items";
+	next;
+	mes "[Ancient Crafter]";
+	mes "Card Coin x 500";
+	mes "35,000,000 Zeny";
+	next;
+	menu "Exchange",M_Premium,"Cancel",C_cancel;
+
+//_____________deletion and creation of items_______________//
+ 
+//____________model______________//
+//M_:
+M_Premium:
+	mes "[Ancient Crafter]";
+	mes "Are you sure you want to procreed?";
+	menu "No",C_cancel,"Yes",P_Premium;
+P_Premium:	
+	if(countitem(512)<6)
+	goto M_insufficient;
+	delitem 512,6;
+ 	getitem 514,1;
+	close;
+
+M_Angelwing:
+	mes "[Ancient Crafter]";
+	mes "You need to bring me these items";
+	mes "Angel Wing x1";
+	mes "Gold x66";
+	mes "Valkyrie Helm[] x1";
+	mes "Premium Ticket x1";
+	mes "59,999,999 Zeny";
+	next;
+	mes "[Ancient Crafter]";
+	mes "Do you want to exchange?";
+	menu "No",C_cancel,"Yes",P_Angelwing;
+P_Angelwing:
+	if(countitem(2254)<1 || countitem(969)<80 || countitem(5171)<1 || countitem(7608)<1 || Zeny <59999999)
+	goto M_insufficient;
+	delitem 2254,1;
+	delitem 969,80;
+	delitem 5171,1;
+	delitem 7608,1;
+	set zeny,zeny-59999999;
+	getitem 19529,1;
+	close;
+	
+M_Coronet:
+	mes "[Ancient Crafter]";
+	mes "You need to bring me these items";
+	mes "Coronet x1";
+	mes "Gold x50";
+	mes "Premium Ticket x1";
+	mes "49,000,000 Zeny";
+	next;
+	mes "[Ancient Crafter]";
+	mes "Do you want to exchange?";
+	menu "No",C_cancel,"Yes",P_Coronet;
+P_Coronet:
+	if(countitem(2249)<1 || countitem(969)<50 || countitem(7608)<1 || Zeny <49000000)
+	goto M_insufficient;
+	delitem 2249,1;
+	delitem 969,50;
+	delitem 7608,1;
+	set zeny,zeny-49000000;
+	getitem 19719,1;
+	close;
+	
+M_Crown:
+	mes "[Ancient Crafter]";
+	mes "You need to bring me these items";
+	mes "Crown x1";
+	mes "Gold x50";
+	mes "Premium Ticket x1";
+	mes "49,000,000 Zeny";
+	next;
+	mes "[Ancient Crafter]";
+	mes "Do you want to exchange?";
+	menu "No",C_cancel,"Yes",P_Crown;
+P_Crown:
+	if(countitem(2235)<1 || countitem(969)<50 || countitem(7608)<1 || Zeny <49000000)
+	goto M_insufficient;
+	delitem 2235,1;
+	delitem 969,50;
+	delitem 7608,1;
+	set zeny,zeny-49000000;
+	getitem 19630,1;	
+	close;
+
+M_Corsair:
+	mes "[Ancient Crafter]";
+	mes "You need to bring me these items";
+	mes "Cosair x1";
+	mes "Gold x50";
+	mes "Premium Ticket x1";
+	mes "49,000,000 Zeny";
+	next;
+	mes "[Ancient Crafter]";
+	mes "Do you want to exchange?";
+	menu "No",C_cancel,"Yes",P_Corsair;
+P_Corsair:
+	if(countitem(5019)<1 || countitem(969)<50 || countitem(7608)<1 || Zeny <49000000)
+	goto M_insufficient;
+	delitem 5019,1;
+	delitem 969,50;
+	delitem 7608,1;
+	set zeny,zeny-49000000;
+	getitem 19619,1;
+	close;
+
+M_Grand:
+	mes "[Ancient Crafter]";
+	mes "You need to bring me these items";
+	mes "Grand Circlet x1";
+	mes "Gold x50";
+	mes "Premium Ticket x1";
+	mes "49,000,000 Zeny";
+	next;
+	mes "[Ancient Crafter]";
+	mes "Do you want to exchange?";
+	menu "No",C_cancel,"Yes",P_Grand;
+P_Grand:
+	if(countitem(5007)<1 || countitem(969)<50 || countitem(7608)<1 || Zeny <49000000)
+	goto M_insufficient;
+	delitem 5007,1;
+	delitem 969,50;
+	delitem 7608,1;
+	set zeny,zeny-49000000;
+	getitem 19795,1;
+	close;
+	
+M_Tiara:
+	mes "[Ancient Crafter]";
+	mes "You need to bring me these items";
+	mes "Angel Wing x1";
+	mes "Gold x80";
+	mes "Premium Ticket x1";
+	mes "99,000,000 Zeny";
+	next;
+	mes "[Ancient Crafter]";
+	mes "Do you want to exchange?";
+	menu "No",C_cancel,"Yes",P_Tiara;
+P_Tiara:
+	if(countitem(2234)<1 || countitem(969)<50 || countitem(7608)<1 || Zeny <49000000)
+	goto M_insufficient;
+	delitem 2234,1;
+	delitem 969,50;
+	delitem 7608,1;
+	set zeny,zeny-49000000;
+	getitem 19629,1;
+	close;
+
+//________not enough or not the correct items________
+       
+M_insufficient:
+	next;
+	mes "[Challenge Reward]";
+	mes "You don't have the required materials.";
+	mes "Please come back when you do...";
+	menu "Return to Main Menu",C_top,"Leave",C_cancel;
+	close;
+       
+C_cancel:
+	close;
+
+     end;
+}
