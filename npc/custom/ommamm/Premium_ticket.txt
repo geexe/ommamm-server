@@ -64,10 +64,11 @@ M_Premium:
 	mes "Are you sure you want to procreed?";
 	menu "No",C_cancel,"Yes",P_Premium;
 P_Premium:	
-	if(countitem(512)<6)
+	if(countitem(6379)<500 || Zeny <35000000)
 	goto M_insufficient;
-	delitem 512,6;
- 	getitem 514,1;
+	delitem 6379,500;
+	set zeny,zeny-35000000;
+ 	getitem 7608,1;
 	close;
 
 M_Angelwing:
