@@ -30,6 +30,7 @@ Update_Info:
 	mes "- เพิ่มไอเท็มสวมใส่ส่วนปาก Blood Sucker และ Umbala Spirit";
 	mes "- เพิ่มไอเท็ม Kafra Blossom Card ป้องกันทุกธาตุ 10%!!";
 	mes "- Sprite ตัวละครใหม่จาก jRO อาชีพ Mechanic และ Royal Guard";
+	mes "- NPC Costume Maker";
 	next;
 	goto Info_Menu;
 	end;
