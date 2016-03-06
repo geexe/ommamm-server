@@ -82,6 +82,7 @@
 18666,CD_In_Mouth,CD In Mouth,4,20,,200,,0,,0,0xFFFFFFFE,63,2,1,,20,0,815,{ autobonus "{ bonus3 bAutoSpell,8013,5,40; bonus3 bAutoSpell,8013,4,40; bonus3 bAutoSpell,8013,3,40; bonus3 bAutoSpell,8013,2,40; bonus3 bAutoSpell,8013,1,40; bonus3 bAutoSpell,13,1,10; bonus3 bAutoSpell,13,2,10; bonus3 bAutoSpell,13,3,10; bonus3 bAutoSpell,13,4,10; bonus3 bAutoSpell,13,1,10; }",60,5000,0,"{ specialeffect2 EF_POTION_BERSERK; }"; },{},{}
 13092,RWC_Memory_Knife,RWC Memory Knife,5,1000,500,650,50,0,1,1,0x028F5EF5,63,2,2,3,1,1,1,{ .@r = getrefine(); bonus bBaseAtk,20*(.@r/3); bonus bMatk,20*(.@r/3); if(.@r>=9){ .@i = 1; bonus4 bAutoSpell,"BS_WEAPONPERFECT",1,20,0; } if(.@r>=6){ .@rate = 5*(.@i+1); bonus2 bAddClass,Class_All,.@rate; bonus2 bMagicAddClass,Class_All,.@rate; } },{},{}
 5778,Blue_Arara_Hat,Turkey On Your Head,4,20,,100,,5,,1,0xFFFFFFFF,63,2,256,,1,1,656,{ bonus bStr,2; .@r = getrefine(); bonus bMaxHPrate,.@r; bonus bMaxSPrate,.@r; },{},{}
+2000,Destruction_Rod,Staff of Destruction,5,20,,2500,130:280,,1,1,0x00000200,18,2,34,4,80,1,23,{ .@r = getrefine; bonus bMatkRate,.@r/2; bonus bInt,3; bonus bAgi,10; bonus bUseSPrate,(.@r*2); bonus3 bAutoSpellWhenHit,"WZ_JUPITEL",5,(.@r*20); bonus2 bFixedCastrate,"HW_MAGICPOWER",-50; },{},{}
 
 // Ommamm Custom Items
 //=============================================================
