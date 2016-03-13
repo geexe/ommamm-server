@@ -76,7 +76,6 @@
 //-------------------------Equipment-----------------------
 //--------Upper
 4, 5409, 500 //Purple Cowboy Hat
-4, 5457, 1000 //Moon Rabbit Hat
 4, 5357, 2000 //Wings of Victory (Top, Mid)
 4, 5363, 2000 //Abyss Helm
 4, 18580, 2000 //Yggdrasil Crown
@@ -102,6 +101,7 @@
 4, 18542, 4000 //Benevolent Guardian
 4, 18892, 4000 //UFO Poring Hat
 4, 18791, 4000 //Shrine Maiden Hat
+4, 5457, 4500 //Moon Rabbit Hat
 4, 5469, 4500 //Musketeer Hat
 4, 18652, 4500 //Vanargand Helm
 4, 18908, 4500 //Isabella Red Ear
