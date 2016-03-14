@@ -1,0 +1,168 @@
+izlude,127,139,3	script	Emmitt White::gef_magic_init	641,{
+	
+	.npc$ = "[Geffen Magic Tournament]";
+	
+	if(checkquest(70001,PLAYTIME) == 0 || checkquest(70001,PLAYTIME) == 1 ) {
+		mes .npc$;
+		mes "You can participate in the tournament again after 23 hours.";
+		close;
+	} else if (checkquest(70001,PLAYTIME) == 2) {
+		erasequest(70001);
+	}
+	mes .npc$;
+	mes "Welcome to Geffen Magic Tournament.";
+	next;
+	mes .npc$;
+	mes "This was a tournament held in the ancient past, where magicians around Rune-Midgard convened to find the true master of magic.";
+	next;
+	mes .npc$;
+	mes "Here you will be battling various heroes in a tournament manner:";
+	mes "1-On-1 for 12 rounds";
+	next;
+	mes .npc$;
+	mes "Are you interested in joining the tournament?";
+	next;
+	switch(select("Sure:I would rather not risk my life...")) {
+	case 1:
+		break;
+	case 2:
+		mes .npc$;
+		mes "I would not blame you for that!";
+		close;
+	}
+	mes .npc$;
+	mes "That's the spirit!";
+	mes "Are you ready to enter the time gap?";
+	next;
+	switch(select("Enter:I need more time to prepare")) {
+	case 1:
+		break;
+	case 2:
+		mes .npc$;
+		mes "Come back when you are ready.";
+		close;
+	}
+	getpartymember getcharid(1);
+	if($@partymembercount > 1) {
+		mes .npc$;
+		mes "Only 1 person is allowed in the party.";
+		close;
+	}
+	//instance_create("Geffen Magic Tournament");
+	switch(instance_enter("Geffen Magic Tournament")) {
+	case 3:
+		mes "An unknown error has occurred.";
+		close;
+	case 2:
+		mes "The memorial dungeon Geffen Magic Tournament does not exist.";
+		mes "The party leader did not generate the dungeon yet.";
+		close;
+		break;
+	case 1:
+		mes "You can enter the dungeon after making the party.";
+		close;
+		break;
+	case 0:
+		setquest 70001;
+		break;
+	}	
+}
+
+1@gef,122,58,4	script	Receptionist::gef_magic_reception	4_M_ARUNA_NFM1,{
+	
+	.npc$ = "[Tournament Receptionist]";
+	
+	if(.warp_stadium) {
+		mes .npc$;
+		mes "The Magic Tournament is going to start soon.";
+		mes "Enter the portal to the south and you can join in.";
+		next;
+		mes .npc$;
+		mes "Good luck!";
+		close;
+	}
+	if(.test_success) {
+		mes .npc$;
+		mes "Congratulations! You passed the test!";
+		mes "Give me your name so I can write it down.";
+		mes "You will automatically be registered for the tournament now.";
+		next;
+		input .@name;
+		mes .npc$;
+		mes strcharinfo(0) + "?";
+		mes "Okay, interesting name.";
+		mes "Anyway, your registration is complete!";
+		next;
+		mes .npc$;
+		mes "Competitors who registered will randomly be selected.";
+		next;
+		mes .npc$;
+		mes "The Magic Tournament is going to start soon.";
+		mes "Enter the portal to the south and you can join in.";
+		next;
+		mes .npc$;
+		mes "Good luck!";
+		.warp_stadium = 1;
+		//enablenpc "";
+		close;
+	}
+	mes .npc$;
+	mes "Thank you for visiting Geffen";
+	mes "Magic Tournament.";
+	mes "What can I do for you?";
+	next;
+	switch(select("About Geffen Magic Tournament:How do I Register?:Collecting Rewards:Can I get a Spectator Pass?:Cancel")) {
+	case 1:
+		break;
+	case 2:
+		mes .npc$;
+		mes "There is no registration fee to enter.";
+		mes "The only requirement is to pass a simple test.";
+		next;
+		mes .npc$;
+		mes "The test is very simple. Defeat a Desert Wolf in 60 seconds or less and you're in.";
+		next;
+		mes .npc$;
+		mes "If you fail you will automatically be eliminated from the list but you can try again as many times as you wish.";
+		mes "Do you want to take the test?";
+		next;
+		switch(select("No:Yes")) {
+		case 1:
+			mes .npc$;
+			mes "Come back if you change your mind.";
+			close;
+		case 2:
+			mes .npc$;
+			mes "You can participate in the Magic Tournament after passing the test. Then, let us begin!";
+			hideonnpc instance_npcname(strnpcinfo(3));
+			npctalk "The time limit is 60 seconds! Ready! Set! Go!";
+			monster instance_mapname("1@gef"),118,62,"Desert Wolf",1106,1,instance_npcname(strnpcinfo(3)) + "::OnDesertWolfDead";
+			setquest 70002;
+			close2;
+			break;
+		}
+	case 3:
+	case 4:
+		mes "<Placeholder>";
+		close;
+	case 5:
+		close;
+	}
+	
+	close;
+	
+OnDesertWolfDead:
+	if(checkquest(70002,PLAYTIME) == 2) {
+		hideoffnpc instance_npcname(strnpcinfo(3));
+		npctalk "You have failed! You can come back and try again.";
+		end;
+	}
+	erasequest 70002;
+	.test_success = 1;
+	hideoffnpc instance_npcname(strnpcinfo(3));
+	npctalk "You passed the test! Shall we finish your registration?";
+	end;
+}
+
+//1@gef - gef_st warp npc 
+
