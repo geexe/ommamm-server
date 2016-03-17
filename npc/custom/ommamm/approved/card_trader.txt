@@ -64,7 +64,7 @@ OnSellItem:
 	mes "Cards to sell:";
 	mes "-----------------------------------";
 	for(set .@i,0; .@i<getarraysize(@sold_nameid); set .@i,.@i+1)
-		if (@sold_nameid[.@i] > 4000 && @sold_nameid[.@i] < 4700) {
+		if ((@sold_nameid[.@i] > 4000 && @sold_nameid[.@i] < 4700) || @sold_nameid[.@i] = 6379){
 			if (.Level) {
 				query_sql("SELECT `LV` FROM `mob_db` WHERE `DropCardid` = "+@sold_nameid[.@i],.@lv);
 				if (.@lv < .Level) {
@@ -137,7 +137,7 @@ OnInit:
 		6379,1, //Card Coin
 		12246,150, //Mystical Card Album
 		12103,50, //Bloody Branch
-		7059,15, //Free Ticket for Kafra Storage
+		12211,15, //Kafra Card
 		14545,75, //Field Manual 300%
 		12412,75, //HE Bubble Gum
 		31104,1500; //Kafra Blossom Card

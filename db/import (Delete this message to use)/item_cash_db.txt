@@ -178,7 +178,7 @@
 //--------------------------Others-----------------------
 7, 7227, 10 //Bossania Entrance Ticket
 7, 16770, 250 //Silvervine 10 Box
-7, 6665, 100 //RWC_Inicializer
+7, 6665, 250 //RWC_Inicializer
 7, 7621, 10 //Token of Ziegfried
 7, 17068, 250 //Acidbomb Box50
 7, 17069, 450 //Acidbomb Box100
