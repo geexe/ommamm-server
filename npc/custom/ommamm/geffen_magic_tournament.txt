@@ -48,7 +48,11 @@ izlude,127,139,3	script	Emmitt White::gef_magic_init	641,{
 		mes "Only 1 person is allowed in the party.";
 		close;
 	}
-	//instance_create("Geffen Magic Tournament");
+	if(instance_create("Geffen Magic Tournament") < 0) {
+		mes "Can't generate instance.";
+		close;
+	};
+	next;
 	switch(instance_enter("Geffen Magic Tournament")) {
 	case 3:
 		mes "An unknown error has occurred.";
@@ -68,7 +72,7 @@ izlude,127,139,3	script	Emmitt White::gef_magic_init	641,{
 	}	
 }
 
-1@gef,122,58,4	script	Receptionist::gef_magic_reception	4_M_ARUNA_NFM1,{
+1@gef,122,58,4	script	Receptionist::gef_magic_reception	937,{
 	
 	.npc$ = "[Tournament Receptionist]";
 	
@@ -87,7 +91,7 @@ izlude,127,139,3	script	Emmitt White::gef_magic_init	641,{
 		mes "Give me your name so I can write it down.";
 		mes "You will automatically be registered for the tournament now.";
 		next;
-		input .@name;
+		input .@name$;
 		mes .npc$;
 		mes strcharinfo(0) + "?";
 		mes "Okay, interesting name.";
@@ -103,7 +107,7 @@ izlude,127,139,3	script	Emmitt White::gef_magic_init	641,{
 		mes .npc$;
 		mes "Good luck!";
 		.warp_stadium = 1;
-		//enablenpc "";
+		enablenpc "gef_stadium_warp";
 		close;
 	}
 	mes .npc$;
@@ -113,6 +117,7 @@ izlude,127,139,3	script	Emmitt White::gef_magic_init	641,{
 	next;
 	switch(select("About Geffen Magic Tournament:How do I Register?:Collecting Rewards:Can I get a Spectator Pass?:Cancel")) {
 	case 1:
+		mes .npc$;
 		break;
 	case 2:
 		mes .npc$;
@@ -134,13 +139,14 @@ izlude,127,139,3	script	Emmitt White::gef_magic_init	641,{
 		case 2:
 			mes .npc$;
 			mes "You can participate in the Magic Tournament after passing the test. Then, let us begin!";
-			hideonnpc instance_npcname(strnpcinfo(3));
+			hideonnpc instance_npcname("gef_magic_reception");
 			npctalk "The time limit is 60 seconds! Ready! Set! Go!";
-			monster instance_mapname("1@gef"),118,62,"Desert Wolf",1106,1,instance_npcname(strnpcinfo(3)) + "::OnDesertWolfDead";
+			monster instance_mapname("1@gef"),118,62,"Desert Wolf",1106,1,instance_npcname("gef_magic_reception") + "::OnDesertWolfDead";
 			setquest 70002;
 			close2;
 			break;
 		}
+		break;
 	case 3:
 	case 4:
 		mes "<Placeholder>";
@@ -148,21 +154,114 @@ izlude,127,139,3	script	Emmitt White::gef_magic_init	641,{
 	case 5:
 		close;
 	}
-	
 	close;
 	
 OnDesertWolfDead:
 	if(checkquest(70002,PLAYTIME) == 2) {
-		hideoffnpc instance_npcname(strnpcinfo(3));
+		hideoffnpc instance_npcname("gef_magic_reception");
 		npctalk "You have failed! You can come back and try again.";
+		erasequest 70002;
 		end;
 	}
 	erasequest 70002;
 	.test_success = 1;
-	hideoffnpc instance_npcname(strnpcinfo(3));
+	hideoffnpc instance_npcname("gef_magic_reception");
 	npctalk "You passed the test! Shall we finish your registration?";
+	end;
+	
+OnInint:
+	disablenpc "gef_stadium_warp";
 	end;
 }
 
-//1@gef - gef_st warp npc 
+1@gef,117,35,0	script	gef_stadium_warp	45,2,2,{
 
+OnTouch:	
+	warp instance_mapname("1@ge_st"),88,48;
+	end;
+}
+
+1@ge_st,100,55,4	script	Geffen Academy Master::gef_magic_mc	10006,{
+	
+	.npc$ = "[Magic Academy Master]";
+	
+OnPCLoadMapEvent:
+	.accountid = getattachedrid();
+	mes .npc$;
+	mes "Ladies and gentlemen!";
+	mes "Welcome to Geffen Magic Tournament!";
+	next;
+	mes .npc$;
+	mes "Today a champion will be crowned.";
+	mes .npc$;
+	mes "There are 2 divisions this year divided into group A and B.";
+	mes "The winner of each group will face each other for the championship match.";
+	next;
+	mes .npc$;
+	mes "I am the MC of group A.";
+	mes "Geffen Academy Master~!";
+	mes "Archmeiji Janjiar Helmode";
+	next;
+	mes "I'm honored to be this year's MC.";
+	mes "Now it's time for the matches to begin.";
+	next;
+	mes .npc$;
+	mes "Begin...";
+	close2;
+	sleep2 1000;
+	npcskilleffect 51,0,90,48;
+	npctalk "Ladies and Gentlemen!";
+	sleep2 1000;
+	npctalk "I do my best to be as loud as I can!";
+	sleep2 1000;
+	npctalk "The Geffen Magic Tournament will now commence!";
+	donpcevent instance_npcname("Arhi") + "::OnStart";
+	end;
+	
+OnRoundWon:
+	end;
+
+OnRoundEnd:
+	end;
+}
+
+1@ge_st,105,48,4	script	Arhi	670,{
+
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+
+OnStart:
+	attachrid(getvariableofnpc(.accountid,instance_npcname("gef_magic_mc")));
+	sleep2 2000;
+	npctalk "The first match always make me nervous~!";
+	sleep2 1000;
+	npctalk "Can I win?";
+	sleep2 1000;
+	if(Sex) {
+		npctalk "I guess it will be okay. This guy seems weak.";
+	} else {
+		npctalk "I guess it will be okay. This girl seems weak";
+	}
+	sleep2 1000;
+	npctalk "OK just relax~!";
+	sleep2 1000;
+	npctalk "Ah... Finally, it's going to start soon!";
+	sleep2 1000;
+	npctalk "Just relax~!";
+	sleep2 1000;
+	hideonnpc strnpcinfo(0);
+	monster instance_mapname("1@ge_st"),0,0,"Aruhi",1002,100,instance_npcname(strnpcinfo(0))+"::OnMyMobDead";
+	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname(strnpcinfo(0))+"::OnMyMobDead") > 0) {
+		killmonster instance_mapname("1@ge_st"),instance_npcname(strnpcinfo(0))+"::OnMyMobDead";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRoundEnd";
+	}
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+	
+OnMyMobDead:
+	end;
+	
+}
+
+//1@ge_st,1,1,1	script	tournament_controller
