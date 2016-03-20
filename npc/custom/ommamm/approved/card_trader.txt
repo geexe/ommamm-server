@@ -64,7 +64,7 @@ OnSellItem:
 	mes "Cards to sell:";
 	mes "-----------------------------------";
 	for(set .@i,0; .@i<getarraysize(@sold_nameid); set .@i,.@i+1)
-		if ((@sold_nameid[.@i] > 4000 && @sold_nameid[.@i] < 4700) || @sold_nameid[.@i] = 6379){
+		if ((@sold_nameid[.@i] > 4000 && @sold_nameid[.@i] < 4700) || @sold_nameid[.@i] == 6379){
 			if (.Level) {
 				query_sql("SELECT `LV` FROM `mob_db` WHERE `DropCardid` = "+@sold_nameid[.@i],.@lv);
 				if (.@lv < .Level) {
