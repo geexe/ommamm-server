@@ -7,6 +7,10 @@
 // If no MobID* is given, then any mob has a chance to drop the given ItemID*.
 12322,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Leave Old Glast Heim"
 
+//Geffen Magic Tournament
+70001,82800,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Geffen Magic Tournament"
+70002,60,1106,1,0,0,0,0,0,0,0,0,0,0,0,0,0,"Tournament Registration Test"
+
 //Biolab Challenge
 71646,0,1646,1,0,0,0,0,0,0,0,0,0,0,0,0,0,"Defeat Lord Knight Seyren"
 71647,0,1647,1,0,0,0,0,0,0,0,0,0,0,0,0,0,"Defeat Assassin Cross Eremes"

@@ -17,14 +17,20 @@
 
 izlude,153,147,4	script	Reset Girl	124,{
 
-	.@ResetStat  = 5000;	// Zeny for stat reset
-	.@ResetSkill = 5000;	// Zeny for skill reset
-	.@ResetBoth  = 9000;	// Zeny for resetting both together
+	if(BaseLevel > 99) {
+		.@ResetStat  = 100000 + ((BaseLevel - 100) * (BaseLevel - 100 + 1) / 2) * 5000;	// Zeny for stat reset
+		.@ResetSkill = 92000 + (JobLevel * (JobLevel + 1) / 2) * 8000;	// Zeny for skill reset
+		.@ResetBoth  = (.@ResetStat + .@ResetSkill) * 8/10;	// Zeny for resetting both together
+	} else {
+		.@ResetStat  = 5000;	// Zeny for stat reset
+		.@ResetSkill = 5000;	// Zeny for skill reset
+		.@ResetBoth  = 9000;	// Zeny for resetting both together
+	}
 
 	mes "[Reset Girl]";
 	mes "I am the Reset Girl.";
-	mes "Reset Stats: "  + callfunc("F_InsertComma", .@ResetStat)  + "z";
 	mes "Reset Skills: " + callfunc("F_InsertComma", .@ResetSkill) + "z";
+	mes "Reset Stats: "  + callfunc("F_InsertComma", .@ResetStat)  + "z";
 	mes "Reset Both: "   + callfunc("F_InsertComma", .@ResetBoth)  + "z";
 	mes "Please select the service you want:";
 	next;
@@ -35,33 +41,66 @@ izlude,153,147,4	script	Reset Girl	124,{
 			mes "Sorry, you don't have enough Zeny.";
 			close;
 		}
-		Zeny -= .@ResetSkill;
-		sc_end SC_ALL;
-		resetskill;
-		mes "There you go!";
-		close;
+		mes "Skill reset will cost ^e53535" + callfunc("F_InsertComma", .@ResetSkill) + "^000000z";
+		mes "Are you sure you want to reset skills?";
+		next;
+		switch(select("No:Yes")) {
+		case 1:
+			mes "[Reset Girl]";
+			mes "See you next time.";
+			close;
+		case 2:
+			Zeny -= .@ResetSkill;
+			sc_end SC_ALL;
+			resetskill;
+			mes "[Reset Girl]";
+			mes "There you go!";
+			close;
+		}
 	case 2:
 		mes "[Reset Girl]";
 		if (Zeny < .@ResetStat) {
 			mes "Sorry, you don't have enough Zeny.";
 			close;
 		}
-		Zeny -= .@ResetStat;
-		resetstatus;
-		mes "There you go!";
-		close;
+		mes "Stat reset will cost ^e53535" + callfunc("F_InsertComma", .@ResetStat) + "^000000z";
+		mes "Are you sure you want to reset stats?";
+		next;
+		switch(select("No:Yes")) {
+		case 1:
+			mes "[Reset Girl]";
+			mes "See you next time.";
+			close;
+		case 2:
+			Zeny -= .@ResetStat;
+			resetstatus;
+			mes "[Reset Girl]";
+			mes "There you go!";
+			close;
+		}
 	case 3:
 		mes "[Reset Girl]";
 		if (Zeny < .@ResetBoth) {
 			mes "Sorry, you don't have enough Zeny.";
 			close;
 		}
-		Zeny -= .@ResetBoth;
-		sc_end SC_ALL;
-		resetskill;
-		resetstatus;
-		mes "There you go!";
-		close;
+		mes "Skill and stat reset will cost ^e53535" + callfunc("F_InsertComma", .@ResetBoth) + "^000000z";
+		mes "Are you sure you want to reset skills and stats?";
+		next;
+		switch(select("No:Yes")) {
+		case 1:
+			mes "[Reset Girl]";
+			mes "See you next time.";
+			close;
+		case 2:
+			Zeny -= .@ResetBoth;
+			sc_end SC_ALL;
+			resetskill;
+			resetstatus;
+			mes "[Reset Girl]";
+			mes "There you go!";
+			close;
+		}
 	case 4:
 		close;
 	}

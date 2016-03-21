@@ -278,6 +278,25 @@ OnRound2Won:
 	enablenpc instance_npcname("gef_magic_guide");
 	end;
 
+OnRound3_1Start:
+	npctalk "Welcome back our competitor!";
+	sleep2 2000;
+	npctalk "And the other competitor~!";
+	sleep2 2000;
+	npctalk "With a mischieveous grin on his face!";
+	sleep2 2000;
+	npctalk "Geffen's Theif guildmaster! Geffen Shoplifter!";
+	sleep2 2000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 2000;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 2000;
+	npctalk "Let's get it on!";
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+	
 OnRoundEnd:
 	end;
 }
@@ -285,17 +304,12 @@ OnRoundEnd:
 1@ge_st,107,57,4	script	Tournament Guide::gef_magic_guide	899,{
 	
 	.npc$ = "[Tournament Guide]";
-	setarray .round3_name$[0],"3_1","3_2","3_3";
-	setarray .round12_name$[0],"12_1","12_2";
-	.round3$ = .round3_name$[rand(3)];
-	.round12$ = .round12_name$[rand(2)];
-	setarray .npc_name$[0],"1","2",.round3$,"4","5","6","7","8","9","10","11",.round12$,"13"; 
-	setarray .round_name$[0],"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","Semi-Final","Final";
+
 	
-	switch(select("Start " + .round_name$['round - 1] + " match and get reward:End Conversation")) {
+	switch(select("Start " + 'round_name$['round - 1] + " match and get reward:End Conversation")) {
 	case 1:
 		mes .npc$;
-		mes "Passed " + .round_name$['round - 2] + " match!";
+		mes "Passed " + 'round_name$['round - 2] + " match!";
 		mes "Congratulations!";
 		next;
 		mes .npc$;
@@ -306,12 +320,12 @@ OnRoundEnd:
 		mes "^007F00" + getitemname(6671) + "^000000 can be exchanged in Geffen with the ^007F00Geffen Coin Operator^000000 for special equipment.";
 		next;
 		mes .npc$;
-		mes "The " + .round_name$['round - 1] + " match of Group A has begun.";
-		enablenpc instance_npcname("gef_magic_round" + .npc_name$['round - 1]);
+		mes "The " + 'round_name$['round - 1] + " match of Group A has begun.";
+		enablenpc instance_npcname("gef_magic_round" + 'npc_name$['round - 1]);
 		close2;
 		warp instance_mapname("1@ge_st"),104,50;
-		donpcevent instance_npcname("gef_magic_round" + .npc_name$['round - 1]) + "::OnRound" + .npc_name$['round - 1] + "Start";
-		donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + .npc_name$['round - 1] + "Start";
+		donpcevent instance_npcname("gef_magic_round" + 'npc_name$['round - 1]) + "::OnRound" + 'npc_name$['round - 1] + "Start";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Start";
 		disablenpc instance_npcname("gef_magic_guide");
 		break;
 	case 2:
@@ -321,6 +335,12 @@ OnRoundEnd:
 	}
 		
 OnInstanceInit:
+	setarray 'round3_name$[0],"3_1","3_2","3_3";
+	setarray 'round12_name$[0],"12_1","12_2";
+	'round3$ = 'round3_name$[rand(3)];
+	'round12$ = 'round12_name$[rand(2)];
+	setarray 'npc_name$[0],"1","2",'round3$,"4","5","6","7","8","9","10","11",'round12$,"13"; 
+	setarray 'round_name$[0],"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th","Final";
 	disablenpc instance_npcname("gef_magic_guide");
 	end;
 }
@@ -439,3 +459,73 @@ OnMyMobDead:
 	disablenpc instance_npcname("gef_magic_round2");
 	end;
 }
+
+1@ge_st,114,50,4	script	Geffen Shoplifter::gef_magic_round3_1	671,{
+	end;
+
+OnInstanceInit:
+	.npc_name$ = instance_npcname("gef_magic_round3_1"); 
+	disablenpc .npc_name$;
+	end;
+
+OnRound3_1Start:
+	npctalk "There are so many people gathered here.";
+	sleep2 1000;
+	npctalk "I though there would be something I ca steal.";
+	sleep2 1000;
+	npctalk "But I can't steal because of all the attention it will cause.";
+	sleep2 1000;
+	npctalk "Ah.... This is not good.";
+	sleep2 1000;
+	npctalk "I guess I am fighting in this tournament...";
+	sleep2 1000;
+	npctalk "Well~! Let's win anyway!";
+	sleep2 6000;
+	hideonnpc instance_npcname("gef_magic_round3_1");
+	monster instance_mapname("1@ge_st"),114,50,"Dio Anemos",1002,1,instance_npcname("gef_magic_round3_1")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round3_1")+"::OnMyMobDead") > 0) {
+		atcommand "killmonster2";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRoundEnd";
+	}
+	disablenpc instance_npcname("gef_magic_round3_1");
+	end;
+	
+OnMyMobDead:
+	hideoffnpc instance_npcname("gef_magic_round2");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound2Won";
+	sleep2 5000;
+	npctalk "Oh my god...";
+	sleep2 2000;
+	npctalk "I lost...";
+	sleep2 2000;
+	npctalk "Ah, Ah... to this random loser.";
+	sleep2 2000;
+	npctalk "My skill has gotten worse...";
+	sleep2 2000;
+	npctalk "Ah, Ah.... sad..";
+	sleep2 2000;
+	npctalk "Ahhhh why?";
+	sleep2 2000;
+	hideonnpc instance_npcname("gef_magic_round2");
+	disablenpc instance_npcname("gef_magic_round2");
+	end;
+}
+
+1@ge_st,114,50,4	script	Geffen Bully::gef_magic_round3_2	681,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round3_2");
+	end;
+}
+
+1@ge_st,114,50,4	script	Geffen Assassin::gef_magic_round3_3	682,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round3_3");
+	end;
+}
+
