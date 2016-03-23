@@ -320,7 +320,7 @@ OnNormal:
 	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
 	delitem2 5102,1,1,0,0,0,@slotUnique,@slotNormal,@slotSpecial;
 	getitem2 5102,1,1,0,0,0,@slotUnique,.@enchant,@slotSpecial;
-	equip 5102;
+	//equip 5102;
 	specialeffect2 1019;
 	specialeffect2 98;
 	close;
@@ -417,7 +417,7 @@ OnSpecial:
 	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
 	delitem2 5102,1,1,0,0,0,@slotUnique,@slotNormal,@slotSpecial;
 	getitem2 5102,1,1,0,0,0,@slotUnique,@slotNormal,.@enchant;
-	equip 5102;
+	//equip 5102;
 	specialeffect2 1019;
 	specialeffect2 98;
 	close;
@@ -478,7 +478,7 @@ OnUnique:
 	@slotSpecial = getequipcardid(EQI_HEAD_MID,3);
 	delitem2 5102,1,1,0,0,0,@slotUnique,@slotNormal,@slotSpecial;
 	getitem2 5102,1,1,0,0,0,.@enchant,@slotNormal,@slotSpecial;
-	equip 5102;
+	//equip 5102;
 	specialeffect2 1019;
 	specialeffect2 98;
 	close;

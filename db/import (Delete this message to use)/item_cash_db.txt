@@ -22,11 +22,11 @@
 0, 14730, 450 //Ommamm Costume Box I
 //------------------------Hot--------------------------------
 1, 2589, 5500 //Fallen Angel Wing
-1, 5102, 1800 //Blank Eye
+1, 5102, 2800 //Blank Eye
 1, 2829, 1500 //Greed Clip
 1, 12902, 450 //Bubble Gum Box
-1, 7621, 10 //Token of Ziegfried
-1, 12214, 20 //Convex Mirror
+1, 7621, 15 //Token of Ziegfried
+1, 12214, 25 //Convex Mirror
 1, 13875, 400 //Thief Set Card Box
 1, 13874, 400 //Swordman Set Card Box
 1, 13871, 400 //Mage Set Card Box
@@ -35,13 +35,7 @@
 1, 13876, 400 //Merchant Set Card Box
 //-------------------------Limited---------------------------
 2, 14730, 450 //Ommamm Costume Box I
-2, 5873, 3900 //Helmet of Ziegfried
-2, 5874, 3900 //Circlet of Kriemhild
-2, 5875, 3900 //Diadem of Brunhild
-2, 1837, 5900 //Iron Nail
-2, 15105, 2000  //Kaftan
-2, 18863, 3000 //Exorcist Robe
-2, 2985, 5500 //Gyges Ring
+
 //-------------------------Costumes-----------------------
 3, 19509, 2000 //Cos butterfly wing ear
 3, 19517, 2000 //Cos Chicken Crest
@@ -81,6 +75,7 @@
 4, 18580, 2000 //Yggdrasil Crown
 4, 5372, 2000 //Koneko Hat
 4, 18841, 2000 //Small Poring Band
+4, 5388, 2000 //Snake Head Hat
 4, 5379, 2500 //Balloon Hat
 4, 5286, 2500 //Pecopeco Hairband
 4, 18656, 2500 //Witch's Pumpkin Hat
@@ -118,13 +113,13 @@
 4, 5325, 1500 //Robo Eye
 //Not consistent 4, 5664, 1500 //Filir's Pini
 4, 5402, 1500 //Mischievous Fairy
-4, 5102, 1800 //Blank Eye
 4, 5800, 2000 //Blush of Groom
 4, 5592, 2000 //Sigrun's Wings
 4, 5421, 2000 //Ifrit Ears
 4, 18657, 2000 //Pegasus Ear Wing
 4, 18599, 2000 //Black Devil's Mask
 4, 18540, 2500 // Demon Mask (Mid, Low)
+4, 5102, 2800 //Blank Eye
 //--------Lower
 4, 5361, 1000 //Gangster Scarf
 4, 18670, 1000 //Handkerchief in Mouth
@@ -151,6 +146,7 @@
 4, 13092, 1500 //RWC memory dagger
 4, 16026, 1500 //RWC memory mace
 4, 1670, 1500 //RWC memory Staff
+4, 1837, 5900 //Iron Nail
 //--------Shield
 4, 17122, 3500 //Immune Shield Box
 //--------------------------Buff/Scrolls-----------------------
@@ -168,32 +164,32 @@
 6, 12900, 450 //Battle Manual Box
 6, 12210, 50 //Bubble Gum
 6, 12902, 450 //Bubble Gum Box
-6, 14523, 5 //Pill
-6, 14522, 5 //Big Bun
-6, 12209, 20 //Insurance
-6, 12901, 180 //Insurance Box
+6, 14523, 8 //Pill
+6, 14522, 8 //Big Bun
+6, 12209, 10 //Insurance
+6, 12901, 90 //Insurance Box
 6, 13571, 50 //Giant Fly Wing 100 Box
-6, 12214, 20 //Convex Mirror
-6, 14168, 180//Convex Mirror 10 Box
+6, 12214, 25 //Convex Mirror
+6, 14168, 225//Convex Mirror 10 Box
 //--------------------------Others-----------------------
-7, 7227, 10 //Bossania Entrance Ticket
+7, 7227, 10 //Bossania Entrance Ticket (TCG)
 7, 16770, 250 //Silvervine 10 Box
 7, 6665, 250 //RWC_Inicializer
-7, 7621, 10 //Token of Ziegfried
-7, 17068, 250 //Acidbomb Box50
-7, 17069, 450 //Acidbomb Box100
-7, 17070, 2000 //Acidbomb Box500
-7, 17066, 250 //Poison Bottle Box50
-7, 17067, 450 //Poison Bottle Box100
-7, 6241, 25 //HD Elunium
-7, 6240, 25 //HD Oridecon
-7, 6225, 40 //HD Carnium
-7, 6226, 40 //HD Bradium
-7, 7619, 35 //Enriched Elunium
-7, 7620, 35 //Enriched Oridecon
+7, 7621, 15 //Token of Ziegfried
+7, 17068, 350 //Acidbomb Box50
+7, 17069, 650 //Acidbomb Box100
+7, 17070, 3000 //Acidbomb Box500
+7, 17066, 350 //Poison Bottle Box50
+7, 17067, 650 //Poison Bottle Box100
+7, 6241, 20 //HD Elunium
+7, 6240, 20 //HD Oridecon
+7, 6225, 35 //HD Carnium
+7, 6226, 35 //HD Bradium
+7, 7619, 30 //Enriched Elunium
+7, 7620, 30 //Enriched Oridecon
 //7, 16753, 450 //Blessed Ori
 //7, 16755, 450 //Blessed Elu
-7, 7776, 100 //Gym Pass
+7, 7776, 250 //Gym Pass
 7, 6456, 500 //Safe to 5 Weapon Certificate
 7, 6457, 750 //Safe to 5 Armor Certificatate
 7, 6231, 1000 //Safe to 6 Weapon Certificate
