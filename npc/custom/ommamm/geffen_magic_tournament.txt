@@ -282,15 +282,18 @@ OnRound2Start:
 	
 OnRound2Won:
 	'round = 3;
+	sleep2 1000;
 	npctalk "The 2nd match of Group A is finished~! Each match winner will receive a reward";
-	sleep2 2000;
+	sleep2 3000;
 	npctalk "You will be given time to heal any injuries.";
-	sleep2 2000;
+	sleep2 3000;
 	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 4000;
 	enablenpc instance_npcname("gef_magic_guide");
 	end;
 
 OnRound3_1Start:
+	attachrid('accountid);
 	npctalk "Welcome back our competitor!";
 	sleep2 2000;
 	npctalk "And the other competitor~!";
@@ -307,9 +310,30 @@ OnRound3_1Start:
 	sleep2 2000;
 	npctalk "A match has started. This is so exciting.";
 	end;
+
+OnRound3_2Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "The 3rd match of Group A has begun!";
+	sleep2 1500;
+	npctalk "Welcome back our competitor!";
+	sleep2 5000;
+	npctalk "And the other competitor~!";
+	sleep2 1500;
+	npctalk "With a smile that only a mother can love.";
+	sleep2 1500;
+	npctalk "The ruthless! Geffen Bully!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	sleep2 2500;
+	npctalk "A match has started. This is so exciting.";
+	end;
 	
 OnRound3_1Won:
-OnRound3_2Won:
 OnRound3_3Won:
 	'round = 4;
 	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
@@ -320,6 +344,20 @@ OnRound3_3Won:
 	enablenpc instance_npcname("gef_magic_guide");
 	enablenpc instance_npcname("gef_magic_healer");
 	sleep2 2000;
+	npctalk "Fenris Fenrir has 3 consecutive victories~!";
+	end;
+	
+OnRound3_2Won:
+	'round = 4;
+	sleep2 1500;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 4000;
+	enablenpc instance_npcname("gef_magic_guide");
+	enablenpc instance_npcname("gef_magic_healer");
 	npctalk "Fenris Fenrir has 3 consecutive victories~!";
 	end;
 	
@@ -601,34 +639,25 @@ OnRound2Start:
 	end;
 	
 OnMyMobDead:
+	sleep2 3000;
 	hideoffnpc instance_npcname("gef_magic_round2");
 	donpcevent instance_npcname("gef_magic_mc") + "::OnRound2Won";
-	sleep2 5000;
+	sleep2 1000;
 	npctalk "Oh my god...";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "I lost...";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "Ah, Ah... to this random loser.";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "My skill has gotten worse...";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "Ah, Ah.... sad..";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "Ahhhh why?";
-	sleep2 2000;
+	sleep2 1500;
 	hideonnpc instance_npcname("gef_magic_round2");
 	disablenpc instance_npcname("gef_magic_round2");
 	end;
-	
-/*OnRound2Won:
-	'round = 3;
-	npctalk "The 2nd match of Group A is finished~! Each match winner will receive a reward";
-	sleep2 2000;
-	npctalk "You will be given time to heal any injuries.";
-	sleep2 2000;
-	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
-	enablenpc instance_npcname("gef_magic_guide");
-	end;*/
 }
 
 1@ge_st,114,50,4	script	Geffen Shoplifter::gef_magic_round3_1	671,{
@@ -691,7 +720,56 @@ OnMyMobDead:
 	
 OnInstanceInit:
 	disablenpc instance_npcname("gef_magic_round3_2");
+	end;	
+	
+OnRound3_2Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 3000;
+	npctalk "I got you. You know my face?";
+	sleep2 1500;
+	npctalk "I will beat you down today!";
+	sleep2 1000;
+	npctalk "Give me zeny!";
+	sleep2 1500;
+	npctalk "You will be crying until you get home!";
+	sleep2 1500;
+	npctalk "Do you really want me to show you my 20 years skill of bullying?";
+	sleep2 1500;
+	npctalk "You are dead now!!";
+	sleep2 8000;
+	hideonnpc instance_npcname("gef_magic_round3_2");
+	monster instance_mapname("1@ge_st"),114,50,"Geffen Shoplifter",1002,1,instance_npcname("gef_magic_round3_2")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round3_2")+"::OnMyMobDead") > 0) {
+		atcommand "killmonster2";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRoundEnd";
+	}
+	disablenpc instance_npcname("gef_magic_round3_2");
 	end;
+	
+OnMyMobDead:
+	sleep2 2000;
+	hideoffnpc instance_npcname("gef_magic_round3_2");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1500;
+	npctalk "I can't believe that nerd beat me";
+	sleep2 1500;
+	npctalk "It can't be!!";
+	sleep2 1500;
+	npctalk "Doesn't make sense!!! I wanted to steal zeny!!";
+	sleep2 1500;
+	npctalk "If it is found out, everyone in Geffen.";
+	sleep2 1500;
+	npctalk "will laugh at me.......";
+	sleep2 1500;
+	npctalk "Ah, AhAh...!!! It can't be!!!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round3_2");
+	disablenpc instance_npcname("gef_magic_round3_2");
+	end;	
 }
 
 1@ge_st,114,50,4	script	Geffen Assassin::gef_magic_round3_3	682,{
@@ -784,7 +862,7 @@ OnRound5Start:
 	npctalk "Shall we start?";
 	sleep2 8000;
 	hideonnpc instance_npcname("gef_magic_round5");
-	monster instance_mapname("1@ge_st"),114,50,"Feymont",1002,1,instance_npcname("gef_magic_round5")+"::OnMyMobDead";
+	monster instance_mapname("1@ge_st"),114,50,"Odre",1002,1,instance_npcname("gef_magic_round5")+"::OnMyMobDead";
 	pcblockmove getcharid(3),0;
 	removemapflag instance_mapname("1@ge_st"),mf_noskill;
 	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round5")+"::OnMyMobDead") > 0) {
@@ -870,4 +948,53 @@ OnMyMobDead:
 	hideonnpc instance_npcname("gef_magic_round6");
 	disablenpc instance_npcname("gef_magic_round6");
 	end;
+}
+
+1@ge_st,114,50,4	script	Kuro Akuma::gef_magic_round7	675,{
+	
+	end;
+
+OnRound7Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "Finally, the 7th game has started~!";
+	sleep2 1500;
+	npctalk "Have you seen the evil?";
+	sleep2 1500;
+	npctalk "If not? You are lucky~!";
+	sleep2 1500;
+	
+	hideonnpc instance_npcname("gef_magic_round6");
+	monster instance_mapname("1@ge_st"),114,50,"Blut Hase",1002,1,instance_npcname("gef_magic_round6")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round6")+"::OnMyMobDead") > 0) {
+		atcommand "killmonster2";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRoundEnd";
+	}
+	disablenpc instance_npcname("gef_magic_round6");
+	end;
+
+/*OnRound7Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "Continuing the march of victory~!";
+	sleep2 1500;
+	npctalk "Welcome back! " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "One who's cute on the outside but cruelly destroys enemies!";
+	sleep2 1500;
+	npctalk "Rabbit's ear of blood~!!! Blut Hase!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;*/
+	
 }
