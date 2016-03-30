@@ -406,7 +406,7 @@ OnRound5Start:
 	sleep2 1500;
 	npctalk "One who promises to fight with honor!";
 	sleep2 1000;
-	npctalk "The self-proclaimed master of battle. Odre!";
+	npctalk "The self-proclaimed master of battle. Ordre!";
 	sleep2 3000;
 	npctalk "Time limit is 3 minutes. If there is no winner after that...";
 	sleep2 2000;
@@ -467,6 +467,116 @@ OnRound6Won:
 	enablenpc instance_npcname("gef_magic_healer");
 	end;
 	
+OnRound7Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "Continuing the march of victory~!";
+	sleep2 1500;
+	npctalk "Welcome back! " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "Have you ever seen evil? If not, you will see it today...";
+	sleep2 1500;
+	npctalk "aka the evil tooth! Kuro Akuma!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound7Won:
+	'round = 8;
+	sleep 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+	
+OnRound8Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "The darling of this year's tournament!";
+	sleep2 1500;
+	npctalk "Rune Midgard's newest star! " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "Slow as a turtle but fast as a hare.";
+	sleep2 1500;
+	npctalk "The maniac of Rune Midgard! Ifodes!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+
+OnRound8Won:
+	'round = 9;
+	sleep 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+	
+OnRound9Start:
+	attachrid('accountid);
+	sleep2 1000;
+	if(Sex) {
+		npctalk "Who is going to stop him!!";
+	} else {
+		npctalk "Who is going to stop her!!";
+	}
+	sleep2 1500;
+	npctalk "The best player who represents Rune Midgard! " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "Attack you like a snake after approaching like a lady!!";
+	sleep2 1500;
+	npctalk "A lady of death~!!! Licheni!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound9Won:
+	'round = 10;
+	sleep 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	npctalk "It is getting exciting! More news from Group B!";
+	sleep2 2000;
+	npctalk "Fenris Fenrir is continuing her dominance~! Those in Group A better beware!";
+	enablenpc instance_npcname("gef_magic_guide");
+	enablenpc instance_npcname("gef_magic_healer");
+	end;
+	
 OnRoundEnd:
 	end;
 }
@@ -516,13 +626,13 @@ OnInstanceInit:
 	end;
 }
 
-1@ge_st,109,50,4	script	Tournament Healer::gef_magic_healer	899,{
+1@ge_st,109,50,4	script	Tournament Healer::gef_magic_healer	475,{
 	
 	.npc$ = "[Tournament Healer]";
 
 	switch(select("Heal me!:Cancel")) {
 	case 1:
-		heal 100,100;
+		percentheal 100,100;
 		mes .npc$;
 		mes "Administering medical care.";
 		next;
@@ -836,7 +946,7 @@ OnMyMobDead:
 	end;
 }
 
-1@ge_st,114,50,4	script	Odre::gef_magic_round5	673,{
+1@ge_st,114,50,4	script	Ordre::gef_magic_round5	673,{
 	
 	end;
 	
@@ -896,6 +1006,8 @@ OnMyMobDead:
 
 1@ge_st,114,50,4	script	Blut Hase::gef_magic_round6	674,{
 
+	end;
+
 OnInstanceInit:
 	disablenpc instance_npcname("gef_magic_round6");
 	end;
@@ -954,6 +1066,10 @@ OnMyMobDead:
 	
 	end;
 
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round7");
+	end;	
+	
 OnRound7Start:
 	attachrid('accountid);
 	setmapflag instance_mapname("1@ge_st"),mf_noskill;
@@ -965,36 +1081,215 @@ OnRound7Start:
 	sleep2 1500;
 	npctalk "If not? You are lucky~!";
 	sleep2 1500;
-	
-	hideonnpc instance_npcname("gef_magic_round6");
-	monster instance_mapname("1@ge_st"),114,50,"Blut Hase",1002,1,instance_npcname("gef_magic_round6")+"::OnMyMobDead";
+	npctalk "It will be a good experience for today~!";
+	sleep2 1500;
+	npctalk "Nobody who stood in front of me has survived~!";
+	sleep2 1500;
+	npctalk "I will destroy you if I must~!";
+	sleep2 7000;
+	hideonnpc instance_npcname("gef_magic_round7");
+	monster instance_mapname("1@ge_st"),114,50,"Kuro Akuma",1002,1,instance_npcname("gef_magic_round7")+"::OnMyMobDead";
 	pcblockmove getcharid(3),0;
 	removemapflag instance_mapname("1@ge_st"),mf_noskill;
-	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round6")+"::OnMyMobDead") > 0) {
+	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round7")+"::OnMyMobDead") > 0) {
 		atcommand "killmonster2";
 		donpcevent instance_npcname("gef_magic_mc") + "::OnRoundEnd";
 	}
-	disablenpc instance_npcname("gef_magic_round6");
+	disablenpc instance_npcname("gef_magic_round7");
 	end;
 
-/*OnRound7Start:
-	attachrid('accountid);
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round7");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
 	sleep2 1000;
-	npctalk "Continuing the march of victory~!";
+	npctalk "Oh my gods...";
 	sleep2 1500;
-	npctalk "Welcome back! " + strcharinfo(0) + "!";
-	sleep2 3000;
-	npctalk "And the other competitor~!!!";
+	npctalk "I am a tooth of the devil...";
 	sleep2 1500;
-	npctalk "One who's cute on the outside but cruelly destroys enemies!";
+	npctalk "I actually lost...";
 	sleep2 1500;
-	npctalk "Rabbit's ear of blood~!!! Blut Hase!";
-	sleep2 3000;
-	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	npctalk "Yikes ah, ah, ah Kuh yikes ah, ah ,ah!!";
 	sleep2 1500;
-	npctalk "Let's get it on!";
-	sleep2 2000;
-	npctalk "A match has started. This is so exciting.";
-	end;*/
+	npctalk "I can't lose!!!!";
+	sleep2 1500;
+	npctalk "If we meet again, I will get my revenge!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round7");
+	disablenpc instance_npcname("gef_magic_round7");
+	end;
+}
+
+1@ge_st,114,50,4	script	Ifodes::gef_magic_round8	676,{
 	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round8");
+	end;	
+	
+OnRound8Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "At long last the 8th game has started.";
+	sleep2 1500;
+	npctalk "No one can attack me.";
+	sleep2 1500;
+	npctalk "But I can kill anyone!";
+	sleep2 1500;
+	npctalk "There will be no chance to laugh again!";
+	sleep2 1500;
+	npctalk "If a match has started, your laughter will turn to tears instead!";
+	sleep2 1500;
+	npctalk "Shall we start?";
+	sleep2 7000;
+	hideonnpc instance_npcname("gef_magic_round8");
+	monster instance_mapname("1@ge_st"),114,50,"Ifodes",2558,1,instance_npcname("gef_magic_round8")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round8")+"::OnMyMobDead") > 0) {
+		atcommand "killmonster2";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRoundEnd";
+	}
+	disablenpc instance_npcname("gef_magic_round8");
+	end;
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round8");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "I will not lose the game!!";
+	sleep2 1500;
+	npctalk "This is nonsense...";
+	sleep2 1500;
+	npctalk "How could this happen?";
+	sleep2 1500;
+	npctalk "I can't understand!";
+	sleep2 1500;
+	npctalk "That weak looking fighter...";
+	sleep2 1500;
+	npctalk "Argggh!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round8");
+	disablenpc instance_npcname("gef_magic_round8");
+	end;
+}
+
+1@ge_st,114,50,4	script	Licheni::gef_magic_round9	677,{
+	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round9");
+	end;	
+	
+OnRound9Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "Ho ho ho~!!";
+	sleep2 1500;
+	npctalk "The competitor of the 9th match looks scary~!";
+	sleep2 1500;
+	npctalk "Do not scare me~!";
+	sleep2 1500;
+	npctalk "I am a lady~!";
+	sleep2 1500;
+	npctalk "But, if a match starts!";
+	sleep2 1500;
+	npctalk "Giggling... I will bite them!";
+	sleep2 7000;
+	hideonnpc instance_npcname("gef_magic_round9");
+	monster instance_mapname("1@ge_st"),114,50,"Ifodes",2558,1,instance_npcname("gef_magic_round9")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round9")+"::OnMyMobDead") > 0) {
+		atcommand "killmonster2";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRoundEnd";
+	}
+	disablenpc instance_npcname("gef_magic_round9");
+	end;	
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round9");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "How could you do this to me?";
+	sleep2 1500;
+	npctalk "You try to beat me with cruelty... to a lady like me.";
+	sleep2 1500;
+	npctalk "I am very sad.";
+	sleep2 1500;
+	npctalk "Weeping...";
+	sleep2 1500;
+	npctalk "But when you see me next time!";
+	sleep2 1500;
+	npctalk "I will beat you with more than laughter!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round9");
+	disablenpc instance_npcname("gef_magic_round9");
+	end;
+}
+
+1@ge_st,114,50,4	script	Licheni::gef_magic_round10	677,{
+	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round9");
+	end;	
+	
+OnRound9Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "Ho ho ho~!!";
+	sleep2 1500;
+	npctalk "The competitor of the 9th match looks scary~!";
+	sleep2 1500;
+	npctalk "Do not scare me~!";
+	sleep2 1500;
+	npctalk "I am a lady~!";
+	sleep2 1500;
+	npctalk "But, if a match starts!";
+	sleep2 1500;
+	npctalk "Giggling... I will bite them!";
+	sleep2 7000;
+	hideonnpc instance_npcname("gef_magic_round9");
+	monster instance_mapname("1@ge_st"),114,50,"Ifodes",2558,1,instance_npcname("gef_magic_round9")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	sleep2 180000;	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round9")+"::OnMyMobDead") > 0) {
+		atcommand "killmonster2";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRoundEnd";
+	}
+	disablenpc instance_npcname("gef_magic_round9");
+	end;	
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round9");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "How could you do this to me?";
+	sleep2 1500;
+	npctalk "You try to beat me with cruelty... to a lady like me.";
+	sleep2 1500;
+	npctalk "I am very sad.";
+	sleep2 1500;
+	npctalk "Weeping...";
+	sleep2 1500;
+	npctalk "But when you see me next time!";
+	sleep2 1500;
+	npctalk "I will beat you with more than laughter!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round9");
+	disablenpc instance_npcname("gef_magic_round9");
+	end;
 }
