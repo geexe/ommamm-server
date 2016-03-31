@@ -17,19 +17,15 @@
 
 izlude,153,147,4	script	Reset Girl	124,{
 
-	/*if(BaseLevel > 99) {
-		.@ResetStat  = 100000 + ((BaseLevel - 100) * (BaseLevel - 100 + 1) / 2) * 5000;	// Zeny for stat reset
-		.@ResetSkill = 92000 + (JobLevel * (JobLevel + 1) / 2) * 8000;	// Zeny for skill reset
+	if(BaseLevel > 99) {
+		.@ResetStat  = 100000 + ((BaseLevel - 100) * (BaseLevel - 100 + 1) / 2) * 3400;	// Zeny for stat reset
+		.@ResetSkill = 95500 + (JobLevel * (JobLevel + 1) / 2) * 4500;	// Zeny for skill reset
 		.@ResetBoth  = (.@ResetStat + .@ResetSkill) * 8/10;	// Zeny for resetting both together
 	} else {
 		.@ResetStat  = 5000;	// Zeny for stat reset
 		.@ResetSkill = 5000;	// Zeny for skill reset
 		.@ResetBoth  = 9000;	// Zeny for resetting both together
-	}*/
-	
-		.@ResetStat  = 5000;	// Zeny for stat reset
-		.@ResetSkill = 5000;	// Zeny for skill reset
-		.@ResetBoth  = 9000;	// Zeny for resetting both together
+	}
 
 	mes "[Reset Girl]";
 	mes "I am the Reset Girl.";
