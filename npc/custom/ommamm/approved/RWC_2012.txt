@@ -156,7 +156,7 @@ prontera,147,59,3	script	Goldberg#pron	878,{
 			break;
 		case 3:
 			setarray .@enchant_select[0],5,6,7;
-			set .@i, select("Cancel:Spell:MATK (%):SP")-2;
+			set .@i, select("Cancel:MATK (%):Spell:SP")-2;
 			break;
 		case 2:
 			mes "[Goldberg]";
