@@ -299,18 +299,19 @@ OnRound2Won:
 
 OnRound3_1Start:
 	attachrid('accountid);
+	sleep2 1000;
 	npctalk "Welcome back our competitor!";
-	sleep2 2000;
+	sleep2 5000;
 	npctalk "And the other competitor~!";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "With a mischieveous grin on his face!";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "Geffen's Theif guildmaster! Geffen Shoplifter!";
-	sleep2 2000;
+	sleep2 3000;
 	npctalk "Time limit is 3 minutes. If there is no winner after that...";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "The match will be decided by 3 judges.";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "Let's get it on!";
 	sleep2 2000;
 	npctalk "A match has started. This is so exciting.";
@@ -339,20 +340,8 @@ OnRound3_2Start:
 	end;
 	
 OnRound3_1Won:
-OnRound3_3Won:
-	'round = 4;
-	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
-	sleep2 2000;
-	npctalk "You will be given time to heal any injuries.";
-	sleep2 2000;
-	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
-	enablenpc instance_npcname("gef_magic_guide");
-	enablenpc instance_npcname("gef_magic_healer");
-	sleep2 2000;
-	npctalk "Fenris Fenrir has 3 consecutive victories~!";
-	end;
-	
 OnRound3_2Won:
+OnRound3_3Won:
 	'round = 4;
 	sleep2 1500;
 	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
@@ -360,7 +349,7 @@ OnRound3_2Won:
 	npctalk "You will be given time to heal any injuries.";
 	sleep2 3000;
 	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
-	sleep2 4000;
+	sleep2 6000;
 	enablenpc instance_npcname("gef_magic_guide");
 	enablenpc instance_npcname("gef_magic_healer");
 	npctalk "Fenris Fenrir has 3 consecutive victories~!";
@@ -977,18 +966,19 @@ OnRound3_1Start:
 	attachrid('accountid);
 	setmapflag instance_mapname("1@ge_st"),mf_noskill;
 	pcblockmove getcharid(3),1;
+	sleep2 1000;
 	npctalk "There are so many people gathered here.";
-	sleep2 1000;
+	sleep2 1500;
 	npctalk "I thought there would be something I can steal.";
-	sleep2 1000;
+	sleep2 1500;
 	npctalk "But I can't steal because of all the attention it will cause.";
-	sleep2 1000;
+	sleep2 1500;
 	npctalk "Ah.... This is not good.";
-	sleep2 1000;
+	sleep2 1500;
 	npctalk "I guess I am fighting in this tournament...";
-	sleep2 1000;
+	sleep2 1500;
 	npctalk "Well~! Let's win anyway!";
-	sleep2 6000;
+	sleep2 8000;
 	hideonnpc instance_npcname("gef_magic_round3_1");
 	monster instance_mapname("1@ge_st"),114,50,"Geffen Shoplifter",1002,1,instance_npcname("gef_magic_round3_1")+"::OnMyMobDead";
 	pcblockmove getcharid(3),0;
@@ -1003,19 +993,19 @@ OnRound3_1Start:
 OnMyMobDead:
 	hideoffnpc instance_npcname("gef_magic_round3_1");
 	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "Oh my gods... I was defeated...";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "I have been stealing too much.";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "My battle power has been reduced.";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "Ah... It can't be...";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "You need to train more if you continue to steal.";
-	sleep2 2000;
+	sleep2 1500;
 	npctalk "Ahem... Anyway, let's run away from here!";
-	sleep2 2000;
+	sleep2 1500;
 	hideonnpc instance_npcname("gef_magic_round3_1");
 	disablenpc instance_npcname("gef_magic_round3_1");
 	end;
