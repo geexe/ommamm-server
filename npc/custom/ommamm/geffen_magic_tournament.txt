@@ -338,6 +338,7 @@ MenuSelect:
 ShieldSelect:
 	switch(select("Magic Reflector<900 coin>:Revised cersion of Encyclopedia<900 coin>:Go back to previous menu")) {
 	case 1:
+		.@gear_select = 0;
 		mes "This anti-magic shield effectively reflects magic.";
 		mes	"^888888-------------------------^000000";
 		mes	"MDEF +10";
@@ -351,11 +352,11 @@ ShieldSelect:
 		mes	"Weight: ^0EAA0B100^000000";
 		mes	"Required Level: ^0EAA0B99^000000";
 		mes	"Jobs: ^6A5ACDAll classes^000000";
-		.@gear_select = 0;
 		next;
 		goto OnExchange;
 		end;
 	case 2:
+		.@gear_select = 2;
 		mes "A revised edition of an encyclopedia that is printed by a Prontera publisher. Thick and sharp-edged, this book is popularly used as a shield.";
 		mes	"^888888-------------------------^000000";
 		mes	"MATK +5, INT +3, DEX +2, CRIT +3";
@@ -374,7 +375,6 @@ ShieldSelect:
 		mes	"Weight: ^0EAA0B20^000000";
 		mes	"Required Level: ^0EAA0B99^000000";
 		mes	"Jobs: ^6A5ACDPriest, Sage and Star Gladiator^000000";
-		.@gear_select = 2;
 		next;
 		goto OnExchange;
 		end;
@@ -386,14 +386,44 @@ ShieldSelect:
 RingSelect:
 	switch(select("Physical Enhancer Ring<1350 coin>:Magic Intensifier Ring<1350 coin>:Go back to previous menu")) {
 	case 1:
-		mes "<Description>";
 		.@gear_select = 4;
+		mes "This magic ring, developed in Geffen, enhances its wearer's physical abilities.";
+		mes "^888888-------------------------^000000";
+		mes	"ATK +5%";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Anti-Magic Suits^000000]";
+		mes	"ASPD +5%";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Geffen Magic Robe^000000]";
+		mes	"Reduce after cast delay by 5%.";
+		mes	"Reduces damage taken from Demihuman monsters by 5%.";
+		mes	"^888888-------------------------^000000";
+		mes	"Class: ^6A5ACDAccessory^000000";
+		mes	"Defense: ^0000FF0^000000";
+		mes	"Weight: ^0EAA0B10^000000";
+		mes	"Required Level: ^0EAA0B90^000000";
+		mes	"Jobs: ^6A5ACDAll classes^000000";
 		next;
 		goto OnExchange;
 		end;
 	case 2:
-		mes "<Description>";
 		.@gear_select = 6;
+		mes "This magic ring developed in Geffen enhances its wearer's magical abilities.";
+		mes	"^888888-------------------------^000000";
+		mes	"MATK +5%";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Geffen Magic Robe^000000]";
+		mes	"Variable cast time -5%.";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Anti-Magic Suits^000000]";
+		mes	"After cast delay -5%.";
+		mes	"Reduces damage from Demihuman monsters by 5%.";
+		mes	"^888888-------------------------^000000";
+		mes	"Class: ^6A5ACDAccessory^000000";
+		mes	"Defense: ^0000FF0^000000";
+		mes	"Weight: ^0EAA0B10^000000";
+		mes	"Required Level: ^0EAA0B90^000000";
+		mes	"Jobs: ^6A5ACDAll classes^000000";
 		next;
 		goto OnExchange;
 		end;
@@ -405,14 +435,30 @@ RingSelect:
 ArmorSelect:
 	switch(select("Anti-Magic Suit<1800 coin>:Geffen Magic Robe<1800 coin>:Go back to previous menu")) {
 	case 1:
-		mes "<Description>";
 		.@gear_select = 8;
+		mes "This suit, developed in Geffen over a long period of time; effectively protects its wearer against potent magic.";
+		mes	"MaxHP +5%, MDEF +10.";
+		mes	"MDEF +5 when upgraded to +7. MaxHP +2% when upgraded to +9.";
+		mes	"Class: ^6A5ACDArmor^000000";
+		mes	"Defense: ^0000FF50^000000";
+		mes	"Weight: ^0EAA0B150^000000";
+		mes	"Required Level: ^0EAA0B99^000000";
+		mes	"Jobs: ^6A5ACDAll classes^000000";
 		next;
 		goto OnExchange;
 		end;
 	case 2:
-		mes "<Description>";
 		.@gear_select = 10;
+		mes "This uniform worn by the Geffen Mages enhances its wearer's concentration while he casts spells.";
+		mes	"10% SP Cost Reduction.";
+		mes	"Increased Variable Cast Time +15%. Casting cannot be interrupted.";
+		mes	"Additional 5% SP Cost Reduction when upgraded to +7.";
+		mes	"Reduce Variable Cast Time 5% when upgraded to +9.";
+		mes	"Class: ^6A5ACDArmor^000000";
+		mes	"Defense: ^0000FF40^000000";
+		mes	"Weight: ^0EAA0B100^000000";
+		mes	"Required Level: ^0EAA0B99^000000";
+		mes	"Jobs: ^6A5ACDAll classes^000000";
 		next;
 		goto OnExchange;
 		end;
@@ -1218,7 +1264,7 @@ OnRoundEnd:
 	sleep2 3000;
 	npctalk "You have lost!";
 	warp instance_mapname("1@gef"),120,62;
-	end;	
+	end;
 }
 
 1@ge_st,107,57,4	script	Tournament Guide::gef_magic_guide	899,{
@@ -2171,7 +2217,8 @@ OnWinEffect:
 	specialeffect 62; //Sight Rusher
 	specialeffect 89; //Storm Gust
 	sleep 6000;
-	specialeffect 225; //
+	//specialeffect ; //Light and sound
+	specialeffect 225; //Volcano Casting
 	end;
 }
 
@@ -2179,7 +2226,21 @@ OnWinEffect:
 1@ge_st,116,46,4	duplicate(gef_magic_win_effect)	gef_magic_win_effect2	139
 1@ge_st,104,45,4	duplicate(gef_magic_win_effect)	gef_magic_win_effect3	139
 1@ge_st,104,53,4	duplicate(gef_magic_win_effect)	gef_magic_win_effect4	139
-//effect Top-Right: 115,53
-//effect Bottom-right: 116,46
-//effect bottom-left: 104,45
-//effect top-left: 104,53 
+
+//------------------------------TO-DO------------------------------------------
+//In-arena spectators
+	//Dummy (No talk)
+	//Talking
+
+//In-Town spectators
+	//Dummy (No talk)
+	//Interactive/talking
+
+//In-Town competitors
+
+//Mini Quests
+	//Thief
+	//Bully
+	//Assassin
+	
+//In-Town effects
