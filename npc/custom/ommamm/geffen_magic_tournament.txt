@@ -2229,9 +2229,227 @@ OnWinEffect:
 
 //------------------------------TO-DO------------------------------------------
 //In-arena spectators
-	//Dummy (No talk)
-	//Talking
+//North Row 1 (Bottom)----------------------------------
+1@ge_st,93,62,4	script	gef_stadium_spec_N_1_1	46,{
+	end;
+}
 
+1@ge_st,94,62,4	script	gef_stadium_spec_N_1_2	67,{
+	end;
+}
+
+1@ge_st,95,62,6	script	gef_stadium_spec_N_1_3	870,{
+	end;
+}
+
+1@ge_st,96,62,4	script	gef_stadium_spec_N_1_4	47,{
+	end;
+}
+
+1@ge_st,97,62,6	script	gef_stadium_spec_N_1_5	985,{
+	end;
+}
+
+1@ge_st,98,62,4	script	gef_stadium_spec_N_1_6	48,{
+	end;
+}
+
+1@ge_st,99,62,6	script	gef_stadium_spec_N_1_7	727,{
+	end;
+}
+
+1@ge_st,100,62,4	script	gef_stadium_spec_N_1_8	49,{
+	end;
+}
+
+1@ge_st,101,62,4	script	gef_stadium_spec_N_1_9	828,{
+	end;
+}
+
+1@ge_st,102,62,4	script	gef_stadium_spec_N_1_10	66,{
+	end;
+}
+
+1@ge_st,103,62,6	script	gef_stadium_spec_N_1_11	84,{
+	end;
+}
+
+1@ge_st,104,62,4	script	gef_stadium_spec_N_1_12	68,{
+	end;
+}
+
+1@ge_st,105,62,6	script	gef_stadium_spec_N_1_13	89,{
+	end;
+}
+
+1@ge_st,106,62,6	script	gef_stadium_spec_N_1_14	512,{
+	end;
+}
+
+1@ge_st,107,62,6	script	gef_stadium_spec_N_1_15	558,{
+	end;
+}
+
+1@ge_st,108,62,6	script	gef_stadium_spec_N_1_16	683,{
+	end;
+}
+
+1@ge_st,109,62,6	script	gef_stadium_spec_N_1_17	921,{
+	end;
+}
+
+1@ge_st,110,62,4	script	gef_stadium_spec_N_1_18	666,{
+	end;
+}
+
+1@ge_st,111,62,4	script	gef_stadium_spec_N_1_19	850,{
+	end;
+}
+
+1@ge_st,112,62,4	script	gef_stadium_spec_N_1_20	10010,{
+	end;
+}
+
+1@ge_st,113,62,4	script	gef_stadium_spec_N_1_21	868,{
+	end;
+}
+
+1@ge_st,114,62,4	script	gef_stadium_spec_N_1_22	86,{
+	end;
+}
+
+1@ge_st,115,62,4	script	gef_stadium_spec_N_1_23	945,{
+	end;
+}
+
+1@ge_st,116,62,4	script	gef_stadium_spec_N_1_24	69,{
+	end;
+}
+
+1@ge_st,117,62,4	script	gef_stadium_spec_N_1_25	803,{
+	end;
+}
+
+1@ge_st,118,62,4	script	gef_stadium_spec_N_1_26	70,{
+	end;
+}
+
+1@ge_st,119,62,4	script	gef_stadium_spec_N_1_27	728,{
+	end;
+}
+
+1@ge_st,120,62,4	script	gef_stadium_spec_N_1_28	51,{
+	end;
+}
+
+1@ge_st,121,62,4	script	gef_stadium_spec_N_1_29	712,{
+	end;
+}
+
+1@ge_st,122,62,4	script	gef_stadium_spec_N_1_30	72,{
+	end;
+}
+
+1@ge_st,123,62,4	script	gef_stadium_spec_N_1_31	805,{
+	end;
+}
+//North West Row 1 (Bottom)---------------------------------------
+1@ge_st,89,51,6	script	gef_stadium_spec_NW_1_1	982,{
+	end;
+}
+
+//North Row 2 (Top)---------------------------------------
+1@ge_st,87,59,6	script	gef_stadium_spec_N_2_1	484,{
+	end;
+}
+
+1@ge_st,88,61,6	script	gef_stadium_spec_N_2_3	540,{
+	end;
+}
+
+1@ge_st,89,62,6	script	gef_stadium_spec_N_2_4	923,{
+	end;
+}
+
+1@ge_st,90,63,6	script	gef_stadium_spec_N_2_5	124,{
+	end;
+}
+
+1@ge_st,91,63,6	script	gef_stadium_spec_N_2_6	838,{
+	end;
+}
+
+1@ge_st,92,64,6	script	gef_stadium_spec_N_2_7	771,{
+	end;
+}
+
+1@ge_st,93,64,4	script	gef_stadium_spec_N_2_8	73,{
+	end;
+}
+
+1@ge_st,94,64,4	script	gef_stadium_spec_N_2_9	74,{
+	end;
+}
+
+1@ge_st,95,64,4	script	gef_stadium_spec_N_2_10	54,{
+	end;
+}
+
+1@ge_st,96,64,4	script	gef_stadium_spec_N_2_11	55,{
+	end;
+}
+
+1@ge_st,97,64,4	script	gef_stadium_spec_N_2_12	56,{
+	end;
+}
+
+1@ge_st,98,64,4	script	gef_stadium_spec_N_2_13	57,{
+	end;
+}
+
+1@ge_st,99,64,4	script	gef_stadium_spec_N_2_14	75,{
+	end;
+}
+
+1@ge_st,100,64,4	script	gef_stadium_spec_N_2_15	76,{
+	end;
+}
+
+1@ge_st,101,64,4	script	gef_stadium_spec_N_2_16	77,{
+	end;
+}
+
+1@ge_st,102,64,4	script	gef_stadium_spec_N_2_17	78,{
+	end;
+}
+
+1@ge_st,103,64,4	script	gef_stadium_spec_N_2_18	58,{
+	end;
+}
+
+1@ge_st,104,64,4	script	gef_stadium_spec_N_2_19	106,{
+	end;
+}
+
+1@ge_st,105,64,4	script	gef_stadium_spec_N_2_20	59,{
+	end;
+}
+
+1@ge_st,106,64,4	script	gef_stadium_spec_N_2_21	60,{
+	end;
+}
+
+1@ge_st,107,64,4	script	gef_stadium_spec_N_2_22	79,{
+	end;
+}
+
+1@ge_st,108,64,4	script	gef_stadium_spec_N_2_23	80,{
+	end;
+}
+
+1@ge_st,109,64,4	script	gef_stadium_spec_N_2_24	947,{
+	end;
+}
 //In-Town spectators
 	//Dummy (No talk)
 	//Interactive/talking
