@@ -547,7 +547,8 @@ OnInstanceInit:
 	end;
 	
 OnTouch:
-	.npc$ = "[Magic Academy Master]";	
+	.npc$ = "[Magic Academy Master]";
+	setarray 'effect_num$[0],"1","2","3","4","5","6","7","8","9","10";
 	if (!'round) {
 		cutin "acamaster_a",2;
 		'round = 1;
@@ -603,6 +604,9 @@ OnTouch:
 		npctalk "I will rule who the victor is!";
 		sleep2 1500;
 		npctalk "Begin!";
+		for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+			donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+		}
 		callsub RoundCountdown, 'round - 1;
 		sleep2 1500;
 		npctalk "A match has started. This is so exciting.";
@@ -642,6 +646,9 @@ OnRound2Start:
 	npctalk "This one is going to need judgment to find a winner!";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2500;
 	npctalk "A match has started. This is so exciting.";
@@ -675,6 +682,9 @@ OnRound3_1Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2000;
 	npctalk "A match has started. This is so exciting.";
@@ -698,6 +708,9 @@ OnRound3_2Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2500;
 	npctalk "A match has started. This is so exciting.";
@@ -737,6 +750,9 @@ OnRound4Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 2000;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 1500;
 	npctalk "A match has started. This is so exciting.";
@@ -772,6 +788,9 @@ OnRound5Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2500;
 	npctalk "A match has started. This is so exciting.";
@@ -805,6 +824,9 @@ OnRound6Start:
 	npctalk "Time limit is 3 minutes. If there is no winner after that...";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2000;
 	npctalk "A match has started. This is so exciting.";
@@ -846,6 +868,9 @@ OnRound7Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2000;
 	npctalk "A match has started. This is so exciting.";
@@ -881,6 +906,9 @@ OnRound8Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2000;
 	npctalk "A match has started. This is so exciting.";
@@ -920,6 +948,9 @@ OnRound9Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2000;
 	npctalk "A match has started. This is so exciting.";
@@ -959,6 +990,9 @@ OnRound10Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2000;
 	npctalk "A match has started. This is so exciting.";
@@ -994,6 +1028,9 @@ OnRound11Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 1500;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 2000;
 	npctalk "A match has started. This is so exciting.";
@@ -1031,6 +1068,9 @@ OnRound12_1Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 3000;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 4000;
 	npctalk "A match has started. This is so exciting.";
@@ -1056,6 +1096,9 @@ OnRound12_2Start:
 	npctalk "The match will be decided by 3 judges.";
 	sleep2 3000;
 	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 4000;
 	npctalk "A match has started. This is so exciting.";
@@ -1127,6 +1170,9 @@ OnRound13Start:
 	npctalk "The match will be decided by the judges.";
 	sleep2 3000;
 	npctalk "Start!!!!!!!!!!!!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
 	callsub RoundCountdown, 'round - 1;
 	sleep2 4000;
 	npctalk "A match has started. This is so exciting.";
@@ -2207,6 +2253,75 @@ OnMyMobDead:
 	end;
 }
 
+-	script	gef_magic_effect_top1	-1,{
+
+	end;
+
+OnEffect:
+	specialeffect 89; //Storm gust
+	sleep 3000;
+	specialeffect 30; //Thunder storm
+	sleep 3000;
+	specialeffect 92; //Meteor storm
+	end;
+}
+
+1@ge_st,92,59,4	duplicate(gef_magic_effect_top1)	gef_stadium_effect_1	139
+1@ge_st,109,59,4	duplicate(gef_magic_effect_top1)	gef_stadium_effect_2	139
+1@ge_st,125,59,4	duplicate(gef_magic_effect_top1)	gef_stadium_effect_3	139
+
+-	script	gef_magic_effect_top2	-1,{
+
+	end;
+
+OnEffect:
+	sleep 3000;
+	specialeffect 89; //Storm gust
+	sleep 3000;
+	specialeffect 30; //Thunder storm
+	sleep 3000;
+	specialeffect 92; //Meteor storm
+	end;
+}
+
+1@ge_st,100,59,4	duplicate(gef_magic_effect_top2)	gef_stadium_effect_4	139
+1@ge_st,118,59,4	duplicate(gef_magic_effect_top2)	gef_stadium_effect_5	139
+
+-	script	gef_magic_effect_bot1	-1,{
+
+	end;
+
+OnEffect:
+	sleep 1500;
+	specialeffect 89; //Storm gust
+	sleep 3000;
+	specialeffect 30; //Thunder storm
+	sleep 3000;
+	specialeffect 92; //Meteor storm
+	end;
+}
+
+1@ge_st,100,38,4	duplicate(gef_magic_effect_bot1)	gef_stadium_effect_6	139
+1@ge_st,118,38,4	duplicate(gef_magic_effect_bot1)	gef_stadium_effect_7	139
+
+-	script	gef_magic_effect_bot2	-1,{
+
+	end;
+
+OnEffect:
+	sleep 4500;
+	specialeffect 89; //Storm gust
+	sleep 3000;
+	specialeffect 30; //Thunder storm
+	sleep 3000;
+	specialeffect 92; //Meteor storm
+	end;
+}
+
+1@ge_st,92,38,4	duplicate(gef_magic_effect_bot2)	gef_stadium_effect_8	139
+1@ge_st,109,38,4	duplicate(gef_magic_effect_bot2)	gef_stadium_effect_9	139
+1@ge_st,125,38,4	duplicate(gef_magic_effect_bot2)	gef_stadium_effect_10	139
+
 -	script	gef_magic_win_effect	-1,{
 	
 	end;
@@ -2353,103 +2468,620 @@ OnWinEffect:
 1@ge_st,123,62,4	script	gef_stadium_spec_N_1_31	805,{
 	end;
 }
+
+1@ge_st,125,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_33	52,{
+	end;
+}
+
 //North West Row 1 (Bottom)---------------------------------------
 1@ge_st,89,51,6	script	gef_stadium_spec_NW_1_1	982,{
 	end;
 }
 
 //North Row 2 (Top)---------------------------------------
-1@ge_st,87,59,6	script	gef_stadium_spec_N_2_1	484,{
+1@ge_st,87,59,6	script	Tournament Spectator::gef_stadium_spec_N_2_1	484,{
 	end;
 }
 
-1@ge_st,88,61,6	script	gef_stadium_spec_N_2_3	540,{
+1@ge_st,87,60,6	script	Tournament Spectator::gef_stadium_spec_N_2_2	534,{
 	end;
 }
 
-1@ge_st,89,62,6	script	gef_stadium_spec_N_2_4	923,{
+1@ge_st,88,61,6	script	Tournament Spectator::gef_stadium_spec_N_2_3	540,{
 	end;
 }
 
-1@ge_st,90,63,6	script	gef_stadium_spec_N_2_5	124,{
+1@ge_st,89,62,6	script	Tournament Spectator::gef_stadium_spec_N_2_4	923,{
 	end;
 }
 
-1@ge_st,91,63,6	script	gef_stadium_spec_N_2_6	838,{
+1@ge_st,90,63,6	script	Tournament Spectator::gef_stadium_spec_N_2_5	124,{
 	end;
 }
 
-1@ge_st,92,64,6	script	gef_stadium_spec_N_2_7	771,{
+1@ge_st,91,63,6	script	Tournament Spectator::gef_stadium_spec_N_2_6	838,{
 	end;
 }
 
-1@ge_st,93,64,4	script	gef_stadium_spec_N_2_8	73,{
+1@ge_st,92,64,6	script	Tournament Spectator::gef_stadium_spec_N_2_7	771,{
 	end;
 }
 
-1@ge_st,94,64,4	script	gef_stadium_spec_N_2_9	74,{
+1@ge_st,93,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_8	73,{
 	end;
 }
 
-1@ge_st,95,64,4	script	gef_stadium_spec_N_2_10	54,{
+1@ge_st,94,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_9	74,{
 	end;
 }
 
-1@ge_st,96,64,4	script	gef_stadium_spec_N_2_11	55,{
+1@ge_st,95,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_10	54,{
 	end;
 }
 
-1@ge_st,97,64,4	script	gef_stadium_spec_N_2_12	56,{
+1@ge_st,96,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_11	55,{
 	end;
 }
 
-1@ge_st,98,64,4	script	gef_stadium_spec_N_2_13	57,{
+1@ge_st,97,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_12	56,{
 	end;
 }
 
-1@ge_st,99,64,4	script	gef_stadium_spec_N_2_14	75,{
+1@ge_st,98,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_13	57,{
 	end;
 }
 
-1@ge_st,100,64,4	script	gef_stadium_spec_N_2_15	76,{
+1@ge_st,99,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_14	75,{
 	end;
 }
 
-1@ge_st,101,64,4	script	gef_stadium_spec_N_2_16	77,{
+1@ge_st,100,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_15	76,{
 	end;
 }
 
-1@ge_st,102,64,4	script	gef_stadium_spec_N_2_17	78,{
+1@ge_st,101,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_16	77,{
 	end;
 }
 
-1@ge_st,103,64,4	script	gef_stadium_spec_N_2_18	58,{
+1@ge_st,102,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_17	78,{
 	end;
 }
 
-1@ge_st,104,64,4	script	gef_stadium_spec_N_2_19	106,{
+1@ge_st,103,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_18	58,{
 	end;
 }
 
-1@ge_st,105,64,4	script	gef_stadium_spec_N_2_20	59,{
+1@ge_st,104,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_19	106,{
 	end;
 }
 
-1@ge_st,106,64,4	script	gef_stadium_spec_N_2_21	60,{
+1@ge_st,105,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_20	59,{
 	end;
 }
 
-1@ge_st,107,64,4	script	gef_stadium_spec_N_2_22	79,{
+1@ge_st,106,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_21	60,{
 	end;
 }
 
-1@ge_st,108,64,4	script	gef_stadium_spec_N_2_23	80,{
+1@ge_st,107,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_22	79,{
 	end;
 }
 
-1@ge_st,109,64,4	script	gef_stadium_spec_N_2_24	947,{
+1@ge_st,108,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_23	80,{
 	end;
 }
+
+1@ge_st,109,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_24	947,{
+	end;
+}
+
+1@ge_st,110,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_25	53,{
+	end;
+}
+
+1@ge_st,111,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_26	62,{
+	end;
+}
+
+1@ge_st,112,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_27	107,{
+	end;
+}
+
+1@ge_st,113,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_28	108,{
+	end;
+}
+
+1@ge_st,114,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_29	61,{
+	end;
+}
+
+1@ge_st,115,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_30	804,{
+	end;
+}
+
+1@ge_st,116,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_31	123,{
+	end;
+}
+
+1@ge_st,117,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_32	90,{
+	end;
+}
+
+1@ge_st,118,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_33	91,{
+	end;
+}
+
+1@ge_st,119,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_34	92,{
+	end;
+}
+
+1@ge_st,120,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_35	93,{
+	end;
+}
+
+1@ge_st,121,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_36	920,{
+	end;
+}
+
+1@ge_st,122,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_37	806,{
+	end;
+}
+
+1@ge_st,123,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_38	807,{
+	end;
+}
+
+1@ge_st,124,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_39	808,{
+	end;
+}
+
+1@ge_st,125,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_40	711,{
+	end;
+}
+
+1@ge_st,126,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_41	714,{
+	end;
+}
+
+1@ge_st,127,63,4	script	Tournament Spectator::gef_stadium_spec_N_2_42	724,{
+	end;
+}
+
+1@ge_st,128,63,4	script	Tournament Spectator::gef_stadium_spec_N_2_43	885,{
+	end;
+}
+
+1@ge_st,129,62,4	script	Tournament Spectator::gef_stadium_spec_N_2_44	809,{
+	end;
+}
+
+1@ge_st,130,61,4	script	Tournament Spectator::gef_stadium_spec_N_2_45	810,{
+	end;
+}
+
+1@ge_st,130,60,4	script	Tournament Spectator::gef_stadium_spec_N_2_46	63,{
+	end;
+}
+
+//North East Row 1 (Bottom)---------------------------------------
+
+//South East Row 1 (Bottom)---------------------------------------
+1@ge_st,128,45,2	script	Tournament Spectator::gef_stadium_spec_SE_1_1	741,{
+	end;
+}
+
+1@ge_st,128,44,2	script	Tournament Spectator::gef_stadium_spec_SE_1_2	122,{
+	end;
+}
+
+1@ge_st,128,43,2	script	Tournament Spectator::gef_stadium_spec_SE_1_3	121,{
+	end;
+}
+
+1@ge_st,128,42,2	script	Tournament Spectator::gef_stadium_spec_SE_1_4	879,{
+	end;
+}
+
+1@ge_st,128,41,2	script	Tournament Spectator::gef_stadium_spec_SE_1_5	979,{
+	end;
+}
+
+1@ge_st,128,40,2	script	Tournament Spectator::gef_stadium_spec_SE_1_6	914,{
+	end;
+}
+
+1@ge_st,128,39,2	script	Tournament Spectator::gef_stadium_spec_SE_1_7	813,{
+	end;
+}
+
+1@ge_st,128,38,2	script	Tournament Spectator::gef_stadium_spec_SE_1_8	120,{
+	end;
+}
+
+1@ge_st,128,37,2	script	Tournament Spectator::gef_stadium_spec_SE_1_9	742,{
+	end;
+}
+
+//South East Row 2 (Bottom)---------------------------------------
+1@ge_st,129,45,2	script	Tournament Spectator::gef_stadium_spec_SE_2_1	961,{
+	end;
+}
+
+1@ge_st,129,44,2	script	Tournament Spectator::gef_stadium_spec_SE_2_2	960,{
+	end;
+}
+
+1@ge_st,129,43,2	script	Tournament Spectator::gef_stadium_spec_SE_2_3	752,{
+	end;
+}
+
+1@ge_st,129,42,2	script	Tournament Spectator::gef_stadium_spec_SE_2_4	414,{
+	end;
+}
+
+1@ge_st,129,41,2	script	Tournament Spectator::gef_stadium_spec_SE_2_5	415,{
+	end;
+}
+
+1@ge_st,129,40,2	script	Tournament Spectator::gef_stadium_spec_SE_2_6	416,{
+	end;
+}
+
+1@ge_st,129,38,2	script	Tournament Spectator::gef_stadium_spec_SE_2_8	958,{
+	end;
+}
+
+//South Row 1 (Bottom)---------------------------------------
+1@ge_st,124,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_1	747,{
+	end;
+}
+
+1@ge_st,123,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_2	918,{
+	end;
+}
+
+1@ge_st,122,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_3	751,{
+	end;
+}
+
+1@ge_st,121,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_4	825,{
+	end;
+}
+
+1@ge_st,120,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_5	824,{
+	end;
+}
+
+1@ge_st,119,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_6	823,{
+	end;
+}
+
+1@ge_st,118,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_7	729,{
+	end;
+}
+
+1@ge_st,117,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_8	793,{
+	end;
+}
+
+1@ge_st,116,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_9	746,{
+	end;
+}
+
+1@ge_st,115,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_10	917,{
+	end;
+}
+
+1@ge_st,114,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_11	822,{
+	end;
+}
+
+1@ge_st,113,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_12	821,{
+	end;
+}
+
+1@ge_st,112,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_13	820,{
+	end;
+}
+
+1@ge_st,111,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_14	819,{
+	end;
+}
+
+1@ge_st,110,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_15	915,{
+	end;
+}
+
+1@ge_st,109,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_16	863,{
+	end;
+}
+
+1@ge_st,108,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_17	862,{
+	end;
+}
+
+1@ge_st,107,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_18	717,{
+	end;
+}
+
+1@ge_st,106,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_19	703,{
+	end;
+}
+
+1@ge_st,105,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_20	839,{
+	end;
+}
+
+1@ge_st,104,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_21	996,{
+	end;
+}
+
+1@ge_st,103,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_22	995,{
+	end;
+}
+
+1@ge_st,102,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_23	834,{
+	end;
+}
+
+1@ge_st,101,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_24	476,{
+	end;
+}
+
+1@ge_st,100,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_25	772,{
+	end;
+}
+
+1@ge_st,99,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_26	906,{
+	end;
+}
+
+1@ge_st,98,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_27	895,{
+	end;
+}
+
+1@ge_st,97,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_28	894,{
+	end;
+}
+
+1@ge_st,96,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_29	475,{
+	end;
+}
+
+1@ge_st,95,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_30	704,{
+	end;
+}
+
+1@ge_st,94,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_31	486,{
+	end;
+}
+
+1@ge_st,93,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_32	87,{
+	end;
+}
+
+1@ge_st,92,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_33	407,{
+	end;
+}
+
+//South Row 2 (Top)---------------------------------------
+1@ge_st,130,37,2	script	Tournament Spectator::gef_stadium_spec_S_2_1	814,{
+	end;
+}
+
+1@ge_st,130,36,2	script	Tournament Spectator::gef_stadium_spec_S_2_2	815,{
+	end;
+}
+
+1@ge_st,130,35,2	script	Tournament Spectator::gef_stadium_spec_S_2_3	743,{
+	end;
+}
+
+1@ge_st,129,34,2	script	Tournament Spectator::gef_stadium_spec_S_2_4	119,{
+	end;
+}
+
+1@ge_st,128,33,2	script	Tournament Spectator::gef_stadium_spec_S_2_5	816,{
+	end;
+}
+
+1@ge_st,127,33,2	script	Tournament Spectator::gef_stadium_spec_S_2_6	817,{
+	end;
+}
+
+1@ge_st,126,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_7	118,{
+	end;
+}
+
+1@ge_st,125,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_8	886,{
+	end;
+}
+
+1@ge_st,124,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_9	818,{
+	end;
+}
+
+1@ge_st,123,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_10	745,{
+	end;
+}
+
+1@ge_st,122,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_11	939,{
+	end;
+}
+
+1@ge_st,121,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_12	82,{
+	end;
+}
+
+1@ge_st,120,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_13	940,{
+	end;
+}
+
+1@ge_st,119,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_14	941,{
+	end;
+}
+
+1@ge_st,118,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_15	865,{
+	end;
+}
+
+1@ge_st,117,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_16	83,{
+	end;
+}
+
+1@ge_st,116,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_17	942,{
+	end;
+}
+
+1@ge_st,115,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_18	951,{
+	end;
+}
+
+1@ge_st,114,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_19	952,{
+	end;
+}
+
+1@ge_st,113,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_20	983,{
+	end;
+}
+
+1@ge_st,112,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_21	944,{
+	end;
+}
+
+1@ge_st,111,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_22	846,{
+	end;
+}
+
+1@ge_st,110,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_23	877,{
+	end;
+}
+
+1@ge_st,109,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_24	985,{
+	end;
+}
+
+1@ge_st,108,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_25	85,{
+	end;
+}
+
+1@ge_st,107,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_26	701,{
+	end;
+}
+
+1@ge_st,106,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_27	702,{
+	end;
+}
+
+1@ge_st,105,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_28	987,{
+	end;
+}
+
+1@ge_st,104,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_29	946,{
+	end;
+}
+
+1@ge_st,103,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_30	989,{
+	end;
+}
+
+1@ge_st,102,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_31	880,{
+	end;
+}
+
+1@ge_st,101,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_32	466,{
+	end;
+}
+
+1@ge_st,100,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_33	891,{
+	end;
+}
+
+1@ge_st,99,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_34	892,{
+	end;
+}
+
+1@ge_st,98,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_35	893,{
+	end;
+}
+
+1@ge_st,97,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_36	991,{
+	end;
+}
+
+1@ge_st,95,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_38	993,{
+	end;
+}
+
+1@ge_st,94,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_39	884,{
+	end;
+}
+
+1@ge_st,93,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_40	748,{
+	end;
+}
+
+1@ge_st,92,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_41	725,{
+	end;
+}
+
+1@ge_st,91,33,8	script	Tournament Spectator::gef_stadium_spec_S_2_42	726,{
+	end;
+}
+
+1@ge_st,90,33,8	script	Tournament Spectator::gef_stadium_spec_S_2_43	430,{
+	end;
+}
+
+1@ge_st,89,34,8	script	Tournament Spectator::gef_stadium_spec_S_2_44	855,{
+	end;
+}
+
+1@ge_st,88,35,8	script	Tournament Spectator::gef_stadium_spec_S_2_45	749,{
+	end;
+}
+
+1@ge_st,88,36,8	script	Tournament Spectator::gef_stadium_spec_S_2_46	750,{
+	end;
+}
+
+1@ge_st,87,37,8	script	Tournament Spectator::gef_stadium_spec_S_2_47	883,{
+	end;
+}
+
+//South West Row 1 (Bottom)---------------------------------------
+1@ge_st,89,38,8	script	Tournament Spectator::gef_stadium_spec_SW_1_1	542,{
+	end;
+}
+
+1@ge_st,89,39,8	script	Tournament Spectator::gef_stadium_spec_SW_1_2	937,{
+	end;
+}
+
+1@ge_st,89,40,8	script	Tournament Spectator::gef_stadium_spec_SW_1_3	757,{
+	end;
+}
+
+1@ge_st,89,41,8	script	Tournament Spectator::gef_stadium_spec_SW_1_4	758,{
+	end;
+}
+
+1@ge_st,89,42,8	script	Tournament Spectator::gef_stadium_spec_SW_1_5	759,{
+	end;
+}
+
+1@ge_st,89,43,8	script	Tournament Spectator::gef_stadium_spec_SW_1_6	892,{
+	end;
+}
+
+1@ge_st,89,44,8	script	Tournament Spectator::gef_stadium_spec_SW_1_7	760,{
+	end;
+}
+
+1@ge_st,89,45,8	script	Tournament Spectator::gef_stadium_spec_SW_1_8	761,{
+	end;
+}
+
 //In-Town spectators
 	//Dummy (No talk)
 	//Interactive/talking
