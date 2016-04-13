@@ -1,4 +1,16 @@
-izlude,127,139,3	script	Emmitt White::gef_magic_init	903,{
+mid_camp,210,292,3	script	Dimensional Device::dali_entry	10007,{
+	mes "Enter the Dimensional Gap of time and space.";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		warp "dali",141,82;
+		end;
+	case 2:
+		close;
+	}
+}
+
+dali,98,141,3	script	Emmitt White::gef_magic_init	903,{
 	
 	.npc$ = "[Time Travel Researcher]";
 	
@@ -101,7 +113,7 @@ izlude,127,139,3	script	Emmitt White::gef_magic_init	903,{
 	}
 }
 
-izlude,127,142,3	script	Dimensional Device::gef_magic_entry	10007,{
+dali,100,147,3	script	Dimensional Device::gef_magic_entry	10007,{
 	
 	//Not party leader
 	if(getpartyleader(getcharid(1),2) != getcharid(0)) {
@@ -1179,6 +1191,7 @@ OnRound13Start:
 	end;
 	
 OnRound13Won:
+	attachrid('accountid);
 	'round = 14;
 	sleep2 8500;
 	npctalk "Final match of Geffen Magic Tournament is finished~!";
@@ -1186,6 +1199,11 @@ OnRound13Won:
 	npctalk "Everyone! Thanks for supporting the Geffen Magic Tournament~!!";
 	sleep2 3000;
 	enablenpc instance_npcname("gef_magic_guide");
+	warp instance_mapname("1@gef"),109,50;
+	for (.@i = 0; .@i < getarraysize('npc_name$); .@i++) {
+		enablenpc instance_npcname("gef_magic_win_" + 'npc_name$[.@i]);
+		donpcevent instance_npcname("gef_magic_win_" + 'npc_name$[.@i]) + "::OnTourWon";
+	}
 	end;
 	
 RoundCountdown:
@@ -1393,7 +1411,7 @@ OnInstanceInit:
 	setarray 'map_name$[0],instance_mapname("1@gef"),instance_mapname("1@ge_st");
 	setarray 'round3_name$[0],"3_1","3_2","3_3";
 	setarray 'round12_name$[0],"12_1","12_2";
-	setarray 'npc_name$[0],"1","2",'round3_name$[1],"4","5","6","7","8","9","10","11",'round12_name$[0],"13"; 
+	setarray 'npc_name$[0],"1","2",'round3_name$[1],"4","5","6","7","8","9","10","11",'round12_name$[rand(2)],"13"; 
 	setarray 'round_name$[0],"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th","Final";
 	setarray 'coin_amount[0],1,2,3,4,5,6,7,8,9,10,15,20;
 	end;
@@ -2225,6 +2243,7 @@ OnRound13Start:
 	monster instance_mapname("1@ge_st"),114,50,"Fenrir",2564,1,instance_npcname("gef_magic_round13")+"::OnMyMobDead";
 	pcblockmove getcharid(3),0;
 	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	removemapflag instance_mapname("1@ge_st"),mf_noloot;
 	end;	
 	
 OnMyMobDead:
@@ -2252,6 +2271,146 @@ OnMyMobDead:
 	disablenpc instance_npcname("gef_magic_round13");
 	end;
 }
+
+//Winning NPCs
+1@ge_st,104,53,6	script	Arhi::gef_magic_win_1	670,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_1");
+	end;
+	
+OnTourWon:
+	sleep 3000;
+	npctalk "Tsk. I will come bacl when I get stronger.";
+	end;
+}
+
+1@ge_st,100,49,6	script	Dio Anemos::gef_magic_win_2	669,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_2");
+	end;
+}
+
+1@ge_st,102,46,8	script	Feymont::gef_magic_win_4	672,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_4");
+	end;	
+}
+
+1@ge_st,104,44,8	script	Ordre::gef_magic_win_5	673,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_5");
+	end;
+	
+OnTourWon:
+	sleep 3000;
+	npctalk "Simply amazing.";
+	end;
+}
+
+1@ge_st,112,45,1	script	Blut Hase::gef_magic_win_6	674,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_6");
+	end;
+
+OnTourWon:
+	sleep 3000;
+	npctalk "You must be famous right?";
+	end;
+}
+
+1@ge_st,116,46,1	script	Kuro Akuma::gef_magic_win_7	675,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_7");
+	end;
+}
+
+1@ge_st,115,53,4	script	Ifodes::gef_magic_win_8	676,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_8");
+	end;
+	
+OnTourWon:
+	sleep 2500;
+	npctalk "Your talent suits your chivalry.";
+	end;
+}
+
+1@ge_st,116,49,4	script	Licheni::gef_magic_win_9	677,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_9");
+	end;
+}
+
+1@ge_st,112,53,4	script	Odoric::gef_magic_win_10	678,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_10");
+	end;
+}
+
+1@ge_st,109,54,4	script	Ju::gef_magic_win_11	679,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_11");
+	end;
+
+OnTourWon:
+	sleep 3500;
+	npctalk "You... are... strong... I... won't... forget... you...";
+	end;
+}
+
+1@ge_st,106,50,6	script	Dwigh::gef_magic_win_12_1	680,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_12_1");
+	end;
+}
+
+1@ge_st,107,48,8	script	Fay Kanavian::gef_magic_win_12_2	665,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_12_2");
+	end;
+	
+OnTourWon:
+	npctalk "I din't think that Fenrir would lose.";
+	end;
+}
+
+1@ge_st,112,50,4	script	Fenrir::gef_magic_win_13	664,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_13");
+	end;
+	
+OnTourWon:
+	npctalk "All my colleagues are so excited about your victory. They are eagar to meet you.";
+	end;
+}
+
+//Round Start Effects
 
 -	script	gef_magic_effect_top1	-1,{
 
@@ -2322,6 +2481,8 @@ OnEffect:
 1@ge_st,109,38,4	duplicate(gef_magic_effect_bot2)	gef_stadium_effect_9	139
 1@ge_st,125,38,4	duplicate(gef_magic_effect_bot2)	gef_stadium_effect_10	139
 
+//Win Effect
+
 -	script	gef_magic_win_effect	-1,{
 	
 	end;
@@ -2342,130 +2503,171 @@ OnWinEffect:
 1@ge_st,104,45,4	duplicate(gef_magic_win_effect)	gef_magic_win_effect3	139
 1@ge_st,104,53,4	duplicate(gef_magic_win_effect)	gef_magic_win_effect4	139
 
-//------------------------------TO-DO------------------------------------------
 //In-arena spectators
+
+//North West Row 1 (Bottom)---------------------------------------
+1@ge_st,89,51,6	script	Tournament Spectator::gef_stadium_spec_NW_1_1	982,{
+	end;
+}
+
+1@ge_st,89,52,6	script	Tournament Spectator::gef_stadium_spec_NW_1_2	919,{
+	end;
+}
+
+1@ge_st,89,53,6	script	Tournament Spectator::gef_stadium_spec_NW_1_3	413,{
+	end;
+}
+
+1@ge_st,89,54,6	script	Tournament Spectator::gef_stadium_spec_NW_1_4	943,{
+	end;
+}
+
+1@ge_st,89,55,6	script	Tournament Spectator::gef_stadium_spec_NW_1_5	538,{
+	end;
+}
+
+1@ge_st,89,56,6	script	Tournament Spectator::gef_stadium_spec_NW_1_6	536,{
+	end;
+}
+
+1@ge_st,89,57,6	script	Tournament Spectator::gef_stadium_spec_NW_1_7	482,{
+	end;
+}
+
+1@ge_st,89,58,6	script	Tournament Spectator::gef_stadium_spec_NW_1_8	95,{
+	end;
+}
+
+1@ge_st,89,59,6	script	Tournament Spectator::gef_stadium_spec_NW_1_9	911,{
+	end;
+}
+
 //North Row 1 (Bottom)----------------------------------
-1@ge_st,93,62,4	script	gef_stadium_spec_N_1_1	46,{
+1@ge_st,93,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_1	46,{
 	end;
 }
 
-1@ge_st,94,62,4	script	gef_stadium_spec_N_1_2	67,{
+1@ge_st,94,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_2	67,{
 	end;
 }
 
-1@ge_st,95,62,6	script	gef_stadium_spec_N_1_3	870,{
+1@ge_st,95,62,6	script	Tournament Spectator::gef_stadium_spec_N_1_3	870,{
 	end;
 }
 
-1@ge_st,96,62,4	script	gef_stadium_spec_N_1_4	47,{
+1@ge_st,96,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_4	47,{
 	end;
 }
 
-1@ge_st,97,62,6	script	gef_stadium_spec_N_1_5	985,{
+1@ge_st,97,62,6	script	Prontera Spectator::gef_stadium_spec_N_1_5	985,{
 	end;
 }
 
-1@ge_st,98,62,4	script	gef_stadium_spec_N_1_6	48,{
+1@ge_st,98,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_6	48,{
 	end;
 }
 
-1@ge_st,99,62,6	script	gef_stadium_spec_N_1_7	727,{
+1@ge_st,99,62,6	script	Tournament Spectator::gef_stadium_spec_N_1_7	727,{
 	end;
 }
 
-1@ge_st,100,62,4	script	gef_stadium_spec_N_1_8	49,{
+1@ge_st,100,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_8	49,{
 	end;
 }
 
-1@ge_st,101,62,4	script	gef_stadium_spec_N_1_9	828,{
+1@ge_st,101,62,4	script	Payon Spectators::gef_stadium_spec_N_1_9	828,{
 	end;
 }
 
-1@ge_st,102,62,4	script	gef_stadium_spec_N_1_10	66,{
+1@ge_st,102,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_10	66,{
 	end;
 }
 
-1@ge_st,103,62,6	script	gef_stadium_spec_N_1_11	84,{
+1@ge_st,103,62,6	script	Magic Academy Spectators::gef_stadium_spec_N_1_11	84,{
 	end;
 }
 
-1@ge_st,104,62,4	script	gef_stadium_spec_N_1_12	68,{
+1@ge_st,104,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_12	68,{
 	end;
 }
 
-1@ge_st,105,62,6	script	gef_stadium_spec_N_1_13	89,{
+1@ge_st,105,62,6	script	Alberta Spectators::gef_stadium_spec_N_1_13	89,{
 	end;
 }
 
-1@ge_st,106,62,6	script	gef_stadium_spec_N_1_14	512,{
+1@ge_st,106,62,6	script	Loki::gef_stadium_spec_N_1_14	512,{
 	end;
 }
 
-1@ge_st,107,62,6	script	gef_stadium_spec_N_1_15	558,{
+1@ge_st,107,62,6	script	Veins Spectators::gef_stadium_spec_N_1_15	558,{
 	end;
 }
 
-1@ge_st,108,62,6	script	gef_stadium_spec_N_1_16	683,{
+1@ge_st,108,62,6	script	Chaos::gef_stadium_spec_N_1_16	683,{
 	end;
 }
 
-1@ge_st,109,62,6	script	gef_stadium_spec_N_1_17	921,{
+1@ge_st,109,62,6	script	Magic Academy Student::gef_stadium_spec_N_1_17	921,{
 	end;
 }
 
-1@ge_st,110,62,4	script	gef_stadium_spec_N_1_18	666,{
+1@ge_st,110,62,4	script	Iris::gef_stadium_spec_N_1_18	666,{
 	end;
 }
 
-1@ge_st,111,62,4	script	gef_stadium_spec_N_1_19	850,{
+1@ge_st,111,62,4	script	Comodo Spectators::gef_stadium_spec_N_1_19	850,{
 	end;
 }
 
-1@ge_st,112,62,4	script	gef_stadium_spec_N_1_20	10010,{
+1@ge_st,112,62,4	script	Lydia::gef_stadium_spec_N_1_20	10010,{
 	end;
 }
 
-1@ge_st,113,62,4	script	gef_stadium_spec_N_1_21	868,{
+1@ge_st,113,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_21	868,{
 	end;
 }
 
-1@ge_st,114,62,4	script	gef_stadium_spec_N_1_22	86,{
+1@ge_st,114,62,4	script	Magic Academy Student::gef_stadium_spec_N_1_22	86,{
 	end;
 }
 
-1@ge_st,115,62,4	script	gef_stadium_spec_N_1_23	945,{
+1@ge_st,115,62,4	script	Prontera Spectators::gef_stadium_spec_N_1_23	945,{
 	end;
 }
 
-1@ge_st,116,62,4	script	gef_stadium_spec_N_1_24	69,{
+1@ge_st,116,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_24	69,{
 	end;
 }
 
-1@ge_st,117,62,4	script	gef_stadium_spec_N_1_25	803,{
+1@ge_st,117,62,4	script	Payon Spectators::gef_stadium_spec_N_1_25	803,{
 	end;
 }
 
-1@ge_st,118,62,4	script	gef_stadium_spec_N_1_26	70,{
+1@ge_st,118,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_26	70,{
 	end;
 }
 
-1@ge_st,119,62,4	script	gef_stadium_spec_N_1_27	728,{
+1@ge_st,119,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_27	728,{
 	end;
 }
 
-1@ge_st,120,62,4	script	gef_stadium_spec_N_1_28	51,{
+1@ge_st,120,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_28	51,{
 	end;
 }
 
-1@ge_st,121,62,4	script	gef_stadium_spec_N_1_29	712,{
+1@ge_st,121,62,4	script	Alberta Spectators::gef_stadium_spec_N_1_29	712,{
 	end;
 }
 
-1@ge_st,122,62,4	script	gef_stadium_spec_N_1_30	72,{
+1@ge_st,122,62,4	script	Magic Academy Student::gef_stadium_spec_N_1_30	72,{
 	end;
 }
 
-1@ge_st,123,62,4	script	gef_stadium_spec_N_1_31	805,{
+1@ge_st,123,62,4	script	Magic Academy Student::gef_stadium_spec_N_1_31	805,{
+	end;
+}
+
+1@ge_st,124,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_34	71,{
 	end;
 }
 
@@ -2473,10 +2675,6 @@ OnWinEffect:
 	end;
 }
 
-//North West Row 1 (Bottom)---------------------------------------
-1@ge_st,89,51,6	script	gef_stadium_spec_NW_1_1	982,{
-	end;
-}
 
 //North Row 2 (Top)---------------------------------------
 1@ge_st,87,59,6	script	Tournament Spectator::gef_stadium_spec_N_2_1	484,{
@@ -2665,6 +2863,43 @@ OnWinEffect:
 
 //North East Row 1 (Bottom)---------------------------------------
 
+1@ge_st,128,60,4	script	Tournament Spectator::gef_stadium_spec_NE_1_1	744,{
+	end;
+}
+
+1@ge_st,128,58,4	script	Tournament Spectator::gef_stadium_spec_NE_1_3	408,{
+	end;
+}
+
+1@ge_st,128,57,4	script	Tournament Spectator::gef_stadium_spec_NE_1_4	473,{
+	end;
+}
+
+1@ge_st,128,56,4	script	Tournament Spectator::gef_stadium_spec_NE_1_5	64,{
+	end;
+}
+
+1@ge_st,128,55,4	script	Tournament Spectator::gef_stadium_spec_NE_1_6	420,{
+	end;
+}
+
+1@ge_st,128,54,4	script	Tournament Spectator::gef_stadium_spec_NE_1_7	740,{
+	end;
+}
+
+1@ge_st,128,53,4	script	Tournament Spectator::gef_stadium_spec_NE_1_8	473,{
+	end;
+}
+
+1@ge_st,128,52,4	script	Tournament Spectator::gef_stadium_spec_NE_1_9	474,{
+	end;
+}
+
+1@ge_st,128,51,4	script	Tournament Spectator::gef_stadium_spec_NE_1_10	478,{
+	end;
+}
+
+
 //South East Row 1 (Bottom)---------------------------------------
 1@ge_st,128,45,2	script	Tournament Spectator::gef_stadium_spec_SE_1_1	741,{
 	end;
@@ -2724,6 +2959,10 @@ OnWinEffect:
 }
 
 1@ge_st,129,40,2	script	Tournament Spectator::gef_stadium_spec_SE_2_6	416,{
+	end;
+}
+
+1@ge_st,129,39,2	script	Tournament Spectator::gef_stadium_spec_SE_2_7	959,{
 	end;
 }
 
@@ -2957,11 +3196,11 @@ OnWinEffect:
 	end;
 }
 
-1@ge_st,109,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_24	985,{
+1@ge_st,109,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_24	985,{
 	end;
 }
 
-1@ge_st,108,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_25	85,{
+1@ge_st,108,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_25	85,{
 	end;
 }
 
@@ -3006,6 +3245,10 @@ OnWinEffect:
 }
 
 1@ge_st,97,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_36	991,{
+	end;
+}
+
+1@ge_st,96,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_37	713,{
 	end;
 }
 
