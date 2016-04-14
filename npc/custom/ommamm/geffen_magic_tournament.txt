@@ -590,7 +590,7 @@ OnTouch:
 		cutin "",255;
 		close2;
 		sleep2 500;
-		npcskilleffect 51,0,90,48;
+		//npcskilleffect 51,0,90,48;
 		npctalk "Ladies and Gentlemen!";
 		sleep2 1500;
 		npctalk "I do my best to be as loud as I can!";
@@ -1191,6 +1191,7 @@ OnRound13Start:
 	end;
 	
 OnRound13Won:
+	setarray .@win_npc_name$[0],"1","2","4","5","6","7","8","9","10","11","12_1","12_2","13";
 	attachrid('accountid);
 	'round = 14;
 	sleep2 8500;
@@ -1199,10 +1200,10 @@ OnRound13Won:
 	npctalk "Everyone! Thanks for supporting the Geffen Magic Tournament~!!";
 	sleep2 3000;
 	enablenpc instance_npcname("gef_magic_guide");
-	warp instance_mapname("1@gef"),109,50;
-	for (.@i = 0; .@i < getarraysize('npc_name$); .@i++) {
-		enablenpc instance_npcname("gef_magic_win_" + 'npc_name$[.@i]);
-		donpcevent instance_npcname("gef_magic_win_" + 'npc_name$[.@i]) + "::OnTourWon";
+	warp instance_mapname("1@ge_st"),109,50;
+	for (.@i = 0; .@i < getarraysize(.@win_npc_name$); .@i++) {
+		enablenpc instance_npcname("gef_magic_win_" + .@win_npc_name$[.@i]);
+		donpcevent instance_npcname("gef_magic_win_" + .@win_npc_name$[.@i]) + "::OnTourWon";
 	}
 	end;
 	
@@ -1411,7 +1412,7 @@ OnInstanceInit:
 	setarray 'map_name$[0],instance_mapname("1@gef"),instance_mapname("1@ge_st");
 	setarray 'round3_name$[0],"3_1","3_2","3_3";
 	setarray 'round12_name$[0],"12_1","12_2";
-	setarray 'npc_name$[0],"1","2",'round3_name$[1],"4","5","6","7","8","9","10","11",'round12_name$[rand(2)],"13"; 
+	setarray 'npc_name$[0],"1","2",'round3_name$[rand(2)],"4","5","6","7","8","9","10","11",'round12_name$[rand(2)],"13"; 
 	setarray 'round_name$[0],"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th","Final";
 	setarray 'coin_amount[0],1,2,3,4,5,6,7,8,9,10,15,20;
 	end;
@@ -2222,6 +2223,7 @@ OnInstanceInit:
 OnRound13Start:
 	attachrid('accountid);
 	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	removemapflag instance_mapname("1@ge_st"),mf_nomobloot;
 	pcblockmove getcharid(3),1;
 	sleep2 6000;
 	cutin "fenrir_b",2;
@@ -2243,7 +2245,6 @@ OnRound13Start:
 	monster instance_mapname("1@ge_st"),114,50,"Fenrir",2564,1,instance_npcname("gef_magic_round13")+"::OnMyMobDead";
 	pcblockmove getcharid(3),0;
 	removemapflag instance_mapname("1@ge_st"),mf_noskill;
-	removemapflag instance_mapname("1@ge_st"),mf_noloot;
 	end;	
 	
 OnMyMobDead:
@@ -2282,7 +2283,7 @@ OnInstanceInit:
 	
 OnTourWon:
 	sleep 3000;
-	npctalk "Tsk. I will come bacl when I get stronger.";
+	npctalk "Tsk. I will come back when I get stronger.";
 	end;
 }
 
@@ -2292,6 +2293,9 @@ OnTourWon:
 OnInstanceInit:
 	disablenpc instance_npcname("gef_magic_win_2");
 	end;
+
+OnTourWon:
+	end;
 }
 
 1@ge_st,102,46,8	script	Feymont::gef_magic_win_4	672,{
@@ -2299,6 +2303,9 @@ OnInstanceInit:
 	
 OnInstanceInit:
 	disablenpc instance_npcname("gef_magic_win_4");
+	end;
+
+OnTourWon:
 	end;	
 }
 
@@ -2334,6 +2341,9 @@ OnTourWon:
 OnInstanceInit:
 	disablenpc instance_npcname("gef_magic_win_7");
 	end;
+
+OnTourWon:
+	end;
 }
 
 1@ge_st,115,53,4	script	Ifodes::gef_magic_win_8	676,{
@@ -2355,6 +2365,9 @@ OnTourWon:
 OnInstanceInit:
 	disablenpc instance_npcname("gef_magic_win_9");
 	end;
+
+OnTourWon:
+	end;
 }
 
 1@ge_st,112,53,4	script	Odoric::gef_magic_win_10	678,{
@@ -2362,6 +2375,9 @@ OnInstanceInit:
 	
 OnInstanceInit:
 	disablenpc instance_npcname("gef_magic_win_10");
+	end;
+
+OnTourWon:
 	end;
 }
 
@@ -2383,6 +2399,9 @@ OnTourWon:
 	
 OnInstanceInit:
 	disablenpc instance_npcname("gef_magic_win_12_1");
+	end;
+	
+OnTourWon:
 	end;
 }
 
@@ -3325,9 +3344,161 @@ OnWinEffect:
 	end;
 }
 
-//In-Town spectators
-	//Dummy (No talk)
-	//Interactive/talking
+//Broadcastor----------------------------------------------------
+1@gef,1,1,1	script	gef_magic_broadcast	-1,{
+
+OnInstanceInit:
+	sleep 2000;
+	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - The Geffen Magic Tournament about to begin!",bc_blue;
+	sleep 2000;
+	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - Citizens and Adventurers in Geffen, Please join the Tournament~!",bc_blue;
+	sleep 2000;
+	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - Anyone who wants to join the Geffen Magic Tournament, please come to the southern fountain of Geffen~!",bc_blue;
+	sleep 2000;
+	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - Anyone who wants to join the Geffen Magic Tournament, please come to the southern fountain in direction of 6 o'clock in Geffen~!",bc_blue;
+	end;
+}
+
+//In-Town spectators---------------------------------------------
+//Outer Ring NE part
+1@gef,130,196,4	script	Tournament Spectator::gef_town_spec_NE_1	46,{
+	end;
+}
+
+1@gef,136,188,6	script	Tournament Spectator::gef_town_spec_NE_2	771,{
+	end;
+}
+
+1@gef,137,190,4	script	Tournament Spectator::gef_town_spec_NE_3	67,{
+	end;
+}
+
+1@gef,149,196,4	script	Tournament Spectator::gef_town_spec_NE_4	47,{
+	end;
+}
+
+1@gef,189,120,4	script	Tournament Spectator::gef_town_spec_NE_5	61,{
+	end;
+}
+
+//Outer Ring SE part
+1@gef,194,110,4	script	Tournament Spectator::gef_town_spec_SE_1	107,{
+	end;
+}
+
+1@gef,185,107,4	script	Tournament Spectator::gef_town_spec_SE_2	108,{
+	end;
+}
+
+1@gef,189,97,4	script	Tournament Spectator::gef_town_spec_SE_3	108,{
+	end;
+}
+
+1@gef,180,84,4	script	Tournament Spectator::gef_town_spec_SE_4	53,{
+	end;
+}
+
+1@gef,175,74,4	script	Tournament Spectator::gef_town_spec_SE_5	947,{
+	end;
+}
+
+1@gef,167,68,4	script	Tournament Spectator::gef_town_spec_SE_6	80,{
+	end;
+}
+
+1@gef,163,76,4	script	Tournament Spectator::gef_town_spec_SE_7	79,{
+	end;
+}
+
+1@gef,154,55,4	script	Tournament Spectator::gef_town_spec_SE_8	59,{
+	end;
+}
+
+1@gef,147,65,4	script	Tournament Spectator::gef_town_spec_SE_9	60,{
+	end;
+}
+
+1@gef,145,47,4	script	Tournament Spectator::gef_town_spec_SE_10	106,{
+	end;
+}
+
+1@gef,134,63,4	script	Tournament Spectator::gef_town_spec_SE_11	58,{
+	end;
+}
+
+1@gef,130,49,4	script	Tournament Spectator::gef_town_spec_SE_12	808,{
+	end;
+}
+
+1@gef,124,72,4	script	Tournament Spectator::gef_town_spec_SE_13	807,{
+	end;
+}
+
+//Outer Ring SW part
+1@gef,106,56,4	script	Tournament Spectator::gef_town_spec_SW_1	78,{
+	end;
+}
+
+1@gef,97,66,4	script	Tournament Spectator::gef_town_spec_SW_2	77,{
+	end;
+}
+
+1@gef,94,68,4	script	Tournament Spectator::gef_town_spec_SW_3	76,{
+	end;
+}
+
+1@gef,83,60,4	script	Tournament Spectator::gef_town_spec_SW_4	75,{
+	end;
+}
+
+1@gef,72,65,4	script	Tournament Spectator::gef_town_spec_SW_5	57,{
+	end;
+}
+
+1@gef,52,83,4	script	Tournament Spectator::gef_town_spec_SW_6	56,{
+	end;
+}
+
+1@gef,44,95,4	script	Tournament Spectator::gef_town_spec_SW_7	55,{
+	end;
+}
+
+1@gef,42,102,4	script	Tournament Spectator::gef_town_spec_SW_8	50,{
+	end;
+}
+
+1@gef,50,107,4	script	Tournament Spectator::gef_town_spec_SW_9	54,{
+	end;
+}
+
+1@gef,55,113,4	script	Tournament Spectator::gef_town_spec_SW_10	74,{
+	end;
+}
+
+1@gef,44,118,4	script	Tournament Spectator::gef_town_spec_SW_11	73,{
+	end;
+}
+
+//Outer Ring NW part
+1@gef,45,126,4	script	Tournament Spectator::gef_town_spec_NW_1	48,{
+	end;
+}
+
+1@gef,44,133,4	script	Tournament Spectator::gef_town_spec_NW_2	52,{
+	end;
+}
+
+1@gef,55,142,4	script	Tournament Spectator::gef_town_spec_NW_3	70,{
+	end;
+}
+
+1@gef,58,146,4	script	Tournament Spectator::gef_town_spec_NW_4	51,{
+	end;
+}
+
+1@gef,45,149,4	script	Tournament Spectator::gef_town_spec_NW_5	71,{
+	end;
+}
 
 //In-Town competitors
 
