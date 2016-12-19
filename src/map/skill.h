@@ -26,7 +26,7 @@ struct status_change_entry;
 #define SKILL_NAME_LENGTH 31 /// Max Skill Name length
 #define SKILL_DESC_LENGTH 31 /// Max Skill Desc length
 
-DBMap* skilldb_name2id;
+extern DBMap* skilldb_name2id;
 
 /// Constants to identify a skill's nk value (damage properties)
 /// The NK value applies only to non INF_GROUND_SKILL skills
@@ -79,7 +79,7 @@ enum e_skill_inf2 {
 /// Skill info type 3
 enum e_skill_inf3 {
 	INF3_NOLP             = 0x00001, // Skill that can ignore Land Protector
-	INF3_NOENDCAMOUFLAGE  = 0x00002, // Skill that doesn't end camouflage
+	INF3_FREE             = 0x00002, // Free
 	INF3_USABLE_HIDING    = 0x00004, // Skill that can be use in hiding
 	INF3_USABLE_DANCE     = 0x00008, // Skill that can be use while in dancing state
 	INF3_HIT_EMP          = 0x00010, // Skill that could hit emperium
@@ -295,7 +295,9 @@ struct skill_unit {
 	struct skill_unit_group *group; /// Skill group reference
 	int limit;
 	int val1, val2;
-	short alive, range;
+	short range;
+	unsigned alive : 1;
+	unsigned hidden : 1;
 };
 
 #define MAX_SKILLUNITGROUPTICKSET 25
@@ -320,9 +322,10 @@ enum e_skill_unit_flag {
 	UF_DUALMODE         = 0x00800,	// Spells should trigger both ontimer and onplace/onout/onleft effects.
 	UF_NOKNOCKBACK      = 0x01000,	// Skill unit cannot be knocked back
 	UF_RANGEDSINGLEUNIT = 0x02000,	// hack for ranged layout, only display center
-	UF_REM_CRAZYWEED    = 0x04000,	// removed by Crazyweed
+	UF_CRAZYWEED_IMMUNE = 0x04000,	// Immune to Crazy Weed removal
 	UF_REM_FIRERAIN     = 0x08000,	// removed by Fire Rain
 	UF_KNOCKBACK_GROUP  = 0x10000,	// knockback skill unit with its group instead of single unit
+	UF_HIDDEN_TRAP      = 0x20000,	// Hidden trap [Cydh]
 };
 
 /// Create Database item
@@ -369,13 +372,13 @@ int skill_get_index_( uint16 skill_id, bool silent, const char *func, const char
 #define skill_get_index(skill_id)  skill_get_index_((skill_id), false, __FUNCTION__, __FILE__, __LINE__) /// Get skill index from skill_id (common usage on source)
 #define skill_get_index2(skill_id) skill_get_index_((skill_id), true, __FUNCTION__, __FILE__, __LINE__)  /// Get skill index from skill_id (used when reading skill_db files)
 int skill_get_type( uint16 skill_id );
-int skill_get_hit( uint16 skill_id );
+enum e_damage_type skill_get_hit( uint16 skill_id );
 int skill_get_inf( uint16 skill_id );
 int skill_get_ele( uint16 skill_id , uint16 skill_lv );
 int skill_get_nk( uint16 skill_id );
 int skill_get_max( uint16 skill_id );
 int skill_get_range( uint16 skill_id , uint16 skill_lv );
-int skill_get_range2(struct block_list *bl, uint16 skill_id, uint16 skill_lv);
+int skill_get_range2(struct block_list *bl, uint16 skill_id, uint16 skill_lv, bool isServer);
 int skill_get_splash( uint16 skill_id , uint16 skill_lv );
 int skill_get_num( uint16 skill_id ,uint16 skill_lv );
 int skill_get_cast( uint16 skill_id ,uint16 skill_lv );
@@ -434,8 +437,8 @@ int skill_break_equip(struct block_list *src,struct block_list *bl, unsigned sho
 int skill_strip_equip(struct block_list *src,struct block_list *bl, unsigned short where, int rate, int lv, int time);
 // Skills unit
 struct skill_unit_group *skill_id2group(int group_id);
-struct skill_unit_group *skill_unitsetting(struct block_list* src, uint16 skill_id, uint16 skill_lv, short x, short y, int flag);
-struct skill_unit *skill_initunit (struct skill_unit_group *group, int idx, int x, int y, int val1, int val2);
+struct skill_unit_group *skill_unitsetting(struct block_list* src, uint16 skill_id, uint16 skill_lv, int16 x, int16 y, int flag);
+struct skill_unit *skill_initunit (struct skill_unit_group *group, int idx, int x, int y, int val1, int val2, bool hidden);
 int skill_delunit(struct skill_unit *unit);
 struct skill_unit_group *skill_initunitgroup(struct block_list* src, int count, uint16 skill_id, uint16 skill_lv, int unit_id, int limit, int interval);
 int skill_delunitgroup_(struct skill_unit_group *group, const char* file, int line, const char* func);
@@ -444,6 +447,10 @@ void skill_clear_unitgroup(struct block_list *src);
 int skill_clear_group(struct block_list *bl, int flag);
 void ext_skill_unit_onplace(struct skill_unit *unit, struct block_list *bl, unsigned int tick);
 int64 skill_unit_ondamaged(struct skill_unit *unit,int64 damage);
+
+// Skill unit visibility [Cydh]
+void skill_getareachar_skillunit_visibilty(struct skill_unit *su, enum send_target target);
+void skill_getareachar_skillunit_visibilty_single(struct skill_unit *su, struct block_list *bl);
 
 int skill_castfix(struct block_list *bl, uint16 skill_id, uint16 skill_lv);
 int skill_castfix_sc(struct block_list *bl, double time, uint8 flag);
@@ -462,20 +469,11 @@ struct skill_condition skill_get_requirement(struct map_session_data *sd, uint16
 int skill_disable_check(struct status_change *sc, uint16 skill_id);
 
 int skill_check_pc_partner(struct map_session_data *sd, uint16 skill_id, uint16 *skill_lv, int range, int cast_flag);
-// -- moonsoul	(added skill_check_unit_cell)
-int skill_check_unit_cell(uint16 skill_id,int16 m,int16 x,int16 y,int unit_id);
-int skill_unit_out_all( struct block_list *bl,unsigned int tick,int range);
 int skill_unit_move(struct block_list *bl,unsigned int tick,int flag);
 void skill_unit_move_unit_group( struct skill_unit_group *group, int16 m,int16 dx,int16 dy);
 void skill_unit_move_unit(struct block_list *bl, int dx, int dy);
 
-struct skill_unit_group *skill_check_dancing( struct block_list *src );
-
-// Chant canceled
-int skill_castcancel(struct block_list *bl,int type);
-
 int skill_sit (struct map_session_data *sd, int type);
-void skill_overbrand(struct block_list* src, uint16 skill_id, uint16 skill_lv, uint16 x, uint16 y, unsigned int tick, int flag);
 void skill_repairweapon(struct map_session_data *sd, int idx);
 void skill_identify(struct map_session_data *sd,int idx);
 void skill_weaponrefine(struct map_session_data *sd,int idx); // [Celest]
@@ -1311,6 +1309,28 @@ enum e_skill {
 	NPC_REVERBERATION,
 	NPC_REVERBERATION_ATK,
 	NPC_LEX_AETERNA,
+	NPC_ARROWSTORM,
+	NPC_CHEAL,
+	NPC_SR_CURSEDCIRCLE,
+	NPC_DRAGONBREATH,
+	NPC_FATALMENACE,
+	NPC_MAGMA_ERUPTION,
+	NPC_MAGMA_ERUPTION_DOTDAMAGE,
+	NPC_MANDRAGORA,
+	NPC_PSYCHIC_WAVE,
+	NPC_RAYOFGENESIS,
+	NPC_VENOMIMPRESS,
+	NPC_CLOUD_KILL,
+	NPC_IGNITIONBREAK,
+	NPC_PHANTOMTHRUST,
+	NPC_POISON_BUSTER,
+	NPC_HALLUCINATIONWALK,
+	NPC_ELECTRICWALK,
+	NPC_FIREWALK,
+	NPC_WIDEDISPEL,
+	NPC_LEASH,
+	NPC_WIDELEASH,
+	NPC_WIDECRITICALWOUND,
 
 	KN_CHARGEATK = 1001,
 	CR_SHRINK,
@@ -1729,6 +1749,31 @@ enum e_skill {
 	LG_KINGS_GRACE,
 	ALL_FULL_THROTTLE,
 
+	SU_BASIC_SKILL = 5018,
+	SU_BITE,
+	SU_HIDE,
+	SU_SCRATCH,
+	SU_STOOP,
+	SU_LOPE,
+	SU_SPRITEMABLE,
+	SU_POWEROFLAND,
+	SU_SV_STEMSPEAR,
+	SU_CN_POWDERING,
+	SU_CN_METEOR,
+	SU_SV_ROOTTWIST,
+	SU_SV_ROOTTWIST_ATK,
+	SU_POWEROFLIFE,
+	SU_SCAROFTAROU,
+	SU_PICKYPECK,
+	SU_PICKYPECK_DOUBLE_ATK,
+	SU_ARCLOUSEDASH,
+	SU_LUNATICCARROTBEAT,
+	SU_POWEROFSEA,
+	SU_TUNABELLY,
+	SU_TUNAPARTY,
+	SU_BUNCHOFSHRIMP,
+	SU_FRESHSHRIMP,
+
 	HLIF_HEAL = 8001,
 	HLIF_AVOID,
 	HLIF_BRAIN,
@@ -1999,6 +2044,9 @@ enum s_skill_unit_id {
 	UNT_B_TRAP,
 	UNT_FIRE_RAIN,
 
+	UNT_CATNIPPOWDER,
+	UNT_SV_ROOTTWIST,
+
 	/**
 	 * Guild Auras
 	 **/
@@ -2073,9 +2121,11 @@ int skill_elementalanalysis(struct map_session_data *sd, int n, uint16 skill_lv,
 int skill_changematerial(struct map_session_data *sd, int n, unsigned short *item_list);	// Genetic Change Material.
 int skill_get_elemental_type(uint16 skill_id, uint16 skill_lv);
 
-bool skill_is_combo(uint16 skill_id);
+int skill_is_combo(uint16 skill_id);
 void skill_combo_toogle_inf(struct block_list* bl, uint16 skill_id, int inf);
 void skill_combo(struct block_list* src,struct block_list *dsrc, struct block_list *bl, uint16 skill_id, uint16 skill_lv, int tick);
+
+void skill_reveal_trap_inarea(struct block_list *src, int range, int x, int y);
 
 #ifdef ADJUST_SKILL_DAMAGE
 /// Skill Damage target

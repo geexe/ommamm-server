@@ -6,6 +6,7 @@
 
 #include "../common/mmo.h"
 #include "../config/core.h"
+#include "clif.h" // e_damage_type
 #include "map.h" //ELE_MAX
 
 /// State of a single attack attempt; used in flee/def penalty calculations when mobbed
@@ -61,7 +62,7 @@ struct Damage {
 #endif
 	int64 damage, /// Right hand damage
 		damage2; /// Left hand damage
-	char type; /// chk clif_damage for type (clif.h enum e_damage_type)
+	enum e_damage_type type; /// Check clif_damage for type
 	short div_; /// Number of hit
 	int amotion,
 		dmotion;
@@ -69,6 +70,7 @@ struct Damage {
 	int flag; /// chk e_battle_flag
 	int miscflag;
 	enum damage_lv dmg_lv; /// ATK_LUCKY,ATK_FLEE,ATK_DEF
+	bool isspdamage; /// Display blue damage numbers in clif_damage
 };
 
 //(Used in read pc.c,) attribute table (battle_attr_fix)
@@ -85,7 +87,8 @@ struct Damage battle_calc_attack_plant(struct Damage wd, struct block_list *src,
 
 int64 battle_calc_return_damage(struct block_list *bl, struct block_list *src, int64 *, int flag, uint16 skill_id, bool status_reflect);
 
-void battle_drain(struct map_session_data *sd, struct block_list *tbl, int64 rdamage, int64 ldamage, int race, int class_, bool infdef);
+void battle_drain(struct map_session_data *sd, struct block_list *tbl, int64 rdamage, int64 ldamage, int race, int class_);
+bool battle_vanish(struct map_session_data *sd, struct block_list *target, struct Damage *wd);
 
 int battle_attr_ratio(int atk_elem,int def_type, int def_lv);
 int64 battle_attr_fix(struct block_list *src, struct block_list *target, int64 damage,int atk_elem,int def_type, int def_lv);
@@ -96,8 +99,8 @@ int64 battle_calc_damage(struct block_list *src,struct block_list *bl,struct Dam
 int64 battle_calc_gvg_damage(struct block_list *src,struct block_list *bl,int64 damage,uint16 skill_id,int flag);
 int64 battle_calc_bg_damage(struct block_list *src,struct block_list *bl,int64 damage,uint16 skill_id,int flag);
 
-void battle_damage(struct block_list *src, struct block_list *target, int64 damage, int delay, uint16 skill_lv, uint16 skill_id, enum damage_lv dmg_lv, unsigned short attack_type, bool additional_effects, unsigned int tick);
-int battle_delay_damage (unsigned int tick, int amotion, struct block_list *src, struct block_list *target, int attack_type, uint16 skill_id, uint16 skill_lv, int64 damage, enum damage_lv dmg_lv, int ddelay, bool additional_effects);
+void battle_damage(struct block_list *src, struct block_list *target, int64 damage, int delay, uint16 skill_lv, uint16 skill_id, enum damage_lv dmg_lv, unsigned short attack_type, bool additional_effects, unsigned int tick, bool spdamage);
+int battle_delay_damage (unsigned int tick, int amotion, struct block_list *src, struct block_list *target, int attack_type, uint16 skill_id, uint16 skill_lv, int64 damage, enum damage_lv dmg_lv, int ddelay, bool additional_effects, bool spdamage);
 
 // Summary normal attack treatment (basic attack)
 enum damage_lv battle_weapon_attack( struct block_list *bl,struct block_list *target,unsigned int tick,int flag);
@@ -107,9 +110,7 @@ struct block_list* battle_get_master(struct block_list *src);
 struct block_list* battle_gettargeted(struct block_list *target);
 struct block_list* battle_getenemy(struct block_list *target, int type, int range);
 int battle_gettarget(struct block_list *bl);
-int battle_getcurrentskill(struct block_list *bl);
-
-#define	is_boss(bl)	( status_get_class_(bl) == CLASS_BOSS )	// Can refine later [Aru]
+uint16 battle_getcurrentskill(struct block_list *bl);
 
 int battle_check_undead(int race,int element);
 int battle_check_target(struct block_list *src, struct block_list *target,int flag);
@@ -316,12 +317,12 @@ extern struct Battle_Config
 	int item_rate_mvp, item_rate_common, item_rate_common_boss, item_rate_card, item_rate_card_boss,
 		item_rate_equip, item_rate_equip_boss, item_rate_heal, item_rate_heal_boss, item_rate_use,
 		item_rate_use_boss, item_rate_treasure, item_rate_adddrop;
+	int item_rate_common_mvp, item_rate_heal_mvp, item_rate_use_mvp, item_rate_equip_mvp, item_rate_card_mvp;
 
 	int logarithmic_drops;
 	int item_drop_common_min,item_drop_common_max;	// Added by TyrNemesis^
 	int item_drop_card_min,item_drop_card_max;
 	int item_drop_equip_min,item_drop_equip_max;
-	int item_drop_equip_min_boss,item_drop_equip_max_boss; // MVP equip min/max drop rate [Xantara] [Ommamm changes]
 	int item_drop_mvp_min,item_drop_mvp_max;	// End Addition
 	int item_drop_mvp_mode; //rAthena addition [Playtester]
 	int item_drop_heal_min,item_drop_heal_max;	// Added by Valatris
@@ -507,10 +508,12 @@ extern struct Battle_Config
 	int max_trans_parameter;
 	int max_third_trans_parameter;
 	int max_extended_parameter;
+	int max_summoner_parameter;
 	int max_third_aspd;
 	int vcast_stat_scale;
 
 	int mvp_tomb_enabled;
+	int mvp_tomb_delay;
 
 	int atcommand_suggestions_enabled;
 	int min_npc_vendchat_distance;
@@ -530,12 +533,11 @@ extern struct Battle_Config
 	int vip_storage_increase;
 	int vip_base_exp_increase;
 	int vip_job_exp_increase;
+	int vip_zeny_penalty;
 	int vip_bm_increase;
 	int vip_drop_increase;
 	int vip_gemstone;
-	int vip_exp_penalty_base_normal;
 	int vip_exp_penalty_base;
-	int vip_exp_penalty_job_normal;
 	int vip_exp_penalty_job;
 	int vip_disp_rate;
 	int mon_trans_disable_in_gvg;
@@ -563,7 +565,6 @@ extern struct Battle_Config
 	int fame_pharmacy_7;
 	int fame_pharmacy_10;
 
-	int disp_serverbank_msg;
 	int disp_servervip_msg;
 	int warg_can_falcon;
 	int path_blown_halt;
@@ -606,12 +607,18 @@ extern struct Battle_Config
 	int exp_cost_redemptio;
 	int exp_cost_redemptio_limit;
 	int exp_cost_inspiration;
+	int mvp_exp_reward_message;
+	int can_damage_skill; //Which BL types can damage traps
+	int atcommand_levelup_events;
+	int block_account_in_same_party;
+	int tarotcard_equal_chance; //Official or equal chance for each card
+
+#include "../custom/battle_config_struct.inc"
 } battle_config;
 
 void do_init_battle(void);
 void do_final_battle(void);
 extern int battle_config_read(const char *cfgName);
-extern void battle_validate_conf(void);
 extern void battle_set_defaults(void);
 int battle_set_value(const char* w1, const char* w2);
 int battle_get_value(const char* w1);

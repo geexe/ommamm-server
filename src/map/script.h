@@ -160,6 +160,7 @@ extern struct Script_Config {
 
 	const char* ontouch_name;
 	const char* ontouch2_name;
+	const char* onwhisper_event_name;
 } script_config;
 
 typedef enum c_op {
@@ -201,8 +202,10 @@ typedef enum c_op {
 	C_NOT, // ~ a
 	C_R_SHIFT, // a >> b
 	C_L_SHIFT, // a << b
-	C_ADD_PP, // ++a
-	C_SUB_PP, // --a
+	C_ADD_POST, // a++
+	C_SUB_POST, // a--
+	C_ADD_PRE, // ++a
+	C_SUB_PRE, // --a
 } c_op;
 
 /**
@@ -623,6 +626,22 @@ enum unitdata_npctypes {
 	UNPC_DMOTION,
 };
 
+enum navigation_service {
+	NAV_NONE = 0, ///< 0
+	NAV_AIRSHIP_ONLY = 1, ///< 1 (actually 1-9)
+	NAV_SCROLL_ONLY = 10, ///< 10
+	NAV_AIRSHIP_AND_SCROLL = NAV_AIRSHIP_ONLY + NAV_SCROLL_ONLY, ///< 11 (actually 11-99)
+	NAV_KAFRA_ONLY = 100, ///< 100
+	NAV_KAFRA_AND_AIRSHIP = NAV_KAFRA_ONLY + NAV_AIRSHIP_ONLY, ///< 101 (actually 101-109)
+	NAV_KAFRA_AND_SCROLL = NAV_KAFRA_ONLY + NAV_SCROLL_ONLY, ///< 110
+	NAV_ALL = NAV_AIRSHIP_ONLY + NAV_SCROLL_ONLY + NAV_KAFRA_ONLY ///< 111 (actually 111-255)
+};
+
+enum random_option_attribute {
+	ROA_ID = 0,
+	ROA_VALUE,
+	ROA_PARAM,
+};
 /**
  * used to generate quick script_array entries
  **/
@@ -638,7 +657,6 @@ void script_error(const char* src, const char* file, int start_line, const char*
 void script_warning(const char* src, const char* file, int start_line, const char* error_msg, const char* error_pos);
 
 struct script_code* parse_script(const char* src,const char* file,int line,int options);
-void run_script_sub(struct script_code *rootscript,int pos,int rid,int oid, char* file, int lineno);
 void run_script(struct script_code *rootscript,int pos,int rid,int oid);
 
 int set_reg(struct script_state* st, TBL_PC* sd, int64 num, const char* name, const void* value, struct reg_db *ref);
@@ -650,7 +668,6 @@ int run_script_timer(int tid, unsigned int tick, int id, intptr_t data);
 void run_script_main(struct script_state *st);
 
 void script_stop_instances(struct script_code *code);
-struct linkdb_node* script_erase_sleepdb(struct linkdb_node *n);
 void script_free_code(struct script_code* code);
 void script_free_vars(struct DBMap *storage);
 struct script_state* script_alloc_state(struct script_code* rootscript, int pos, int rid, int oid);
