@@ -1,7 +1,7 @@
 rAthena
 =======
 
-Build Status: [![Build Status](https://travis-ci.org/rathena/rathena.png?branch=master)](https://travis-ci.org/rathena/rathena)
+Build Status: [![Build Status](https://travis-ci.org/rathena/rathena.png?branch=master)](https://travis-ci.org/rathena/rathena) [![Build status](https://ci.appveyor.com/api/projects/status/8574b8nlwd57loda/branch/master?svg=true)](https://ci.appveyor.com/project/rAthenaAPI/rathena/branch/master)
 
 Table of Contents
 ---------
@@ -65,10 +65,7 @@ relevant to your Operation System, please refer to the Wiki (links at the end of
 	* Type:
 		* (For CentOS)
 
-				yum install gcc make mysql mysql-devel mysql-server pcre-devel zlib-devel
-				rpm -Uvhhttp://repo.webtatic.com/yum/centos/5/latest.rpm
-				yum install --enablerepo=webtatic git-all
-				yum install --enablerepo=webtatic --disableexcludes=main git-all
+				yum install gcc make mysql mysql-devel mysql-server pcre-devel zlib-devel git
 		* (For Debian)
 
 				apt-get install git make gcc libmysqlclient-dev zlib1g-dev libpcre3-dev
@@ -154,17 +151,20 @@ Examples:
 	* https://github.com/rathena/rathena
 
 * Full Installation Instructions
-	* Windows: https://rathena.org/wiki/Installation_on_Windows
-	* CentOS: https://rathena.org/wiki/Installation_(CentOS)
-	* Debian: https://rathena.org/wiki/Installation_(Debian)
-	* FreeBSD: https://rathena.org/wiki/Installation_(FreeBSD)
+	* [Windows](https://github.com/rathena/rathena/wiki/Install-on-Windows)
+	* [CentOS](https://github.com/rathena/rathena/wiki/Install-on-Centos)
+	* [Debian](https://github.com/rathena/rathena/wiki/Install-on-Debian)
+	* [FreeBSD](https://github.com/rathena/rathena/wiki/Install-on-FreeBSD)
 	
 * rAthena IRC Channel
 	* irc://irc.rizon.net/rathena
 	* Web Chat: https://rathena.org/board/page/chat.html
 
+* rAthena Discord Chat
+	http://discord.rathena.org
+
 * rAthena Wiki
-	https://rathena.org/board/index.php?app=ipbwiki
+	https://github.com/rathena/rathena/wiki
 
 * Fork and Pull Request Q&A
 	https://rathena.org/board/topic/86913-pull-request-qa/
