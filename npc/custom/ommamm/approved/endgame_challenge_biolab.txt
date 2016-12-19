@@ -13,8 +13,11 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 	case 1:
 		mes "[Challenge]";
 		mes "You must kill all " + getarraysize(.biolabmvp) + " Biolab MVPs:";
-		for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+		for(.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
 			mes .@i+1 + ". " + "^e53535" + strmobinfo(1,.biolabmvp[.@i]) + "^000000";
+			if(checkquest(70000 + .biolabmvp[.@i]) < 0) {
+				setquest(70000 + .biolabmvp[.@i]);
+			}
 		}
 		next;
 		mes "[Challenge]";
@@ -27,63 +30,66 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 		}
 		next;
 		//display completed MVPs
-
-		if(getarraysize(biolabkill)) {
-			mes "MVPs you have completed:";
-			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(biolabkill[.@i] == .biolabmvp[.@i]) {
-					mes strmobinfo(1,biolabkill[.@i]);
-				}
+		for(.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+			if(checkquest(70000 + .biolabmvp[.@i],HUNTING) == 2) {			
+				.@mvpcount++;
 			}
 		}
-		else {
+		if(!.@mvpcount) {
+			mes "[Challenge]";
+			mes "You have not defeated any Biolab boss.";
 			mes "Go kill those MVPs!";
+			close;
 		}
+		mes "[Challenge]";
+		mes "MVPs you have completed:";
+		for(.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+			if(checkquest(70000 + .biolabmvp[.@i],HUNTING) == 2) {			
+				mes strmobinfo(1,.biolabmvp[.@i]);
+			}
+		}
+		close;
 		break;
 	case 2:
-		mes "[Challenge]";
 		//check to see if character has received the reward
-		if(!getommammreward_biolab) {
-			for (.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
-				if(biolabkill[.@i] == .biolabmvp[.@i]) {
-					.@mvpcount += 1;
-				}
-			}
-			//check to see if all MVPs have been completed
-			if(.@mvpcount == getarraysize(.biolabmvp)) {
-				mes "You have completed the challenge";
-				mes "Do you want to claim the reward?";
-				switch(select("Yes:No")) {
-				case 1: 
-					break;
-				case 2:
-					mes "[Challenge]";
-					mes "Come back when you want to claim the reward";
-					close;
-				}
-				//check weight and inventory 
-				if(checkweight2(.reward,.reward_quantity)) {
-					//Set variable to prevent player from getting multiple items
-					getommammreward_biolab = 1;
-					//Cycle through the reward array
-					for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
-						getitembound .reward[.@k], .reward_quantity[.@k], 1;
-					}
-					mes "[Challenge]";
-					mes "Congratulations on your achievement! Enjoy your reward.";
-					close;
-				} else {
-					mes "You do not have enough space.";
-					mes "Please clear your inventory and come back again.";
-				}
-			}
-			else {
-				mes "You have not completed the challenge.";
-			}
-		}
-		else {
+		if(getommammreward_biolab) {
+			mes "[Challenge]";
 			mes "You have already received reward for this challenge.";
+			close;
 		}
+		//check to see if all MVPs have been completed
+		for(.@i = 0; .@i < getarraysize(.biolabmvp); .@i++) {
+			if(checkquest(70000 + .biolabmvp[.@i],HUNTING) < 2) {
+				mes "[Challenge]";
+				mes "You have not completed the challenge.";
+				close;
+			}
+		}	
+		mes "You have completed the challenge";
+		mes "Do you want to claim the reward?";
+		switch(select("Yes:No")) {
+			case 1: 
+				break;
+			case 2:
+				mes "[Challenge]";
+				mes "Come back when you want to claim the reward";
+				close;
+		}
+		//check weight and inventory 
+		if(!checkweight2(.reward,.reward_quantity)) {
+			mes "You do not have enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		//Set variable to prevent player from getting multiple items
+		getommammreward_biolab = 1;
+		//Cycle through the reward array
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			getitembound .reward[.@k], .reward_quantity[.@k], 1;
+		}
+		mes "[Challenge]";
+		mes "Congratulations on your achievement! Enjoy your reward.";
+		close;
 		break;	
 	case 3:
 		break;
@@ -92,12 +98,24 @@ izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
 	
 OnInit:
 	//monsters to kill
-	setarray .biolabmvp[0],1651,1650,1649,1648,1647,1646;
+	setarray .biolabmvp[0],
+		1646, //Lord Knight Seyren
+		1647, //Assassin Cross Eremes
+		1648, //Whitesmith Howard
+		1649, //High Priest Magaretha
+		1650, //Sniper Cecil
+		1651, //High Wizard Kathryne
+		2235, //Paladin Randel
+		2236, //Creator Flmel
+		2237, //Professor Celia
+		2238, //Champion Chen
+		2239, //Stalker Gertie
+		2240, //Clown Alphoccio
+		2241; //Gypsy Trentini
+		
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
 	setarray .reward[0],31100,6238,6232,2383,16753,16755;	
 	setarray .reward_quantity[0],1,1,1,1,15,15;
-	// Party options: 0 (exclude party kills), 1 (include party kills), 2 (same map only), 3 (screen area only)
-	.party = 3;
 	end;
 	}
