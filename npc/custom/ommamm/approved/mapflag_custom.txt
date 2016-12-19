@@ -15,3 +15,4 @@ lhz_dun04	mapflag	jexp	250
 1@ge_st	mapflag	nobranch
 1@ge_st	mapflag	noicewall
 1@ge_st	mapflag	partylock
+1@ge_st	mapflag	noloot
