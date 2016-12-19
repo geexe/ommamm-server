@@ -109,3 +109,9 @@ item_enabled_npc: no
 
 // Angel of the Sun, Moon and Stars skill ratio (100% = 10000)
 sg_angel_skill_ratio: 3000
+
+// Auction (Note 1)
+// Feature became unstable on clients 2012 onwards (exact date not known),
+// it has been fixed on clients 2013-05-15 onwards however.
+// Feature was removed again on clients 2014-11-12 and later.
+feature.auction: off
