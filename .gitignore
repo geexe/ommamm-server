@@ -30,6 +30,7 @@ Thumbs.db
 /config.log
 /config.status
 /core
+/enc_temp_folder
 /ipch
 /login-server
 /Makefile
@@ -47,7 +48,11 @@ Thumbs.db
 /3rdparty/mt19937ar/Makefile
 /3rdparty/mt19937ar/*.o
 
+# /db/
+/db/import
+
 # /conf/
+/conf/import
 /conf/msg_conf/import
 
 # /doc/
@@ -94,8 +99,17 @@ Thumbs.db
 /tools/*.ilk
 /tools/*.pdb
 
+# /vcproj-15/
+/vcproj-15/char-server
+/vcproj-15/login-server
+/vcproj-15/mapcache
+/vcproj-15/map-server
+/vcproj-15/*.user
+
 # /vcproj-14/
 .vs
+*.VC.db
+*.VC.opendb
 /vcproj-14/char-server
 /vcproj-14/login-server
 /vcproj-14/mapcache
