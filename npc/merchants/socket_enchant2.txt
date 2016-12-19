@@ -171,13 +171,11 @@
 					mes "A class? You seem to want little too much. But, no problem.";
 					mes "So, what kind of armor do you have?";
 					next;
-					//Ommamm changes
-					switch(select("Pirate Bandana:Black Leather Boots:Special Ninja Suit")) 
+					switch(select("Pirate Bandana:Black Leather Boots"))
 					{
 						case 1: callfunc "Func_Socket2",2287,5350,50,61,500,985,1; // 50,61 - it's not a typo
 						case 2: callfunc "Func_Socket2",2425,2434,40,51,500,985,1;
-						//Ommamm changes
-						case 3: callfunc "Func_Socket2",15053,15056,40,51,500,985,1;	
+						//case 3: callfunc "Func_Socket2",15053,15056,x,x,x,x,x;	// Special Ninja Suit (Needs more info)
 					}
 				case 4:
 					mes "[Leablem]";
@@ -413,8 +411,8 @@ function	script	Func_Socket2	{
 	mes "[Leablem]";
 	mes "Did you already bring all of them?";
 	mes "For your information, if you fail to create a slot,";
-	mes "you will lose all the item requirement as well as the target "+ (getiteminfo(.@item_id,5) == 2 ? "weapon" : "armor") +".";// EQP_HAND_R = 2, it's a weapon, otherwise armor
-	mes "Also remember, if the "+ (getiteminfo(.@item_id,5) == 2 ? "weapon" : "armor") +" has been upgraded, and has been inserted with a card,";
+	mes "you will lose all the item requirement as well as the target "+ ((getiteminfo(.@item_id,5)&EQP_HAND_R) ? "weapon" : "armor") +".";
+	mes "Also remember, if the "+ ((getiteminfo(.@item_id,5)&EQP_HAND_R) ? "weapon" : "armor") +" has been upgraded, and has been inserted with a card,";
 	mes "you will lose them even if you succeed in creating a slot.";
 	next;
 	switch(select("Ask for slot creation.:Try next time."))
