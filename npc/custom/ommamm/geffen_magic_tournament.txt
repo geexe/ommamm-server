@@ -1,0 +1,3510 @@
+mid_camp,210,292,3	script	Dimensional Device::dali_entry	10007,{
+	mes "Enter the Dimensional Gap of time and space.";
+	next;
+	switch(select("Yes:No")) {
+	case 1:
+		warp "dali",141,82;
+		end;
+	case 2:
+		close;
+	}
+}
+
+dali,98,141,3	script	Emmitt White::gef_magic_init	903,{
+	
+	.npc$ = "[Time Travel Researcher]";
+	
+	if(BaseLevel < 90) {
+		mes "Only player with level 90 or more can enter.";
+		close;
+	}
+	if (getpartyleader(getcharid(1),2) != getcharid(0)) {
+		mes "You need to be a party leader in order to continue.";
+		close;
+	}
+	//Set cooldown
+	if(checkquest(9315) > -1) {
+		mes .npc$;
+		mes "I see that you've returned from the Tournament.";
+		mes "Did you find out anything interesting?";
+		next;
+		mes "You give details of your experience to the researcher.";
+		next;
+		mes .npc$;
+		mes "I need more information I think.";
+		mes "Not bad for today...";
+		mes "Anyway, thanks.";
+		erasequest 9315; //Delete Exploring the Dimensional Gap quest
+		setquest 9316; //Give Re-exploring the crack of spaces quest
+		next;
+		mes .npc$;
+		mes "But I still want more!";
+		mes "Can you help me tomorrow?";
+		mes "I will be waiting for you.";
+		close;
+	}
+	//Cooldown not finished
+	if(checkquest(9316,PLAYTIME) == 0 || checkquest(9316,PLAYTIME) == 1 ) {
+		mes .npc$;
+		mes "Just a second.";
+		mes "You need to wait for the time to expire before going back again.";
+		close;
+	//Cooldown finished
+	} else if (checkquest(9316,PLAYTIME) == 2) {
+		mes .npc$;
+		mes "I knew you would be back.";
+		next;
+		mes .npc$;
+		mes "The Dimensional Device will let you participate in the Geffen Magic Tournament.";
+		mes "Let me know when you're ready to join.";
+		next;
+		mes .npc$;
+		mes "The portal is unstable so you have to go solo.";
+		mes "Are you ready to enter?";
+		next;
+		switch(select("No:Yes")) {
+		case 1:
+			mes .npc$;
+			mes "Come back if you change your mind~!";
+			close;
+		case 2:
+			mes .npc$;
+			if(instance_create("Geffen Magic Tournament") < 0) {
+				mes "The dimensional device hasn't been activated yet.";
+				close;
+			}
+			mes "The dimensional device has been activated.";
+			close;
+		}
+	}
+	mes .npc$;
+	mes "Did you know? A long time ago there was a Magic Tournament in Geffen.";
+	next;
+	mes .npc$;
+	mes "I've done so much research on the Tournament but haven't gotten too much information from research alone.";
+	next;
+	mes .npc$;
+	mes "When I found out that this time gap can help with my research I couldn't resist the opportunity to continue the research.";
+	next;
+	mes .npc$;
+	mes "And now I've found an adventurer, in you, who can help me go back to the time the Tournament took place.";
+	next;
+	mes .npc$;
+	mes "Please use the dimensional device and participate in the magic tournament for me.";
+	mes "Will you go and tell me about it?";
+	next;
+	mes .npc$;
+	mes "The portal is unstable so you have to go solo.";
+	mes "Are you ready to enter?";
+	next;
+	switch(select("No:Yes")) {
+	case 1:
+		mes .npc$;
+		mes "Come back if you change your mind~!";
+		close;
+	case 2:
+		mes .npc$;
+		if(instance_create("Geffen Magic Tournament") < 0) {
+			mes "The dimensional device hasn't been activated yet.";
+			close;
+		}
+		mes "The dimensional Devide has been activated.";
+		close;
+	}
+}
+
+dali,100,147,3	script	Dimensional Device::gef_magic_entry	10007,{
+	
+	//Not party leader
+	if(getpartyleader(getcharid(1),2) != getcharid(0)) {
+		mes "It seems you are unable to enter at this time.";
+		close;
+	}
+	//Cooldown not finished
+	if (checkquest(9316,PLAYTIME) == 0 || checkquest(9316,PLAYTIME) == 1 ||checkquest(9315) > -1) {
+		mes "Looks like the window of oopportunity is not open right now.";
+		close;
+	}
+	//Working
+	switch(select("Leave it alone:^0000FFUse the device^000000")) {
+	case 1:
+		mes "You can feel time being distorted by the deivce.";
+		close;
+	case 2:
+		switch(instance_enter("Geffen Magic Tournament")) {
+		case 3:
+			mes "An unknown error has occurred.";
+			close;
+		case 2:
+			mes "Memerial dungeon Geffen Magic Tournament does not exist...";
+			mes "The party leader did not create a memorial dungeon instance.";
+			close;
+		case 1:
+			mes "Only party members are allowed to enter memorial dungeon.";
+			close;
+		case 0:
+			//Erase cooldown
+			erasequest 9316;
+			setquest 9315;
+			end;
+		}
+	}
+}
+
+1@gef,122,58,4	script	Receptionist::gef_magic_reception	937,{
+	
+	.npc$ = "[Tournament Receptionist]";
+	
+	if('tour_end) {
+		mes .npc$;
+		mes "Fenrir has won the Magic Tournament this time.";
+		next;
+		mes "I'm such a big fan of hers.";
+		close;
+	}
+	
+	if('warp_stadium) {
+		mes .npc$;
+		mes "The Magic Tournament is going to start soon.";
+		mes "Enter the portal to the south and you can join in.";
+		next;
+		mes .npc$;
+		mes "Good luck!";
+		close;
+	}
+	if('test_success) {
+		mes .npc$;
+		mes "Congratulations! You passed the test!";
+		mes "Give me your name so I can write it down.";
+		mes "You will automatically be registered for the tournament now.";
+		next;
+		input .@name$;
+		mes .npc$;
+		mes strcharinfo(0) + "?";
+		mes "Okay, interesting name.";
+		mes "Anyway, your registration is complete!";
+		next;
+		mes .npc$;
+		mes "Competing partners who registered will be randomly selected.";
+		next;
+		mes .npc$;
+		mes "The Magic Tournament is going to start soon.";
+		mes "Enter the portal to the south and you can join in.";
+		next;
+		mes .npc$;
+		mes "Good luck!";
+		'warp_stadium = 1;
+		enablenpc instance_npcname("gef_stadium_warp");
+		close;
+	}
+	mes .npc$;
+	mes "Thank you for visiting Geffen";
+	mes "Magic Tournament.";
+	mes "What can I do for you?";
+	next;
+	goto MenuSelect;
+	end;
+	
+MenuSelect:	
+	switch(select("About Geffen Magic Tournament:How do I Register?:Collecting Rewards:Can I get a Spectator Pass?:Cancel")) {
+	case 1:
+		mes .npc$;
+		mes "Geffen Magic Tournament is being held once every 3 years.";
+		next;
+		mes .npc$;
+		mes "The festival used to be more studious event with scholars discussing magical methods.";
+		mes "Now it's all about fun and a big party.";
+		next;
+		mes .npc$;
+		mes "Now it has become almost exclusively a fighting tournament.";
+		mes "The most famous Mages from all over the world come for the tourmnament.";
+		next;
+		mes .npc$;
+		mes "Anything else?";
+		next;
+		goto MenuSelect;
+		break;
+	case 2:
+		mes .npc$;
+		mes "There is no registration fee to enter.";
+		mes "The only requirement is to pass a simple test.";
+		next;
+		mes .npc$;
+		mes "The test is very simple. Defeat a Desert Wolf in 60 seconds or less and you're in.";
+		next;
+		mes .npc$;
+		mes "If you fail you will automatically be eliminated from the list but you can try again as many times as you wish.";
+		mes "Do you want to take the test?";
+		next;
+		switch(select("No:Yes")) {
+		case 1:
+			mes .npc$;
+			mes "Come back if you change your mind.";
+			close;
+		case 2:
+			mes .npc$;
+			mes "You can participate in the Magic Tournament after passing the test. Then, let us begin!";
+			hideonnpc instance_npcname("gef_magic_reception");
+			npctalk "The time limit is 60 seconds! Ready! Set! Go!";
+			monster instance_mapname("1@gef"),118,62,"Desert Wolf",1106,1,instance_npcname("gef_magic_reception") + "::OnDesertWolfDead";
+			setquest 9293;
+			close2;
+			break;
+		}
+		break;
+	case 3:
+		mes .npc$;
+		mes "If you get a high score, you will receive coins.";
+		next;
+		mes .npc$;
+		mes "Collect the coins and you can exchange them for equipment from the Coin Machine.";
+		next;
+		mes .npc$;
+		mes "Anything else?";
+		next;
+		goto MenuSelect;
+		break;
+	case 4:
+		mes .npc$;
+		mes "Hmm it seems that the Magic Tournament is so popular this year that ther aren't any more spectator seats available.";
+		next;
+		mes .npc$;
+		mes "I am sorry for the inconvenience.";
+		next;
+		mes .npc$;
+		mes "Anything else?";
+		next;
+		goto MenuSelect;
+		break;
+	case 5:
+		mes .npc$;
+		mes "Please enjoy the Geffen Magic Tournament.";
+		close;
+	}
+	end;
+	
+OnDesertWolfDead:
+	if(checkquest(9293,PLAYTIME) == 2) {
+		hideoffnpc instance_npcname("gef_magic_reception");
+		npctalk "You have failed! You can come back and try again.";
+		erasequest 9293;
+		end;
+	}
+	erasequest 9293;
+	'test_success = 1;
+	hideoffnpc instance_npcname("gef_magic_reception");
+	npctalk "You passed the test! Shall we finish your registration?";
+	end;
+}
+
+1@gef,120,34,0	script	gef_stadium_warp	45,2,2,{
+
+OnInstanceInit:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+
+OnTouch:	
+	warp instance_mapname("1@ge_st"),104,50;
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+1@gef,131,58,4	script	Geffen Coin Machine::gef_magic_exchange	831,{
+	
+	.npc$ = "[Tournament Receptionist]";
+	
+	mes .npc$;
+	mes "Exchange Magic Tournament coins for equipment.";
+	next;
+	goto MenuSelect;
+	end;
+
+MenuSelect:
+	switch(select("Shield:Ring:Armor:End Conversation")) {
+	case 1:
+		mes .npc$;
+		mes "Two types of shield are ready~!";
+		next;
+		goto ShieldSelect;
+		end;
+	case 2:
+		mes .npc$;
+		mes "Two types of magic rings are available for exchange.";
+		next;
+		goto RingSelect;
+		end;
+	case 3:
+		mes .npc$;
+		mes "Two types of Armor are available.";
+		next;
+		goto ArmorSelect;
+		end;
+	case 4:
+		mes .npc$;
+		mes "You can tell a lot about a person by what gear they have.";
+		mes "I will see you next time~!";
+		close;
+	}
+	end;
+
+ShieldSelect:
+	switch(select("Magic Reflector<900 coin>:Revised cersion of Encyclopedia<900 coin>:Go back to previous menu")) {
+	case 1:
+		.@gear_select = 0;
+		mes "This anti-magic shield effectively reflects magic.";
+		mes	"^888888-------------------------^000000";
+		mes	"MDEF +10";
+		mes	"^888888-------------------------^000000";
+		mes	"Adds 3% chance to reflect magical attacks.";
+		mes	"Refine Level +7: increases reflect chance by 3%.";
+		mes	"Refine Level +9: increases reflect chance by 3%.";
+		mes	"^888888-------------------------^000000";
+		mes	"Class: ^6A5ACDShield^000000";
+		mes	"Defense: ^0000FF50^000000";
+		mes	"Weight: ^0EAA0B100^000000";
+		mes	"Required Level: ^0EAA0B99^000000";
+		mes	"Jobs: ^6A5ACDAll classes^000000";
+		next;
+		goto OnExchange;
+		end;
+	case 2:
+		.@gear_select = 2;
+		mes "A revised edition of an encyclopedia that is printed by a Prontera publisher. Thick and sharp-edged, this book is popularly used as a shield.";
+		mes	"^888888-------------------------^000000";
+		mes	"MATK +5, INT +3, DEX +2, CRIT +3";
+		mes	"^888888-------------------------^000000";
+		mes	"Refine Level +7: CRIT +2";
+		mes	"Refine Level +9: MATK +5";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Encyclopedia[2]^000000]";
+		mes "Every refine of Encyclopedia[2], ASPD +1%.";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Rental Encyclopedia^000000]";
+		mes	"ASPD +15%";
+		mes	"^888888-------------------------^000000";
+		mes	"Class: ^6A5ACDShield^000000";
+		mes	"Defense: ^0000FF50^000000";
+		mes	"Weight: ^0EAA0B20^000000";
+		mes	"Required Level: ^0EAA0B99^000000";
+		mes	"Jobs: ^6A5ACDPriest, Sage and Star Gladiator^000000";
+		next;
+		goto OnExchange;
+		end;
+	case 3:
+		goto MenuSelect;
+		end;
+	}
+
+RingSelect:
+	switch(select("Physical Enhancer Ring<1350 coin>:Magic Intensifier Ring<1350 coin>:Go back to previous menu")) {
+	case 1:
+		.@gear_select = 4;
+		mes "This magic ring, developed in Geffen, enhances its wearer's physical abilities.";
+		mes "^888888-------------------------^000000";
+		mes	"ATK +5%";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Anti-Magic Suits^000000]";
+		mes	"ASPD +5%";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Geffen Magic Robe^000000]";
+		mes	"Reduce after cast delay by 5%.";
+		mes	"Reduces damage taken from Demihuman monsters by 5%.";
+		mes	"^888888-------------------------^000000";
+		mes	"Class: ^6A5ACDAccessory^000000";
+		mes	"Defense: ^0000FF0^000000";
+		mes	"Weight: ^0EAA0B10^000000";
+		mes	"Required Level: ^0EAA0B90^000000";
+		mes	"Jobs: ^6A5ACDAll classes^000000";
+		next;
+		goto OnExchange;
+		end;
+	case 2:
+		.@gear_select = 6;
+		mes "This magic ring developed in Geffen enhances its wearer's magical abilities.";
+		mes	"^888888-------------------------^000000";
+		mes	"MATK +5%";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Geffen Magic Robe^000000]";
+		mes	"Variable cast time -5%.";
+		mes	"^888888-------------------------^000000";
+		mes	"[+^008800Anti-Magic Suits^000000]";
+		mes	"After cast delay -5%.";
+		mes	"Reduces damage from Demihuman monsters by 5%.";
+		mes	"^888888-------------------------^000000";
+		mes	"Class: ^6A5ACDAccessory^000000";
+		mes	"Defense: ^0000FF0^000000";
+		mes	"Weight: ^0EAA0B10^000000";
+		mes	"Required Level: ^0EAA0B90^000000";
+		mes	"Jobs: ^6A5ACDAll classes^000000";
+		next;
+		goto OnExchange;
+		end;
+	case 3:
+		goto MenuSelect;
+		end;
+	}
+
+ArmorSelect:
+	switch(select("Anti-Magic Suit<1800 coin>:Geffen Magic Robe<1800 coin>:Go back to previous menu")) {
+	case 1:
+		.@gear_select = 8;
+		mes "This suit, developed in Geffen over a long period of time; effectively protects its wearer against potent magic.";
+		mes	"MaxHP +5%, MDEF +10.";
+		mes	"MDEF +5 when upgraded to +7. MaxHP +2% when upgraded to +9.";
+		mes	"Class: ^6A5ACDArmor^000000";
+		mes	"Defense: ^0000FF50^000000";
+		mes	"Weight: ^0EAA0B150^000000";
+		mes	"Required Level: ^0EAA0B99^000000";
+		mes	"Jobs: ^6A5ACDAll classes^000000";
+		next;
+		goto OnExchange;
+		end;
+	case 2:
+		.@gear_select = 10;
+		mes "This uniform worn by the Geffen Mages enhances its wearer's concentration while he casts spells.";
+		mes	"10% SP Cost Reduction.";
+		mes	"Increased Variable Cast Time +15%. Casting cannot be interrupted.";
+		mes	"Additional 5% SP Cost Reduction when upgraded to +7.";
+		mes	"Reduce Variable Cast Time 5% when upgraded to +9.";
+		mes	"Class: ^6A5ACDArmor^000000";
+		mes	"Defense: ^0000FF40^000000";
+		mes	"Weight: ^0EAA0B100^000000";
+		mes	"Required Level: ^0EAA0B99^000000";
+		mes	"Jobs: ^6A5ACDAll classes^000000";
+		next;
+		goto OnExchange;
+		end;
+	case 3:
+		goto MenuSelect;
+		end;	
+	}
+
+OnExchange:
+	mes .npc$;
+	mes getitemname(.exchange_gear[.@gear_select]);
+	mes "Price is " + .exchange_gear[.@gear_select+1] + " coins";
+	mes "Do you wish to exchange?";
+	next;
+	switch(Select("Do not exchange:Exchange")) {
+	case 1:
+		mes .npc$;
+		mes "Take a look at the other equipment available.";
+		next;
+		switch(.@gear_select) {
+		case 0:
+		case 2:
+			goto ShieldSelect;
+			end;
+		case 4:
+		case 6:
+			goto RingSelect;
+			end;
+		case 8:
+		case 10:
+			goto ArmorSelect;
+			end;
+		}
+		end;
+	case 2:
+		if(countitem(6671) < .exchange_gear[.@gear_select + 1]) {
+			mes .npc$;
+			mes "You need " + .exchange_gear[.@gear_select + 1] + " Geffen Magic Tournament coins.";
+			next;
+			mes .npc$;
+			mes "Participate in the Tournament to earn more coins.";
+			mes "Do you need more help?";
+			next;
+			switch(.@gear_select) {
+			case 0:
+			case 2:
+				goto ShieldSelect;
+				end;
+			case 4:
+			case 6:
+				goto RingSelect;
+				end;
+			case 8:
+			case 10:
+				goto ArmorSelect;
+				end;
+			}
+		}
+		if(!checkweight(.exchange_gear[.@gear_select],1)) {
+			mes .npc$;
+			mes "You do not have enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		delitem 6671, .exchange_gear[.@gear_select + 1];
+		getitem .exchange_gear[.@gear_select], 1;
+		mes .npc$;
+		mes "Here you go!";
+		mes "Please come back again if you want to exchange more equipment.";
+		close;
+	}
+
+OnInstanceInit:
+	setarray .exchange_gear[0],
+		2185,900, //Magic Reflector
+		2186,900, //Revised Encyclopedia
+		2963,1350, //Physical Enhancer Ring
+		2964,1350, //Magic Intensifier Ring
+		15073,1800, //Anti-Magic Suit
+		15074,1800; //Geffen Magic Robe
+	end;
+}
+
+1@ge_st,109,57,4	script	Geffen Academy Master::gef_magic_mc	10006,20,20,{
+	
+	end;
+	
+OnTouch:
+	.npc$ = "[Magic Academy Master]";
+	setarray 'effect_num$[0],"1","2","3","4","5","6","7","8","9","10";
+	if (!'round) {
+		cutin "acamaster_a",2;
+		'round = 1;
+		mes .npc$;
+		mes "Ladies and gentlemen!";
+		mes "Welcome to Geffen Magic Tournament!";
+		'accountid = getattachedrid();
+		next;
+		mes .npc$;
+		mes "Today a champion will be crowned.";
+		next;
+		mes .npc$;
+		mes "There are 2 divisions this year divided into group A and B.";
+		mes "The winner of each group will face each other for the championship match.";
+		next;
+		mes .npc$;
+		mes "I am the MC of group A.";
+		mes "Geffen Academy Master~!";
+		mes "Archmeiji Janjiar Helmode";
+		next;
+		mes .npc$;
+		mes "I'm honored to be this year's MC.";
+		mes "Now it's time for the matches to begin.";
+		next;
+		mes .npc$;
+		mes "Ahem...";
+		cutin "",255;
+		close2;
+		sleep2 500;
+		//npcskilleffect 51,0,90,48;
+		npctalk "Ladies and Gentlemen!";
+		sleep2 1500;
+		npctalk "I do my best to be as loud as I can!";
+		sleep2 1500;
+		npctalk "The Geffen Magic Tournament will now commence!";
+		enablenpc instance_npcname("gef_magic_round1");
+		donpcevent instance_npcname("gef_magic_round1") + "::OnRound1Start";
+		sleep2 3000;
+		npctalk "Start the 1st match for Group A.";
+		sleep2 1500;
+		npctalk "The one who looks weak enough to lose in the 1st game!";
+		sleep2 1500;
+		npctalk "Welcome the unknown competitor! " + strcharinfo(0) + "";
+		sleep2 2500;
+		npctalk "And the other competitor~!!!";
+		sleep2 1500;
+		npctalk "Give them a good show!";
+		sleep2 1500;
+		npctalk "Give it your best by Novice Arhi!";
+		sleep2 2500;
+		npctalk "Time limit is 3 minutes. If there is no victor in 3 minutes...";
+		sleep2 1500;
+		npctalk "I will rule who the victor is!";
+		sleep2 1500;
+		npctalk "Begin!";
+		for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+			donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+		}
+		callsub RoundCountdown, 'round - 1;
+		sleep2 1500;
+		npctalk "A match has started. This is so exciting.";
+		end;
+	}
+	end;
+	
+OnRound1Won:
+	'round = 2;
+	sleep2 1500;
+	npctalk "The first match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You may take some time to heal your wounds.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+	
+OnRound2Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "The 2nd match of Group A has begun!";
+	sleep2 1500;
+	npctalk "To the weak looking competitor...";
+	sleep2 1500;
+	npctalk "Leaves will eventually fall " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "Our next competitor is~!!!";
+	sleep2 1500;
+	npctalk "Despite his skipping classes at the Magic Academy...";
+	sleep2 1500;
+	npctalk "Big round of applause to Mage hopeful, Dio Anemos!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "This one is going to need judgment to find a winner!";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2500;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound2Won:
+	'round = 3;
+	sleep2 1000;
+	npctalk "The 2nd match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 4000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+
+OnRound3_1Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "Welcome back our competitor!";
+	sleep2 5000;
+	npctalk "And the other competitor~!";
+	sleep2 1500;
+	npctalk "With a mischieveous grin on his face!";
+	sleep2 1500;
+	npctalk "Geffen's Thief guildmaster! Geffen Shoplifter!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+
+OnRound3_2Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "The 3rd match of Group A has begun!";
+	sleep2 1500;
+	npctalk "Welcome back our competitor!";
+	sleep2 5000;
+	npctalk "And the other competitor~!";
+	sleep2 1500;
+	npctalk "With a smile that only a mother can love.";
+	sleep2 1500;
+	npctalk "The ruthless! Geffen Bully!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2500;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound3_1Won:
+OnRound3_2Won:
+OnRound3_3Won:
+	'round = 4;
+	sleep2 1500;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 6000;
+	enablenpc instance_npcname("gef_magic_guide");
+	enablenpc instance_npcname("gef_magic_healer");
+	npctalk "Fenris Fenrir has 3 consecutive victories~!";
+	end;
+	
+OnRound4Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "The surprise of this year's tournament~!";
+	sleep2 1000;
+	npctalk "The unrivaled " + strcharinfo(0) + "!";
+	sleep2 1500;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "Entering the ring with pomp and circumstance.";
+	sleep2 1500;
+	npctalk "Prontera style, Feymont!";
+	sleep2 4000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 2000;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 2000;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 1500;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound4Won:
+	'round = 5;
+	sleep2 2500;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 2500;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+	
+OnRound5Start:
+	attachrid('accountid);
+	sleep2 500;
+	npctalk "This isn't just a fluke ladies and gents!";
+	sleep2 1500;
+	npctalk "The remarkable rookie! " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "One who promises to fight with honor!";
+	sleep2 1000;
+	npctalk "The self-proclaimed master of battle. Ordre!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 2000;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2500;
+	npctalk "A match has started. This is so exciting.";
+	end;
+
+OnRound5Won:
+	'round = 6;
+	sleep2 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+	
+OnRound6Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "The incredibly powerful!";
+	sleep2 1500;
+	npctalk "Super rookie of this year's tournament~! " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "One who's cute on the outside but cruelly destroys enemies!";
+	sleep2 1500;
+	npctalk "Rabbit's ear of blood~!!! Blut Hase!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound6Won:
+	'round = 7;
+	sleep 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 4000;
+	npctalk "Okay~! There is news from Group B!";
+	sleep2 2000;
+	npctalk "While all competitors are doing their best, Fenrir";
+	sleep2 1500;
+	npctalk "took the tournament by storm by winning 5 consecutive matches!";
+	enablenpc instance_npcname("gef_magic_guide");
+	enablenpc instance_npcname("gef_magic_healer");
+	end;
+	
+OnRound7Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "Continuing the march of victory~!";
+	sleep2 1500;
+	npctalk "Welcome back! " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "Have you ever seen evil? If not, you will see it today...";
+	sleep2 1500;
+	npctalk "aka the evil tooth! Kuro Akuma!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound7Won:
+	'round = 8;
+	sleep 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+	
+OnRound8Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "The darling of this year's tournament!";
+	sleep2 1500;
+	npctalk "Rune Midgard's newest star! " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "Slow as a turtle but fast as a hare.";
+	sleep2 1500;
+	npctalk "The maniac of Rune Midgard! Ifodes!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+
+OnRound8Won:
+	'round = 9;
+	sleep 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+	
+OnRound9Start:
+	attachrid('accountid);
+	sleep2 1000;
+	if(Sex) {
+		npctalk "Who is going to stop him!!";
+	} else {
+		npctalk "Who is going to stop her!!";
+	}
+	sleep2 1500;
+	npctalk "The best player who represents Rune Midgard! " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "Attack you like a snake after approaching like a lady!!";
+	sleep2 1500;
+	npctalk "A lady of death~!!! Licheni!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound9Won:
+	'round = 10;
+	sleep 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	npctalk "It is getting exciting! More news from Group B!";
+	sleep2 2000;
+	npctalk "Fenris Fenrir is continuing her dominance~! Those in Group A better beware!";
+	enablenpc instance_npcname("gef_magic_guide");
+	enablenpc instance_npcname("gef_magic_healer");
+	end;
+	
+OnRound10Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "And back to entertain us once again!";
+	sleep2 1500;
+	npctalk "None other than " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "Seductress of Rune Midgard.";
+	sleep2 1500;
+	npctalk "The songstress of death! Odoric!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound10Won:
+	'round = 11;
+	sleep 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+	
+OnRound11Start:
+	attachrid('accountid);
+	sleep2 1000;
+	npctalk "It's almost the championship round!";
+	sleep2 1500;
+	npctalk "The winning never ends with " + strcharinfo(0) + "!";
+	sleep2 3000;
+	npctalk "And the other competitor~!!!";
+	sleep2 1500;
+	npctalk "Hidden behind a shroud of mystery...";
+	sleep2 1500;
+	npctalk "Master of power and speed! Ju!";
+	sleep2 3000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 1500;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 1500;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 2000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound11Won:
+	'round = 12;
+	sleep 1000;
+	npctalk "The " + 'round_name$['round - 2] + " match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 3000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 3000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	end;
+
+OnRound12_1Start:
+	attachrid('accountid);
+	sleep2 2500;
+	npctalk "The 12th match of Group A has begun.";
+	sleep2 3000;
+	npctalk "Can't stop now!";
+	sleep2 3000;
+	npctalk "The surprisingly powerful " + strcharinfo(0) + "!";
+	sleep2 6500;
+	npctalk "And the other competitor~!!!";
+	sleep2 3000;
+	npctalk "Chief professor at the Mage Academy.";
+	sleep2 3000;
+	npctalk "Master of battle and wits! Dwigh!";
+	sleep2 6500;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 3000;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 3000;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 4000;
+	npctalk "A match has started. This is so exciting.";
+	end;	
+	
+OnRound12_2Start:
+	attachrid('accountid);
+	sleep2 3000;
+	npctalk "The 12th match of Group A has begun!";
+	sleep2 3000;
+	npctalk "It's almost the finals!";
+	sleep2 3000;
+	npctalk "Will " + strcharinfo(0) + " be your champion?";
+	sleep2 6500;
+	npctalk "And the other competitor~!!!";
+	sleep2 3000;
+	npctalk "An Alchemeist from Aldebaran the city of silence!";
+	sleep2 3000;
+	npctalk "Fay Kanavian and her homonculus, Alphonse!";
+	sleep2 6000;
+	npctalk "Time limit is 3 minutes. If there is no winner after that...";
+	sleep2 3000;
+	npctalk "The match will be decided by 3 judges.";
+	sleep2 3000;
+	npctalk "Let's get it on!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 4000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound12_1Won:
+	'round = 13;
+	sleep 3000;
+	npctalk "Final match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 6000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 6000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 9000;
+	npctalk "Group B has completed their 12th match as well~!";
+	sleep2 3000;
+	npctalk "Have you ever heard of Tetra Vortex? The group B winner uses that mysterious magic!";
+	sleep2 3000;
+	npctalk "That is... none other than Fenris Fenrir!";
+	sleep2 3000;
+	npctalk "The championship round will not be an easy one!";
+	enablenpc instance_npcname("gef_magic_guide");
+	enablenpc instance_npcname("gef_magic_healer");
+	end;
+	
+OnRound12_2Won:
+	'round = 13;
+	sleep 3000;
+	npctalk "Final match of Group A is finished~! Each match winner will receive a reward";
+	sleep2 6000;
+	npctalk "You will be given time to heal any injuries.";
+	sleep2 6000;
+	npctalk "Please tell the Tournament Guide when you are ready for the next round.";
+	sleep2 9000;
+	npctalk "I've had news about matches of Group B~!";
+	sleep2 3000;
+	npctalk "Have you ever heard of Tetra Vortex? There is a player who uses that mysterious magic!!";
+	sleep2 3000;
+	npctalk "That is... none other than Fenris Fenrir!";
+	sleep2 3000;
+	npctalk "The final match will be very difficult!";
+	enablenpc instance_npcname("gef_magic_guide");
+	enablenpc instance_npcname("gef_magic_healer");
+	end;
+	
+OnRound13Start:
+	attachrid('accountid);
+	sleep2 3000;
+	npctalk "An anonymous fighter!";
+	sleep2 3000;
+	npctalk "Unknown but unmatched in Group A!";
+	sleep2 3000;
+	npctalk "The most talked about competitor this year!";
+	sleep2 3000;
+	npctalk "The unrivaled " + strcharinfo(0) + "!!!!!!!!!!!!!!!";
+	sleep2 9500;
+	npctalk "And the champion of Group B~!!!";
+	sleep2 3000;
+	npctalk "A warlock with incredible power!";
+	sleep2 3000;
+	npctalk "swept through Group B like a wind!!";
+	sleep2 3000;
+	npctalk "Is there any stronger Wizard in all of Rune Midgard?";
+	sleep2 3000;
+	npctalk "The Blue Wizard! Fenris Fenrir~!!";
+	sleep2 9500;
+	npctalk "Final competition has a 5 minute restriction. If no one wins in 5 minutes...";
+	sleep2 3000;
+	npctalk "The match will be decided by the judges.";
+	sleep2 3000;
+	npctalk "Start!!!!!!!!!!!!";
+	for (.@i = 0; .@i < getarraysize('effect_num$); .@i++) {
+		donpcevent instance_npcname("gef_stadium_effect_" + 'effect_num$[.@i]) + "::OnEffect";
+	}
+	callsub RoundCountdown, 'round - 1;
+	sleep2 4000;
+	npctalk "A match has started. This is so exciting.";
+	end;
+	
+OnRound13Won:
+	setarray .@win_npc_name$[0],"1","2","4","5","6","7","8","9","10","11","12_1","12_2","13";
+	attachrid('accountid);
+	'round = 14;
+	sleep2 8500;
+	npctalk "Final match of Geffen Magic Tournament is finished~!";
+	sleep2 12500;
+	npctalk "Everyone! Thanks for supporting the Geffen Magic Tournament~!!";
+	sleep2 3000;
+	enablenpc instance_npcname("gef_magic_guide");
+	warp instance_mapname("1@ge_st"),109,50;
+	for (.@i = 0; .@i < getarraysize(.@win_npc_name$); .@i++) {
+		enablenpc instance_npcname("gef_magic_win_" + .@win_npc_name$[.@i]);
+		donpcevent instance_npcname("gef_magic_win_" + .@win_npc_name$[.@i]) + "::OnTourWon";
+	}
+	end;
+	
+RoundCountdown:
+	attachrid('accountid);
+	sleep2 60000;
+	if('round == 13) {
+		if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+			npctalk "4 minutes left!";
+			sleep2 60000;
+		} else {
+			end;
+		}
+		if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+			npctalk "3 minutes left!";
+			sleep2 60000;
+		} else {
+			end;
+		}
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "2 minutes left!";
+		sleep2 30000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "1 minutes 30 seconds left!";
+		sleep2 30000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "1 minute left!";
+		sleep2 30000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "Only 30 seconds left! If no one wins then it goes down to judges decision!";
+		sleep2 30000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "Only 20 seconds left!";
+		sleep2 10000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "10 seconds!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "9 seconds!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "8 seconds!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "7 seconds!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "6 seconds!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "5 seconds!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "4 seconds!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "3!!!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "2!!!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		npctalk "1!!!";
+		sleep2 1000;
+	} else {
+		end;
+	}
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead") > 0) {
+		killmonster instance_mapname("1@ge_st"),instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)])+"::OnMyMobDead";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRoundEnd";
+		disablenpc instance_npcname("gef_magic_round" + 'npc_name$[getarg(0)]);
+	} else {
+		end;
+	}
+	end;
+	
+OnRoundEnd:
+	attachrid('accountid);
+	'tour_end = 1;
+	sleep2 3000;
+	npctalk "You have lost!";
+	warp instance_mapname("1@gef"),120,62;
+	end;
+}
+
+1@ge_st,107,57,4	script	Tournament Guide::gef_magic_guide	899,{
+	
+	.npc$ = "[Tournament Guide]";
+	if ('round == 14) {
+		.@menu_message$ = "Leave arena and receive reward:End Conversation";
+	} else {
+		.@menu_message$ = "Start " + 'round_name$['round - 1] + " match and get reward:End Conversation";
+	}
+	switch(select(.@menu_message$)) {
+	case 1:
+		mes .npc$;
+		if('round == 14) {
+			mes "You won the competition!";
+			next;
+			mes .npc$;
+			mes "By the way, the Academy Master has something to tell you!";
+			next;
+			cutin "acamaster_a",2;
+			mes "[Geffen Academy Master]";
+			mes "Congratulations!";
+			mes "This has been the best pool of competitors in the competition.";
+			next;
+			mes "[Geffen Academy Master]";
+			mes "I present to you your earned ^007F00" + getitemname(6671) + "^000000.";
+			next;
+			mes "[Geffen Academy Master]";
+			mes "Bring the coins to the ^007F00Geffen Coin Operator^000000 to exchange for special equipment.";
+			next;
+			mes "[Geffen Academy Master]";
+			mes "Your name will be remembered in the history books of Geffen.";
+			next;
+			getitem 6671,20;
+			mes "[Geffen Academy Master]";
+			mes "Congratulations again.";
+			mes "I hope you enjoy the rest of the Geffen Festivities.";
+			cutin "",255;
+			close2;
+			warp instance_mapname("1@gef"),120,62;
+			end;
+		} else if('round == 13) {
+			mes "You have passed 12 games~!";
+		} else {
+			mes "Passed " + 'round_name$['round - 2] + " match!";
+		}
+		mes "Congratulations!";
+		next;
+		mes .npc$;
+		mes "Winners of each round will receive a reward of";
+		mes "^007F00" + getitemname(6671) + "^000000";
+		next;
+		mes .npc$;
+		mes "^007F00" + getitemname(6671) + "^000000 can be exchanged in Geffen with the ^007F00Geffen Coin Operator^000000 for special equipment.";
+		next;
+		mes .npc$;
+		if('round == 13) {
+			mes "It's the final match!";
+			mes "Good luck!";
+		} else {
+			mes "The " + 'round_name$['round - 1] + " match of Group A has begun.";
+		}
+		enablenpc instance_npcname("gef_magic_round" + 'npc_name$['round - 1]);
+		close2;
+		getitem 6671, 'coin_amount['round - 2];
+		warp instance_mapname("1@ge_st"),104,50;
+		disablenpc instance_npcname("gef_magic_healer");
+		donpcevent instance_npcname("gef_magic_round" + 'npc_name$['round - 1]) + "::OnRound" + 'npc_name$['round - 1] + "Start";
+		donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Start";
+		disablenpc instance_npcname("gef_magic_guide");
+		break;
+	case 2:
+		mes .npc$;
+		mes "Talk to me again when you are ready.";
+		close;
+	}
+		
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_guide");
+	setarray 'map_name$[0],instance_mapname("1@gef"),instance_mapname("1@ge_st");
+	setarray 'round3_name$[0],"3_1","3_2","3_3";
+	setarray 'round12_name$[0],"12_1","12_2";
+	setarray 'npc_name$[0],"1","2",'round3_name$[rand(2)],"4","5","6","7","8","9","10","11",'round12_name$[rand(2)],"13"; 
+	setarray 'round_name$[0],"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th","Final";
+	setarray 'coin_amount[0],1,2,3,4,5,6,7,8,9,10,15,20;
+	end;
+}
+
+1@ge_st,109,50,4	script	Tournament Healer::gef_magic_healer	475,{
+	
+	.npc$ = "[Tournament Healer]";
+
+	switch(select("Heal me!:Cancel")) {
+	case 1:
+		percentheal 100,100;
+		mes .npc$;
+		mes "Administering medical care.";
+		next;
+		mes .npc$;
+		mes "Good luck~!";
+		close;
+	case 2:
+		mes .npc$;
+		mes "You should heal your wounds before starting the next fight.";
+		close;
+	}
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_healer");
+	end;
+}
+
+
+1@ge_st,114,50,4	script	Arhi::gef_magic_round1	670,{
+	
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round1");
+	end;
+
+OnRound1Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 2000;
+	npctalk "The first match always make me nervous~!";
+	sleep2 1500;
+	npctalk "Can I win?";
+	sleep2 1500;
+	if(Sex) {
+		npctalk "I guess it will be okay. This guy seems weak.";
+	} else {
+		npctalk "I guess it will be okay. This girl seems weak";
+	}
+	sleep2 4500;
+	npctalk "OK just relax~!";
+	sleep2 1500;
+	npctalk "Ah... Finally, it's going to start soon!";
+	sleep2 4000;
+	npctalk "Just relax~!";
+	sleep2 2500;
+	hideonnpc instance_npcname("gef_magic_round1");
+	monster instance_mapname("1@ge_st"),114,50,"Aruhi",2549,1,instance_npcname("gef_magic_round1")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round1");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound1Won";
+	sleep2 1500;
+	npctalk "Ah... I lost the first match...";
+	sleep2 1500;
+	npctalk "How can I talk to my family...";
+	sleep2 1500;
+	npctalk "So shameful...";
+	sleep2 1500;
+	npctalk "Ah.... My friends will laugh at me..";
+	sleep2 1500;
+	npctalk "Weeping...";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round1");
+	disablenpc instance_npcname("gef_magic_round1");
+	end;
+
+}
+
+1@ge_st,114,50,4	script	Dio Anemos::gef_magic_round2	669,{
+	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round2");
+	end;
+	
+OnRound2Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 2500;
+	npctalk "The 2nd match has started.";
+	sleep2 1500;
+	npctalk "You look like weak competition.";
+	sleep2 1500;
+	npctalk "I think I have a good chance...";
+	sleep2 1500;
+	npctalk "I wish the match would start as soon as possible.";
+	sleep2 1500;
+	npctalk "Finish it quickly and we can get some cookies.";
+	sleep2 1500;
+	npctalk "Okay then. Let's start.";
+	sleep2 7500;
+	hideonnpc instance_npcname("gef_magic_round2");
+	monster instance_mapname("1@ge_st"),114,50,"Dio Anemos",2550,1,instance_npcname("gef_magic_round2")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round2");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound2Won";
+	sleep2 1000;
+	npctalk "Oh my god...";
+	sleep2 1500;
+	npctalk "I lost...";
+	sleep2 1500;
+	npctalk "Ah, Ah... to this random loser.";
+	sleep2 1500;
+	npctalk "My skill has gotten worse...";
+	sleep2 1500;
+	npctalk "Ah, Ah.... sad..";
+	sleep2 1500;
+	npctalk "Ahhhh why?";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round2");
+	disablenpc instance_npcname("gef_magic_round2");
+	end;
+}
+
+1@ge_st,114,50,4	script	Geffen Shoplifter::gef_magic_round3_1	671,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round3_1"); 
+	end;
+
+OnRound3_1Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "There are so many people gathered here.";
+	sleep2 1500;
+	npctalk "I thought there would be something I can steal.";
+	sleep2 1500;
+	npctalk "But I can't steal because of all the attention it will cause.";
+	sleep2 1500;
+	npctalk "Ah.... This is not good.";
+	sleep2 1500;
+	npctalk "I guess I am fighting in this tournament...";
+	sleep2 1500;
+	npctalk "Well~! Let's win anyway!";
+	sleep2 8000;
+	hideonnpc instance_npcname("gef_magic_round3_1");
+	monster instance_mapname("1@ge_st"),114,50,"Geffen Shoplifter",2551,1,instance_npcname("gef_magic_round3_1")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+	
+OnMyMobDead:
+	hideoffnpc instance_npcname("gef_magic_round3_1");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1500;
+	npctalk "Oh my gods... I was defeated...";
+	sleep2 1500;
+	npctalk "I have been stealing too much.";
+	sleep2 1500;
+	npctalk "My battle power has been reduced.";
+	sleep2 1500;
+	npctalk "Ah... It can't be...";
+	sleep2 1500;
+	npctalk "You need to train more if you continue to steal.";
+	sleep2 1500;
+	npctalk "Ahem... Anyway, let's run away from here!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round3_1");
+	disablenpc instance_npcname("gef_magic_round3_1");
+	end;
+}
+
+1@ge_st,114,50,4	script	Geffen Bully::gef_magic_round3_2	681,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round3_2");
+	end;	
+	
+OnRound3_2Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 3000;
+	npctalk "I got you. You know my face?";
+	sleep2 1500;
+	npctalk "I will beat you down today!";
+	sleep2 1000;
+	npctalk "Give me zeny!";
+	sleep2 1500;
+	npctalk "You will be crying until you get home!";
+	sleep2 1500;
+	npctalk "Do you really want me to show you my 20 years skill of bullying?";
+	sleep2 1500;
+	npctalk "You are dead now!!";
+	sleep2 8000;
+	hideonnpc instance_npcname("gef_magic_round3_2");
+	monster instance_mapname("1@ge_st"),114,50,"Geffen Shoplifter",2552,1,instance_npcname("gef_magic_round3_2")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+	
+OnMyMobDead:
+	sleep2 2000;
+	hideoffnpc instance_npcname("gef_magic_round3_2");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1500;
+	npctalk "I can't believe that nerd beat me";
+	sleep2 1500;
+	npctalk "It can't be!!";
+	sleep2 1500;
+	npctalk "Doesn't make sense!!! I wanted to steal zeny!!";
+	sleep2 1500;
+	npctalk "If it is found out, everyone in Geffen.";
+	sleep2 1500;
+	npctalk "will laugh at me.......";
+	sleep2 1500;
+	npctalk "Ah, AhAh...!!! It can't be!!!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round3_2");
+	disablenpc instance_npcname("gef_magic_round3_2");
+	end;	
+}
+
+1@ge_st,114,50,4	script	Geffen Assassin::gef_magic_round3_3	682,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round3_3");
+	end;
+}
+
+1@ge_st,114,50,4	script	Feymont::gef_magic_round4	672,{
+	
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round4");
+	end;
+	
+OnRound4Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "This competing partner is...";
+	sleep2 1000;
+	npctalk "Seems to be lucky?";
+	sleep2 1500;
+	npctalk "I do not want to get my hands dirty.";
+	sleep2 1500;
+	npctalk "Ah... I should handle it in a sophisticated way..";
+	sleep2 1500;
+	npctalk "Ahem... This is going to start now.";
+	sleep2 9500;
+	hideonnpc instance_npcname("gef_magic_round4");
+	monster instance_mapname("1@ge_st"),114,50,"Feymont",2554,1,instance_npcname("gef_magic_round4")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round4");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 2000;
+	npctalk "I can't believe that I lost.";
+	sleep2 2000;
+	npctalk "To the one with no dignity.";
+	sleep2 1000;
+	npctalk "This is insulting.";
+	sleep2 1000;
+	npctalk "Lots of girl fans will be disappointed at me losing.";
+	sleep2 2000;
+	npctalk "Ah, Ah... How can I get outside?";
+	sleep2 1500;
+	npctalk "I should not be walking outside";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round4");
+	disablenpc instance_npcname("gef_magic_round4");
+	end;
+}
+
+1@ge_st,114,50,4	script	Ordre::gef_magic_round5	673,{
+	
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round5");
+	end;
+
+OnRound5Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 500;
+	npctalk "One! Two! One! Two!";
+	sleep2 1500;
+	npctalk "Let's climb the stairs one by one!";
+	sleep2 1500;
+	npctalk "I have been tried so hard!";
+	sleep2 1500;
+	npctalk "It won't just go away";
+	sleep2 1500;
+	npctalk "Let's do our best to the ones in front of you.";
+	sleep2 1000;
+	npctalk "Shall we start?";
+	sleep2 8000;
+	hideonnpc instance_npcname("gef_magic_round5");
+	monster instance_mapname("1@ge_st"),114,50,"Ordre",2555,1,instance_npcname("gef_magic_round5")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round5");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "Defeated.";
+	sleep2 2000;
+	npctalk "You need more practice.";
+	sleep2 1000;
+	npctalk "You have to train harder.";
+	sleep2 1000;
+	npctalk "It's twice more than I used to train.";
+	sleep2 2000;
+	npctalk "Let's start again!";
+	sleep2 1500;
+	npctalk "Let's go!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round5");
+	disablenpc instance_npcname("gef_magic_round5");
+	end;
+}
+
+1@ge_st,114,50,4	script	Blut Hase::gef_magic_round6	674,{
+
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round6");
+	end;
+	
+OnRound6Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "You came all the way up here.";
+	sleep2 1500;
+	npctalk "Probably, all competitors are also strong enough?";
+	sleep2 1500;
+	npctalk "But I did not build my reputation for nothing.";
+	sleep2 1500;
+	npctalk "Fear my rabbit headgear.";
+	sleep2 1500;
+	npctalk "You are in my way!";
+	sleep2 1500;
+	npctalk "You will be one of my sacrifices!!";
+	sleep2 6000;
+	hideonnpc instance_npcname("gef_magic_round6");
+	monster instance_mapname("1@ge_st"),114,50,"Blut Hase",2556,1,instance_npcname("gef_magic_round6")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round6");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "I will not lose!";
+	sleep2 1500;
+	npctalk "My reputation... My popularity.";
+	sleep2 1500;
+	npctalk "are going to fall down...";
+	sleep2 1500;
+	npctalk "I can't accept the result!";
+	sleep2 1500;
+	npctalk "I will regain my reputation!";
+	sleep2 1500;
+	npctalk "See you at next competition!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round6");
+	disablenpc instance_npcname("gef_magic_round6");
+	end;
+}
+
+1@ge_st,114,50,4	script	Kuro Akuma::gef_magic_round7	675,{
+	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round7");
+	end;	
+	
+OnRound7Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "Finally, the 7th game has started~!";
+	sleep2 1500;
+	npctalk "Have you seen the evil?";
+	sleep2 1500;
+	npctalk "If not? You are lucky~!";
+	sleep2 1500;
+	npctalk "It will be a good experience for today~!";
+	sleep2 1500;
+	npctalk "Nobody who stood in front of me has survived~!";
+	sleep2 1500;
+	npctalk "I will destroy you if I must~!";
+	sleep2 7000;
+	hideonnpc instance_npcname("gef_magic_round7");
+	monster instance_mapname("1@ge_st"),114,50,"Kuro Akuma",2557,1,instance_npcname("gef_magic_round7")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round7");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "Oh my gods...";
+	sleep2 1500;
+	npctalk "I am a tooth of the devil...";
+	sleep2 1500;
+	npctalk "I actually lost...";
+	sleep2 1500;
+	npctalk "Yikes ah, ah, ah Kuh yikes ah, ah ,ah!!";
+	sleep2 1500;
+	npctalk "I can't lose!!!!";
+	sleep2 1500;
+	npctalk "If we meet again, I will get my revenge!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round7");
+	disablenpc instance_npcname("gef_magic_round7");
+	end;
+}
+
+1@ge_st,114,50,4	script	Ifodes::gef_magic_round8	676,{
+	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round8");
+	end;	
+	
+OnRound8Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "At long last the 8th game has started.";
+	sleep2 1500;
+	npctalk "No one can attack me.";
+	sleep2 1500;
+	npctalk "But I can kill anyone!";
+	sleep2 1500;
+	npctalk "There will be no chance to laugh again!";
+	sleep2 1500;
+	npctalk "If a match has started, your laughter will turn to tears instead!";
+	sleep2 1500;
+	npctalk "Shall we start?";
+	sleep2 7000;
+	hideonnpc instance_npcname("gef_magic_round8");
+	monster instance_mapname("1@ge_st"),114,50,"Ifodes",2558,1,instance_npcname("gef_magic_round8")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round8");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "I will not lose the game!!";
+	sleep2 1500;
+	npctalk "This is nonsense...";
+	sleep2 1500;
+	npctalk "How could this happen?";
+	sleep2 1500;
+	npctalk "I can't understand!";
+	sleep2 1500;
+	npctalk "That weak looking fighter...";
+	sleep2 1500;
+	npctalk "Argggh!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round8");
+	disablenpc instance_npcname("gef_magic_round8");
+	end;
+}
+
+1@ge_st,114,50,4	script	Licheni::gef_magic_round9	677,{
+	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round9");
+	end;	
+	
+OnRound9Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "Ho ho ho~!!";
+	sleep2 1500;
+	npctalk "The competitor of the 9th match looks scary~!";
+	sleep2 1500;
+	npctalk "Do not scare me~!";
+	sleep2 1500;
+	npctalk "I am a lady~!";
+	sleep2 1500;
+	npctalk "But, if a match starts!";
+	sleep2 1500;
+	npctalk "Giggling... I will bite them!";
+	sleep2 7000;
+	hideonnpc instance_npcname("gef_magic_round9");
+	monster instance_mapname("1@ge_st"),114,50,"Licheni",2559,1,instance_npcname("gef_magic_round9")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;	
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round9");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "How could you do this to me?";
+	sleep2 1500;
+	npctalk "You try to beat me with cruelty... to a lady like me.";
+	sleep2 1500;
+	npctalk "I am very sad.";
+	sleep2 1500;
+	npctalk "Weeping...";
+	sleep2 1500;
+	npctalk "But when you see me next time!";
+	sleep2 1500;
+	npctalk "I will beat you with more than laughter!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round9");
+	disablenpc instance_npcname("gef_magic_round9");
+	end;
+}
+
+1@ge_st,114,50,4	script	Odoric::gef_magic_round10	678,{
+	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round10");
+	end;	
+	
+OnRound10Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "Lulu Huh~ what a fun tournament!";
+	sleep2 1500;
+	npctalk "Dance dance~ bewitching dance~";
+	sleep2 1500;
+	npctalk "Everyone is mesmerized by my magical dance!";
+	sleep2 1500;
+	npctalk "You will be the same~!";
+	sleep2 1500;
+	npctalk "Now, to feast my magical dance!";
+	sleep2 1500;
+	npctalk "Lah, Lah, Lah, Lah~~~!";
+	sleep2 7000;
+	hideonnpc instance_npcname("gef_magic_round10");
+	monster instance_mapname("1@ge_st"),114,50,"Odoric",2560,1,instance_npcname("gef_magic_round10")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;	
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round10");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "Weeping...";
+	sleep2 1500;
+	npctalk "defeated... I did my best...";
+	sleep2 1500;
+	npctalk "lost... my charming moves...";
+	sleep2 1500;
+	npctalk "did not work... Weeping...";
+	sleep2 1500;
+	npctalk "It is sad.. that I lost here...";
+	sleep2 1500;
+	npctalk "I have to go~!";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round10");
+	disablenpc instance_npcname("gef_magic_round10");
+	end;
+}
+
+1@ge_st,114,50,4	script	Ju::gef_magic_round11	679,{
+	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round11");
+	end;	
+	
+OnRound11Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 1000;
+	npctalk "A match of magic competition has started.";
+	sleep2 1500;
+	npctalk "A battle is real...";
+	sleep2 1500;
+	npctalk "magic battle!";
+	sleep2 1500;
+	npctalk "the novice who had only trained.";
+	sleep2 1500;
+	npctalk "will never know real battle...";
+	sleep2 1500;
+	npctalk "I will make sure of handling it as fast as possible.";
+	sleep2 7000;
+	hideonnpc instance_npcname("gef_magic_round11");
+	monster instance_mapname("1@ge_st"),114,50,"Ju",2561,1,instance_npcname("gef_magic_round11")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;	
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round11");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 1000;
+	npctalk "Weeping... defeated";
+	sleep2 1500;
+	npctalk "Stronger that I thought...";
+	sleep2 1500;
+	npctalk "must have got through many cruel battles...";
+	sleep2 1500;
+	npctalk "weeping... Victory was the only thing on my mind...";
+	sleep2 1500;
+	npctalk "But you beat me fairly..";
+	sleep2 1500;
+	npctalk "I wish you luck on your following matches.";
+	sleep2 1500;
+	hideonnpc instance_npcname("gef_magic_round11");
+	disablenpc instance_npcname("gef_magic_round11");
+	end;
+}
+
+1@ge_st,114,50,4	script	Dwigh::gef_magic_round12_1	680,{
+
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round12_1");
+	end;	
+
+OnRound12_1Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 6000;
+	npctalk "The final round is upon us.";
+	sleep2 3000;
+	npctalk "I see the end...";
+	sleep2 3000;
+	npctalk "I came to here for my students.";
+	sleep2 3000;
+	npctalk "I guess I have enough motivation?";
+	sleep2 3000;
+	npctalk "You must be good enough since you made it here.";
+	sleep2 3000;
+	npctalk "I can't lose in front of my students!";
+	sleep2 15500;
+	hideonnpc instance_npcname("gef_magic_round12_1");
+	monster instance_mapname("1@ge_st"),114,50,"Dwigh",2562,1,instance_npcname("gef_magic_round12_1")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;	
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round12_1");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 2500;
+	npctalk "If I just won one more game, I could go to the finals...";
+	sleep2 3000;
+	npctalk "I am ashamed for losing in front of my students..";
+	sleep2 3000;
+	npctalk "But the competition was too strong.";
+	sleep2 3000;
+	npctalk "I will admit that I am defeated.";
+	sleep2 3000;
+	npctalk "You..! Do not underestimate me because you beat me.";
+	sleep2 3000;
+	npctalk "I heard that Fenris Fenrir is the one fighting in the final competition in Group B.";
+	sleep2 3000;
+	hideonnpc instance_npcname("gef_magic_round12_1");
+	disablenpc instance_npcname("gef_magic_round12_1");
+	end;
+}
+
+1@ge_st,114,50,4	script	Fay Kanavian::gef_magic_round12_2	665,{
+	
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round12_2");
+	end;	
+	
+OnRound12_2Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	pcblockmove getcharid(3),1;
+	sleep2 6000;
+	cutin "paycana_a",2;
+	npctalk "You~I have never heard about you~!";
+	sleep2 3000;
+	npctalk "Did you hear that all spectators are supporting me?";
+	sleep2 3000;
+	npctalk "If you want to save your life~! You should run away!";
+	sleep2 3000;
+	npctalk "Do you want to try the power of Alphonse?";
+	sleep2 6000;
+	npctalk "Have you seen my homonculus Alphonse?";
+	sleep2 6000;
+	npctalk "If a match starts, you will see its full power!";
+	cutin "",255;
+	sleep2 9000;
+	hideonnpc instance_npcname("gef_magic_round12_2");
+	monster instance_mapname("1@ge_st"),114,50,"Fay Kanavian",2563,1,instance_npcname("gef_magic_round12_2")+"::OnMyMobDead";
+	monster	instance_mapname("1@ge_st"),111,49,"Alphonse",2565,1,instance_npcname("gef_magic_round12_2")+"::OnMySummonDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round12_2");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 3000;
+	npctalk "I was defeated.";
+	sleep2 3000;
+	npctalk "Alphonse... I gave my heart and soul.";
+	sleep2 3000;
+	npctalk "I could make it to the final competition.";
+	sleep2 3000;
+	npctalk "with Fenrir at finals...";
+	sleep2 3000;
+	npctalk "I wanted to fight...";
+	sleep2 2500;
+	npctalk "This is bad..!!!";
+	sleep2 3500;
+	hideonnpc instance_npcname("gef_magic_round12_2");
+	disablenpc instance_npcname("gef_magic_round12_2");
+	end;
+	
+OnMySummonDead:
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round12_2")+"::OnMyMobDead") > 0) {
+		monster	instance_mapname("1@ge_st"),107,49,"Alphonse Jr",2566,2,instance_npcname("gef_magic_round12_2")+"::OnMyLittleDead";
+	}
+	end;
+
+OnMyLittleDead:
+	'summon_kill ++;
+	if(mobcount(instance_mapname("1@ge_st"),instance_npcname("gef_magic_round12_2")+"::OnMyMobDead") == 0) {
+		'summon_kill = 0;
+		end;
+	}
+	if('summon_kill > 1) {
+		monster	instance_mapname("1@ge_st"),107,49,"Alphonse Jr",2566,2,instance_npcname("gef_magic_round12_2")+"::OnMyLittleDead";
+		'summon_kill = 0;
+	}
+	end;
+}
+
+1@ge_st,114,50,4	script	Fenrir::gef_magic_round13	664,{	
+
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_round13");
+	end;	
+	
+OnRound13Start:
+	attachrid('accountid);
+	setmapflag instance_mapname("1@ge_st"),mf_noskill;
+	removemapflag instance_mapname("1@ge_st"),mf_nomobloot;
+	pcblockmove getcharid(3),1;
+	sleep2 6000;
+	cutin "fenrir_b",2;
+	npctalk "The final match...";
+	sleep2 6000;
+	npctalk "I am Fenris Fenrir.";
+	sleep2 6000;
+	npctalk "You... made it here...";
+	sleep2 6000;
+	npctalk "I am sure that you will be strong competition.";
+	sleep2 6000;
+	npctalk "I will do my best to fight you fairly.";
+	sleep2 6000;
+	npctalk "Then, should we start the final match?";
+	sleep2 13000;
+	cutin "",255;
+	sleep2 3000;
+	hideonnpc instance_npcname("gef_magic_round13");
+	monster instance_mapname("1@ge_st"),114,50,"Fenrir",2564,1,instance_npcname("gef_magic_round13")+"::OnMyMobDead";
+	pcblockmove getcharid(3),0;
+	removemapflag instance_mapname("1@ge_st"),mf_noskill;
+	end;	
+	
+OnMyMobDead:
+	sleep2 3000;
+	hideoffnpc instance_npcname("gef_magic_round13");
+	donpcevent instance_npcname("gef_magic_mc") + "::OnRound" + 'npc_name$['round - 1] + "Won";
+	sleep2 3000;
+	npctalk "Uh... I am defeated.";
+	sleep2 3000;
+	npctalk "How did you get to be so strong?";
+	sleep2 3000;
+	npctalk "I am completely defeated...";
+	donpcevent instance_npcname("gef_magic_win_effect1") + "::OnWinEffect";
+	donpcevent instance_npcname("gef_magic_win_effect2") + "::OnWinEffect";
+	donpcevent instance_npcname("gef_magic_win_effect3") + "::OnWinEffect";
+	donpcevent instance_npcname("gef_magic_win_effect4") + "::OnWinEffect";
+	sleep2 3000;
+	npctalk "The world is full of surprises...";
+	sleep2 3000;
+	npctalk "Congratulations to all the participants of this year's matches.";
+	sleep2 3000;
+	npctalk "I won't lose if we ever get to fight again!";
+	sleep2 6000;
+	hideonnpc instance_npcname("gef_magic_round13");
+	disablenpc instance_npcname("gef_magic_round13");
+	end;
+}
+
+//Winning NPCs
+1@ge_st,104,53,6	script	Arhi::gef_magic_win_1	670,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_1");
+	end;
+	
+OnTourWon:
+	sleep 3000;
+	npctalk "Tsk. I will come back when I get stronger.";
+	end;
+}
+
+1@ge_st,100,49,6	script	Dio Anemos::gef_magic_win_2	669,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_2");
+	end;
+
+OnTourWon:
+	end;
+}
+
+1@ge_st,102,46,8	script	Feymont::gef_magic_win_4	672,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_4");
+	end;
+
+OnTourWon:
+	end;	
+}
+
+1@ge_st,104,44,8	script	Ordre::gef_magic_win_5	673,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_5");
+	end;
+	
+OnTourWon:
+	sleep 3000;
+	npctalk "Simply amazing.";
+	end;
+}
+
+1@ge_st,112,45,1	script	Blut Hase::gef_magic_win_6	674,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_6");
+	end;
+
+OnTourWon:
+	sleep 3000;
+	npctalk "You must be famous right?";
+	end;
+}
+
+1@ge_st,116,46,1	script	Kuro Akuma::gef_magic_win_7	675,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_7");
+	end;
+
+OnTourWon:
+	end;
+}
+
+1@ge_st,115,53,4	script	Ifodes::gef_magic_win_8	676,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_8");
+	end;
+	
+OnTourWon:
+	sleep 2500;
+	npctalk "Your talent suits your chivalry.";
+	end;
+}
+
+1@ge_st,116,49,4	script	Licheni::gef_magic_win_9	677,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_9");
+	end;
+
+OnTourWon:
+	end;
+}
+
+1@ge_st,112,53,4	script	Odoric::gef_magic_win_10	678,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_10");
+	end;
+
+OnTourWon:
+	end;
+}
+
+1@ge_st,109,54,4	script	Ju::gef_magic_win_11	679,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_11");
+	end;
+
+OnTourWon:
+	sleep 3500;
+	npctalk "You... are... strong... I... won't... forget... you...";
+	end;
+}
+
+1@ge_st,106,50,6	script	Dwigh::gef_magic_win_12_1	680,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_12_1");
+	end;
+	
+OnTourWon:
+	end;
+}
+
+1@ge_st,107,48,8	script	Fay Kanavian::gef_magic_win_12_2	665,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_12_2");
+	end;
+	
+OnTourWon:
+	npctalk "I din't think that Fenrir would lose.";
+	end;
+}
+
+1@ge_st,112,50,4	script	Fenrir::gef_magic_win_13	664,{
+	end;
+	
+OnInstanceInit:
+	disablenpc instance_npcname("gef_magic_win_13");
+	end;
+	
+OnTourWon:
+	npctalk "All my colleagues are so excited about your victory. They are eagar to meet you.";
+	end;
+}
+
+//Round Start Effects
+
+-	script	gef_magic_effect_top1	-1,{
+
+	end;
+
+OnEffect:
+	specialeffect 89; //Storm gust
+	sleep 3000;
+	specialeffect 30; //Thunder storm
+	sleep 3000;
+	specialeffect 92; //Meteor storm
+	end;
+}
+
+1@ge_st,92,59,4	duplicate(gef_magic_effect_top1)	gef_stadium_effect_1	139
+1@ge_st,109,59,4	duplicate(gef_magic_effect_top1)	gef_stadium_effect_2	139
+1@ge_st,125,59,4	duplicate(gef_magic_effect_top1)	gef_stadium_effect_3	139
+
+-	script	gef_magic_effect_top2	-1,{
+
+	end;
+
+OnEffect:
+	sleep 3000;
+	specialeffect 89; //Storm gust
+	sleep 3000;
+	specialeffect 30; //Thunder storm
+	sleep 3000;
+	specialeffect 92; //Meteor storm
+	end;
+}
+
+1@ge_st,100,59,4	duplicate(gef_magic_effect_top2)	gef_stadium_effect_4	139
+1@ge_st,118,59,4	duplicate(gef_magic_effect_top2)	gef_stadium_effect_5	139
+
+-	script	gef_magic_effect_bot1	-1,{
+
+	end;
+
+OnEffect:
+	sleep 1500;
+	specialeffect 89; //Storm gust
+	sleep 3000;
+	specialeffect 30; //Thunder storm
+	sleep 3000;
+	specialeffect 92; //Meteor storm
+	end;
+}
+
+1@ge_st,100,38,4	duplicate(gef_magic_effect_bot1)	gef_stadium_effect_6	139
+1@ge_st,118,38,4	duplicate(gef_magic_effect_bot1)	gef_stadium_effect_7	139
+
+-	script	gef_magic_effect_bot2	-1,{
+
+	end;
+
+OnEffect:
+	sleep 4500;
+	specialeffect 89; //Storm gust
+	sleep 3000;
+	specialeffect 30; //Thunder storm
+	sleep 3000;
+	specialeffect 92; //Meteor storm
+	end;
+}
+
+1@ge_st,92,38,4	duplicate(gef_magic_effect_bot2)	gef_stadium_effect_8	139
+1@ge_st,109,38,4	duplicate(gef_magic_effect_bot2)	gef_stadium_effect_9	139
+1@ge_st,125,38,4	duplicate(gef_magic_effect_bot2)	gef_stadium_effect_10	139
+
+//Win Effect
+
+-	script	gef_magic_win_effect	-1,{
+	
+	end;
+	
+OnWinEffect:
+	specialeffect 90; //LoV
+	sleep 6000;
+	specialeffect 62; //Sight Rusher
+	specialeffect 89; //Storm Gust
+	sleep 6000;
+	//specialeffect ; //Light and sound
+	specialeffect 225; //Volcano Casting
+	end;
+}
+
+1@ge_st,115,53,4	duplicate(gef_magic_win_effect)	gef_magic_win_effect1	139
+1@ge_st,116,46,4	duplicate(gef_magic_win_effect)	gef_magic_win_effect2	139
+1@ge_st,104,45,4	duplicate(gef_magic_win_effect)	gef_magic_win_effect3	139
+1@ge_st,104,53,4	duplicate(gef_magic_win_effect)	gef_magic_win_effect4	139
+
+//In-arena spectators
+
+//North West Row 1 (Bottom)---------------------------------------
+1@ge_st,89,51,6	script	Tournament Spectator::gef_stadium_spec_NW_1_1	982,{
+	end;
+}
+
+1@ge_st,89,52,6	script	Tournament Spectator::gef_stadium_spec_NW_1_2	919,{
+	end;
+}
+
+1@ge_st,89,53,6	script	Tournament Spectator::gef_stadium_spec_NW_1_3	413,{
+	end;
+}
+
+1@ge_st,89,54,6	script	Tournament Spectator::gef_stadium_spec_NW_1_4	943,{
+	end;
+}
+
+1@ge_st,89,55,6	script	Tournament Spectator::gef_stadium_spec_NW_1_5	538,{
+	end;
+}
+
+1@ge_st,89,56,6	script	Tournament Spectator::gef_stadium_spec_NW_1_6	536,{
+	end;
+}
+
+1@ge_st,89,57,6	script	Tournament Spectator::gef_stadium_spec_NW_1_7	482,{
+	end;
+}
+
+1@ge_st,89,58,6	script	Tournament Spectator::gef_stadium_spec_NW_1_8	95,{
+	end;
+}
+
+1@ge_st,89,59,6	script	Tournament Spectator::gef_stadium_spec_NW_1_9	911,{
+	end;
+}
+
+//North Row 1 (Bottom)----------------------------------
+1@ge_st,93,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_1	46,{
+	end;
+}
+
+1@ge_st,94,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_2	67,{
+	end;
+}
+
+1@ge_st,95,62,6	script	Tournament Spectator::gef_stadium_spec_N_1_3	870,{
+	end;
+}
+
+1@ge_st,96,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_4	47,{
+	end;
+}
+
+1@ge_st,97,62,6	script	Prontera Spectator::gef_stadium_spec_N_1_5	985,{
+	end;
+}
+
+1@ge_st,98,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_6	48,{
+	end;
+}
+
+1@ge_st,99,62,6	script	Tournament Spectator::gef_stadium_spec_N_1_7	727,{
+	end;
+}
+
+1@ge_st,100,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_8	49,{
+	end;
+}
+
+1@ge_st,101,62,4	script	Payon Spectators::gef_stadium_spec_N_1_9	828,{
+	end;
+}
+
+1@ge_st,102,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_10	66,{
+	end;
+}
+
+1@ge_st,103,62,6	script	Magic Academy Spectators::gef_stadium_spec_N_1_11	84,{
+	end;
+}
+
+1@ge_st,104,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_12	68,{
+	end;
+}
+
+1@ge_st,105,62,6	script	Alberta Spectators::gef_stadium_spec_N_1_13	89,{
+	end;
+}
+
+1@ge_st,106,62,6	script	Loki::gef_stadium_spec_N_1_14	512,{
+	end;
+}
+
+1@ge_st,107,62,6	script	Veins Spectators::gef_stadium_spec_N_1_15	558,{
+	end;
+}
+
+1@ge_st,108,62,6	script	Chaos::gef_stadium_spec_N_1_16	683,{
+	end;
+}
+
+1@ge_st,109,62,6	script	Magic Academy Student::gef_stadium_spec_N_1_17	921,{
+	end;
+}
+
+1@ge_st,110,62,4	script	Iris::gef_stadium_spec_N_1_18	666,{
+	end;
+}
+
+1@ge_st,111,62,4	script	Comodo Spectators::gef_stadium_spec_N_1_19	850,{
+	end;
+}
+
+1@ge_st,112,62,4	script	Lydia::gef_stadium_spec_N_1_20	10010,{
+	end;
+}
+
+1@ge_st,113,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_21	868,{
+	end;
+}
+
+1@ge_st,114,62,4	script	Magic Academy Student::gef_stadium_spec_N_1_22	86,{
+	end;
+}
+
+1@ge_st,115,62,4	script	Prontera Spectators::gef_stadium_spec_N_1_23	945,{
+	end;
+}
+
+1@ge_st,116,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_24	69,{
+	end;
+}
+
+1@ge_st,117,62,4	script	Payon Spectators::gef_stadium_spec_N_1_25	803,{
+	end;
+}
+
+1@ge_st,118,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_26	70,{
+	end;
+}
+
+1@ge_st,119,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_27	728,{
+	end;
+}
+
+1@ge_st,120,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_28	51,{
+	end;
+}
+
+1@ge_st,121,62,4	script	Alberta Spectators::gef_stadium_spec_N_1_29	712,{
+	end;
+}
+
+1@ge_st,122,62,4	script	Magic Academy Student::gef_stadium_spec_N_1_30	72,{
+	end;
+}
+
+1@ge_st,123,62,4	script	Magic Academy Student::gef_stadium_spec_N_1_31	805,{
+	end;
+}
+
+1@ge_st,124,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_34	71,{
+	end;
+}
+
+1@ge_st,125,62,4	script	Tournament Spectator::gef_stadium_spec_N_1_33	52,{
+	end;
+}
+
+
+//North Row 2 (Top)---------------------------------------
+1@ge_st,87,59,6	script	Tournament Spectator::gef_stadium_spec_N_2_1	484,{
+	end;
+}
+
+1@ge_st,87,60,6	script	Tournament Spectator::gef_stadium_spec_N_2_2	534,{
+	end;
+}
+
+1@ge_st,88,61,6	script	Tournament Spectator::gef_stadium_spec_N_2_3	540,{
+	end;
+}
+
+1@ge_st,89,62,6	script	Tournament Spectator::gef_stadium_spec_N_2_4	923,{
+	end;
+}
+
+1@ge_st,90,63,6	script	Tournament Spectator::gef_stadium_spec_N_2_5	124,{
+	end;
+}
+
+1@ge_st,91,63,6	script	Tournament Spectator::gef_stadium_spec_N_2_6	838,{
+	end;
+}
+
+1@ge_st,92,64,6	script	Tournament Spectator::gef_stadium_spec_N_2_7	771,{
+	end;
+}
+
+1@ge_st,93,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_8	73,{
+	end;
+}
+
+1@ge_st,94,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_9	74,{
+	end;
+}
+
+1@ge_st,95,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_10	54,{
+	end;
+}
+
+1@ge_st,96,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_11	55,{
+	end;
+}
+
+1@ge_st,97,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_12	56,{
+	end;
+}
+
+1@ge_st,98,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_13	57,{
+	end;
+}
+
+1@ge_st,99,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_14	75,{
+	end;
+}
+
+1@ge_st,100,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_15	76,{
+	end;
+}
+
+1@ge_st,101,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_16	77,{
+	end;
+}
+
+1@ge_st,102,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_17	78,{
+	end;
+}
+
+1@ge_st,103,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_18	58,{
+	end;
+}
+
+1@ge_st,104,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_19	106,{
+	end;
+}
+
+1@ge_st,105,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_20	59,{
+	end;
+}
+
+1@ge_st,106,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_21	60,{
+	end;
+}
+
+1@ge_st,107,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_22	79,{
+	end;
+}
+
+1@ge_st,108,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_23	80,{
+	end;
+}
+
+1@ge_st,109,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_24	947,{
+	end;
+}
+
+1@ge_st,110,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_25	53,{
+	end;
+}
+
+1@ge_st,111,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_26	62,{
+	end;
+}
+
+1@ge_st,112,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_27	107,{
+	end;
+}
+
+1@ge_st,113,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_28	108,{
+	end;
+}
+
+1@ge_st,114,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_29	61,{
+	end;
+}
+
+1@ge_st,115,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_30	804,{
+	end;
+}
+
+1@ge_st,116,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_31	123,{
+	end;
+}
+
+1@ge_st,117,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_32	90,{
+	end;
+}
+
+1@ge_st,118,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_33	91,{
+	end;
+}
+
+1@ge_st,119,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_34	92,{
+	end;
+}
+
+1@ge_st,120,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_35	93,{
+	end;
+}
+
+1@ge_st,121,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_36	920,{
+	end;
+}
+
+1@ge_st,122,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_37	806,{
+	end;
+}
+
+1@ge_st,123,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_38	807,{
+	end;
+}
+
+1@ge_st,124,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_39	808,{
+	end;
+}
+
+1@ge_st,125,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_40	711,{
+	end;
+}
+
+1@ge_st,126,64,4	script	Tournament Spectator::gef_stadium_spec_N_2_41	714,{
+	end;
+}
+
+1@ge_st,127,63,4	script	Tournament Spectator::gef_stadium_spec_N_2_42	724,{
+	end;
+}
+
+1@ge_st,128,63,4	script	Tournament Spectator::gef_stadium_spec_N_2_43	885,{
+	end;
+}
+
+1@ge_st,129,62,4	script	Tournament Spectator::gef_stadium_spec_N_2_44	809,{
+	end;
+}
+
+1@ge_st,130,61,4	script	Tournament Spectator::gef_stadium_spec_N_2_45	810,{
+	end;
+}
+
+1@ge_st,130,60,4	script	Tournament Spectator::gef_stadium_spec_N_2_46	63,{
+	end;
+}
+
+//North East Row 1 (Bottom)---------------------------------------
+
+1@ge_st,128,60,4	script	Tournament Spectator::gef_stadium_spec_NE_1_1	744,{
+	end;
+}
+
+1@ge_st,128,58,4	script	Tournament Spectator::gef_stadium_spec_NE_1_3	408,{
+	end;
+}
+
+1@ge_st,128,57,4	script	Tournament Spectator::gef_stadium_spec_NE_1_4	473,{
+	end;
+}
+
+1@ge_st,128,56,4	script	Tournament Spectator::gef_stadium_spec_NE_1_5	64,{
+	end;
+}
+
+1@ge_st,128,55,4	script	Tournament Spectator::gef_stadium_spec_NE_1_6	420,{
+	end;
+}
+
+1@ge_st,128,54,4	script	Tournament Spectator::gef_stadium_spec_NE_1_7	740,{
+	end;
+}
+
+1@ge_st,128,53,4	script	Tournament Spectator::gef_stadium_spec_NE_1_8	473,{
+	end;
+}
+
+1@ge_st,128,52,4	script	Tournament Spectator::gef_stadium_spec_NE_1_9	474,{
+	end;
+}
+
+1@ge_st,128,51,4	script	Tournament Spectator::gef_stadium_spec_NE_1_10	478,{
+	end;
+}
+
+
+//South East Row 1 (Bottom)---------------------------------------
+1@ge_st,128,45,2	script	Tournament Spectator::gef_stadium_spec_SE_1_1	741,{
+	end;
+}
+
+1@ge_st,128,44,2	script	Tournament Spectator::gef_stadium_spec_SE_1_2	122,{
+	end;
+}
+
+1@ge_st,128,43,2	script	Tournament Spectator::gef_stadium_spec_SE_1_3	121,{
+	end;
+}
+
+1@ge_st,128,42,2	script	Tournament Spectator::gef_stadium_spec_SE_1_4	879,{
+	end;
+}
+
+1@ge_st,128,41,2	script	Tournament Spectator::gef_stadium_spec_SE_1_5	979,{
+	end;
+}
+
+1@ge_st,128,40,2	script	Tournament Spectator::gef_stadium_spec_SE_1_6	914,{
+	end;
+}
+
+1@ge_st,128,39,2	script	Tournament Spectator::gef_stadium_spec_SE_1_7	813,{
+	end;
+}
+
+1@ge_st,128,38,2	script	Tournament Spectator::gef_stadium_spec_SE_1_8	120,{
+	end;
+}
+
+1@ge_st,128,37,2	script	Tournament Spectator::gef_stadium_spec_SE_1_9	742,{
+	end;
+}
+
+//South East Row 2 (Bottom)---------------------------------------
+1@ge_st,129,45,2	script	Tournament Spectator::gef_stadium_spec_SE_2_1	961,{
+	end;
+}
+
+1@ge_st,129,44,2	script	Tournament Spectator::gef_stadium_spec_SE_2_2	960,{
+	end;
+}
+
+1@ge_st,129,43,2	script	Tournament Spectator::gef_stadium_spec_SE_2_3	752,{
+	end;
+}
+
+1@ge_st,129,42,2	script	Tournament Spectator::gef_stadium_spec_SE_2_4	414,{
+	end;
+}
+
+1@ge_st,129,41,2	script	Tournament Spectator::gef_stadium_spec_SE_2_5	415,{
+	end;
+}
+
+1@ge_st,129,40,2	script	Tournament Spectator::gef_stadium_spec_SE_2_6	416,{
+	end;
+}
+
+1@ge_st,129,39,2	script	Tournament Spectator::gef_stadium_spec_SE_2_7	959,{
+	end;
+}
+
+1@ge_st,129,38,2	script	Tournament Spectator::gef_stadium_spec_SE_2_8	958,{
+	end;
+}
+
+//South Row 1 (Bottom)---------------------------------------
+1@ge_st,124,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_1	747,{
+	end;
+}
+
+1@ge_st,123,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_2	918,{
+	end;
+}
+
+1@ge_st,122,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_3	751,{
+	end;
+}
+
+1@ge_st,121,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_4	825,{
+	end;
+}
+
+1@ge_st,120,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_5	824,{
+	end;
+}
+
+1@ge_st,119,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_6	823,{
+	end;
+}
+
+1@ge_st,118,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_7	729,{
+	end;
+}
+
+1@ge_st,117,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_8	793,{
+	end;
+}
+
+1@ge_st,116,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_9	746,{
+	end;
+}
+
+1@ge_st,115,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_10	917,{
+	end;
+}
+
+1@ge_st,114,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_11	822,{
+	end;
+}
+
+1@ge_st,113,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_12	821,{
+	end;
+}
+
+1@ge_st,112,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_13	820,{
+	end;
+}
+
+1@ge_st,111,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_14	819,{
+	end;
+}
+
+1@ge_st,110,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_15	915,{
+	end;
+}
+
+1@ge_st,109,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_16	863,{
+	end;
+}
+
+1@ge_st,108,34,2	script	Tournament Spectator::gef_stadium_spec_S_1_17	862,{
+	end;
+}
+
+1@ge_st,107,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_18	717,{
+	end;
+}
+
+1@ge_st,106,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_19	703,{
+	end;
+}
+
+1@ge_st,105,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_20	839,{
+	end;
+}
+
+1@ge_st,104,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_21	996,{
+	end;
+}
+
+1@ge_st,103,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_22	995,{
+	end;
+}
+
+1@ge_st,102,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_23	834,{
+	end;
+}
+
+1@ge_st,101,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_24	476,{
+	end;
+}
+
+1@ge_st,100,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_25	772,{
+	end;
+}
+
+1@ge_st,99,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_26	906,{
+	end;
+}
+
+1@ge_st,98,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_27	895,{
+	end;
+}
+
+1@ge_st,97,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_28	894,{
+	end;
+}
+
+1@ge_st,96,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_29	475,{
+	end;
+}
+
+1@ge_st,95,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_30	704,{
+	end;
+}
+
+1@ge_st,94,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_31	486,{
+	end;
+}
+
+1@ge_st,93,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_32	87,{
+	end;
+}
+
+1@ge_st,92,34,8	script	Tournament Spectator::gef_stadium_spec_S_1_33	407,{
+	end;
+}
+
+//South Row 2 (Top)---------------------------------------
+1@ge_st,130,37,2	script	Tournament Spectator::gef_stadium_spec_S_2_1	814,{
+	end;
+}
+
+1@ge_st,130,36,2	script	Tournament Spectator::gef_stadium_spec_S_2_2	815,{
+	end;
+}
+
+1@ge_st,130,35,2	script	Tournament Spectator::gef_stadium_spec_S_2_3	743,{
+	end;
+}
+
+1@ge_st,129,34,2	script	Tournament Spectator::gef_stadium_spec_S_2_4	119,{
+	end;
+}
+
+1@ge_st,128,33,2	script	Tournament Spectator::gef_stadium_spec_S_2_5	816,{
+	end;
+}
+
+1@ge_st,127,33,2	script	Tournament Spectator::gef_stadium_spec_S_2_6	817,{
+	end;
+}
+
+1@ge_st,126,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_7	118,{
+	end;
+}
+
+1@ge_st,125,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_8	886,{
+	end;
+}
+
+1@ge_st,124,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_9	818,{
+	end;
+}
+
+1@ge_st,123,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_10	745,{
+	end;
+}
+
+1@ge_st,122,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_11	939,{
+	end;
+}
+
+1@ge_st,121,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_12	82,{
+	end;
+}
+
+1@ge_st,120,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_13	940,{
+	end;
+}
+
+1@ge_st,119,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_14	941,{
+	end;
+}
+
+1@ge_st,118,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_15	865,{
+	end;
+}
+
+1@ge_st,117,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_16	83,{
+	end;
+}
+
+1@ge_st,116,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_17	942,{
+	end;
+}
+
+1@ge_st,115,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_18	951,{
+	end;
+}
+
+1@ge_st,114,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_19	952,{
+	end;
+}
+
+1@ge_st,113,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_20	983,{
+	end;
+}
+
+1@ge_st,112,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_21	944,{
+	end;
+}
+
+1@ge_st,111,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_22	846,{
+	end;
+}
+
+1@ge_st,110,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_23	877,{
+	end;
+}
+
+1@ge_st,109,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_24	985,{
+	end;
+}
+
+1@ge_st,108,32,2	script	Tournament Spectator::gef_stadium_spec_S_2_25	85,{
+	end;
+}
+
+1@ge_st,107,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_26	701,{
+	end;
+}
+
+1@ge_st,106,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_27	702,{
+	end;
+}
+
+1@ge_st,105,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_28	987,{
+	end;
+}
+
+1@ge_st,104,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_29	946,{
+	end;
+}
+
+1@ge_st,103,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_30	989,{
+	end;
+}
+
+1@ge_st,102,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_31	880,{
+	end;
+}
+
+1@ge_st,101,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_32	466,{
+	end;
+}
+
+1@ge_st,100,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_33	891,{
+	end;
+}
+
+1@ge_st,99,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_34	892,{
+	end;
+}
+
+1@ge_st,98,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_35	893,{
+	end;
+}
+
+1@ge_st,97,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_36	991,{
+	end;
+}
+
+1@ge_st,96,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_37	713,{
+	end;
+}
+
+1@ge_st,95,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_38	993,{
+	end;
+}
+
+1@ge_st,94,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_39	884,{
+	end;
+}
+
+1@ge_st,93,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_40	748,{
+	end;
+}
+
+1@ge_st,92,32,8	script	Tournament Spectator::gef_stadium_spec_S_2_41	725,{
+	end;
+}
+
+1@ge_st,91,33,8	script	Tournament Spectator::gef_stadium_spec_S_2_42	726,{
+	end;
+}
+
+1@ge_st,90,33,8	script	Tournament Spectator::gef_stadium_spec_S_2_43	430,{
+	end;
+}
+
+1@ge_st,89,34,8	script	Tournament Spectator::gef_stadium_spec_S_2_44	855,{
+	end;
+}
+
+1@ge_st,88,35,8	script	Tournament Spectator::gef_stadium_spec_S_2_45	749,{
+	end;
+}
+
+1@ge_st,88,36,8	script	Tournament Spectator::gef_stadium_spec_S_2_46	750,{
+	end;
+}
+
+1@ge_st,87,37,8	script	Tournament Spectator::gef_stadium_spec_S_2_47	883,{
+	end;
+}
+
+//South West Row 1 (Bottom)---------------------------------------
+1@ge_st,89,38,8	script	Tournament Spectator::gef_stadium_spec_SW_1_1	542,{
+	end;
+}
+
+1@ge_st,89,39,8	script	Tournament Spectator::gef_stadium_spec_SW_1_2	937,{
+	end;
+}
+
+1@ge_st,89,40,8	script	Tournament Spectator::gef_stadium_spec_SW_1_3	757,{
+	end;
+}
+
+1@ge_st,89,41,8	script	Tournament Spectator::gef_stadium_spec_SW_1_4	758,{
+	end;
+}
+
+1@ge_st,89,42,8	script	Tournament Spectator::gef_stadium_spec_SW_1_5	759,{
+	end;
+}
+
+1@ge_st,89,43,8	script	Tournament Spectator::gef_stadium_spec_SW_1_6	892,{
+	end;
+}
+
+1@ge_st,89,44,8	script	Tournament Spectator::gef_stadium_spec_SW_1_7	760,{
+	end;
+}
+
+1@ge_st,89,45,8	script	Tournament Spectator::gef_stadium_spec_SW_1_8	761,{
+	end;
+}
+
+//Broadcastor----------------------------------------------------
+1@gef,1,1,1	script	gef_magic_broadcast	-1,{
+
+OnInstanceInit:
+	sleep 2000;
+	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - The Geffen Magic Tournament about to begin!",bc_blue;
+	sleep 2000;
+	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - Citizens and Adventurers in Geffen, Please join the Tournament~!",bc_blue;
+	sleep 2000;
+	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - Anyone who wants to join the Geffen Magic Tournament, please come to the southern fountain of Geffen~!",bc_blue;
+	sleep 2000;
+	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - Anyone who wants to join the Geffen Magic Tournament, please come to the southern fountain in direction of 6 o'clock in Geffen~!",bc_blue;
+	end;
+}
+
+//In-Town spectators---------------------------------------------
+//Outer Ring NE part
+1@gef,130,196,4	script	Tournament Spectator::gef_town_spec_NE_1	46,{
+	end;
+}
+
+1@gef,136,188,6	script	Tournament Spectator::gef_town_spec_NE_2	771,{
+	end;
+}
+
+1@gef,137,190,4	script	Tournament Spectator::gef_town_spec_NE_3	67,{
+	end;
+}
+
+1@gef,149,196,4	script	Tournament Spectator::gef_town_spec_NE_4	47,{
+	end;
+}
+
+1@gef,189,120,4	script	Tournament Spectator::gef_town_spec_NE_5	61,{
+	end;
+}
+
+//Outer Ring SE part
+1@gef,194,110,4	script	Tournament Spectator::gef_town_spec_SE_1	107,{
+	end;
+}
+
+1@gef,185,107,4	script	Tournament Spectator::gef_town_spec_SE_2	108,{
+	end;
+}
+
+1@gef,189,97,4	script	Tournament Spectator::gef_town_spec_SE_3	108,{
+	end;
+}
+
+1@gef,180,84,4	script	Tournament Spectator::gef_town_spec_SE_4	53,{
+	end;
+}
+
+1@gef,175,74,4	script	Tournament Spectator::gef_town_spec_SE_5	947,{
+	end;
+}
+
+1@gef,167,68,4	script	Tournament Spectator::gef_town_spec_SE_6	80,{
+	end;
+}
+
+1@gef,163,76,4	script	Tournament Spectator::gef_town_spec_SE_7	79,{
+	end;
+}
+
+1@gef,154,55,4	script	Tournament Spectator::gef_town_spec_SE_8	59,{
+	end;
+}
+
+1@gef,147,65,4	script	Tournament Spectator::gef_town_spec_SE_9	60,{
+	end;
+}
+
+1@gef,145,47,4	script	Tournament Spectator::gef_town_spec_SE_10	106,{
+	end;
+}
+
+1@gef,134,63,4	script	Tournament Spectator::gef_town_spec_SE_11	58,{
+	end;
+}
+
+1@gef,130,49,4	script	Tournament Spectator::gef_town_spec_SE_12	808,{
+	end;
+}
+
+1@gef,124,72,4	script	Tournament Spectator::gef_town_spec_SE_13	807,{
+	end;
+}
+
+//Outer Ring SW part
+1@gef,106,56,4	script	Tournament Spectator::gef_town_spec_SW_1	78,{
+	end;
+}
+
+1@gef,97,66,4	script	Tournament Spectator::gef_town_spec_SW_2	77,{
+	end;
+}
+
+1@gef,94,68,4	script	Tournament Spectator::gef_town_spec_SW_3	76,{
+	end;
+}
+
+1@gef,83,60,4	script	Tournament Spectator::gef_town_spec_SW_4	75,{
+	end;
+}
+
+1@gef,72,65,4	script	Tournament Spectator::gef_town_spec_SW_5	57,{
+	end;
+}
+
+1@gef,52,83,4	script	Tournament Spectator::gef_town_spec_SW_6	56,{
+	end;
+}
+
+1@gef,44,95,4	script	Tournament Spectator::gef_town_spec_SW_7	55,{
+	end;
+}
+
+1@gef,42,102,4	script	Tournament Spectator::gef_town_spec_SW_8	50,{
+	end;
+}
+
+1@gef,50,107,4	script	Tournament Spectator::gef_town_spec_SW_9	54,{
+	end;
+}
+
+1@gef,55,113,4	script	Tournament Spectator::gef_town_spec_SW_10	74,{
+	end;
+}
+
+1@gef,44,118,4	script	Tournament Spectator::gef_town_spec_SW_11	73,{
+	end;
+}
+
+//Outer Ring NW part
+1@gef,45,126,4	script	Tournament Spectator::gef_town_spec_NW_1	48,{
+	end;
+}
+
+1@gef,44,133,4	script	Tournament Spectator::gef_town_spec_NW_2	52,{
+	end;
+}
+
+1@gef,55,142,4	script	Tournament Spectator::gef_town_spec_NW_3	70,{
+	end;
+}
+
+1@gef,58,146,4	script	Tournament Spectator::gef_town_spec_NW_4	51,{
+	end;
+}
+
+1@gef,45,149,4	script	Tournament Spectator::gef_town_spec_NW_5	71,{
+	end;
+}
+
+//In-Town competitors
+
+//Mini Quests
+	//Thief
+	//Bully
+	//Assassin
+	
+//In-Town effects

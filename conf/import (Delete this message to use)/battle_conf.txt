@@ -60,10 +60,13 @@ max_hair_style: 90
 min_hair_color: 0
 max_hair_color: 10
 min_cloth_color: 0 
-max_cloth_color: 4
+max_cloth_color: 3
 
 // Show rAthena version to users when the login?
 display_version: no
+
+// Visible area size (how many squares away from a player they can see)
+area_size: 15
 
 //-----------------party.conf changes
 

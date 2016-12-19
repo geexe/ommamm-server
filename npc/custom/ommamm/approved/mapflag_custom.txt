@@ -1,3 +1,18 @@
 //Biolab 4 EXP increase
 lhz_dun04	mapflag	bexp	250
 lhz_dun04	mapflag	jexp	250
+
+//Geffen Magic Tournament
+1@gef	mapflag	noreturn
+1@gef	mapflag	noteleport
+1@gef	mapflag	nomemo
+1@gef	mapflag	nobranch
+1@gef	mapflag	noicewall
+1@gef	mapflag	partylock
+1@ge_st	mapflag	noreturn
+1@ge_st	mapflag	noteleport
+1@ge_st	mapflag	nomemo
+1@ge_st	mapflag	nobranch
+1@ge_st	mapflag	noicewall
+1@ge_st	mapflag	partylock
+1@ge_st	mapflag	noloot

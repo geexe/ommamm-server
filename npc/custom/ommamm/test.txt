@@ -1,9 +1,0 @@
-izlude,127,139,3	script	Healer	641,{
-	if(checkquest(71101,HUNTING) == 2) {
-		mes "You have completed the quest";
-	}
-	setquest(71101);
-	input(.@spriteno);
-	changelook 0,.@spriteno;
-	close;
-}

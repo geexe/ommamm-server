@@ -5,7 +5,14 @@
 //
 // The MobID*, NameID*, and Rate* reflect special values for quests that can drop an item at given rate from given mob.
 // If no MobID* is given, then any mob has a chance to drop the given ItemID*.
+
+//Old Glast Heim
 12322,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Leave Old Glast Heim"
+
+//Geffen Magic Tournament
+9315,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Exploring the dimensional gap"
+9316,82800,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Re-exploring the crack of spaces"
+9293,60,1106,1,0,0,0,0,0,0,0,0,0,0,0,0,0,"Tournament Registration"
 
 //Biolab Challenge
 71646,0,1646,1,0,0,0,0,0,0,0,0,0,0,0,0,0,"Defeat Lord Knight Seyren"
