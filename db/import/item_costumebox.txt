@@ -1,0 +1,37 @@
+//Useitem
+//very rare
+IG_CostumeBox,19529,2	//(C_Angelic_Chain)
+IG_CostumeBox,19781,2	//(C_Angel_Wing_Ears)
+IG_CostumeBox,19876,5	//(C_Bunny_Top_Hat)
+IG_CostumeBox,19509,15	//(Butterfly Wing Ears)
+IG_CostumeBox,19521,15	//(Charlies Hat)
+IG_CostumeBox,19507,15	//(Clear_Sun)
+IG_CostumeBox,20230,15	//(C_Bankruptcy_Mask)
+IG_CostumeBox,19845,15	//(C_Hair_Protector)
+IG_CostumeBox,19885,15	//(C_Blinker)
+IG_CostumeBox,19550,15	//(C_Blush)
+IG_CostumeBox,19625,15	//(C_Bunny_Band)
+IG_CostumeBox,19798,150	//(C_Angry_Mouth)
+IG_CostumeBox,19794,150	//(C_Goblin_Mask_03)
+IG_CostumeBox,19797,150	//(C_Apple_of_Archer)
+IG_CostumeBox,20161,150	//(C_Army_Cap)
+IG_CostumeBox,19553,150	//(C_Assassin_Mask_)
+IG_CostumeBox,19608,150	//(C_Baby_Chick)
+IG_CostumeBox,20203,150	//(C_Bandana)
+IG_CostumeBox,20074,150	//(C_Biretta)
+IG_CostumeBox,19850,150	//(C_Bongun_Hat)
+IG_CostumeBox,20118,150	//(C_Cake_Hat)
+IG_CostumeBox,14545,500	//(Battle_Manual_X3)
+IG_CostumeBox,14533,500	//(Battle_Manual100)
+IG_CostumeBox,12412,500	//(HE_Bubble_Gum)
+IG_CostumeBox,7059,500	//(Cargo_Free_Ticket)
+IG_CostumeBox,6235,400	//(Guarantee_Armor_6Up)
+IG_CostumeBox,6231,400	//(Guarantee_Weapon_6Up)
+IG_CostumeBox,13534,400	//(Light_White_Pot_Box)
+IG_CostumeBox,13810,400	//(Blue_Potion_Box)
+IG_CostumeBox,12906,400	//Tonic Boxes
+IG_CostumeBox,12903,400	//Steamed Tongue Box
+IG_CostumeBox,12905,400	//Dragon Breath Box
+IG_CostumeBox,14160,400	//Steamed Scorpian box
+IG_CostumeBox,14164,400	//Immortal Stew Box
+IG_CostumeBox,14163,400	//Nine Tails Box

@@ -1,0 +1,26 @@
+// MySQL Login server
+login_server_id: ommammserver
+login_server_pw: UgK6G2QCwe
+login_server_db: rathena
+
+ipban_db_id: ommammserver
+ipban_db_pw: UgK6G2QCwe
+ipban_db_db: rathena
+
+// MySQL Character server
+char_server_id: ommammserver
+char_server_pw: UgK6G2QCwe
+char_server_db: rathena
+
+// MySQL Map Server
+map_server_id: ommammserver
+map_server_pw: UgK6G2QCwe
+map_server_db: rathena
+
+// MySQL Log Database
+log_db_id: ommammserver
+log_db_pw: UgK6G2QCwe
+log_db_db: logs
+
+// Level range for sharing within a party
+party_share_level: 17

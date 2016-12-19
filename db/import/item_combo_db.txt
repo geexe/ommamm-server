@@ -1,0 +1,17 @@
+// Item Combos Database
+//
+// Structure of Database:
+// ID:ID:ID:ID,{ Script }
+
+//Healing Staff and Benevolent Guardian
+1625:18542,{ bonus bHealPower,1*getequiprefinerycnt(EQI_HAND_R);}
+//Holy Stick and Benevolent Guardian
+1631:18542,{ bonus bHealPower,3*getequiprefinerycnt(EQI_HAND_R);}
+//Bone wand and Skull Cap
+1615:18539,{ .@r = getequiprefinerycnt(EQI_HAND_R); bonus bMatk,10*.@r; if (.@r >= 10) bonus bVariableCastrate,-10; }
+//Thorn Staff of Destruction and Skull Cap
+1636:18539,{ .@r = getequiprefinerycnt(EQI_HAND_R); bonus bMatk,10*.@r; if (.@r >= 10) bonus bVariableCastrate,-10; }
+//Evil Mask and Incubus Horn
+18540:5072,{ bonus bAspd,1; bonus bAspdRate,9; bonus2 bSPLossRate,3,2000; }
+//Evil Mask and Succubus Horn
+18540:5066,{ bonus bAspd,1; bonus bAspdRate,9; bonus2 bSPLossRate,3,2000; }

@@ -1,0 +1,198 @@
+// Cash Shop Database
+// Contains the items sold in the ingame cash shop.
+//
+// Structure of Database:
+// Type,ItemID,Price
+//
+// Type:
+//    0: New
+//    1: Hot
+//    2: Limited
+//    3: Rental
+//    4: Gear
+//    5: Buff
+//    6: Usables
+//    7: Other
+//    8: DO NOT USE - WILL CRASH MAP SERVER
+//
+// Price:
+// Item cost, in cash points (#CASHPOINTS).
+
+//------------------------New--------------------------------
+0, 14730, 190 //Ommamm Costume Box I
+//------------------------Hot--------------------------------
+1, 2589, 5500 //Fallen Angel Wing
+1, 5102, 2800 //Blank Eye
+1, 2829, 1500 //Greed Clip
+1, 12902, 450 //Bubble Gum Box
+1, 7621, 15 //Token of Ziegfried
+1, 12214, 25 //Convex Mirror
+//-------------------------Limited---------------------------
+2, 14730, 190 //Ommamm Costume Box I
+//-------------------------Costumes-----------------------
+3, 19509, 2000 //Cos butterfly wing ear
+3, 19517, 2000 //Cos Chicken Crest
+3, 19934, 2000 //Cos Lolita
+3, 20119, 2000 //Cos beanie
+3, 20147, 2000 //Cos parrot
+3, 20068, 3500 //Cos black bunny
+3, 19876, 2000 //Cos bunny top hat
+3, 19552, 2000 //Cos romantic flower
+3, 19920, 2000 //Cos Ghost
+3, 19984, 2000 //Cos winter Hat
+3, 19687, 2000 //Cos Fresh Rose
+3, 19574, 2000 //Cos Transformer
+3, 19540, 2000 //Cos Rabbit Earplug
+3, 19536, 2000 //Cos RJC
+3, 18742, 3500 //Cos Moon and Star
+3, 20183, 2500 //Cos There is something
+3, 19510, 2000 //Cos Knuckel in head
+3, 19603, 2000 //Cos Invisible Sunglasses
+3, 19827, 2000 //Cos Altemis
+3, 20201, 3500 //Cos Banshee masterr
+3, 19678, 2500 //Cos Bell Ribbon
+3, 20159, 2000 //Cos Blue Hairband
+3, 19550, 2000 //Cos Brush
+3, 19871, 4000 //Cos Decoration of Music
+3, 20202, 2500 //Cos Deviluchi Bollon
+3, 20177, 2000 //Cos Dropping Disuke
+3, 20162, 2000 //Cos lamb Hat
+3, 19977, 2000 //Cos Exclaimation mark
+3, 20204, 2000 //Cos hunter Hat
+3, 19976, 2000 //Cos Cat Santa Hat
+//-------------------------Equipment-----------------------
+//--------Upper
+4, 5409, 500 //Purple Cowboy Hat
+4, 5357, 2000 //Wings of Victory (Top, Mid)
+4, 5363, 2000 //Abyss Helm
+4, 18580, 2000 //Yggdrasil Crown
+4, 5372, 2000 //Koneko Hat
+4, 18841, 2000 //Small Poring Band
+4, 5388, 2000 //Snake Head Hat
+4, 5379, 2500 //Balloon Hat
+4, 5286, 2500 //Pecopeco Hairband
+4, 18656, 2500 //Witch's Pumpkin Hat
+4, 18671, 2500 //Rudolf Hairband
+//Not consistent 4, 18565, 2500 //St Patrick's Hat
+4, 5211, 2500 //Dress Hat
+4, 5547, 3000 //RJC katyusa
+4, 18539, 3000 //Skull Cap
+4, 18756, 3000 //Black Shiba Inu Hat
+4, 5137, 3500 //Alice Doll
+4, 5208, 3500 //Rideword Hat
+4, 18830, 3500 //RWC 2011 Runner
+4, 5585, 4000 //Rune Hairband
+//Not consistent combo 4, 18673, 4000 //Chibi Pope
+4, 18856, 4000 //White Dropping Eddga Hat
+4, 18600, 4000 //Cat Ear Beret
+4, 5564, 4000 //Crown of Deceit
+4, 18542, 4000 //Benevolent Guardian
+4, 18892, 4000 //UFO Poring Hat
+4, 18791, 4000 //Shrine Maiden Hat
+4, 5457, 4500 //Moon Rabbit Hat
+4, 5469, 4500 //Musketeer Hat
+4, 18652, 4500 //Vanargand Helm
+4, 18908, 4500 //Isabella Red Ear
+4, 18793, 4500 //Magician's Night Cap
+4, 5778, 5000 //Turkey on your Head
+4, 18522, 5500 //Evil Marching Hat
+4, 5359, 5500 //Ship Captain Hat
+4, 18878, 5500 //Palace Guard Cap
+//4, 18821, 2500 // rainbow RWC
+//no item 4, 5904, 4000 //Very Normal Hat
+//---------Mid
+4, 5389, 500 //Angel Spirit
+4, 5475, 1500 //Gozarian Mask (Mid, Low)
+4, 5325, 1500 //Robo Eye
+//Not consistent 4, 5664, 1500 //Filir's Pini
+4, 5402, 1500 //Mischievous Fairy
+4, 5800, 2000 //Blush of Groom
+4, 5592, 2000 //Sigrun's Wings
+4, 5421, 2000 //Ifrit Ears
+4, 18657, 2000 //Pegasus Ear Wing
+4, 18599, 2000 //Black Devil's Mask
+4, 18540, 2500 // Demon Mask (Mid, Low)
+4, 5102, 2800 //Blank Eye
+//--------Lower
+4, 5361, 1000 //Gangster Scarf
+4, 18670, 1000 //Handkerchief in Mouth
+4, 5305, 1000 //Pirate Dagger
+4, 5574, 1000 //Well-chewed pencil
+4, 5596, 1000 //Four Leaf Clover
+4, 5362, 1500 //Ninja Scroll
+4, 5463, 1500 //Rainbow Scarf
+4, 18505, 1500 //Umbala Spirit
+4, 18918, 1500 //Long Octopus Ballon
+4, 18754, 2500 //Blood Sucker
+4, 18666, 3500 //CD In Mouth
+//No item 4, 18968, 1500 //Jinn Marin Balloon
+//-------Garment
+4, 2576, 5000 //Adventurer's Backpack
+4, 2589, 5500 //Fallen Angel Wing
+//--------Accessory
+4, 2959, 500 //Fidelity Necklace
+4, 2966, 1500 //RWC Ring
+4, 2968, 1500 //RWC chamber
+4, 2828, 1500 //Upg Clip
+4, 2829, 1500 //Greed Clip
+//--------Weapon
+4, 13092, 1500 //RWC memory dagger
+4, 16026, 1500 //RWC memory mace
+4, 1670, 1500 //RWC memory Staff
+4, 1837, 5900 //Iron Nail
+//--------Shield
+4, 17122, 3500 //Immune Shield Box
+//--------------------------Buff/Scrolls-----------------------
+//5, 14540, 50 //Holy Armor Scroll
+5, 12927, 85 //Aspersio Scroll box
+5, 13700, 85 //Adrenaline Scroll box
+5, 12906, 85 //Tonic Boxes
+5, 12903, 85 //Steamed Tongue Box
+5, 12905, 85 //Dragon Breath Box
+5, 14160, 85 //Steamed Scorpian box
+5, 14164, 85 //Immortal Stew Box
+5, 14163, 85 //Nine Tails Box
+5, 13718, 85 //Abrasive Box
+//--------------------------Consumables-----------------------
+6, 12208, 50 //Battle Manual
+6, 12900, 450 //Battle Manual Box
+6, 12210, 50 //Bubble Gum
+6, 12902, 450 //Bubble Gum Box
+6, 14523, 8 //Pill
+6, 14522, 8 //Big Bun
+6, 12209, 10 //Insurance
+6, 12901, 90 //Insurance Box
+6, 13571, 50 //Giant Fly Wing 100 Box
+6, 12214, 25 //Convex Mirror
+6, 14168, 225//Convex Mirror 10 Box
+//--------------------------Others-----------------------
+7, 7227, 10 //Bossania Entrance Ticket (TCG)
+7, 16770, 250 //Silvervine 10 Box
+7, 6665, 250 //RWC_Inicializer
+7, 7621, 15 //Token of Ziegfried
+7, 17068, 350 //Acidbomb Box50
+7, 17069, 650 //Acidbomb Box100
+7, 17070, 3000 //Acidbomb Box500
+7, 17066, 350 //Poison Bottle Box50
+7, 17067, 650 //Poison Bottle Box100
+7, 6241, 20 //HD Elunium
+7, 6240, 20 //HD Oridecon
+7, 6225, 35 //HD Carnium
+7, 6226, 35 //HD Bradium
+7, 7619, 30 //Enriched Elunium
+7, 7620, 30 //Enriched Oridecon
+//7, 16753, 450 //Blessed Ori
+//7, 16755, 450 //Blessed Elu
+7, 7776, 250 //Gym Pass
+7, 6456, 500 //Safe to 5 Weapon Certificate
+7, 6457, 750 //Safe to 5 Armor Certificatate
+7, 6231, 1000 //Safe to 6 Weapon Certificate
+7, 6235, 1500 //Safe to 6 Armor Certificate
+7, 6230, 2500 //Safe to 7 Weapon Certificate
+7, 6234, 3500 //Safe to 7 Armor Certificate
+7, 13875, 400 //Thief Set Card Box
+7, 13874, 400 //Swordman Set Card Box
+7, 13871, 400 //Mage Set Card Box
+7, 13872, 400 //Acolyte Set Card Box
+7, 13873, 400 //Archer Set Card Box
+7, 13876, 400 //Merchant Set Card Box
