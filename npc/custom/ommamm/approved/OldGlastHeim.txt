@@ -566,29 +566,29 @@ OnTimer92000:
 	monster .@map$,154,99,"Abysmal Knight",2470,1,.@label$;
 
 	monster .@map$,145,54,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"Water... Someone give me water...",1;
+	unittalk $@mobid[0],"Water... Someone give me water...";
 	monster .@map$,154,54,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"Kkkrrrruughgh...",1;
+	unittalk $@mobid[0],"Kkkrrrruughgh...";
 	monster .@map$,145,64,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"Sir. Heinrich. Save me...",1;
+	unittalk $@mobid[0],"Sir. Heinrich. Save me...";
 	monster .@map$,154,64,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"I miss my sister...",1;
+	unittalk $@mobid[0],"I miss my sister...";
 	monster .@map$,145,74,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"Don't leave me alone, help me.",1;
+	unittalk $@mobid[0],"Don't leave me alone, help me.";
 	monster .@map$,154,74,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"Aaarrrrrhhhh",1;
+	unittalk $@mobid[0],"Aaarrrrrhhhh";
 	monster .@map$,145,84,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"I am so thirsty.",1;
+	unittalk $@mobid[0],"I am so thirsty.";
 	monster .@map$,154,84,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"Oh...No...I can't die yet...",1;
+	unittalk $@mobid[0],"Oh...No...I can't die yet...";
 	monster .@map$,145,94,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"I feel sick to my stomach urrgg",1;
+	unittalk $@mobid[0],"I feel sick to my stomach urrgg";
 	monster .@map$,154,94,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"Can someone...",1;
+	unittalk $@mobid[0],"Can someone...";
 	monster .@map$,145,104,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"Arrgg... My body",1;
+	unittalk $@mobid[0],"Arrgg... My body";
 	monster .@map$,154,104,"Khalitzburg",2471,1,.@label$;
-	unittalk $@mobid[0],"My throat is burning!",1;
+	unittalk $@mobid[0],"My throat is burning!";
 	end;
 OnTimer94000:
 	donpcevent instance_npcname("Heinrich#ghinstance2")+"::OnTalk8";
@@ -833,7 +833,7 @@ OnMyMobDead:
 	if (getcharid(0) == getpartyleader(getcharid(1),2)) {
 		mes "[Altar boy Domun]";
 		mes "Save me! Save me!!!";
-		npctalk "Save me! Save me!!!",1;
+		npctalk "Save me! Save me!!!";
 		next;
 		select("Hold on! Are you the only survivor?");
 		mes "["+strcharinfo(0)+"]";
@@ -1079,7 +1079,7 @@ OnDisable:
 OnEnable:
 	enablenpc instance_npcname("#ghmemorialmob04");
 	monster instance_mapname("1@gl_k"),150,258,"Corrupted Soul",2475,1,instance_npcname("#ghmemorialmob04")+"::OnMyMobDead";
-	unittalk $@mobid[0],"Grrrrrrhh~~~",1;
+	unittalk $@mobid[0],"Grrrrrrhh~~~";
 	end;
 OnMyMobDead:
 	set .@map$,instance_mapname("1@gl_k");
@@ -1666,20 +1666,20 @@ OnEnable:
 	enablenpc instance_npcname("#ghmemorialmob10");
 	donpcevent instance_npcname("Gerhalt#ghinstance1")+"::OnDisable";
 	monster instance_mapname("2@gl_k"),158,255,"Amdarais",2476,1,instance_npcname("#ghmemorialmob10")+"::OnMyMobDead";
-	unittalk $@mobid[0],"Run away... run away from me...",1;
+	unittalk $@mobid[0],"Run away... run away from me...";
 	initnpctimer;
 	end;
 OnTimer6000:
-	unittalk $@mobid[0],"I don't want... I don't want to kill anyone. Uhuuuuuh",1;
+	unittalk $@mobid[0],"I don't want... I don't want to kill anyone. Uhuuuuuh";
 	end;
 OnTimer12000:
-	unittalk $@mobid[0],"Please kill me! Please!",1;
+	unittalk $@mobid[0],"Please kill me! Please!";
 	end;
 OnTimer18000:
-	unittalk $@mobid[0],"Eeeeee...eee...die... die...",1;
+	unittalk $@mobid[0],"Eeeeee...eee...die... die...";
 	end;
 OnTimer24000:
-	unittalk $@mobid[0],"Demolition... Death!...",1;
+	unittalk $@mobid[0],"Demolition... Death!...";
 	stopnpctimer;
 	end;
 OnMyMobDead:
