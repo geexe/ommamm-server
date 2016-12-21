@@ -1,0 +1,3 @@
+//Missing warp for dimension gaps
+dali,64,129,0	warp	dimensional_gap_dali1	1,1,dali2,66,101
+dali2,66,97,0	warp	dimensional_gap_dali2	1,1,dali,64,125

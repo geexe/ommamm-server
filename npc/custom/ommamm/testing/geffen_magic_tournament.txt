@@ -1,14 +1,4 @@
-mid_camp,210,292,3	script	Dimensional Device::dali_entry	10007,{
-	mes "Enter the Dimensional Gap of time and space.";
-	next;
-	switch(select("Yes:No")) {
-	case 1:
-		warp "dali",141,82;
-		end;
-	case 2:
-		close;
-	}
-}
+//Original Script
 
 dali,98,141,3	script	Emmitt White::gef_magic_init	903,{
 	
@@ -69,7 +59,7 @@ dali,98,141,3	script	Emmitt White::gef_magic_init	903,{
 			close;
 		case 2:
 			mes .npc$;
-			if(instance_create("Geffen Magic Tournament") < 0) {
+			if(instance_create("Geffen Magic Tournament",IM_CHAR) < 0) {
 				mes "The dimensional device hasn't been activated yet.";
 				close;
 			}
@@ -3345,9 +3335,9 @@ OnWinEffect:
 }
 
 //Broadcastor----------------------------------------------------
-1@gef,1,1,1	script	gef_magic_broadcast	-1,{
+1@gef,120,212,1	script	gef_magic_broadcast	-1,10,10,{
 
-OnInstanceInit:
+OnTouch:
 	sleep 2000;
 	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - The Geffen Magic Tournament about to begin!",bc_blue;
 	sleep 2000;
@@ -3356,6 +3346,7 @@ OnInstanceInit:
 	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - Anyone who wants to join the Geffen Magic Tournament, please come to the southern fountain of Geffen~!",bc_blue;
 	sleep 2000;
 	mapannounce instance_mapname("1@gef"),"Geffen Broadcast - Anyone who wants to join the Geffen Magic Tournament, please come to the southern fountain in direction of 6 o'clock in Geffen~!",bc_blue;
+	disablenpc(instance_npcname("gef_magic_broadcast"));
 	end;
 }
 
