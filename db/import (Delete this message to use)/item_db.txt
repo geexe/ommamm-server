@@ -90,9 +90,9 @@
 
 // Ommamm Custom Items
 //=============================================================
-31100,black_lhz_aura,Lhz Aura Black,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1900,{},{},{}
-31101,blue_lhz_aura,Lhz Aura Blue,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1901,{},{},{}
-31102,green_lhz_aura,Lhz Aura Green,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1902,{},{},{}
-31103,green_lhz_aura,Lhz Aura Red,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1903,{},{},{}
-31104,kafra_blossom_card,Kafra Blossom Card,6,20,,10,,,,,,,,136,,,,,{ bonus2 bSubEle,Ele_ALL,10;  autobonus2 "{ bonus2 bSubEle,Ele_ALL,10; }",20,10000,BF_MAGIC,"{ specialeffect2 440; }";},{},{}
-14730,Costume_Festival_Box_II,Ommamm Costume Box I,18,10,,10,,,,0,0xFFFFFFFF,63,2,,,,,,{ getrandgroupitem(IG_CostumeBox,1); },{},{}
+40001,black_lhz_aura,Lhz Aura Black,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1900,{},{},{}
+40002,blue_lhz_aura,Lhz Aura Blue,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1901,{},{},{}
+40003,green_lhz_aura,Lhz Aura Green,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1902,{},{},{}
+40004,green_lhz_aura,Lhz Aura Red,4,20,,0,,,,,0xFFFFFFFF,16,2,4096,,1,0,1903,{},{},{}
+40005,kafra_blossom_card,Kafra Blossom Card,6,20,,10,,,,,,,,136,,,,,{ bonus2 bSubEle,Ele_ALL,10;  autobonus2 "{ bonus2 bSubEle,Ele_ALL,10; }",20,10000,BF_MAGIC,"{ specialeffect2 440; }";},{},{}
+40006,Costume_Festival_Box_II,Ommamm Costume Box I,18,10,,10,,,,0,0xFFFFFFFF,63,2,,,,,,{ getrandgroupitem(IG_CostumeBox,1); },{},{}
