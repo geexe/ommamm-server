@@ -105,25 +105,36 @@ izlude,124,148,5	script	Kafra	861,{
 	case 4:
 		if (ismounting()) {
 			break;
-		} else if ((eaclass()&EAJ_THIRDMASK==EAJ_RANGER) && !countitem(6124)) {
-			if (!checkfalcon() && getskilllv("HT_FALCON") && !checkwug()) {
-				if(select(" ~ Falcon: ~ Warg")==1) setfalcon;
-				else getitem 6124,1; //Wolf's_Flute
-			} else getitem 6124,1; //Wolf's_Flute
-		} else if ((eaclass()&EAJ_THIRDMASK==EAJ_MECHANIC) && !checkcart() && getskilllv("MC_PUSHCART")) {
-			if (!checkmadogear() && getskilllv("NC_MADOLICENCE")) {
-			if(select(" ~ Cart: ~ Mado")==1) setcart;
-			else setmadogear;
-		} else setcart;
-		} else if (!checkcart() && getskilllv("MC_PUSHCART")) setcart;
-		else if (!checkfalcon() && getskilllv("HT_FALCON") && !checkwug()) setfalcon;
-		else if (!checkriding() && !checkdragon() && getskilllv("KN_RIDING")) {
-			if (eaclass()&EAJ_THIRDMASK==EAJ_RUNE_KNIGHT) setdragon;
-			else setriding;
-		} else if (!checkmadogear() && getskilllv("NC_MADOLICENCE")) setmadogear;
-		else {
-			break;
+		} 
+		if (class == Job_Ranger || class == Job_Ranger_T || class == Job_Baby_Ranger) {
+			if(!countitem(6124) && !checkwug()) {
+				getitem 6124,1;
+				mes .npc$;
+				mes "Please use the flute to summon the warg.";
+				break;
+			} else {
+				break;
+			}
 		}
+		if (!checkfalcon() && getskilllv("HT_FALCON") && !checkwug()) {
+			setfalcon;
+		} 
+		if (class == Job_Mechanic || class == Job_Mechanic_T || class == Job_Baby_Mechanic && !checkmadogear() && getskilllv("NC_MADOLICENCE")) {
+			setmadogear;
+		}
+		if (!checkcart() && getskilllv("MC_PUSHCART")) {
+			setcart;
+		}
+		if (Class == Job_Rune_Knight || Class == Job_Rune_Knight_T || Class == Job_Baby_Rune) {
+			if (!getskilllv("KN_RIDING")) {
+				break;
+			} else if (checkdragon()) {
+				break;
+			}
+			setdragon;
+		} else if (!checkriding() && !checkdragon() && getskilllv("KN_RIDING")) {
+			setriding;
+		} 
 		specialeffect2 EF_TEIHIT3;
 		break;
 	case 5:
