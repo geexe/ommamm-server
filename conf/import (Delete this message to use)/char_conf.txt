@@ -21,7 +21,7 @@ server_name: Ommamm-RO
 
 // Starting point for new characters
 // Format: <map_name>,<x>,<y>
-start_point: new_1-1,53,111
+start_point: prt_monk,172,181
 start_point_pre: new_1-1,53,111
 
 // Starting items for new characters

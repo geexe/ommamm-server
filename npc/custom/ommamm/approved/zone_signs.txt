@@ -1,18 +1,18 @@
-izlude,110,141,5	script	Quest Zone	857,{
+prt_monk,131,210,5	script	Quest Zone	857,{
 	OnInit:
 	waitingroom "Challenge Zone",0;
 	end;
 
 }
 
-izlude,161,130,3	script	Refine and Socketing	857,{
+prt_monk,185,244,3	script	Refine and Socketing	857,{
 	OnInit:
 	waitingroom "Refine and Socketing",0;
 	end;
 
 }
 
-izlude,145,141,5	script	Event Zone	857,{
+prt_monk,185,214,5	script	Event Zone	857,{
 	OnInit:
 	waitingroom "Events and Utilities",0;
 	end;
