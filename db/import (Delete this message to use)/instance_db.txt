@@ -6,3 +6,4 @@
 // EnterMap is considered as Map1
 
 101,Geffen Magic Tournament,3600,3600,1@gef,120,212,1@gef,1@ge_st
+16,Bios Island,7200,300,1@dth1,19,94,1@dth2,1@dth3

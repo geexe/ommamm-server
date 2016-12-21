@@ -1,0 +1,131 @@
+izlude,124,141,5	script	Event Puzzler	97,{
+		mes "[Event Puzzler]";
+		mes "Please enter a 3 digit";
+		mes "number. Do not use a";
+		mes "single number more than";
+		mes "once or use the number 0.";
+		next;
+		while (1) {
+			set .@yagu100, rand(1,9);
+			set .@yagu10, rand(1,9);
+			set .@yagu1, rand(1,9);
+			if (((.@yagu100 != .@yagu10) && (.@yagu100 != .@yagu1)) && (.@yagu10 != .@yagu1))
+				break;
+		}
+		while (1) {
+			while (1) {
+				input .@input;
+				if (.@input < 100 || .@input > 999) {
+					mes "[Event Puzzler]";
+					mes "Number input";
+					mes "requirement has";
+					mes "not been fulfilled.";
+					mes "Please enter a";
+					mes "3 digit number.";
+					close;
+				}
+				set .@input100, .@input / 100;
+				set .@input10, (.@input % 100) / 10;
+				if (((.@input100 > 0) && (.@input10 > 0)) && (.@input % 10 > 0)) {
+					if (((.@input100 != .@input10) && (.@input100 != .@input % 10)) && (.@input10 != .@input % 10))
+						break;
+					mes "[Event Puzzler]";
+					mes "Violation of number";
+					mes "input parameter. The";
+					mes "number 0 has been input,";
+					mes "or a number has been";
+					mes "input more than once.";
+					next;
+				}
+			}
+			set .@retry, .@retry + 1;
+			mes "[Event Puzzler]";
+			mes "You have input...";
+			mes "^0000ff" + .@input100 + "^000000, ^0000ff" + .@input10 + "^000000, ^0000ff" + (.@input % 10) + "^000000";
+			mes " ";
+			mes "Calculating Results...";
+			mes "Please wait a moment...";
+			next;
+			set .@strike, 0;
+			set .@ball, 0;
+			if (.@yagu100 == .@input100) set .@strike, .@strike + 1;
+			if (.@yagu10 == .@input10) set .@strike, .@strike + 1;
+			if (.@yagu1 == .@input % 10) set .@strike, .@strike + 1;
+			if ((.@yagu100 == .@input10) || (.@yagu100 == .@input % 10)) set .@ball, .@ball + 1;
+			if ((.@yagu10 == .@input100) || (.@yagu10 == .@input % 10)) set .@ball, .@ball + 1;
+			if ((.@yagu1 == .@input100) || (.@yagu1 == .@input10)) set .@ball, .@ball + 1;
+			if (.@strike == 3) {
+				mes "[Event Puzzler]";
+				mes "Input number accepted.";
+				mes "Access authorized.";
+				next;
+				mes "^3355FFCongratulation!!!";
+				mes "You are the first paticipant";
+				mes "who got the right answer";
+				mes "Please take the reward^000000";
+				next;
+				mes "^4d4dffYou have recieved TCG 10ea^000000";
+				getitem 7227,5; //TCG
+				if (Zeny= 10005) close;
+				mes "^4d4dffA fierce feeling passes through your head.";
+				mes "You seen an illusion of light, like when you acquired the first key.^000000";
+				next;
+				switch(select("Ignore it.:Concentrate on it.")) {
+				case 1:
+					mes "You decide to ignore it.";
+					close;
+				case 2:
+					mes "You focus on the light.";
+					mes "Some letters begin to appear...";
+					next;
+					mes "^b22222Have you found the second key?";
+					mes "I wish to tell you where the seal is, but I won't unveil it so easily.";
+					mes "Here's a hint. Go to the eagle on the 5th floor.";
+					next;
+					mes "^b22222The reason I came here is...";
+					mes "to find someone.";
+					mes "We human beings can't understand this...";
+					next;
+					mes "^b22222When I found her in Juperos, I couldn't relax.";
+					mes "The giant men staying with her in deep side of cave";
+					mes "made me rush through my investigation...";
+					next;
+					mes "^b22222After confirming her existence, I became blindly obsessed with finding traces of her.";
+					mes "'Her', you ask? She is shaped like a woman...";
+					next;
+					mes "^b22222I followed her traces without knowing that she existed 10 years earlier.";
+					mes "Then I came upon this place.";
+					next;
+					mes "^b22222This tower set up for...^000000";
+					next;
+					mes "It suddenly shakes, then disappears.";
+					close;
+				}
+			}
+			else {
+				mes "[Screen]";
+				mes "*Beeeeep*";
+				mes "Unauthorized";
+				mes "numerical sequence.";
+				next;
+				mes "[Screen]";
+				mes "Correct number";
+				mes "in correct place";
+				mes "in sequence total: ^FF0000" + .@strike + "^000000";
+				mes " ";
+				mes "Correct number total: ^FF0000" + .@ball + "^000000";
+				next;
+				if (.@retry > 4) {
+					mes "[Screen]";
+					mes "Correct number";
+					mes "authorization";
+					mes "sequence was...";
+					mes "^ff0000" + .@yagu100 + "^000000, ^ff0000" + .@yagu10 + "^000000, ^ff0000" + .@yagu1 + "^000000";
+					mes "Authorization number";
+					mes "will change upon retry.";
+					close;
+				}
+			}
+		}
+	end;
+}
