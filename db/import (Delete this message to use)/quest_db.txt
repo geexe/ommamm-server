@@ -19,6 +19,12 @@
 15006,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Isle of Bios Exploration"
 15007,7200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Memorial Dungeon: Isle of Bios"
 
+//----------Trail of Heroes - Cursed Swordman 'Ghost Palace' memorial dungeon
+1260,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Cursed Swordman"
+1261,82800,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Cursed Swordman"
+1262,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Cursed Swordman"
+1263,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Cursed Swordman"
+
 //Biolab Challenge
 71646,0,1646,1,0,0,0,0,0,0,0,0,0,0,0,0,0,"Defeat Lord Knight Seyren"
 71647,0,1647,1,0,0,0,0,0,0,0,0,0,0,0,0,0,"Defeat Assassin Cross Eremes"
