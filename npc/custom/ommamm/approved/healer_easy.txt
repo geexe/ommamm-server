@@ -1,11 +1,39 @@
-izlude,134,147,3	script	Healer	569,{
+prt_monk,169,186,5	script	Healer	569,{
 
 	.@Price = 0;	// Zeny required for heal
 	.@Buffs = 1;	// Also buff players? (1: yes / 0: no)
-	.@Delay = 1;	// Heal delay, in seconds
+	.@Delay = 0;	// Heal delay, in seconds
 
-	if (@HD > gettimetick(2))
-		end;
+	if (@HD > gettimetick(2)) {
+		mes "[Healer]";
+		mes "You cannot use the healer at the moment";
+		mes " ";
+		mes "Time until healer available:";
+		mes "^0055FF" + (@HD - gettimetick(2)) + "^000000 seconds.";
+		switch(select("Cancel:More Detatils")) {
+			case 1:
+				close;
+			case 2:
+				next;
+				mes "[Healer]";
+				mes "Healer cooldown starts from";
+				mes "^0055FF30 seconds^000000 at level 100 and increases by ^0055FF1 second^000000 per level.";
+				next;
+				mes "[Healer]";
+				mes "HP Healing rate decreases by";
+				mes "^0055FF1 percent^000000 per level starting at level 125.";
+				mes "SP Healing rate decreases by";
+				mes "^0055FF1 percent^000000 per level starting at level 100.";
+				next;
+				mes "[Healer]";
+				mes "Buff duration decreases by";
+				mes "^0055FF60 seconds^000000 every 7 level starting from level 100.";
+				mes "Buff skill level decrease by";
+				mes "^0055FF1 skill level^000000 every 10 level starting from level 100.";
+				close;
+		}
+			
+	}
 	if (.@Price) {
 		message strcharinfo(0), "Healing costs " + callfunc("F_InsertComma",.@Price) + " Zeny.";
 		if (Zeny < .@Price)
@@ -29,13 +57,35 @@ izlude,134,147,3	script	Healer	569,{
 	sc_end SC_Curse;
 	sc_end SC_Hallucination;
 	sc_end SC_ORCISH;
-	percentheal 100,100;
+	if(BaseLevel > 99) {
+		for(.@i = 125; .@i < BaseLevel; .@i++) {
+			.@hppenalty ++;
+		}
+		for(.@i = 100; .@i < BaseLevel; .@i++) {
+			.@sppenalty ++;
+		}
+		
+	}
+	percentheal 100 - .@hppenalty, 100 - .@sppenalty;
 	if (.@Buffs) {
-	
+		if (BaseLevel > 99) {
+			for(.@i = 100; .@i < BaseLevel; .@i += 10) {
+				.@bufflevelpenalty ++;
+			}
+			for(.@i = 100; .@i < BaseLevel; .@i += 7) {
+				.@bufftimepenalty += 60000;
+			}
+		}
 		specialeffect2 EF_INCAGILITY;
-		sc_start SC_INCREASEAGI,900000,10;
+		sc_start SC_INCREASEAGI,900000 - .@bufftimepenalty, 10 - .@bufflevelpenalty;
 		specialeffect2 EF_BLESSING;
-		sc_start SC_BLESSING,900000,10;
+		sc_start SC_BLESSING,900000 - .@bufftimepenalty, 10 - .@bufflevelpenalty;
+	}
+	if(BaseLevel > 99) {
+		.@Delay = 30;
+		for (.@i = 101; .@i < BaseLevel; .@i += 1) {
+			.@Delay += 3;
+		}
 	}
 	if (.@Delay)
 		@HD = gettimetick(2) + .@Delay;
