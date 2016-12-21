@@ -12,3 +12,5 @@
 
 // EXP modifiers due to level difference
 
+// Drop rate modifiers due to level difference
+2,CLASS_NORMAL,0,100
