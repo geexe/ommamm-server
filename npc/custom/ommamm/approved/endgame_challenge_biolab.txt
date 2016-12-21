@@ -1,6 +1,6 @@
 //Biolab Hunting Challenge
 
-izlude,100,140,5	script	Biolab Challenge::endgame_biolab	904,{
+prt_monk,136,184,5	script	Biolab Challenge::endgame_biolab	904,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";

@@ -1,4 +1,4 @@
-izlude,160,147,5	script	Rellion Job Changer::rebellion_job	10062,{
+prt_monk,152,194,5	script	Rellion Job Changer::rebellion_job	10062,{
 	
 	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
 	

@@ -1,4 +1,4 @@
-izlude,121,153,4	script	Server Info	837,{
+prt_monk,166,190,5	script	Server Info	837,{
 	.npc$ = "[^000080"+strnpcinfo(0)+"^000000]";
 	
 	mes .npc$;

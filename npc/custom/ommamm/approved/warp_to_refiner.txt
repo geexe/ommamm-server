@@ -1,1 +1,1 @@
-izlude,160,125,0	warp	Mall	1,1,prt_in,60,72
+prt_monk,182,246,0	warp	Mall	1,1,prt_in,60,72

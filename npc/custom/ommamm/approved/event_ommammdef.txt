@@ -3,7 +3,7 @@ force_2-3.gat	mapflag	noteleport
 force_2-3.gat	mapflag	noreturn
 force_2-3.gat	mapflag	monster_noteleport
 
-izlude,141,138,5	script	Ommamm Defense::ommammdef	576,{
+prt_monk,185,226,3	script	Ommamm Defense::ommammdef	576,{
 	
 	.maxuser_room1 = 7;
 	.maxuser_room2 = 7;

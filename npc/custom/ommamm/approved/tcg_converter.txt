@@ -1,4 +1,4 @@
-izlude,119,126,5	script	TCG exchanger	951,{
+prt_monk,169,192,5	script	TCG exchanger	951,{
 
 set .@i, countitem(7227);
 

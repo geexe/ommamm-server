@@ -1,4 +1,4 @@
-izlude,132,153,3	script	BlankEyes Knight	416,{
+prt_monk,156,187,3	script	BlankEyes Knight	416,{
 	mes .npc$;
 	mes "I can enchant ^000099Blank Eyes^000000 (Cash Shop item) for a fee.";
 	mes "Very.. powerful enchantments.";

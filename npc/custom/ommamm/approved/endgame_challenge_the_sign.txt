@@ -1,6 +1,6 @@
 //New World Challenge
 
-izlude,108,131,3	script	The Sign Challenge::endgame_thesign	804,{
+prt_monk,136,193,5	script	The Sign Challenge::endgame_thesign	804,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";

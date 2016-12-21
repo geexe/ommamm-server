@@ -1,4 +1,4 @@
-izlude,119,124,5	script	Card Coin exchanger	751,{
+prt_monk,156,173,5	script	Card Coin exchanger	751,{
 
 	set .@i, countitem(6379);
 	

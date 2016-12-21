@@ -10,7 +10,7 @@
 //= Exchange cards for points.
 //============================================================
 
-izlude,149,135,4	script	Card Trader	90,{
+prt_monk,159,173,4	script	Card Trader	90,{
 	mes "[Card Trader]";
 	mes "Hi, "+strcharinfo(0)+"!";
 	mes "What can I do for you?";

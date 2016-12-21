@@ -1,4 +1,4 @@
-izlude,129,153,5	script	ElvenEars Knight	420,{
+prt_monk,159,187,5	script	ElvenEars Knight	420,{
 	mes .npc$;
 	mes "I can enchant ^000099Elven Ears^000000 (Dropped from monsters) for a fee.";
 	mes "^ff3232However, unique slot enchantment and level 10 enchantment is not possible for Elven Ears^000000";

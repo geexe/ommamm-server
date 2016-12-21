@@ -6,7 +6,7 @@
 //= Makes Unique to Epic item to those who bring extremely rare item
 //============================================================
 //= For Test (Use fruits as the item)
-izlude,127,130,3	script	Ancient Craftter	71,{
+prt_monk,160,177,3	script	Ancient Craftter	71,{
  
 	mes "[Ancient Crafter]";  
 	mes "Hello, " + strcharinfo(0) + "!";
