@@ -25,6 +25,11 @@
 1262,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Cursed Swordman"
 1263,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Cursed Swordman"
 
+//Nightmarish Jitterbug
+13181,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Nightmarish Jitterbug"
+13182,82800,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Nightmarish Jitterbug: Waiting"
+13183,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"Nightmarish Jitterbug: Completed"
+
 //Biolab Challenge
 71646,0,1646,1,0,0,0,0,0,0,0,0,0,0,0,0,0,"Defeat Lord Knight Seyren"
 71647,0,1647,1,0,0,0,0,0,0,0,0,0,0,0,0,0,"Defeat Assassin Cross Eremes"
