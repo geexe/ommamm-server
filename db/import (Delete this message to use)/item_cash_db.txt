@@ -22,11 +22,11 @@
 0, 14730, 190 //Ommamm Costume Box I
 //------------------------Hot--------------------------------
 1, 2589, 5500 //Fallen Angel Wing
-1, 5102, 2800 //Blank Eye
-1, 2829, 1500 //Greed Clip
-1, 12902, 450 //Bubble Gum Box
-1, 7621, 15 //Token of Ziegfried
-1, 12214, 25 //Convex Mirror
+1, 5102, 3500 //Blank Eye
+1, 2829, 3000 //Greed Clip
+1, 12902, 500 //Bubble Gum Box
+//1, 7621, 15 //Token of Ziegfried
+//1, 12214, 25 //Convex Mirror
 //-------------------------Limited---------------------------
 2, 14730, 190 //Ommamm Costume Box I
 //-------------------------Costumes-----------------------
@@ -112,7 +112,7 @@
 4, 18657, 2000 //Pegasus Ear Wing
 4, 18599, 2000 //Black Devil's Mask
 4, 18540, 2500 // Demon Mask (Mid, Low)
-4, 5102, 2800 //Blank Eye
+4, 5102, 3500 //Blank Eye
 //--------Lower
 4, 5361, 1000 //Gangster Scarf
 4, 18670, 1000 //Handkerchief in Mouth
@@ -131,68 +131,68 @@
 4, 2589, 5500 //Fallen Angel Wing
 //--------Accessory
 4, 2959, 500 //Fidelity Necklace
-4, 2966, 1500 //RWC Ring
-4, 2968, 1500 //RWC chamber
+4, 2966, 2500 //RWC Ring
+4, 2968, 2500 //RWC chamber
 4, 2828, 1500 //Upg Clip
-4, 2829, 1500 //Greed Clip
+4, 2829, 3000 //Greed Clip
 //--------Weapon
-4, 13092, 1500 //RWC memory dagger
-4, 16026, 1500 //RWC memory mace
-4, 1670, 1500 //RWC memory Staff
+4, 13092, 2500 //RWC memory dagger
+4, 16026, 2500 //RWC memory mace
+4, 1670, 2500 //RWC memory Staff
 4, 1837, 5900 //Iron Nail
 //--------Shield
 4, 17122, 3500 //Immune Shield Box
 //--------------------------Buff/Scrolls-----------------------
 //5, 14540, 50 //Holy Armor Scroll
-5, 12927, 85 //Aspersio Scroll box
-5, 13700, 85 //Adrenaline Scroll box
-5, 12906, 85 //Tonic Boxes
-5, 12903, 85 //Steamed Tongue Box
-5, 12905, 85 //Dragon Breath Box
-5, 14160, 85 //Steamed Scorpian box
-5, 14164, 85 //Immortal Stew Box
-5, 14163, 85 //Nine Tails Box
-5, 13718, 85 //Abrasive Box
+5, 12927, 150 //Aspersio Scroll box
+5, 13700, 150 //Adrenaline Scroll box
+5, 12906, 250 //Tonic Boxes
+5, 12903, 250 //Steamed Tongue Box
+5, 12905, 250 //Dragon Breath Box
+5, 14160, 250 //Steamed Scorpian box
+5, 14164, 250 //Immortal Stew Box
+5, 14163, 250 //Nine Tails Box
+5, 13718, 150 //Abrasive Box
 //--------------------------Consumables-----------------------
-6, 12208, 50 //Battle Manual
-6, 12900, 450 //Battle Manual Box
-6, 12210, 50 //Bubble Gum
-6, 12902, 450 //Bubble Gum Box
-6, 14523, 8 //Pill
-6, 14522, 8 //Big Bun
-6, 12209, 10 //Insurance
-6, 12901, 90 //Insurance Box
-6, 13571, 50 //Giant Fly Wing 100 Box
-6, 12214, 25 //Convex Mirror
-6, 14168, 225//Convex Mirror 10 Box
+6, 12208, 60 //Battle Manual
+6, 12900, 500 //Battle Manual Box
+6, 12210, 60 //Bubble Gum
+6, 12902, 500 //Bubble Gum Box
+//6, 14523, 8 //Pill
+//6, 14522, 8 //Big Bun
+6, 12209, 20 //Insurance
+6, 12901, 150 //Insurance Box
+6, 13571, 100 //Giant Fly Wing 100 Box
+//6, 12214, 25 //Convex Mirror
+//6, 14168, 225//Convex Mirror 10 Box
 //--------------------------Others-----------------------
-7, 7227, 10 //Bossania Entrance Ticket (TCG)
-7, 16770, 250 //Silvervine 10 Box
+//7, 7227, 10 //Bossania Entrance Ticket (TCG)
+7, 16770, 500 //Silvervine 10 Box
 7, 6665, 250 //RWC_Inicializer
-7, 7621, 15 //Token of Ziegfried
-7, 17068, 350 //Acidbomb Box50
-7, 17069, 650 //Acidbomb Box100
-7, 17070, 3000 //Acidbomb Box500
-7, 17066, 350 //Poison Bottle Box50
-7, 17067, 650 //Poison Bottle Box100
-7, 6241, 20 //HD Elunium
-7, 6240, 20 //HD Oridecon
-7, 6225, 35 //HD Carnium
-7, 6226, 35 //HD Bradium
+//7, 7621, 50 //Token of Ziegfried
+7, 17068, 500 //Acidbomb Box50
+7, 17069, 800 //Acidbomb Box100
+7, 17070, 3500 //Acidbomb Box500
+7, 17066, 500 //Poison Bottle Box50
+7, 17067, 800 //Poison Bottle Box100
+7, 6241, 30 //HD Elunium
+7, 6240, 30 //HD Oridecon
+7, 6225, 45 //HD Carnium
+7, 6226, 45 //HD Bradium
 7, 7619, 30 //Enriched Elunium
 7, 7620, 30 //Enriched Oridecon
-//7, 16753, 450 //Blessed Ori
-//7, 16755, 450 //Blessed Elu
-7, 7776, 250 //Gym Pass
-7, 6456, 500 //Safe to 5 Weapon Certificate
-7, 6457, 750 //Safe to 5 Armor Certificatate
-7, 6231, 1000 //Safe to 6 Weapon Certificate
-7, 6235, 1500 //Safe to 6 Armor Certificate
-7, 6230, 2500 //Safe to 7 Weapon Certificate
-7, 6234, 3500 //Safe to 7 Armor Certificate
-7, 13875, 400 //Thief Set Card Box
-7, 13874, 400 //Swordman Set Card Box
-7, 13871, 400 //Mage Set Card Box
-7, 13872, 400 //Acolyte Set Card Box
-7, 13873, 400 //Archer Set Card Box
-7, 13876, 400 //Merchant Set Card Box
+7, 16753, 1000 //Blessed Ori
+7, 16755, 1000 //Blessed Elu
+7, 7776, 1000 //Gym Pass
+//7, 6456, 500 //Safe to 5 Weapon Certificate
+//7, 6457, 750 //Safe to 5 Armor Certificatate
+//7, 6231, 1000 //Safe to 6 Weapon Certificate
+//7, 6235, 1500 //Safe to 6 Armor Certificate
+//7, 6230, 2500 //Safe to 7 Weapon Certificate
+//7, 6234, 3500 //Safe to 7 Armor Certificate
+7, 13875, 500 //Thief Set Card Box
+7, 13874, 500 //Swordman Set Card Box
+7, 13871, 500 //Mage Set Card Box
+7, 13872, 500 //Acolyte Set Card Box
+7, 13873, 500 //Archer Set Card Box
+7, 13876, 500 //Merchant Set Card Box
