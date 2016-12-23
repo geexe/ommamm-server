@@ -1,4 +1,20 @@
-izlude,124,141,5	script	Event Puzzler	97,{
+prt_monk,185,232,3	script	Event Puzzler	97,{
+		//Test menu----------------------------------
+		/*
+		switch(select("reset:play")) {
+			case 1:
+				.reward_grant = 0;
+				mes "Reset complete";
+				close;
+			case 2:
+		}
+		*/
+		//--------------------------------------------
+		if (.reward_grant) {
+			mes "[Event Puzzler]";
+			mes "This round is already over.";
+			close;
+		}
 		mes "[Event Puzzler]";
 		mes "Please enter a 3 digit";
 		mes "number. Do not use a";
@@ -55,52 +71,25 @@ izlude,124,141,5	script	Event Puzzler	97,{
 			if ((.@yagu10 == .@input100) || (.@yagu10 == .@input % 10)) set .@ball, .@ball + 1;
 			if ((.@yagu1 == .@input100) || (.@yagu1 == .@input10)) set .@ball, .@ball + 1;
 			if (.@strike == 3) {
+				//Set variable to turn off NPC
+				.reward_grant = 1;
+				//Annouce the winner and round closure
+				announce strcharinfo(0) + " has won the puzzle game for this round. Puzzle is now closed until next round.",bc_all;
 				mes "[Event Puzzler]";
 				mes "Input number accepted.";
 				mes "Access authorized.";
 				next;
+				mes "[Event Puzzler]";
 				mes "^3355FFCongratulation!!!";
-				mes "You are the first paticipant";
+				mes "You are the first person";
 				mes "who got the right answer";
 				mes "Please take the reward^000000";
 				next;
-				mes "^4d4dffYou have recieved TCG 10ea^000000";
-				getitem 7227,5; //TCG
-				if (Zeny= 10005) close;
-				mes "^4d4dffA fierce feeling passes through your head.";
-				mes "You seen an illusion of light, like when you acquired the first key.^000000";
-				next;
-				switch(select("Ignore it.:Concentrate on it.")) {
-				case 1:
-					mes "You decide to ignore it.";
-					close;
-				case 2:
-					mes "You focus on the light.";
-					mes "Some letters begin to appear...";
-					next;
-					mes "^b22222Have you found the second key?";
-					mes "I wish to tell you where the seal is, but I won't unveil it so easily.";
-					mes "Here's a hint. Go to the eagle on the 5th floor.";
-					next;
-					mes "^b22222The reason I came here is...";
-					mes "to find someone.";
-					mes "We human beings can't understand this...";
-					next;
-					mes "^b22222When I found her in Juperos, I couldn't relax.";
-					mes "The giant men staying with her in deep side of cave";
-					mes "made me rush through my investigation...";
-					next;
-					mes "^b22222After confirming her existence, I became blindly obsessed with finding traces of her.";
-					mes "'Her', you ask? She is shaped like a woman...";
-					next;
-					mes "^b22222I followed her traces without knowing that she existed 10 years earlier.";
-					mes "Then I came upon this place.";
-					next;
-					mes "^b22222This tower set up for...^000000";
-					next;
-					mes "It suddenly shakes, then disappears.";
-					close;
-				}
+				mes "[Event Puzzler]";
+				mes "^4d4dffYou have accquired TCG 10ea^000000";
+				getitem 7227,10; //TCG
+				close;
+				
 			}
 			else {
 				mes "[Screen]";
@@ -127,5 +116,14 @@ izlude,124,141,5	script	Event Puzzler	97,{
 				}
 			}
 		}
+	end;
+	
+OnInit:
+	.reward_grant = 1;
+	end;
+
+OnMinute30:
+	.reward_grant = 0;
+	announce "Puzzle is now open for contest. You can join at " + strnpcinfo(0) + " npc at 185,123" ,bc_all;
 	end;
 }
