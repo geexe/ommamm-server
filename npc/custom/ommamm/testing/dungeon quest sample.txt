@@ -1,0 +1,8 @@
+izlude,173,185,1	script	Geeglom::dungeon_challenge_izlude	726,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "Izlude checkpoint completed.";
+	close;
+}
