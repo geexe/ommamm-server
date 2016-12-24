@@ -3,13 +3,13 @@
 //----------------exp.conf chages
 
 // Rate at which exp. is given. (Note 2)
-base_exp_rate: 1500
+base_exp_rate: 2500
 
 // Rate at which job exp. is given. (Note 2)
-job_exp_rate: 1500
+job_exp_rate: 2500
 
 // Rate of base/job exp given by NPCs. (Note 2)
-quest_exp_rate: 1500
+quest_exp_rate: 2500
 
 //----------------drops.conf changes
 
@@ -32,12 +32,12 @@ item_drop_use_min: 1
 item_drop_use_max: 10000
 
 // The rate at which equipment is dropped.
-item_rate_equip: 3500
+item_rate_equip: 5000
 item_drop_equip_min: 1
 item_drop_equip_max: 3000
 
 // The rate at which cards are dropped
-item_rate_card: 7000
+item_rate_card: 8000
 item_rate_card_boss: 2000
 item_drop_card_min: 1
 item_drop_card_max: 10000
@@ -49,18 +49,18 @@ item_drop_add_max: 10000
 
 // The rate adjustment for the MVP equipment drop [Xantara]
 item_rate_equip_boss: 100
-item_drop_equip_min_boss: 1
-item_drop_equip_max_boss: 10000
+//item_drop_equip_min_boss: 1
+//item_drop_equip_max_boss: 10000
 
 //----------------client.conf changes
 
 // Valid range of dyes and styles on the client.
 min_hair_style: 0
-max_hair_style: 90
+max_hair_style: 97
 min_hair_color: 0
-max_hair_color: 10
+max_hair_color: 8
 min_cloth_color: 0 
-max_cloth_color: 3
+max_cloth_color: 4
 
 // Show rAthena version to users when the login?
 display_version: no
@@ -82,7 +82,7 @@ party_even_share_bonus: 40
 // 1 = show announces for 0.01% drop chance items
 // 333 = show announces for 3.33% or lower drop chance items
 // 10000 = show announces for all items
-rare_drop_announce: 99
+rare_drop_announce: 60
 
 //-----------------misc.conf changes
 
@@ -112,3 +112,5 @@ item_enabled_npc: no
 
 // Angel of the Sun, Moon and Stars skill ratio (100% = 10000)
 sg_angel_skill_ratio: 3000
+
+item_logarithmic_drops: yes
