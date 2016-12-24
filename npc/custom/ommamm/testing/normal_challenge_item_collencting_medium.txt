@@ -1,0 +1,99 @@
+prt_monk,103,205,3	script	Item Collector Normal::normal_item_collector2	10126,{
+	mes "[Challenge]";  
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Collecting items is getting harder nowadays";
+	mes "I need someone who is capable of doing this";
+	mes "You may have to go to some dangerous dungeon";
+	mes "but the reward will surely satisfy your afford";
+	next;
+	mes "[Challenge]";
+	mes "Would you accept my challenge?";
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	Case 1:
+		mes "[Challenge]";
+		mes "You have to wander around";
+		mes "northern of part rune midgard";
+		mes "to gather these precious items";
+		next;
+		for (.@i = 0; .@i < getarraysize(.collect2_item) ;.@i += 2) {
+			mes ((.@i+2)/2) + ". " + "^e53535" + getitemname(.collect2_item[.@i]) + "^000000" + " x " + "^1c3f89" + .collect2_item[.@i+1] + "^000000";
+		}
+		next;
+		mes "[Challenge]";
+		mes "When you have collected all the items ";
+		mes "you can claimthe reward from me.";
+		next;
+		mes "[Challenge]";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+		mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
+		}
+		break;
+	Case 2:
+		mes "[Challenge]";
+		//check to see if character has received the reward
+		if(getommammreward_collect2item) {
+			mes "You have already received reward for this challenge.";
+			close;
+		}
+		//check to see if all requirements are met
+		for (.@i = 0; .@i < getarraysize(.collect2_item) ;.@i += 2) {
+			if(countitem(.collect2_item[.@i]) < .collect2_item[.@i+1] ) {
+				mes "You have not completed the challenge.";
+				close;
+			}
+		}
+		mes "You have completed the challenge";
+		mes "Do you want to claim the reward?";
+		next;
+		switch(select("Yes:No")) {
+			case 1: 
+				break;
+			case 2:
+				mes "[Challenge]";
+				mes "Come back when you want to claim the reward";
+				close;
+		}			
+		//check weight and inventory 
+		if(!checkweight2(.reward,.reward_quantity)) {
+			mes "[Challenge]";
+			mes "You do not enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		//Set variable to prevent player from getting multiple items
+		getommammreward_collect2item= 1;
+		for (.@i = 0; .@i < getarraysize(.collect2_item) ;.@i += 2) {
+			delitem .collect2_item[.@i],.collect2_item[.@i+1];
+		}
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			getitembound .reward[.@k], .reward_quantity[.@k], 1;
+		}
+		mes "[Challenge]";
+		mes "Congratulations on your achievement! Enjoy your reward.";
+		close;
+		break;		
+	Case 3:
+		mes "[Challenge";
+		mes "Come back when you are ready";
+		close;
+		break;
+	}
+	close;
+	
+OnInit:
+	// Format <item ID1>, <item quantity1>, <item ID2>, <item quantity2>, ..., ...;
+	setarray .collect2_item[0],
+		7345,300, //Handcuff
+		7511,500, //Rune Of Darkness
+		7563,700, //Bloody Rune
+		7448,400, //Yellow Bijou
+		7507,500; //Solid Iron plate
+
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],7227,6235,20405;	
+	setarray .reward_quantity[0],100,1,1;
+	end;
+	}

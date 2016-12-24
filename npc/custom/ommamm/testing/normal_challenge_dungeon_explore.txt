@@ -1,0 +1,276 @@
+//--------------------------------------------------------------------------------------------
+//Reward NPC
+//--------------------------------------------------------------------------------------------
+prt_monk,100,205,5	script	Dungeon Explorer Normal::Dungeon_explorer_easy	10043,{
+	mes "[Challenge]";
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Welcome to Ommamm Challenge.";
+	next;
+	mes "[Challenge]";
+	mes "Prove yourself that you really love Ragnarok Online.";
+	mes "We will reward only the utmost dedication to the game.";
+	next;
+	mes "[Challenge]";
+	mes "This is a challenge to prove that your curiosity in exploring the deepest and most mysterious.";
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	case 1:
+		mes "[Challenge]";
+		mes "You must explore the deepest part and find the hidden ruins in these dungeon.";
+		next;
+		mes "[Challenge]";
+		for (.@i = 0; .@i < getarraysize(.dun_name$); .@i++) {
+			mes "^e53535" + .dun_name$[.@i] + "^000000";
+		}
+		next;
+		mes "[Challenge]";
+		mes "You will notice that you are talking to the right one after you find them.";
+		mes "When you have found all ruins, you will receive the reward.";
+		next;
+		mes "[Challenge]";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
+		}
+		next;
+		mes "[Challenge]";
+		mes "Go and explore the depths of Midgard.";
+		break;
+	case 2:
+		//check to see if character has received the reward
+		if(getommammreward_dun_explore_hard) {
+			mes "[Challenge]";
+			mes "You have already received reward for this challenge.";
+			close;
+		}
+		//check to see if Requirements have been completed
+		for(.@i = 0; .@i < getarraysize(.dungeon$); .@i++) {
+			if(!getd(.dungeon$[.@i] + "_checkpoint")) {
+				mes "[Challenge]";
+				mes "You have not found all the hidden ruins.";
+				close;
+			}
+		}
+		mes "[Challenge]";		
+		mes "You found all the hidden ruins.";	
+		mes "Do you want to claim the reward?";
+		next;
+		switch(select("Yes:No")) {
+			case 1: 
+				break;
+			case 2:
+				mes "[Challenge]";
+				mes "Come back when you want to claim the reward";
+				close;
+		}
+		//check weight and inventory 
+		if(!checkweight2(.reward,.reward_quantity)) {
+			mes "[Challenge]";
+			mes "You do not have enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		//Set variable to prevent player from getting multiple items
+		getommammreward_dun_explore_hard = 1;
+		//Cycle through the reward array
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			getitembound .reward[.@k], .reward_quantity[.@k], 1;
+		}
+		mes "[Challenge]";
+		mes "Congratulations on your achievement! Enjoy your reward.";
+		close;
+	case 3:
+		break;
+	}
+	close;
+	
+OnInit:
+	//Dungeon to explore,written in RO map name format 
+	//WARNING: Map names need to match with all quest NPCs in dungeons otherwise it won't work
+	setarray .dungeon$[0],
+		"gl_dun02", //The Lowest Cave in Glast Heim F2
+		"abyss_03", //Abyss Lake 3F
+		"iz_dun05", //Babylon 6f
+		"alde_dun04", //Clock TW B4F
+		"abbey03", //Abbey 3F
+		"kh_dun02", //Kiel 2F
+		"odin_tem03", //Odin Temple 3F
+		"ra_san05", //Rachel Santuary 5F
+		"dic_dun02", //Scaraba Hole 2F
+		"thana_boss", //Thanatos 13F
+		"thor_v03"; //Thor Volcano 3F
+		
+		
+	//Dungeon name tot display. Anything you want to show thw player in quest info
+	setarray .dun_name$[0],
+		"Glast Heim",
+		"Abyss Lake",
+		"Abyss Lake",
+		"Byalan Dungeon",
+		"Clock Tower",
+		"Cursed Abbey",
+		"Kiel Robot Factory",
+		"Odin Temple",
+		"Rachel Sanctuary",
+		"Scaraba Hole",
+		"Thanatos Tower",
+		"Thor Volcano";
+		
+	
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],
+		7227,
+		6235,
+		6231,
+		19859;	
+	setarray .reward_quantity[0],350,1,1,1;
+	end;	
+}
+
+//--------------------------------------------------------------------------------------------
+//Dungeon NPCs
+//--------------------------------------------------------------------------------------------
+gl_dun02,19,27,1	script	Lost soul::dungeon_challenge_glastheim	10083,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "You brought your level 4 weapon with you right?";
+	specialeffect 102;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+abyss_03,100,140,1	script	Crack::dungeon_challenge_abyss	550,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "I bet you were looking for some ranger accessories. huhuhuhu";
+	specialeffect 99;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+
+iz_dun05,252,230,1	script	Ancient Seaweed::dungeon_challenge_babylon	527,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "Diving into the ocean by yourself is much more fun, don't you think?";
+	specialeffect 99;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+alde_dun04,136,143,1	script	Unconcious Mind::dungeon_challenge_clocktower	10044,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "Silver Key is a great gift for people in ancient time.";
+	specialeffect 41;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+abbey03,234,233,1	script	Patient::dungeon_challenge_cursedabbey	584,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "I hope those Chonchons won't find me. So do you.";
+	specialeffect 16;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+kh_dun02,174,53,1	script	Trap?::dungeon_challenge_kielfactory	10150,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "I've already been trapped since you entered this dungeon";
+	specialeffect 87;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+odin_tem03,158,272,1	script	Trace::dungeon_challenge_odintemple	10043,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "'The flower you are looking for is just right here'";
+	specialeffect 90;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+ra_san05,157,157,1	script	Trace::dungeon_challenge_rachel_santury	10045,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "The Ghost is here. Beware.";
+	specialeffect 89;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+dic_dun02,220,37,1	script	Trace::dungeon_challenge_dicdun	10045,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "10000 bugs to kill. May the force be with you";
+	specialeffect 113;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+thana_boss,136,129,1	script	Deep Shadow::dungeon_challenge_thanatos	723,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "You are getting better at Puzzle Game, aren't you?";
+	specialeffect 183;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}
+
+thor_v03,38,45,1	script	Machine::dungeon_challenge_thor	10007,{
+	.npc$ = "[" + strnpcinfo(1) + "]";
+	//Set variable for completion
+	setd strnpcinfo(4) + "_checkpoint", 1;
+	mes .npc$;
+	mes "The gloves are OVERRATED!! Find something else.";
+	specialeffect 328;
+	next;
+	mes .npc$;
+	mes strnpcinfo(4) + " checkpoint completed.";
+	close;
+}

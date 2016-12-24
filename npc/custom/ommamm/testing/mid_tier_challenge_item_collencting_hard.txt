@@ -1,0 +1,105 @@
+prt_monk,86,205,5	script	Item Collector Hard::item_collector_hard	758,{
+	mes .Npc_Name$;  
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Collecting items is getting harder nowadays";
+	mes "I need someone who is capable of doing this";
+	mes "You may have to go to some dangerous dungeon";
+	mes "but the reward will surely satisfy your afford";
+	next;
+	mes .Npc_Name$;
+	mes "Would you accept my challenge?";
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	Case 1:
+		mes .Npc_Name$;
+		mes "You have to wander around";
+		mes "northern of part rune midgard";
+		mes "to gather these precious items";
+		next;
+		for (.@i = 0; .@i < getarraysize(.collect2_item) ;.@i += 2) {
+			mes ((.@i+2)/2) + ". " + "^e53535" + getitemname(.collect2_item[.@i]) + "^000000" + " x " + "^1c3f89" + .collect2_item[.@i+1] + "^000000";
+		}
+		next;
+		mes .Npc_Name$;
+		mes "When you have collected all the items ";
+		mes "you can claimthe reward from me.";
+		next;
+		mes .Npc_Name$;
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+		mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
+		}
+		break;
+	Case 2:
+		mes .Npc_Name$;
+		//check to see if character has received the reward
+		if(getommammreward_collect2item) {
+			mes "You have already received reward for this challenge.";
+			close;
+		}
+		//check to see if all requirements are met
+		for (.@i = 0; .@i < getarraysize(.collect2_item) ;.@i += 2) {
+			if(countitem(.collect2_item[.@i]) < .collect2_item[.@i+1] ) {
+				mes "You have not completed the challenge.";
+				close;
+			}
+		}
+		mes "You have completed the challenge";
+		mes "Do you want to claim the reward?";
+		next;
+		switch(select("Yes:No")) {
+			case 1: 
+				break;
+			case 2:
+				mes .Npc_Name$;
+				mes "Come back when you want to claim the reward";
+				close;
+		}			
+		//check weight and inventory 
+		if(!checkweight2(.reward,.reward_quantity)) {
+			mes .Npc_Name$;
+			mes "You do not enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		//Set variable to prevent player from getting multiple items
+		getommammreward_collect2item= 1;
+		for (.@i = 0; .@i < getarraysize(.collect2_item) ;.@i += 2) {
+			delitem .collect2_item[.@i],.collect2_item[.@i+1];
+		}
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			getitembound .reward[.@k], .reward_quantity[.@k], 1;
+		}
+		mes .Npc_Name$;
+		mes "Congratulations on your achievement! Enjoy your reward.";
+		close;
+		break;		
+	Case 3:
+		mes "[Challenge";
+		mes "Come back when you are ready";
+		close;
+		break;
+	}
+	close;
+	
+OnInit:
+	// Format <item ID1>, <item quantity1>, <item ID2>, <item quantity2>, ..., ...;
+	setarray .collect2_item[0],
+		7510,10, //Valhala Flower
+		6087,50, //Spiritual Crystal 
+		6088,50, //Spiritual Crysta
+		6559,50, //Tears drop
+		7799,50, //Crystal of Darkness
+		6608,25, //Coagulated Spell
+		1624,1; //Lich's Bone Wand
+
+
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],7227,6233,20504;	
+	setarray .reward_quantity[0],200,1,1;
+	.Npc_Name$ = "[^0000FF Challenge ^000000]";
+	end;
+	end;
+	
+}

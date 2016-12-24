@@ -1,0 +1,99 @@
+prt_monk,103,202,3	script	A Grade Headgear::normal_headgear	51,{
+	mes "[Challenge]";  
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "I am a rare head gear collector";
+	mes "I gather all kinds of hats and helms";
+	mes "All I need is not that many";
+	mes "But you need to be patient";
+	next;
+	mes "[Challenge]";
+	mes "Would you accept my challenge?";
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	Case 1:
+		mes "[Challenge]";
+		mes "You have to wander around rune midgard";
+		mes "to show complete various";
+		mes "head gear quest";
+		mes "and show me the following item";
+		next;
+		for (.@i = 0; .@i < getarraysize(.agrade_item) ;.@i += 2) {
+			mes ((.@i+2)/2) + ". " + "^e53535" + getitemname(.agrade_item[.@i]) + "^000000" + " x " + "^1c3f89" + .agrade_item[.@i+1] + "^000000";
+		}
+		next;
+		mes "[Challenge]";
+		mes "When you have collected all the items you can claim ";
+		mes "the reward from me.";
+		next;
+		mes "[Challenge]";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+		mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
+		}
+		break;
+	Case 2:
+		mes "[Challenge]";
+		//check to see if character has received the reward
+		if(getommammreward_agradeitem) {
+			mes "You have already received reward for this challenge.";
+			close;
+		}
+		//check to see if all requirements are met
+		for (.@i = 0; .@i < getarraysize(.agrade_item) ;.@i += 2) {
+			if(countitem(.agrade_item[.@i]) < .agrade_item[.@i+1] ) {
+				mes "You have not completed the challenge.";
+				close;
+			}
+		}
+		mes "You have completed the challenge";
+		mes "Do you want to claim the reward?";
+		next;
+		switch(select("Yes:No")) {
+			case 1: 
+				break;
+			case 2:
+				mes "[Challenge]";
+				mes "Come back when you want to claim the reward";
+				close;
+		}			
+		//check weight and inventory 
+		if(!checkweight2(.reward,.reward_quantity)) {
+			mes "[Challenge]";
+			mes "You do not enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		//Set variable to prevent player from getting multiple items
+		getommammreward_agradeitem= 1;
+		for (.@i = 0; .@i < getarraysize(.agrade_item) ;.@i += 2) {
+			delitem .agrade_item[.@i],.agrade_item[.@i+1];
+		}
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			getitembound .reward[.@k], .reward_quantity[.@k], 1;
+		}
+		mes "[Challenge]";
+		mes "Congratulations on your achievement! Enjoy your reward.";
+		close;
+		break;		
+	Case 3:
+		mes "[Challenge";
+		mes "Come back when you are ready";
+		close;
+		break;
+	}
+	close;
+	
+OnInit:
+	// Format <item ID1>, <item quantity1>, <item ID2>, <item quantity2>, ..., ...;
+	setarray .agrade_item[0],
+		5038,1, //Deviruchi Hat
+		5032,1, //Sunday Hat
+		5078,1, //sea-other Hat
+		5108,1; //Renown Detective's Cap
+
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],18550,7227,6231;	
+	setarray .reward_quantity[0],1,100,1;
+	end;
+	}

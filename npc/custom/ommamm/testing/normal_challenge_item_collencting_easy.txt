@@ -1,0 +1,102 @@
+prt_monk,100,202,3	script	Item Collector Easy::normal_item_collector1	408,{
+	mes "[Challenge]";  
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Gathering items is ";
+	mes "a part of the gmae";
+	mes "I am sure that this is not too hard for you";
+	mes "my task is not hard nor easy";
+	mes "The reward will help you in the near future";
+	next;
+	mes "[Challenge]";
+	mes "Would you accept my challenge?";
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	Case 1:
+		mes "[Challenge]";
+		mes "Please find these items";
+		next;
+		for (.@i = 0; .@i < getarraysize(.collect1_item) ;.@i += 2) {
+			mes ((.@i+2)/2) + ". " + "^e53535" + getitemname(.collect1_item[.@i]) + "^000000" + " x " + "^1c3f89" + .collect1_item[.@i+1] + "^000000";
+		}
+		next;
+		mes "[Challenge]";
+		mes "When you have collected all the items ";
+		mes "you can claim the reward from me.";
+		next;
+		mes "[Challenge]";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+		mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
+		}
+		break;
+	Case 2:
+		mes "[Challenge]";
+		//check to see if character has received the reward
+		if(getommammreward_collect1item) {
+			mes "You have already received reward for this challenge.";
+			close;
+		}
+		//check to see if all requirements are met
+		for (.@i = 0; .@i < getarraysize(.collect1_item) ;.@i += 2) {
+			if(countitem(.collect1_item[.@i]) < .collect1_item[.@i+1] ) {
+				mes "You have not completed the challenge.";
+				close;
+			}
+		}
+		mes "You have completed the challenge";
+		mes "Do you want to claim the reward?";
+		next;
+		switch(select("Yes:No")) {
+			case 1: 
+				break;
+			case 2:
+				mes "[Challenge]";
+				mes "Come back when you want to claim the reward";
+				close;
+		}			
+		//check weight and inventory 
+		if(!checkweight2(.reward,.reward_quantity)) {
+			mes "[Challenge]";
+			mes "You do not have enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		//Set variable to prevent player from getting multiple items
+		getommammreward_collect1item= 1;
+		for (.@i = 0; .@i < getarraysize(.collect1_item) ;.@i += 2) {
+			delitem .collect1_item[.@i],.collect1_item[.@i+1];
+		}
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			getitembound .reward[.@k], .reward_quantity[.@k], 1;
+		}
+		mes "[Challenge]";
+		mes "Congratulations on your achievement! Enjoy your reward.";
+		close;
+		break;		
+	Case 3:
+		mes "[Challenge";
+		mes "Come back when you are ready";
+		close;
+		break;
+	}
+	close;
+	
+OnInit:
+	// Format <item ID1>, <item quantity1>, <item ID2>, <item quantity2>, ..., ...;
+	setarray .collect1_item[0],
+		6224,20, //Bradium
+		6223,2, //Carnium
+		7097,100, //Burning Heart
+		7223,50, //Self portrait
+		7939,10, //Elder Branch
+		7326,5, //Fluorescent Liquid
+		7003,50, //Anolian Skin
+		1054,25, //Ancient Lips
+		7002,50, //Ogre Tooth
+		7038,30; //Yarn
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],7227;	
+	setarray .reward_quantity[0],250;
+	end;
+}

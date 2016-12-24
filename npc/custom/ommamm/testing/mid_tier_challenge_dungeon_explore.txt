@@ -1,0 +1,122 @@
+prt_monk,89,205,4	script	Dungeon Explorer Hard::Dungeon_explorer_hard	10045,{
+	mes "[Challenge]";
+	mes "Hello, " + strcharinfo(0) + "!";
+	mes "Welcome to Ommamm Challenge.";
+	mes " ";
+	mes "When exploring dungeon is not the end of the game, you know what is next.";
+	mes "We will reward only the utmost dedication to the game.";
+	
+	next;
+	switch(select("Quest Info:Claim Reward:Cancel")){
+	case 1:
+		mes "[Challenge]";
+		mes "You must kill all " + getarraysize(.harddunmvp) + " these MVPs:";
+		for(.@i = 0; .@i < getarraysize(.harddunmvp); .@i++) {
+			mes .@i+1 + ". " + "^e53535" + strmobinfo(1,.harddunmvp[.@i]) + "^000000";
+			if(checkquest(80000 + .harddunmvp[.@i]) < 0) {
+				setquest(80000 + .harddunmvp[.@i]);
+			}
+		}
+		next;
+		mes "[Challenge]";
+		mes "When you have killed all " + getarraysize(.harddunmvp) + " MVPs, you can claim the reward from me.";
+		next;
+		mes "[Challenge]";
+		mes "The reward for this quest is";
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
+		}
+		next;
+		//display completed MVPs
+		for(.@i = 0; .@i < getarraysize(.harddunmvp); .@i++) {
+			if(checkquest(70000 + .harddunmvp[.@i],HUNTING) == 2) {			
+				.@mvpcount++;
+			}
+		}
+		if(!.@mvpcount) {
+			mes "[Challenge]";
+			mes "You have not defeated any bosses.";
+			mes "Go kill those MVPs!";
+			close;
+		}
+		mes "[Challenge]";
+		mes "You have defeated ^551A8B" + .@mvpcount + "^000000 MVPs:";
+		for(.@i = 0; .@i < getarraysize(.harddunmvp); .@i++) {
+			if(checkquest(70000 + .harddunmvp[.@i],HUNTING) == 2) {			
+				mes .@i+1 + ". " + "^551A8B" + strmobinfo(1,.harddunmvp[.@i]) + "^000000";
+			}
+		}
+		close;
+		break;
+	case 2:
+		//check to see if character has received the reward
+		if(getommammreward_harddun) {
+			mes "[Challenge]";
+			mes "You have already received reward for this challenge.";
+			close;
+		}
+		//check to see if all MVPs have been completed
+		for(.@i = 0; .@i < getarraysize(.harddunmvp); .@i++) {
+			if(checkquest(70000 + .harddunmvp[.@i],HUNTING) < 2) {
+				mes "[Challenge]";
+				mes "You have not completed the challenge.";
+				close;
+			}
+		}
+		mes "[Challenge]";		
+		mes "You have completed the challenge";
+		mes "Do you want to claim the reward?";
+		next;
+		switch(select("Yes:No")) {
+			case 1: 
+				break;
+			case 2:
+				mes "[Challenge]";
+				mes "Come back when you want to claim the reward";
+				close;
+		}
+		//check weight and inventory 
+		if(!checkweight2(.reward,.reward_quantity)) {
+			mes "[Challenge]";
+			mes "You do not have enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		//Set variable to prevent player from getting multiple items
+		getommammreward_harddun = 1;
+		//Cycle through the reward array
+		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
+			getitembound .reward[.@k], .reward_quantity[.@k], 1;
+		}
+		mes "[Challenge]";
+		mes "Congratulations on your achievement! Enjoy your reward.";
+		close;
+		break;	
+	case 3:
+		break;
+	}
+	close;
+	
+OnInit:
+	//monsters to kill
+	setarray .harddunmvp[0],
+		1719, //Detale
+		2202, //Kraken
+		1871, //Fallen Bisshop
+		1874, //Beelzebub
+		1779, //Ktullanux
+		1734, //Kiel D-01
+		2022, //Nidhoggr's Shadow
+		1623, //RSX-0806
+		1751, //Valkyrie Randgris
+		1768, //Gloom Under Night 
+		2165, //Gold Queen Scaraba
+		1708, //Thanatos
+		1832; //Ifrit
+		
+	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
+	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
+	setarray .reward[0],20407,6238,6239,2383;	
+	setarray .reward_quantity[0],1,3,3,1;
+	end;
+	}
