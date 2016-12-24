@@ -19,7 +19,7 @@
 // Item cost, in cash points (#CASHPOINTS).
 
 //------------------------New--------------------------------
-0, 14730, 190 //Ommamm Costume Box I
+//0, 14730, 190 //Ommamm Costume Box I
 //------------------------Hot--------------------------------
 1, 2589, 5500 //Fallen Angel Wing
 1, 5102, 3500 //Blank Eye
@@ -28,7 +28,7 @@
 //1, 7621, 15 //Token of Ziegfried
 //1, 12214, 25 //Convex Mirror
 //-------------------------Limited---------------------------
-2, 14730, 190 //Ommamm Costume Box I
+//2, 14730, 190 //Ommamm Costume Box I
 //-------------------------Costumes-----------------------
 3, 19509, 2000 //Cos butterfly wing ear
 3, 19517, 2000 //Cos Chicken Crest
