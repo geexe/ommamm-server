@@ -310,6 +310,7 @@ OnTouch:
 		case 30: warp "izlude",134,118; end;	// Old coordinates: (127,142)
 		case 31: warp "umbala",94,154; end;
 		case 32: warp "malaya",234,199; end;
+		case 33: warp "prt_monk",174,182; end; // [Ommamm changes] - Changes warp to prt_monk
 		default: warp "prontera",116,72; end;
 	}
 	end;

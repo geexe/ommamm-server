@@ -1,2 +1,3 @@
 prt_monk,181,175,4	duplicate(gkut)	Gate Keeper#gke_ommamm	83
 prt_monk,178,235,5	duplicate(Ripped Cabus#GymPass)	Ripped Cabus#gym_ommamm	899
+prt_monk,166,173,5	duplicate(eto)	Eden Teleport Officer#33	729
