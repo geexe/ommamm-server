@@ -1,0 +1,1 @@
+prt_monk,178,241,3	shop	Upgrade Shop	63,984:150000,985:130000
