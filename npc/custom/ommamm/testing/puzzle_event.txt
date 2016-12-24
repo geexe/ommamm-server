@@ -122,7 +122,7 @@ OnInit:
 	.reward_grant = 1;
 	end;
 
-OnMinute30:
+OnMinute40:
 	.reward_grant = 0;
 	announce "Puzzle is now open for contest. You can join at " + strnpcinfo(0) + " npc at 185,123" ,bc_all;
 	end;
