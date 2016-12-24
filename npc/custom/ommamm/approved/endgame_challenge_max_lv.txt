@@ -1,6 +1,6 @@
 //Max Level Challenge
 
-prt_monk,136,181,5	script	Max Level Challenge::endgame_maxlv	936,{
+prt_monk,89,216,5	script	Max Level Challenge::endgame_maxlv	936,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";

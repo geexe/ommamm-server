@@ -1,6 +1,6 @@
 //New World Challenge
 
-prt_monk,136,193,5	script	The Sign Challenge::endgame_thesign	804,{
+prt_monk,106,205,5	script	The Sign Challenge::endgame_thesign	804,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -23,6 +23,7 @@ prt_monk,136,193,5	script	The Sign Challenge::endgame_thesign	804,{
 		mes "When you have completed the quest, you can claim the reward from me.";
 		mes " ";
 		mes "The reward for this quest is";
+		next;
 		for(.@k = 0; .@k < getarraysize(.reward); .@k++) {
 			mes (.@k+1) + ". " + "^4ba94b" + getitemname(.reward[.@k]) + "^000000" + " x " + "^1c3f89" + .reward_quantity[.@k] + "^000000";
 		}
@@ -78,7 +79,7 @@ prt_monk,136,193,5	script	The Sign Challenge::endgame_thesign	804,{
 OnInit:
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],969,18503,7227,16755,16753;	
-	setarray .reward_quantity[0],6,1,350,3,3;
+	setarray .reward[0],969,7227,6235;	
+	setarray .reward_quantity[0],10,350,1;
 	end;
 	}

@@ -1,6 +1,6 @@
 //Biolab Hunting Challenge
 
-prt_monk,136,184,5	script	Biolab Challenge::endgame_biolab	904,{
+prt_monk,99,216,3	script	Biolab Challenge::endgame_biolab	904,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -118,7 +118,7 @@ OnInit:
 		
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],31100,6238,6232,2383,16753,16755;	
-	setarray .reward_quantity[0],1,1,1,1,15,15;
+	setarray .reward[0],20407,6238,6239,2383;	
+	setarray .reward_quantity[0],1,3,3,1;
 	end;
 	}

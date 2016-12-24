@@ -1,6 +1,6 @@
 //Endless Tower Challenge
 
-prt_monk,136,187,5	script	Endeless Tower Challenge::endgame_endless	709,{
+prt_monk,85,202,5	script	Endeless Tower Challenge::endgame_endless	709,{
 	mes "[Challenge]";
 	mes "Hello, " + strcharinfo(0) + "!";
 	mes "Welcome to Ommamm Challenge.";
@@ -79,7 +79,7 @@ prt_monk,136,187,5	script	Endeless Tower Challenge::endgame_endless	709,{
 OnInit:
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],20737,6233,6228,16755,16753;	
-	setarray .reward_quantity[0],1,1,1,5,5;
+	setarray .reward[0],20737,6233,6228,7227;	
+	setarray .reward_quantity[0],1,1,1,300;
 	end;
 }
