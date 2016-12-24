@@ -1,20 +1,47 @@
 prt_monk,131,210,5	script	Quest Zone	857,{
-	OnInit:
-	waitingroom "Challenge Zone",0;
 	end;
 
+OnInit:
+	waitingroom "Challenge Zone",0;
+	end;
 }
 
 prt_monk,185,244,3	script	Refine and Socketing	857,{
-	OnInit:
+	end;
+	
+OnInit:
 	waitingroom "Refine and Socketing",0;
 	end;
-
 }
 
 prt_monk,185,214,5	script	Event Zone	857,{
-	OnInit:
+	end;
+	
+OnInit:
 	waitingroom "Events and Utilities",0;
 	end;
+}
 
+prt_monk,105,210,5	script	Top Tier Challenge	857,{
+	end;
+	
+OnInit:
+	waitingroom "Top Tier Challenge",0;
+	end;
+}
+
+prt_monk,92,206,5	script	Mid Tier Challenge	857,{
+	end;
+	
+OnInit:
+	waitingroom "High Tier Challenge",0;
+	end;
+}
+
+prt_monk,97,206,5	script	Normal Tier Challenge	857,{
+	end;
+	
+OnInit:
+	waitingroom "Normal Tier Challenge",0;
+	end;
 }
