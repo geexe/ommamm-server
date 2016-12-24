@@ -99,7 +99,7 @@ OnPCLoginEvent:
 				message strcharinfo(0),"[Daily Rewards]: Recieved "+ .@TT[0] +"z";
 			}
 			if(.@TT[1]){
-				setd getd(.Points$[0]),getd(.Points$[0]) + .@TT[1];
+				#CASHPOINTS += .@TT[1];
 				message strcharinfo(0),"[Daily Rewards]: Recieved "+ .@TT[1] +" "+.Points$[1];
 			}
 		}
@@ -137,7 +137,7 @@ OnInit:
 	//   64: No Rewards ffor Autotraders
 	//   128: Show Next Day Cutin
 	//     (a bit value, e.g. 3 = Items & Points from Multi)
-	.Mode = 1|2|4|8|16|64;
+	.Mode = 1|2|4|8|16|32|64;
 
 	// Number of times same IP can recive rewards
 	//   0 = unlimited
@@ -162,7 +162,7 @@ OnInit:
 	// Minimum minutes between collecting daily reward
 	//   Day: 22*60 - 24*60
 	//   Week: 10080
-	.MinWait = 1;
+	.MinWait = 1320;
 
 	// Minutes before losing the consecutive reward
 	//   Day: 48*60 - 50*60
@@ -180,7 +180,7 @@ OnInit:
 	// Point Type
 	//   [0] Points earned
 	//   [1] Point name in mes
-	setarray .Points$,"#KAFRAPOINTS","K-Points";
+	setarray .Points$,"#Cashpoints","CASHPoints";
 
 	// Consecutive Days Buff
 	// Each buff contains 4 variables (32 Total Max)
@@ -196,10 +196,10 @@ OnInit:
 	//  Days is days buff is applied, in this example 7, so every 7th day, 14,21,28....
 	//  Duration is buff duration is Minuits, in this example 45 mins
 	//  Rate is buff strength, in this example player gains 3 Str
-	setarray .BuffInfo	,260,2,360,1	// Life Insurance for 360 Mins Every 2nd Day
-				,198,3,120,10	// +10% Hp for 120 Mins Every 3th Day
-				,196,5,120,25	// +25 Flee for 120 Mins Every 5th Day
-				,257,7,240,50;	// +50% Exp for 240 Mins Every 7th Day
+	setarray .BuffInfo	,260,1,360,1	// Life Insurance for 360 Mins Every 1st Day
+				,198,1,120,10	// +10% Hp for 120 Mins Every 1st Day
+				,196,1,120,25	// +25 Flee for 120 Mins Every 1st Day
+				,257,1,60,50;	// +50% Exp for 240 Mins Every 1st Day
 
 	// Daily Prize items (max 128 days):
 	//   "<Zeny>|<Points>|<BaseExp>|<JobExp>|<itemID-1>|<amount-1>|<itemID-2>|<amount-2>...etc", // Day 1
@@ -209,15 +209,15 @@ OnInit:
 	// * If players login longer than the last set
 	//   day, they will keep getting the last prize.
 	setarray .Rewards$[1],
-		"0,0,0,0,503,5,506,5",			// Day 1: 5 White Potion + 5 Green Potion
-		"100",					// Day 2: 100 Zeny
-		"0,0,0,0,501,5",			// Day 3: 5 Red Potion
-		"0,0,0,0,503,5,506,5",			// Day 4: 5 White Potion + 5 Green Potion
-		"100",					// Day 5: 100 Zeny
-		"0,0,0,0,501,5",			// Day 6: 5 Red Potion
-		"1000",					// Day 7: 100 Zeny
-		"1000",					// Day 8: 100 Zeny
-		"0,0,0,0,503,5,506,5";			// Day 9: 5 White Potion + 5 Green Potion
+		"0,100,0,0,0,0,0,0",			// Day 1: Cash 100
+		"0,100,0,0,12221,2,0,0",		// Day 2: Cash 150 Megaphone 2
+		"30000,100,0,0,7621,3,0,0",	// Day 3: Cash 150 Token of Siegfied
+		"80000,100,0,0,12214,3,0,0",	// Day 4: Cash 150 Convex Mirror
+		"100000,100,0,0,14001,1,0,0",	// Day 5: Cash 200 recruit
+		"200000,100,0,0,14002,1,0,0",	// Day 6: Cash 200 veteren
+		"500000,100,0,0,14003,1,0,0",	// Day 7: Cash 200 Elite 
+		"800000,100,0,0,12215,5,0,0",	// Day 8: Cash 200 Blessing Scroll 5
+		"1500000,100,0,0,12523,5,0,0";	// Day 9: Cash 300 Increase Agility 5
 
 	// Cutin Array
 	//	Shows a cuting for each date
