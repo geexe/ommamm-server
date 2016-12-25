@@ -29,7 +29,7 @@ prt_monk,89,205,4	script	Dungeon Explorer Hard::Dungeon_explorer_hard	10045,{
 		next;
 		//display completed MVPs
 		for(.@i = 0; .@i < getarraysize(.harddunmvp); .@i++) {
-			if(checkquest(70000 + .harddunmvp[.@i],HUNTING) == 2) {			
+			if(checkquest(80000 + .harddunmvp[.@i],HUNTING) == 2) {			
 				.@mvpcount++;
 			}
 		}
@@ -42,7 +42,7 @@ prt_monk,89,205,4	script	Dungeon Explorer Hard::Dungeon_explorer_hard	10045,{
 		mes "[Challenge]";
 		mes "You have defeated ^551A8B" + .@mvpcount + "^000000 MVPs:";
 		for(.@i = 0; .@i < getarraysize(.harddunmvp); .@i++) {
-			if(checkquest(70000 + .harddunmvp[.@i],HUNTING) == 2) {			
+			if(checkquest(80000 + .harddunmvp[.@i],HUNTING) == 2) {			
 				mes .@i+1 + ". " + "^551A8B" + strmobinfo(1,.harddunmvp[.@i]) + "^000000";
 			}
 		}
@@ -57,7 +57,7 @@ prt_monk,89,205,4	script	Dungeon Explorer Hard::Dungeon_explorer_hard	10045,{
 		}
 		//check to see if all MVPs have been completed
 		for(.@i = 0; .@i < getarraysize(.harddunmvp); .@i++) {
-			if(checkquest(70000 + .harddunmvp[.@i],HUNTING) < 2) {
+			if(checkquest(80000 + .harddunmvp[.@i],HUNTING) < 2) {
 				mes "[Challenge]";
 				mes "You have not completed the challenge.";
 				close;
@@ -107,7 +107,7 @@ OnInit:
 		1779, //Ktullanux
 		1734, //Kiel D-01
 		2022, //Nidhoggr's Shadow
-		1623, //RSX-0806
+		1685, //Vesper
 		1751, //Valkyrie Randgris
 		1768, //Gloom Under Night 
 		2165, //Gold Queen Scaraba
@@ -116,7 +116,14 @@ OnInit:
 		
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],20407,6238,6239,2383;	
-	setarray .reward_quantity[0],1,3,3,1;
+	setarray .reward[0],
+		20746, //Rudra wing
+		18740, //Costume Hair of the Strong
+		20448, //Costume Water Spell Caster
+		6232, //Refine ticket +9 armor
+		6228, //Refine Ticket +9 Weapon
+		7227, //TCG 
+		12246; //Mystical Card Album	
+	setarray .reward_quantity[0],1,1,1,1,1,400,5;
 	end;
 	}
