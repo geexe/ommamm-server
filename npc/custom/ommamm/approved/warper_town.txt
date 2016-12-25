@@ -1,4 +1,4 @@
-prt_monk,175,179,5	script	Test Warper	10079,{
+prt_monk,166,180,5	script	Town Warper	4_F_PINKWOMAN,{
 function Go; function Disp; function Pick; function Restrict;
 
 // --------------------------------------------------
