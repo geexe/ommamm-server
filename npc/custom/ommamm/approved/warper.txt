@@ -444,7 +444,7 @@ G6: Go("schg_dun01",200,124);
 	Instances:
 // --------------------------------------------------
 menu	"Bakonawa Lake",I1, "Bangungot Hospital 2F",I2, "Buwaya Cave",I3,
-    	"Endless Tower",I4, "Geffen Magic Tournament",I13, "Hazy Forest",I5, "Malangdo Culvert",I6, "Nidhoggur's Nest",I7,
+    	"Endless Tower",I4, "Geffen Magic Tournament",I13, "Ghost Palace",I15, "Hazy Forest",I5, "Malangdo Culvert",I6, "Nidhoggur's Nest",I7, "Nightmarish Jitterbug",I14,
     	"Octopus Cave",I8, "Old Glast Heim",I9, "Orc's Memory",I10, "Sealed Shrine",I11,
     	"Wolfchev's Laboratory",I12;
 
@@ -470,6 +470,10 @@ I12: Restrict("RE");
 	Go("lighthalzen",305,302);
 I13: Restrict("RE");
 	Go("dali",95,144);
+I14: Restrict("RE");
+	Go("moc_para01",27,90);
+I15: Restrict("RE");
+	Go("dali02",48,127);
 
 // --------------------------------------------------
 	Special:
