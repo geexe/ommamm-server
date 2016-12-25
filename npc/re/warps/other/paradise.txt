@@ -42,11 +42,15 @@ OnTouch:
 	warp "moc_para01",47,85;
 	end;
 }
-moc_para01,49,86,0	script	#warp_2_pass_1	WARPNPC,1,1,{
+//[Ommamm Change] - Debug a warp on moc_para01
+/*moc_para01,49,86,0	script	#warp_2_pass_1	WARPNPC,1,1,{
 OnTouch:
 	warp "moc_para01",103,27;
 	end;
-}
+}*/
+
+moc_para01,49,86,0	warp	#warp_2_pass_1	1,1,moc_para01,103,27
+
 moc_para01,113,32,0	script	#warp_2_ware	WARPNPC,1,1,{
 OnTouch:
 	warp "moc_para01",105,92;
@@ -67,3 +71,5 @@ OnTouch:
 	warp "moc_para01",41,185;
 	end;
 }
+
+
