@@ -124,6 +124,6 @@ OnInit:
 
 OnMinute40:
 	.reward_grant = 0;
-	announce "Puzzle is now open for contest. You can join at " + strnpcinfo(0) + " npc at 185,123" ,bc_all;
+	announce "Puzzle is now open for contest. You can join at " + strnpcinfo(0) + " npc at 185,232" ,bc_all;
 	end;
 }

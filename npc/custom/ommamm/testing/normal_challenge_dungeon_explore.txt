@@ -105,7 +105,6 @@ OnInit:
 	setarray .dun_name$[0],
 		"Glast Heim",
 		"Abyss Lake",
-		"Abyss Lake",
 		"Byalan Dungeon",
 		"Clock Tower",
 		"Cursed Abbey",
