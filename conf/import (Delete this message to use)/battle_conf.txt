@@ -32,12 +32,13 @@ item_drop_use_min: 1
 item_drop_use_max: 10000
 
 // The rate at which equipment is dropped.
-item_rate_equip: 5000
+item_rate_equip: 3500
 item_drop_equip_min: 1
 item_drop_equip_max: 3000
 
 // The rate at which cards are dropped
 item_rate_card: 8000
+item_rate_card_mvp: 2000
 item_rate_card_boss: 2000
 item_drop_card_min: 1
 item_drop_card_max: 10000
