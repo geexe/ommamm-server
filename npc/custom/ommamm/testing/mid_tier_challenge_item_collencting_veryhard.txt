@@ -102,8 +102,8 @@ OnInit:
 
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],7227,7608,6232,6228,2410,19710,20440;	
-	setarray .reward_quantity[0],500,1,1,1,1,1,1;
+	setarray .reward[0],7227,7608,6232,6228,2410,19710;	
+	setarray .reward_quantity[0],500,1,1,1,1,1;
 	.Npc_Name$ = "[^0000FF Challenge ^000000]";
 	end;
 	
