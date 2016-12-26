@@ -86,11 +86,11 @@ function Restrict {
 	Towns:
 // --------------------------------------------------
 menu	"Prontera",T1, "Alberta",T2, "Aldebaran",T3, "Amatsu",T4, "Ayothaya",T5,
-    	"Brasilis",T6, "Comodo",T7, "Dewata",T8, "Eclage",T9, "Einbech",T10, 
+    	"Brasilis",T6, "Comodo",T7, "Dewata",T8, /*"Eclage",T9,*/ "Einbech",T10, 
     	"Einbroch",T11, "El Dicastes",T12, "Geffen",T13, "Gonryun",T14, "Hugel",T15,
     	"Izlude",T16, "Jawaii",T17, "Lighthalzen",T18, "Louyang",T19, "Lutie",T20,
     	"Malangdo",T21, "Malaya",T22, "Manuk",T23, "Midgarts Expedition Camp",T24,
-    	"Mora",T25, "Morroc",T26, "Moscovia",T27, "Nameless Island",T28,
+    	/*"Mora",T25,*/ "Morroc",T26, "Moscovia",T27, "Nameless Island",T28,
     	"Niflheim",T29, "Payon",T30, "Rachel",T31, "Splendide",T32, "Thor Camp",T33,
     	"Umbala",T34, "Veins",T35, "Yuno",T36;
 
@@ -104,8 +104,8 @@ T6: Restrict("RE");
 T7: Go("comodo",209,143);
 T8: Restrict("RE");
 	Go("dewata",200,180);
-T9: Restrict("RE");
-	Go("ecl_in01",48,53);
+//T9: Restrict("RE");
+//	Go("ecl_in01",48,53);
 T10: Go("einbech",63,35);
 T11: Go("einbroch",64,200);
 T12: Restrict("RE");
@@ -124,8 +124,8 @@ T22: Restrict("RE");
 	 Go("malaya",231,200);
 T23: Go("manuk",282,138);
 T24: Go("mid_camp",210,288);
-T25: Restrict("RE");
-	 Go("mora",55,146);
+//T25: Restrict("RE");
+//	 Go("mora",55,146);
 T26: Go("morocc",156,93);
 T27: Go("moscovia",223,184);
 T28: Go("nameless_n",256,215);

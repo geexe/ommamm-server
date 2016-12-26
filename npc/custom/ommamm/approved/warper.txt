@@ -44,7 +44,7 @@ function Fee {
 // --------------------------------------------------
 
 menu	"Last Warp ^777777["+lastwarp$+"]^000000",-,
-    	" ~ Towns",Towns,
+    	/*" ~ Towns",Towns,*/
     	" ~ Fields",Fields,
     	" ~ Dungeons",Dungeons,
     	" ~ Guild Castles",Castles,
@@ -138,65 +138,65 @@ function Restrict {
 // --------------------------------------------------
 	Towns:
 // --------------------------------------------------
-menu	"Prontera",T1, "Alberta",T2, "Aldebaran",T3, "Amatsu",T4, "Ayothaya",T5,
-    	"Brasilis",T6, "Comodo",T7, "Dewata",T8, "Eclage",T9, "Einbech",T10, 
-    	"Einbroch",T11, "El Dicastes",T12, "Geffen",T13, "Gonryun",T14, "Hugel",T15,
-    	"Izlude",T16, "Jawaii",T17, "Lighthalzen",T18, "Louyang",T19, "Lutie",T20,
-    	"Malangdo",T21, "Malaya",T22, "Manuk",T23, "Midgarts Expedition Camp",T24,
-    	"Mora",T25, "Morroc",T26, "Moscovia",T27, "Nameless Island",T28,
-    	"Niflheim",T29, "Payon",T30, "Rachel",T31, "Splendide",T32, "Thor Camp",T33,
-    	"Umbala",T34, "Veins",T35, "Yuno",T36;
-
-T1: Go("prontera",155,183);
-T2: Go("alberta",28,234);
-T3: Go("aldebaran",140,131);
-T4: Go("amatsu",198,84);
-T5: Go("ayothaya",208,166);
-T6: Restrict("RE");
-	Go("brasilis",196,217);
-T7: Go("comodo",209,143);
-T8: Restrict("RE");
-	Go("dewata",200,180);
-T9: Restrict("RE");
-	Go("ecl_in01",48,53);
-T10: Go("einbech",63,35);
-T11: Go("einbroch",64,200);
-T12: Restrict("RE");
-	 Go("dicastes01",198,187);
-T13: Go("geffen",119,59);
-T14: Go("gonryun",160,120);
-T15: Go("hugel",96,145);
-T16: Go("izlude",128,(checkre(3)?146:114));
-T17: Go("jawaii",251,132);
-T18: Go("lighthalzen",158,92);
-T19: Go("louyang",217,100);
-T20: Go("xmas",147,134);
-T21: Restrict("RE");
-	 Go("malangdo",140,114);
-T22: Restrict("RE");
-	 Go("malaya",231,200);
-T23: Go("manuk",282,138);
-T24: Go("mid_camp",210,288);
-T25: Restrict("RE");
-	 Go("mora",55,146);
-T26: Go("morocc",156,93);
-T27: Go("moscovia",223,184);
-T28: Go("nameless_n",256,215);
-T29: Go("niflheim",202,174);
-T30: Go("payon",179,100);
-T31: Go("rachel",130,110);
-T32: Go("splendide",201,147);
-T33: Go("thor_camp",246,68);
-T34: Go("umbala",97,153);
-T35: Go("veins",216,123);
-T36: Go("yuno",157,51);
+//menu	"Prontera",T1, "Alberta",T2, "Aldebaran",T3, "Amatsu",T4, "Ayothaya",T5,
+//   	"Brasilis",T6, "Comodo",T7, "Dewata",T8, "Eclage",T9, "Einbech",T10, 
+//    	"Einbroch",T11, "El Dicastes",T12, "Geffen",T13, "Gonryun",T14, "Hugel",T15,
+//    	"Izlude",T16, "Jawaii",T17, "Lighthalzen",T18, "Louyang",T19, "Lutie",T20,
+//   	"Malangdo",T21, "Malaya",T22, "Manuk",T23, "Midgarts Expedition Camp",T24,
+//    	"Mora",T25, "Morroc",T26, "Moscovia",T27, "Nameless Island",T28,
+//    	"Niflheim",T29, "Payon",T30, "Rachel",T31, "Splendide",T32, "Thor Camp",T33,
+//    	"Umbala",T34, "Veins",T35, "Yuno",T36;
+//
+//T1: Go("prontera",155,183);
+//T2: Go("alberta",28,234);
+//T3: Go("aldebaran",140,131);
+//T4: Go("amatsu",198,84);
+//T5: Go("ayothaya",208,166);
+//T6: Restrict("RE");
+//	Go("brasilis",196,217);
+//T7: Go("comodo",209,143);
+//T8: Restrict("RE");
+//	Go("dewata",200,180);
+//T9: Restrict("RE");
+//	Go("ecl_in01",48,53);
+//T10: Go("einbech",63,35);
+//T11: Go("einbroch",64,200);
+//T12: Restrict("RE");
+//	 Go("dicastes01",198,187);
+//T13: Go("geffen",119,59);
+//T14: Go("gonryun",160,120);
+//T15: Go("hugel",96,145);
+//T16: Go("izlude",128,(checkre(3)?146:114));
+//T17: Go("jawaii",251,132);
+//T18: Go("lighthalzen",158,92);
+//T19: Go("louyang",217,100);
+//T20: Go("xmas",147,134);
+//T21: Restrict("RE");
+//	 Go("malangdo",140,114);
+//T22: Restrict("RE");
+//	 Go("malaya",231,200);
+//T23: Go("manuk",282,138);
+//T24: Go("mid_camp",210,288);
+//T25: Restrict("RE");
+//	 Go("mora",55,146);
+//T26: Go("morocc",156,93);
+//T27: Go("moscovia",223,184);
+//T28: Go("nameless_n",256,215);
+//T29: Go("niflheim",202,174);
+//T30: Go("payon",179,100);
+//T31: Go("rachel",130,110);
+//T32: Go("splendide",201,147);
+//T33: Go("thor_camp",246,68);
+//T34: Go("umbala",97,153);
+//T35: Go("veins",216,123);
+//T36: Go("yuno",157,51);
 
 // --------------------------------------------------
 	Fields:
 // --------------------------------------------------
 menu	"Amatsu Fields",F1, "Ayothaya Fields",F2, "Bifrost Fields", F3,
     	"Brasilis Fields",F4, "Comodo Fields",F5, "Dewata Fields",F6,
-    	"Eclage Fields",F7, "Einbroch Fields",F8, "El Dicastes Fields",F9,
+    	/*"Eclage Fields",F7,*/ "Einbroch Fields",F8, "El Dicastes Fields",F9,
     	"Geffen Fields",F10, "Gonryun Fields",F11, "Hugel Fields",F12,
     	"Lighthalzen Fields",F13, "Louyang Field",F14, "Lutie Field",F15,
     	"Malaya Fields",F16, "Manuk Fields",F17, "Mjolnir Fields",F18,
@@ -221,9 +221,9 @@ F5: Restrict("Pre-RE",5);
 F6: Restrict("RE");
 	setarray @c[2],371,212;
 	Disp("Dewata Field",1,1); Pick("dew_fild");
-F7: Restrict("RE");
-	setarray @c[2],97,314;
-	Disp("Eclage Field",1,1); Pick("ecl_fild");
+//F7: Restrict("RE");
+//	setarray @c[2],97,314;
+//	Disp("Eclage Field",1,1); Pick("ecl_fild");
 F8: Restrict("Pre-RE",2,10);
 	setarray @c[2],142,225,182,141,187,228,185,173,216,173,195,148,272,220,173,214,207,174,196,200;
 	Disp("Einbroch Field",1,10); Pick("ein_fild");
@@ -281,7 +281,7 @@ F28: Restrict("Pre-RE",5,10);
 	Dungeons:
 // --------------------------------------------------
 menu	"Abyss Lakes",D1, "Amatsu Dungeon",D2, "Anthell",D3,
-    	"Ayothaya Dungeon",D4, "Beach Dungeon",D5, "Bifrost Tower",D41,
+    	"Ayothaya Dungeon",D4, "Beach Dungeon",D5, /*"Bifrost Tower",D41,*/
     	"Bio Labs",D6, "Brasilis Dungeon",D7, "Byalan Dungeon",D8, "Clock Tower",D9,
     	"Coal Mines",D10, "Culvert",D11, "Cursed Abbey",D12, "Dewata Dungeon",D13,
     	"Einbroch Dungeon",D14, /*"Gefenia",D15,*/ "Geffen Dungeon",D16,
@@ -386,9 +386,9 @@ D40: Restrict("RE",1,2);
 	 setarray @c[2],110,285;
 	 Disp("Yggdrasill's Root");
 	 Pick("","umbala","um_dun02","yggdrasil01");
-D41: Restrict("RE");
-	 setarray @c[2],57,13;
-	 Disp("Bifrost Tower",1); Pick("ecl_tdun");
+//D41: Restrict("RE");
+//	 setarray @c[2],57,13;
+//	 Disp("Bifrost Tower",1); Pick("ecl_tdun");
 
 // --------------------------------------------------
 	Castles:
