@@ -71,6 +71,12 @@ prt_monk,185,232,3	script	Event Puzzler	97,{
 			if ((.@yagu10 == .@input100) || (.@yagu10 == .@input % 10)) set .@ball, .@ball + 1;
 			if ((.@yagu1 == .@input100) || (.@yagu1 == .@input10)) set .@ball, .@ball + 1;
 			if (.@strike == 3) {
+				//Check to see if the round has been closed
+				if (.reward_grant) {
+					mes "[Event Puzzler]";
+					mes "This round is already over.";
+					close;
+				}
 				//Set variable to turn off NPC
 				.reward_grant = 1;
 				//Annouce the winner and round closure
