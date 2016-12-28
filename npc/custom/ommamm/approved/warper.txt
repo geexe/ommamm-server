@@ -20,6 +20,8 @@ function Fee {
 		mes " ";
 		mes "The fee starts at 10,000z for Transcendent or Third-Class character and increases by 5,000 every 5 level starting at level 100.";
 		mes " ";
+		mes "In other words, You need to pay 15,000z at level 100-104.";
+		mes " ";
 		mes "Do you wish to pay?";
 		next;
 		switch(select("Yes:No")) {
