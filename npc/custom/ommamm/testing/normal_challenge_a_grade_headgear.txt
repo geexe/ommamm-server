@@ -93,7 +93,7 @@ OnInit:
 
 	//reward item. Add more reward by <reward 1>, <reward 2>, <reward 3>, ....
 	//reward_quantity set in the same manner <quantity for reward 1>, <quantity for reward 2>, ...
-	setarray .reward[0],18550,7227,6231;	
-	setarray .reward_quantity[0],1,100,1;
+	setarray .reward[0],18550,7227,6231,20440;	
+	setarray .reward_quantity[0],1,100,1,1;
 	end;
 	}

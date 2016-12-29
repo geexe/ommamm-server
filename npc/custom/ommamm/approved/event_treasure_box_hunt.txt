@@ -49,7 +49,7 @@ OnInit:
 		"brasilis",
 		"comodo",
 		"dewata",
-		"eclage",
+		/*"eclage",*/
 		"einbech",
 		"einbroch",
 		"dicastes01",
@@ -65,7 +65,7 @@ OnInit:
 		"malaya",
 		"manuk",
 		"mid_camp",
-		"mora",
+		/*"mora",*/
 		"morocc",
 		"moscovia",
 		"nameless_n",

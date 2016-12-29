@@ -20,3 +20,10 @@
 //	Balmung cannot be dropped, traded, or placed in Guild Storage (1+2+64).
 //	Only groups of group-level 50 and up can override this setting.
 
+7227,475,99 //TCG - Account bound
+16682,1,99 //Boarding Halter 7 days
+13720,1,99 //Regeneration Box10 pc
+14001,1,99 //Recruit Supply box
+14002,1,99 //Advance WOE Supply Box
+14003,1,99 //Elite Siege Supply Box
+14017,1,99 //All in One Ring Box

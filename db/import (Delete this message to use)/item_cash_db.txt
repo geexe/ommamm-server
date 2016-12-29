@@ -158,6 +158,8 @@
 6, 12900, 500 //Battle Manual Box
 6, 12210, 60 //Bubble Gum
 6, 12902, 500 //Bubble Gum Box
+6, 14592, 60 //Job Manual
+6, 13990, 500 //Job Manual Box
 //6, 14523, 8 //Pill
 //6, 14522, 8 //Big Bun
 6, 12209, 20 //Insurance
@@ -196,3 +198,23 @@
 7, 13872, 500 //Acolyte Set Card Box
 7, 13873, 500 //Archer Set Card Box
 7, 13876, 500 //Merchant Set Card Box
+7, 14242, 950 //Rental Ring I
+7, 14243, 950 //Rental Ring I
+7, 14244, 950 //Rental Ring I
+7, 14245, 950 //Rental Ring I
+7, 14246, 950 //Rental Ring I
+7, 14247, 950 //Rental Ring I
+7, 14248, 950 //Rental Ring I
+7, 14249, 950 //Rental Ring I
+7, 14250, 950 //Rental Ring I
+7, 14251, 950 //Rental Ring I
+7, 14252, 1500 //Rental Ring II
+7, 14253, 1500 //Rental Ring II
+7, 14254, 1500 //Rental Ring II
+7, 14255, 1500 //Rental Ring II
+7, 14256, 1500 //Rental Ring II
+7, 14257, 1500 //Rental Ring II
+7, 14258, 1500 //Rental Ring II
+7, 14259, 1500 //Rental Ring II
+7, 14260, 1500 //Rental Ring II
+7, 14261, 1500 // Rental Ring II

@@ -3,7 +3,7 @@
 	mes "^000099"+strcharinfo(0)+"^000000";
 	mes "The Kafra Corporation is always working to provide you with convenient services. How may I be of assistance?";
 	next;
-	switch(select("Take me back to Izlude:Cancel")){
+	switch(select("Take me back to St. Capitolina Abbey:Cancel")){
 	case 1:
 		mes .npc$;
 		mes "You will now be teleported.";
@@ -68,6 +68,7 @@ umbala,106,150,3	duplicate(izlude_warper)	Officer#umb	860
 veins,214,123,4	duplicate(izlude_warper)	Officer#ve	860
 xmas,150,136,6	duplicate(izlude_warper)	Officer#xmas	860
 yuno,162,47,4	duplicate(izlude_warper)	Officer#yuno	860
+izlude,124,148,6	duplicate(izlude_warper)	Officer#izlude	860
 
 // --------------------------------------------------
 //	Duplicates (Renewal):
