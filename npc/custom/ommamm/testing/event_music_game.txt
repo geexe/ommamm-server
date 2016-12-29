@@ -1,0 +1,94 @@
+prt_monk,174,188,5	script	Music Test	569,{
+	
+	
+
+	
+Event_Info:
+	mes .npc$;
+	mes "Welcome to Ragnarok BGM Challenge - where your BGM knowledge will be tested.";
+	next;
+	mes .npc$;
+	mes "Please read the rules carefully";
+	next;
+	mes .npc$;
+	mes "^0000ffFor each round, an RO RGM will be played for all participants.^000000";
+	next;
+	mes .npc$;
+	mes "^0000ffWhen you know what BGM is being played, talk to <NPC Name> to give your answer.^000000";
+	next;
+	mes .npc$;
+	mes "^0000ffThere are ^ff00006^000000 answers to choose from. You only have ^ff00001^000000 chance to select your answer. ^000000";
+	next;
+	mes .npc$
+	mes "^0000ffThe first person to get the correct answer gets 3 points. Any person answering correctly after that gets 1 point.^000000";
+	next;
+	mes .npc$;
+	mes "^0000ffGiving an incorrect answer results in -1 point, so guessing is discouraged.^000000";
+	next;
+	mes .npc$;
+	mes "^0000ffThe time limit is 20 second for each round. After the time is over, any answer given will not get any score.^000000";
+	next;
+	mes .npc$;
+	mes "^0000ffThere will be a total of 10 rounds. When the final round is finished, you will get rewards based on your score.^000000";
+	goto Event_Menu;
+	end;
+	
+	
+//npc in another map	
+	if (!.@round_start) {
+		mes .npc$;
+		mes "Please wait for the next round.";
+		close;
+	}
+	mes .npc$;
+	mes "Select the name of the BGM.";
+	next;
+	menu "choice1",-,"choice2",-,"choice3",-"choice4",-,"choice5",-,"choice6",-;
+	//Check which chioce is the correct choice
+	
+Game_Start:
+	.@round_start = 1;
+	//Random BGM for the round
+	.@num = rand(166) * 2;
+	.@select_bgm$ = .bgm$[.@num];
+	playbgm(.@select_bgm$);
+	//Set correct bgm
+	setarray .@choices$[0],
+		.@bgm$[.@num + 1];
+	
+	
+	
+	for (.@i = 0; .@i < 5; .@i++) {
+		setarray .@choices$[.@i], .@bgm$[rand(166) * 2 + 1];
+		//Check to see if the choice repeats previous choices or not
+		for (.@j = 0; .@j < getarraysize(.@choices$); .@j++) {
+			if (.choices$[.@i] == .choices$[.@j]) {
+				goto RandWrongChoice;
+				
+			}
+		}
+	}
+OnInit:	
+	.npc$ = "[Music Game]";
+	setarray .bgm$[0],
+		"01", "Title",
+		"02", "Gambler of Highway",
+		"03", "Peaceful Forest",
+		"04", "I miss you",
+		"05", "Tread on the ground",
+		"06", "Risk your life",
+		"07", "Wind of Tragedy",
+		"08", "Theme of Prontera",
+		"09", "Great honor",
+		"10", "Divine Grace",
+		"11", "Theme of Morroc",
+		"12", "Streamside",
+		"13","Theme of Geffen",
+		"14","Theme of Payon",
+		"15","Theme of Alberta",
+		"16","Labyrinth";
+	end;
+	
+Function
+}
+

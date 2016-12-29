@@ -1,0 +1,160 @@
+prt_monk,174,188,5	script	Test Music::music_master	569,{
+	if (.round = 7) {
+		mes .npc$;
+		mes "Your total score is " + @music_game_score + ".";
+		next;
+		
+		mes .npc$;
+	}
+	if (@round_played == .round) {
+		mes .npc$;
+		mes "Please wait for the next round.";
+		close;
+	}
+	if (.round_start) {
+		mes .npc$;
+		mes "Please select your answer.";
+		mes "You only have 1 chance to answer.";
+		next;
+		menu .choices$[0],-,.choices$[1],-,.choices$[2],-,.choices$[3],-,.choices$[4],-,.choices$[5],-;
+		if (!round_start) {
+			mes .npc$;
+			mes "You did not give your answer in time.";
+			mes "Be quicker next time.";
+			close;
+		}
+		if (.choice$ == .select_bgm_name$) {
+			if (!.correct) {
+				.correct++;
+				@music_game_score += 3;
+				@round_played = .round;
+				mes .npc$;
+				mes "Congratulations! You are the first person to give the correct answer.";
+				mes "You got 3 points.";
+				close;
+			}
+			.correct++;
+			@music_game_score += 1;
+			@round_played = .round;
+			mes .npc$;
+			mes "You gave the correct answer.";
+			mes "You got 1 points.";
+			close;
+		} else {
+			@round_played = .round;
+			@music_game_score -= 1;
+			mes .npc$;
+			mes "Too bad. That answer is incorrect.";
+			mse "You points are deducted by 1 point";
+			close;
+		}
+	}
+	mes .npc$;
+	mes "Please wait for the next round.";
+	close;
+	
+	//set function to random choice
+	function RandWrongChoice {
+		.@num = rand(getarraysize(.bgm$)/2) * 2 + 1;
+		setarray getarg(0), getd(getarg(1) + "[" + .@num + "]");
+		return getarg(0);
+	}
+	//Set function to check if the option repeat previous options
+	function CheckRepeat {
+		.repeat = 0;
+		for (.@i = 0; .@i < getarraysize(getd(getarg(1))) -1; .@i++) {
+			if(getarg(0) == getd(getarg(1) + "[" + .@i + "]")) {
+				return 1;
+			}
+		}
+	}
+
+OnGameStart:
+	//Reset all variables
+	.round = 0;
+	@round_played = 0;
+	.round_start = 0;
+	.correct = 0;
+	announce "", bc_all;
+	end;
+
+OnRoundStanby:
+	announce "The next round will start in 20 seconds.", bc_all;
+	sleep2 17000;
+	announce "3..", bc_all;
+	sleep2 1000;
+	announce "2..", bc_all;
+	sleep2 1000;
+	announce "1..", bc_all;
+	sleep2 1000;
+	donpcevent("music_master::OnRoundStart")
+	end;
+	
+OnRoundStart:
+	.round_start = 1;
+	.round++;
+	deletearray .songs$[0],getarraysize(.songs$);
+	.@num = rand(getarraysize(.bgm$)/2) * 2;
+	//Set BGM file name and song name
+	.select_bgm_filename$ = .bgm$[.@num];
+	.select_bgm_name$ = .bgm$[.@num + 1];
+	//Set correct choice
+	setarray .songs$[0], .select_bgm_name$;
+	//Set incorrect songs
+	for (.@i = 1; .@i < 5; .@i++) {
+		do {
+			RandWrongChoice(.songs$[.@i],".bgm$");
+		} while (CheckRepeat(.songs$[.@i],".songs$"));
+	}
+	//Randomize options
+	for (.@i = 0; .@i < getarraysize(.songs$); .@i++) {
+		do {
+			.@num = rand(getarraysize(.song$));
+			setarray .choices$[.@i], .songs[.@num]; 
+		} while (CheckRepeat(.choices$[.@i],".choices$"));
+	}
+	//Play BGM
+	playBGMall (.select_bgm_filename$);
+	announce "You have 20 seconds to answer.", bc_all;
+	sleep2 20000;
+	.round_start = 0;
+	.correct = 0;
+	if (.round = 6) {
+		announce "The game is now finished. You can claim your reward based on your score."
+		.round++;
+		end;
+	}
+	donpcevent("music_master::OnRoundStanby");
+	end;
+
+OnInit:
+	setarray .bgm$[0],
+		"01", "Title",
+		"02", "Gambler of Highway",
+		"03", "Peaceful Forest",
+		"04", "I miss you",
+		"05", "Tread on the ground",
+		"06", "Risk your life",
+		"07", "Wind of Tragedy",
+		"08", "Theme of Prontera",
+		"09", "Great honor",
+		"10", "Divine Grace",
+		"11", "Theme of Morroc",
+		"12", "Streamside",
+		"13", "Theme of Geffen",
+		"14", "Theme of Payon",
+		"15", "Theme of Alberta",
+		"16", "Labyrinth",
+		"17", "Treasure Hunter",
+		"18", "Time Up!!",
+		"19", "Under the Ground",
+		"20", "Ancient Grover",
+		"21", "Through the Tower",
+		"22", "Backattack!!",
+		"23", "Travel",
+		"24", "Desert",
+		"25", "Plateau",
+		"26", "Everlasting Wanderers";
+	.npc$ = "[BGM Master]";
+	end;	
+}
