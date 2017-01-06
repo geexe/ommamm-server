@@ -1,29 +1,69 @@
 prt_monk,174,188,5	script	Test Music::music_master	569,{
-	if (.round = 7) {
+	if (.round == 7) {
+		if(@getreward) {
+			mes .npc$;
+			mes "You have already received the reward.";
+			mes "Come again next time.";
+			close;
+		}
 		mes .npc$;
 		mes "Your total score is " + @music_game_score + ".";
 		next;
-		
+		.@tier = 0;
+		for (.@i = 0; .@i < getarraysize(.reward_tier); .@i++) {
+			if (@music_game_score >=  .reward_tier[.@i]) {
+					.@tier++;
+			}
+		}
+		if (!checkweight2 (getd (".reward_tier" + .@tier), getd  (".reward_tier_quantity" + .@tier))) {
+			mes .npc$;
+			mes "You do not have enough space.";
+			mes "Please clear your inventory and come back again.";
+			close;
+		}
+		@getreward = 1;
+		for (.@i = 0; .@i < getarraysize(getd (".reward_tier" + .@tier)); .@i++) {
+			getitem getd (".reward_tier" + .@tier + "[" + .@i + "]"), getd (".reward_tier_quantity" + .@tier + "[" + .@i + "]");
+		}
 		mes .npc$;
+		mes "Your rewards are:";
+		for (.@i = 0; .@i < getarraysize(getd (".reward_tier" + .@tier)); .@i++) {
+			mes getitemname(getd (".reward_tier" + .@tier + "[" + .@i + "]")) + " " + getd (".reward_tier_quantity" + .@tier + "[" + .@i + "]") + " ea";
+		}
+		close;
 	}
 	if (@round_played == .round) {
 		mes .npc$;
 		mes "Please wait for the next round.";
-		close;
+		next;
+		//Test Menu
+		mes "Do you want to start the game?";
+		switch(select("Yes:No")) {
+		case 1:
+			donpcevent("music_master::OnGameStart");
+			end;
+		case 2:
+			close;
+		}
 	}
 	if (.round_start) {
+		if (.round == 1) {
+			@getreward = 0;
+			@round_played = 0;
+			@music_game_score = 0;
+		}
 		mes .npc$;
 		mes "Please select your answer.";
 		mes "You only have 1 chance to answer.";
 		next;
 		menu .choices$[0],-,.choices$[1],-,.choices$[2],-,.choices$[3],-,.choices$[4],-,.choices$[5],-;
-		if (!round_start) {
+		if (!.round_start) {
 			mes .npc$;
 			mes "You did not give your answer in time.";
 			mes "Be quicker next time.";
 			close;
 		}
-		if (.choice$ == .select_bgm_name$) {
+		if (@menu == .correct_option) {
 			if (!.correct) {
 				.correct++;
 				@music_game_score += 3;
@@ -31,6 +71,7 @@ prt_monk,174,188,5	script	Test Music::music_master	569,{
 				mes .npc$;
 				mes "Congratulations! You are the first person to give the correct answer.";
 				mes "You got 3 points.";
+				dispbottom "You have " + @music_game_score + " points.";
 				close;
 			}
 			.correct++;
@@ -39,18 +80,30 @@ prt_monk,174,188,5	script	Test Music::music_master	569,{
 			mes .npc$;
 			mes "You gave the correct answer.";
 			mes "You got 1 points.";
+			dispbottom "You have " + @music_game_score + " points.";
 			close;
 		} else {
 			@round_played = .round;
 			@music_game_score -= 1;
 			mes .npc$;
 			mes "Too bad. That answer is incorrect.";
-			mse "You points are deducted by 1 point";
+			mes "You points are deducted by 1 point";
+			dispbottom "You have " + @music_game_score + " points.";
 			close;
 		}
 	}
 	mes .npc$;
 	mes "Please wait for the next round.";
+	//Test Menu
+	next;
+	mes "Do you want to start the game?";
+	switch(select("Yes:No")) {
+		case 1:
+			donpcevent("music_master::OnGameStart");
+			end;
+		case 2:
+			close;
+		}
 	close;
 	
 	//set function to random choice
@@ -59,12 +112,12 @@ prt_monk,174,188,5	script	Test Music::music_master	569,{
 		setarray getarg(0), getd(getarg(1) + "[" + .@num + "]");
 		return getarg(0);
 	}
-	//Set function to check if the option repeat previous options
+	//Set function to check if the option repeats previous options
 	function CheckRepeat {
 		.repeat = 0;
 		for (.@i = 0; .@i < getarraysize(getd(getarg(1))) -1; .@i++) {
 			if(getarg(0) == getd(getarg(1) + "[" + .@i + "]")) {
-				return 1;
+				return .repeat++;
 			}
 		}
 	}
@@ -72,28 +125,29 @@ prt_monk,174,188,5	script	Test Music::music_master	569,{
 OnGameStart:
 	//Reset all variables
 	.round = 0;
-	@round_played = 0;
 	.round_start = 0;
-	.correct = 0;
-	announce "", bc_all;
+	announce "Welcome to ...", bc_all;
+	sleep2 1000;
+	donpcevent("music_master::OnRoundStanby");
 	end;
 
 OnRoundStanby:
-	announce "The next round will start in 20 seconds.", bc_all;
-	sleep2 17000;
+	announce "The next round will start in 10 seconds.", bc_all;
+	sleep2 7000;
 	announce "3..", bc_all;
 	sleep2 1000;
 	announce "2..", bc_all;
 	sleep2 1000;
 	announce "1..", bc_all;
 	sleep2 1000;
-	donpcevent("music_master::OnRoundStart")
+	donpcevent("music_master::OnRoundStart");
 	end;
 	
 OnRoundStart:
 	.round_start = 1;
 	.round++;
 	deletearray .songs$[0],getarraysize(.songs$);
+	deletearray .choices$[0],getarraysize(.choices$);
 	.@num = rand(getarraysize(.bgm$)/2) * 2;
 	//Set BGM file name and song name
 	.select_bgm_filename$ = .bgm$[.@num];
@@ -101,33 +155,51 @@ OnRoundStart:
 	//Set correct choice
 	setarray .songs$[0], .select_bgm_name$;
 	//Set incorrect songs
-	for (.@i = 1; .@i < 5; .@i++) {
+	for (.@i = 1; .@i < 6; .@i++) {
 		do {
 			RandWrongChoice(.songs$[.@i],".bgm$");
-		} while (CheckRepeat(.songs$[.@i],".songs$"));
+			CheckRepeat(.songs$[.@i],".songs$");
+		} while (.repeat);
 	}
-	//Randomize options
+	//Random choices from .song$ array
 	for (.@i = 0; .@i < getarraysize(.songs$); .@i++) {
 		do {
-			.@num = rand(getarraysize(.song$));
-			setarray .choices$[.@i], .songs[.@num]; 
-		} while (CheckRepeat(.choices$[.@i],".choices$"));
+			.@num = rand(getarraysize(.songs$));
+			setarray .choices$[.@i], .songs$[.@num];
+			CheckRepeat(.choices$[.@i],".choices$");
+		} while (.repeat);
 	}
-	//Play BGM
+	//Check which element is the correct song and set variable for use in menu
+	for (.@i = 0; .@i < getarraysize(.choices$); .@i++) {
+		if(.choices$[.@i] == .select_bgm_name$) {
+			.correct_option = .@i + 1;
+		}
+	}
+	//Play BGM for the round
 	playBGMall (.select_bgm_filename$);
 	announce "You have 20 seconds to answer.", bc_all;
-	sleep2 20000;
+	sleep2 15000;
+	announce "5 seconds left.", bc_all;
+	sleep2 5000;
 	.round_start = 0;
 	.correct = 0;
-	if (.round = 6) {
-		announce "The game is now finished. You can claim your reward based on your score."
+	//Play BGM between round
+	playBGMall ("18");
+	if (.round == 6) {
+		announce "The game is now finished. You can claim your reward based on your score.", bc_all;
 		.round++;
 		end;
 	}
+	announce "The time for this round is over", bc_all;
+	sleep2 1000;
 	donpcevent("music_master::OnRoundStanby");
 	end;
 
 OnInit:
+	.round = 0;
+	.round_start = 0;
+	.correct = 0;
+	.npc$ = "[BGM Master]";
 	setarray .bgm$[0],
 		"01", "Title",
 		"02", "Gambler of Highway",
@@ -155,6 +227,32 @@ OnInit:
 		"24", "Desert",
 		"25", "Plateau",
 		"26", "Everlasting Wanderers";
-	.npc$ = "[BGM Master]";
+	//Points needed for each tier
+	setarray .reward_tier[0],
+		//Tier 0 (No element - everyone below tier 1 will get the reward)
+		3, //Tier 1
+		6, //Tier 2
+		12, //Tier 3
+		18; //Tier 4
+	setarray .reward_tier0[0],
+		501; //TCG
+	setarray .reward_tier_quantity0[0],
+		1;
+	setarray .reward_tier1[0],
+		502; //TCG
+	setarray .reward_tier_quantity1[0],
+		2;
+	setarray .reward_tier2[0],
+		503; //TCG
+	setarray .reward_tier_quantity2[0],
+		3;
+	setarray .reward_tier3[0],
+		504; //TCG
+	setarray .reward_tier_quantity3[0],
+		4;
+	setarray .reward_tier4[0],
+		505; //TCG
+	setarray .reward_tier_quantity4[0],
+		5;
 	end;	
 }
