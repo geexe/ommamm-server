@@ -1,4 +1,5 @@
 prt_monk,174,188,5	script	Test Music::music_master	569,{
+	//Give rewards
 	if (.round == 7) {
 		if(@getreward) {
 			mes .npc$;
@@ -32,6 +33,7 @@ prt_monk,174,188,5	script	Test Music::music_master	569,{
 		}
 		close;
 	}
+	//If player has already answered for the round
 	if (@round_played == .round) {
 		mes .npc$;
 		mes "Please wait for the next round.";
@@ -146,6 +148,7 @@ OnRoundStanby:
 OnRoundStart:
 	.round_start = 1;
 	.round++;
+	//Clear provious array to prevent error
 	deletearray .songs$[0],getarraysize(.songs$);
 	deletearray .choices$[0],getarraysize(.choices$);
 	.@num = rand(getarraysize(.bgm$)/2) * 2;
